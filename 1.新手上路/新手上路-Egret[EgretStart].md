@@ -26,7 +26,7 @@
 
 打开Lanucher 定位到项目页面。创建项目。在项目创建页面勾选Matchvs游戏云。并创建。
 
-![](Egret新手上路img\egret_start2.png)
+![](Egret新手上路img/egret_start2.png)
 
 #### 2、使用 wing打开项目
 
