@@ -12,7 +12,7 @@
 
 打开Lanucher选择对应的egret引擎版本下载安装（egret更新较快建议安装最新的Stableb版本），如下图：
 
-![](Egret新手上路img\egret_start1.png)
+![](Egret新手上路img/egret_start1.png)
 
 #### 3、安装IDE工具Wing
 
@@ -32,7 +32,7 @@
 
 创建好项目后，在打开项目的wing左边导航可以的libs目录下可以看到有 matchvs文件夹，如下图：
 
-![](Egret新手上路img\egret_start3.png)
+![](Egret新手上路img/egret_start3.png)
 
 #### 3、替换matchvs文件夹下面的内容
 
