@@ -13,11 +13,11 @@
 
 打开 Egret Lanucher 定位到项目页面，点击发布按钮如下图：
 
-![](egret项目发布img\egret_report1.png)
+![](egret项目发布img/egret_report1.png)
 
 点击发布按钮，会弹出发布配置页面，在这里可以选择你想发布的任何支持的平台，同时我们Matchvs也是支持的。如下图所示：
 
-![](egret项目发布img\egret_report2.png)
+![](egret项目发布img/egret_report2.png)
 
 点击确定后会有发布成功的提示，打开相应的目录，找到index.html 文件打开就可以了。
 
@@ -33,7 +33,7 @@
 
 微信小游戏发布可以参考 [egret的教程](http://developer.egret.com/cn/github/egret-docs/Engine2D/minigame/publish/index.html) 。也可在满足 egret最新支持的微信小游戏版本发布的条件情况下直接在 egret 发布设置界面中选择微信小程序，如下图：
 
-![](egret项目发布img\egret_report3.png)
+![](egret项目发布img/egret_report3.png)
 
 > 注意：要填好AppID 和项目名称。这个AppID是在 [微信公众平台](https://mp.weixin.qq.com/) 中注册的游戏信息。
 
@@ -41,7 +41,7 @@
 
 打开刚刚使用 Egret发布的微信小程序可能会遇到，fixedWidth 模式不匹配问题，可参考下图配置：
 
-![](egret项目发布img\egret_report5.png)
+![](egret项目发布img/egret_report5.png)
 
 把`game.js` 文件下的scaleMode改为fixedWidth，和不验证合法域名，配置好后就可以啦！
 
