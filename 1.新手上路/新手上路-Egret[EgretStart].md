@@ -38,17 +38,15 @@
 
 到 [Matchvs官网下载](http://www.matchvs.com/serviceDownload) TypeScript版本的 MatchvsSDK 解压并替换 egret项目`matchvs`文件下的三个文件(matchvs.d.ts、matchvs.js、matchvs.min.js)。
 
-> 注意：如果不替换 matchvs官网下载的 SDK就无法使用 Matchvs账号在Matchvs官网创建的游戏服务。
+**注意：如果不替换 matchvs官网下载的 SDK就无法使用 Matchvs账号在Matchvs官网创建的游戏服务。**
 
-
-
-以上步骤已经完美集成MatchvsSDK，接下来就开启你的 联网对战之旅。
+以上步骤已经完美集成 Matchvs SDK，接下来就开启你的 联网对战之旅。
 
 ## Matchvs 使用
 
 在使用 Matchvs 服务之前请确认您已经在 Matchvs官网注册账号并新建好了一款游戏服务。如果还没有注册Matchvs 游戏服务请参考 [Matchvs游戏注册]() 文档。
 
-Matchvs SDK 接口服务分为 **请求服务** 和 **回调服务** ， 使用是以简单的接口调用和接口返回的方式实现相关联网操作。比如随机加入房间只需要调用`joinRandRoom接口`，加入房间结果就以接口 `joinRoomResponse` 返回。在整个使用过程中，开发者只需要关心`MatchvsEngine`(接口请求调用对象)和 `MatchvsResponse`(接口调用返回对象)。接口请求使用 `MatchvsEngine`对象实例，接口返回使用 `MatchvsResponse` 对象实例。后面后介绍这两个对象的使用方法。此文档只是用于引导开发者接入SDK，需要接口详细的参数说明请看 [API手册](http://www.matchvs.com/service?page=js)  
+Matchvs SDK 接口服务分为 **请求服务** 和 **回调服务** ， 使用是以简单的接口调用和接口返回的方式实现相关联网操作。比如随机加入房间只需要调用`joinRandRoom接口`，加入房间结果就以接口 `joinRoomResponse` 返回。在整个使用过程中，开发者只需要关心`MatchvsEngine`(接口请求调用对象)和 `MatchvsResponse`(接口调用返回对象)。接口请求使用 `MatchvsEngine`对象实例，接口返回使用 `MatchvsResponse` 对象实例。后面后介绍这两个对象的使用方法。此文档只是用于引导开发者接入SDK，需要接口详细的参数说明请看 [API手册](http://www.matchvs.com/service?page=ts) 
 
 #### Matchvs 变量定义
 
@@ -86,7 +84,7 @@ class Main extends eui.UILayer {
 engine.init(response, "Matchvs", "alpha", 201016);
 ```
 
-Matchvs 提供了两个环境，alpha 调试环境和 release 正式环境。游戏开发调试阶段请使用 alpha 环境，即 platform 传参"alpha"，具体可参考 [环境说明]()
+Matchvs 提供了两个环境，alpha 调试环境和 release 正式环境。游戏开发调试阶段请使用 alpha 环境，即 platform 传参"alpha"，具体可参考 [环境说明](http://www.matchvs.com/service?page=envGuide) 
 
 参数说明:
 
@@ -163,7 +161,7 @@ MsRegistRsp 参数说明
 | name   | string | 随机用户名      |
 | avatar | string | 随机头像        |
 
-> **注意** : 每次调用 registerUser 接口都会生成新的 `userID` 为了节省资源消耗， `userID`和 `token` 有需要的可以缓存起来，在之后的应用启动中不必重复获取。如果你有自己的用户系统，可以将Matchvs 提供的 userID 和用户系统进行映射。可以参考 [Matchvs 第三方账号绑定]()，让您的用户唯一对应一个userID，以节省资源。
+> **注意** : 每次调用 registerUser 接口都会生成新的 `userID` 为了节省资源消耗， `userID`和 `token` 有需要的可以缓存起来，在之后的应用启动中不必重复获取。如果你有自己的用户系统，可以将Matchvs 提供的 userID 和用户系统进行映射。可以参考 [Matchvs 第三方账号绑定](http://www.matchvs.com/service?page=third)，让您的用户唯一对应一个userID，以节省资源。
 >
 > 为了资源节省，我们在registerUserResponse 回调前把userID信息缓存在本地，数据会暂存在浏览器中。所以使用同一个浏览器调用 registerUser 接口会返回相同的 userID信息。
 
