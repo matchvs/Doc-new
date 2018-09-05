@@ -455,7 +455,7 @@ response.joinRoomResponse(status, roomUserInfoList, roomInfo)
 #### 示例
 
 ```javascript
-response.joinRoomResponse : this.joinRoomResponse.bind(this)
+response.joinRoomResponse = this.joinRoomResponse.bind(this)
 joinRoomResponse : function (status, userInfoList, roomInfo) {
     if (status === 200) {
         console.log("进入房间成功");
@@ -487,13 +487,13 @@ response.joinRoomNotify(roomUserInfo)
 #### 示例
 
 ```javascript
-response.joinRoomNotify : this.joinRoomNotify.bind(this)
+response.joinRoomNotify = this.joinRoomNotify.bind(this)
 joinRoomNotify : function (roomUserInfo) {
     console.log(roomUserInfo.userID+"加入了房间");
 }
 ```
 
-## <span id="joinOver">joinOver</span>
+## joinOver
 
 ```javascript
 engine.joinOver(cpProto)
@@ -550,7 +550,7 @@ response.joinOverResponse(joinOverRsp)
 #### 示例
 
 ```javascript
-response.joinOverResponse : this.joinOverResponse.bind(this);
+response.joinOverResponse = this.joinOverResponse.bind(this);
 joinOverResponse : function (joinOverRsp) {
     if(joinOverRsp.status == 200) {
         console.log("房间关闭成功");
@@ -582,7 +582,7 @@ response.joinOverNotify(notifyInfo);
 #### 示例
 
 ```javascript
-response.joinOverNotify : this.joinOverNotify.bind(this);
+response.joinOverNotify = this.joinOverNotify.bind(this);
 joinOverNotify : function (notifyInfo) {
     console.log("房间关闭通知");
 	console.log(srcUserID+"关闭了房间");
@@ -590,7 +590,7 @@ joinOverNotify : function (notifyInfo) {
 ```
 
 
-## <span id="leaveRoom">leaveRoom</span>
+## leaveRoom
 
 ```javascript
 engine.leaveRoom(cpProto)
@@ -647,7 +647,7 @@ response.leaveRoomResponse(leaveRoomRsp)
 #### 示例
 
 ```javascript
-response.leaveRoomResponse :this.leaveRoomResponse.bind(this);
+response.leaveRoomResponse=this.leaveRoomResponse.bind(this);
 leaveRoomResponse : function (leaveRoomRsp) {
     if (leaveRoomRsp.status == 200) {
         console.log("离开房间成功");
@@ -680,10 +680,10 @@ response.leaveRoomNotify(leaveRoomInfo)
 #### 示例
 
 ```javascript
-response.leaveRoomNotify : this.leaveRoomNotify.bind(this);
+response.leaveRoomNotify = this.leaveRoomNotify.bind(this);
 leaveRoomNotify : function (leaveRoomInfo) {
-	console.log(userID+'离开了房间,roomID是+'roomID);
-	console.log(”新的房主是:“+userID);
+	console.log(leaveRoomInfo.userID+'离开了房间,roomID是'+leaveRoomInfo.roomID);
+	console.log("新的房主是:"+leaveRoomInfo.owner);
 }
 ```
 
@@ -705,12 +705,12 @@ engine.createRoom(createRoomInfo, userProfile)
 
 | 属性         | 类型   | 描述                         | 示例值         |
 | ------------ | ------ | ---------------------------- | -------------- |
-| roomName     | string | 房间名称                     | “MatchvsRoom”  |
+| roomName     | string | 房间名称                     | "MatchvsRoom"  |
 | maxPlayer    | number | 最大玩家数                   | 3              |
 | mode         | number | 模式                         | 1              |
 | canWatch     | number | 是否可以观战 1-可以 2-不可以 | 2              |
 | visibility   | number | 是否可见默认 0不可见 1可见   | 1              |
-| roomProperty | string | 房间属性                     | “roomProperty” |
+| roomProperty | string | 房间属性                     | "roomProperty" |
 
 #### 返回值
 
@@ -739,7 +739,7 @@ createRoom.mode = 0;
 createRoom.canWatch = 1;
 createRoom.visibility = 1;
 createRoom.roomProperty = '白天模式';
-var result = engine.createRoom(createRoom,"I Love China");
+var result = engine.createRoom(createRoom,"Matchvs");
 console.log("createRoom result"+result);
 ```
 
@@ -751,11 +751,11 @@ response.createRoomResponse(CreateRoomRsp)
 
 #### 参数
 
-| 参数     | 类型     | 描述                | 示例值    |
+| 参数   | 类型   | 描述              | 示例值 |
 | ------ | ------ | ----------------- | ------ |
 | status | number | 状态返回，200表示成功<br>400 客户端参数错误 <br>500 服务器内部错误 | 200    |
-| roomID | string | 房间号               | "210039" |
-| owner  | number | 房主                | 210000 |
+| roomID | string | 房间号            |"210039"|
+| owner  | number | 房主              | 210000 |
 
 #### 说明
 
@@ -764,7 +764,7 @@ response.createRoomResponse(CreateRoomRsp)
 #### 示例
 
 ```javascript
-response.createRoomResponse : this.createRoomResponse.bind(this);
+response.createRoomResponse = this.createRoomResponse.bind(this);
 createRoomResponse : function (CreateRoomRsp) {
     if (CreateRoomRsp.status == 200) {
         console.log("创建指定类型房间接口成功");
@@ -846,7 +846,7 @@ response.getRoomListResponse(status, roomInfos)
 #### 示例
 
 ```javascript
-response.getRoomListResponse : this.getRoomListResponse.bind(this);
+response.getRoomListResponse = this.getRoomListResponse.bind(this);
 getRoomListResponse : function (status, roomInfo) {
     if (status == 200) {
         console.log("获取房间列表成功");
@@ -947,7 +947,7 @@ response.getRoomListExResponse(rsp);
 #### 示例
 
 ```javascript
-response.getRoomListExResponse : this.getRoomListExResponse.bind(this);
+response.getRoomListExResponse = this.getRoomListExResponse.bind(this);
 getRoomListExResponse : function (rsp) {
     if (rsp.status == 200) {
         console.log("获取房间列表成功");
@@ -968,7 +968,7 @@ engine.getRoomDetail(roomID);
 
 | 参数   | 类型   | 描述   | 示例值                 |
 | ------ | ------ | ------ | ---------------------- |
-| roomID | string | 房间ID | “16323532544156875354” |
+| roomID | string | 房间ID | "16323532544156875354" |
 
 #### 返回值
 
@@ -1027,7 +1027,7 @@ response.getRoomDetailResponse(rsp);
 #### 示例
 
 ```javascript
-response.getRoomDetailResponse : this.getRoomDetailResponse.bind(this);
+response.getRoomDetailResponse = this.getRoomDetailResponse.bind(this);
 getRoomDetailResponse : function (rsp) {
     if (rsp.status === 200) {
         console.log("获取房间详情成功");
@@ -1049,7 +1049,7 @@ engine.setRoomProperty(roomID, roomProperty)
 | 参数         | 类型   | 描述             | 示例值               |
 | ------------ | ------ | ---------------- | -------------------- |
 | roomID       | string | 房间号           | "654354323413134354" |
-| roomProperty | string | 要修改的房间属性 | “changeRoomProperty” |
+| roomProperty | string | 要修改的房间属性 | "changeRoomProperty" |
 
 #### 返回值
 
@@ -1073,7 +1073,7 @@ engine.setRoomProperty(roomID, roomProperty)
 
 ```
 var roomID = "34532423423423";
-var newRoomProperty = '我爱中国';
+var newRoomProperty = 'Matchvs';
 var result = engine.setRoomProperty(roomID,newRoomProperty);
 console.log("修改房间属性 result"+ result);
 ```
@@ -1092,7 +1092,7 @@ response.setRoomPropertyResponse(rsp);
 | status       | number | 状态值，200成功<br>400 客户端参数错误 <br>404 房间不存在 <br>500 服务器内部错误 | 200                  |
 | roomID       | string | 房间号          | "654354323413134354" |
 | userID       | number | 玩家            | 123                  |
-| roomProperty | string | 修改后的属性值  | “changeRoomProperty” |
+| roomProperty | string | 修改后的属性值  | "changeRoomProperty" |
 
 #### 说明
 
@@ -1101,7 +1101,7 @@ response.setRoomPropertyResponse(rsp);
 #### 示例
 
 ```javascript
-response.setRoomPropertyResponse : this.setRoomPropertyResponse.bind(this);
+response.setRoomPropertyResponse = this.setRoomPropertyResponse.bind(this);
 setRoomPropertyResponse : function (rsp) {
     if (rsp.status === 200) {
         console.log("修改房间属性成功");
@@ -1123,7 +1123,7 @@ response.setRoomPropertyNotify(notify);
 | ------------ | ------ | -------------- | -------------------- |
 | roomID       | string | 房间号         | "654354323413134354" |
 | userID       | number | 玩家           | 123                  |
-| roomProperty | string | 修改后的属性值 | “changeRoomProperty” |
+| roomProperty | string | 修改后的属性值 | "changeRoomProperty" |
 
 #### 说明
 
@@ -1135,11 +1135,11 @@ response.setRoomPropertyNotify(notify);
 response.setRoomPropertyNotify = this.setRoomPropertyNotify.bind(this);
 setRoomPropertyNotify : function (notify) {
 	console.log("修改房间属性通知");
-	console.log(rsp.userID+"修改了房间属性，新的房间属性是"+rsp.roomProperty);
+	console.log(notify.userID+"修改了房间属性，新的房间属性是"+notify.roomProperty);
 }
 ```
 
-## <span id="sendEvent">sendEvent</span>
+## sendEvent
 
 ```javascript
 engine.sendEvent(msg)
@@ -1195,18 +1195,18 @@ engine.sendEventEx(type, cpProto, targetType, [targetUserID])
 
 #### 参数
 
-| 参数           | 类型     | 描述                                       | 示例值         |
+| 参数         | 类型   | 描述                                     | 示例值      |
 | ------------ | ------ | ---------------------------------------- | ----------- |
 | type         | number | 消息类型。0表示转发给房间成员；1表示转发给game server；2表示转发给房间成员及game server | 0           |
-| cpProto      | string | 消息内容                                     | "hello"     |
+| cpProto      | string | 消息内容                                 | "hello"     |
 | targetType   | number | 目标类型。0表示发送目标为目标列表成员；1表示发送目标为除目标列表成员以外的房间成员 | 0           |
-| targetUserID | array  | 目标列表                                     | [1001,1002] |
+| targetUserID | array  | 目标列表                                 | [1001,1002] |
 
 #### 返回值
 
 - 返回值为一个对象，该对象包含以下属性：
 
-| 属性       | 类型     | 描述               | 示例值    |
+| 属性     | 类型   | 描述             | 示例值 |
 | -------- | ------ | ---------------- | ------ |
 | result   | number | 错误码，0表示成功，其他表示失败 | 0      |
 | sequence | number | 事件序号，作为事件的唯一标识   | 231212 |
@@ -1278,9 +1278,9 @@ response.sendEventNotify(eventInfo)
 
 #### 参数eventInfo的属性
 
-| 参数        | 类型     | 描述                                    | 示例值     |
+| 参数      | 类型   | 描述                                  | 示例值  |
 | --------- | ------ | ------------------------------------- | ------- |
-| srcUserID | number | 推送方用户ID，表示是谁发的消息                      | 321     |
+| srcUserID | number | 推送方用户ID，表示是谁发的消息        | 321     |
 | cpProto   | string | 消息内容，对应[sendEvent](#sendEvent)中的msg参数 | "hello" |
 
 #### 说明
@@ -1430,7 +1430,7 @@ response.kickPlayerNotify(KickPlayerNotify)
 
 #### 参数
 
-| 参数               | 类型     | 描述                                       | 示例值                                      |
+| 参数             | 类型   | 描述                                     | 示例值                                   |
 | ---------------- | ------ | ---------------------------------------- | ---------------------------------------- |
 | KickPlayerNotify | object | srcUserID:踢人用户ID<br />userID:被踢用户ID<br />cpProto:自定义数据<br />owner:房主 | srcUserID:223333<br />userID:344222<br />cpProto:'kick'<br />owner:223333 |
 
@@ -1486,10 +1486,10 @@ response.subscribeEventGroupResponse(status, [group])
 
 #### 参数
 
-| 参数     | 类型     | 描述         | 示例值         |
+| 参数   | 类型   | 描述       | 示例值      |
 | ------ | ------ | ---------- | ----------- |
-| status | number | 状态，200代表成功 | 200         |
-| group  | array  | 组数组        | ["Matchvs"] |
+| status | number | 状态，200代表成功 | 200  |
+| group  | array  | 组数组     | ["Matchvs"] |
 
 #### 说明
 
@@ -1503,7 +1503,7 @@ engine.sendEventGroup(cpProto, [group])
 
 #### 参数
 
-| 参数      | 类型     | 描述     | 示例值         |
+| 参数    | 类型   | 描述   | 示例值      |
 | ------- | ------ | ------ | ----------- |
 | cpProto | string | 自定义消息  | "test"      |
 | group   | array  | 发送的组列表 | ["Matchvs"] |
@@ -1534,7 +1534,7 @@ response.sendEventGroupResponse(status, dstNum)
 
 #### 参数
 
-| 参数     | 类型     | 描述         | 示例值  |
+| 参数   | 类型   | 描述       |示例值|
 | ------ | ------ | ---------- | ---- |
 | status | number | 状态，200代表成功 | 200  |
 | dstNum | number | 推送的用户个数    | 5    |
@@ -1860,7 +1860,7 @@ MsReopenRoomResponse:
 | 属性         | 类型   | 描述               | 示例值 |
 | ------------ | ------ | ------------------ | ------ |
 | status       | number | 接口调用的服务器返回码,200为正确| 200 |
-| cpProto      | string | 调用者附带的信息           | ""     |
+| cpProto      | string | 调用者附带的信息   | ""     |
 
 
 
@@ -1928,8 +1928,8 @@ response.errorResponse = function(error) {
 ```
 **注意** Matchvs相关的异常信息可通过该接口获取
 
-| 错误码 | 含义                                                         |
-| ------ | ------------------------------------------------------------ |
+| 错误码 | 含义                           |
+| ------ | -------------------------------|
 | 1001   | 网络错误                       |
 | 500    | 服务器内部错误                 |
 | 其他   | 参考对应接口回调的错误码说明   |
