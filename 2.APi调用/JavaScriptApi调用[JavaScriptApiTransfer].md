@@ -6,7 +6,7 @@
 
 **注意** 在整个应用全局，开发者只需要对引擎做一次初始化。
 
-调用Matchvs.MatchvsEngine.getInstance方法获取Matchvs引擎对象：
+调用下面的代码获取Matchvs引擎对象：
 
 ```javascript
 var jsMatchvs = require("matchvs.all");
@@ -50,7 +50,7 @@ engine.registerUser();
 ```
 
 ```javascript
-response.registerUserResponse = function(userInfo) {
+response.registerUserResponse : function(userInfo) {
 	// 用户ID
 	console.log("userID: ", userInfo.userID);
 	// token
@@ -89,7 +89,7 @@ engine.login(userID, token, gameID, gameVersion, appKey, secret, deviceID, gatew
 **注意** SDK支持房间断线重连，掉线重新登录后可以选择加入原来的房间，loginResponse里的`roomID` 即为上次异常退出的房间ID。如果登录时没有异常退出的房间，则`roomID`为0。
 
 ```javascript
-response.loginResponse = function(loginRsp) {
+response.loginResponse : function(loginRsp) {
 	// 返回值
 	var status = loginRsp.status;
 	// 房间号

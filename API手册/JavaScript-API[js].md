@@ -17,7 +17,7 @@ var response = new Matchvs.MatchvsResponse();
 ```
 
 #### 说明
-- 根据上面的代码片段获取Matchvs引擎的一个实例，接下来可以调用这个实例的方法实现联网对战功能。
+- 根据上面的代码片段获取Matchvs引擎的一个实例，接下来可以调用这个实例的回调方法实现联网对战功能。
 - 建议在获取一个实例之后，将其作为单例或全局变量。
 
 ## init
@@ -54,6 +54,15 @@ engine.init(response, channel, platform, gameID)
 | -25    | channel 非法，请检查是否正确填写为 “Matchvs”              |
 | -26    | platform 非法，请检查是否正确填写为 “alpha”  或 “release” |
 
+#### 示例
+
+```javascript
+var result = engine.init(response,'Matchvs','alpha','200978');
+if(result === 0) {
+	console.log(“初始化请求成功”);
+}
+```
+
 
 ## initResponse
 
@@ -70,6 +79,20 @@ response.initResponse(status)
 #### 说明
 
 - response是engine.init方法中传入的对象，init初始化完成之后，会异步回调initResponse方法
+
+#### 示例
+
+```javascript
+response.initResponse = this.initResponse.bind(this);
+
+initResponse:function (status) {
+    if (status === 200) {
+        console.log("初始化成功");
+    } else {
+        console.log("初始化失败"+status);
+    }
+}
+```
 
 
 ## uninit
@@ -132,7 +155,23 @@ response.registerUserResponse(userInfo)
 >
 > 如果需要同时调试多个客户端，则需要打开多个不同的浏览器进行调试。
 
+#### 示例
 
+```javascript
+response.registerUserResponse = this.registerUserResponse.bind(this);
+
+registerUserResponse :function (userInfo) {
+    if (userInfo.status === 0) {
+        console.log("注册成功");
+		// 用户ID
+		console.log("userID: ", userInfo.userID);
+		// token
+		console.log("token: ", userInfo.token);
+    } else {
+        console.log("注册失败"+userInfo.status);
+    }
+}
+```
 
 ## login
 
@@ -164,7 +203,15 @@ engine.login(userID, token, gameID, gameVersion, appKey, secretKey, deviceID, ga
 | -5     | 已经登录，请勿重复登录       |
 | -6     | 正在登出                     |
 
+#### 示例
 
+```javascript
+//userID 和token 在注册回调接口中获得
+var DeviceID = 'TestDevice';
+var gatewayID = 0;
+var result = engine.login(userID,token,200978,1, '4fd4a67c10e84e259a2c3c417b9114f4','bd00c3953f6a447eaaa1e36f19684764',DeviceID,gatewayID);
+console.log("登录result"+result);
+```
 
 ## loginResponse
 
@@ -175,8 +222,8 @@ response.loginResponse(loginRsp)
 
 | 属性   | 类型   | 描述                            | 示例值 |
 | ------ | ------ | ------------------------------- | ------ |
-| status | number | 状态返回 <br>200 成功<br>402 应用校验失败，确认是否在未上线时用了release环境，并检查gameId、appkey 和 secret<br>403 检测到该账号已在其他设备登录<br>404 无效用户 <br>500 服务器内部错误 | 200    |
-| roomID | number | 房间号                          | 210039 |
+| status | number | 状态返回 <br>200 成功<br>402 应用校验失败，确认是否在未上线时用了release环境，并检查gameID、appkey 和 secret<br>403 检测到该账号已在其他设备登录<br>404 无效用户 <br>500 服务器内部错误 | 200    |
+| roomID | string | 房间号                          | "210039" |
 
 #### 说明
 
@@ -185,7 +232,17 @@ response.loginResponse(loginRsp)
 - 如果一个账号在两台设备上登录，则后登录的设备会连接失败。
 - 如果用户加入房间之后掉线，再重新登录进来，则roomID为之前加入的房间的房间号。
 
+#### 示例
 
+```javascript
+loginResponse:function (loginRsp) {
+    if (MsLoginRsp.status == 200) {
+        console.log("登录成功");
+    } else {
+        console.log("登录失败"+ MsLoginRsp.status);
+    }
+}
+```
 
 ## logout
 
@@ -260,6 +317,14 @@ response.logoutResponse(status)
 - 如果不存在人未满且没有joinOver的房间，则系统会再创建一个房间，然后将玩家加入到该房间。
 - 玩家userProfile的值可以自定义，接下来会通过回调函数（如joinRoomResponse）传给其他客户端。
 
+#### 示例
+
+```javascript
+var mxaNumer = 3;
+var result = engine.joinRandomRoom(mxaNumer,"I Love China");
+console.log("随机匹配result"+result);
+```
+
 
 ## joinRoomWithProperties
 
@@ -298,6 +363,19 @@ engine.joinRoomWithProperties(matchInfo, userProfile)
 - 同 joinRandomRoom，对应的回调接口也是 joinRoomResponse
 
   tags为匹配标签，开发者通过设置不同的标签进行自定义属性匹配，相同MsMatchInfo的玩家将会被匹配到一起。
+  
+#### 示例
+
+```javascript
+var mxaNumer = 3;
+var matchinfo = new Matchvs.MsMatchInfo();
+matchinfo.maxPlayer =3;
+matchinfo.mode = 0;
+matchinfo.canWatch = 1;
+matchinfo.tags = {"title": "A"};
+var result = mvs.engine.joinRoomWithProperties(matchinfo,"I Love China");
+console.log("属性匹配result"+result);
+```
 
 ## joinRoom
 
@@ -309,7 +387,7 @@ engine.joinRoom(roomID, userProfile)
 
 | 参数        | 类型   | 描述     | 示例值  |
 | ----------- | ------ | -------- | ------- |
-| roomID      | number | 房间号   | 1344333 |
+| roomID      | string | 房间号   | "1344333" |
 | userProfile | string | 玩家简介 | ""      |
 
 #### 返回值
@@ -330,6 +408,14 @@ engine.joinRoom(roomID, userProfile)
 - 客户端可以通过调用该接口加入指定房间，roomID为加入指定房间的房间号
 - 指定房间号必须是由 createRoom接口创建的房间。
 
+#### 示例
+
+```javascript
+var roomID = ”12456544323432432432432“;
+var result = engine.joinRoom(roomID,"I Love China");
+console.log("加入指定房间 result"+result);
+```
+
 
 ## joinRoomResponse
 
@@ -349,14 +435,14 @@ response.joinRoomResponse(status, roomUserInfoList, roomInfo)
 
 | 属性        | 类型   | 描述     | 示例值 |
 | ----------- | ------ | -------- | ------ |
-| userId      | number | 用户ID   | 32322  |
+| userID      | number | 用户ID   | 32322  |
 | userProfile | string | 玩家简介 | ""     |
 
 #### 参数roomInfo的属性
 
 | 属性         | 类型   | 描述                             | 示例值 |
 | ------------ | ------ | -------------------------------- | ------ |
-| roomID       | number | 房间号                           | 238211 |
+| roomID       | string | 房间号                           | "238211" |
 | roomProperty | string | 房间属性                         | ""     |
 | owner        | number | 房间创建者的用户ID(房主ID)       | 0      |
 | state        | number | 状态值 0-未知， 1-打开， 2- 关闭 |        |
@@ -365,6 +451,21 @@ response.joinRoomResponse(status, roomUserInfoList, roomInfo)
 - 如果本房间是某个玩家调用joinRandomRoom随机加入房间时创建的，那么roomInfo中的owner为服务器随机指定的房主ID。在调用engine.createRoom主动创建房间时owner为创建房间者（即房主）的ID。以上两种情况下，如果房主离开房间，服务器均会指定下一个房主，并通过`leaveRoomNotify`通知房间其他成员。
 - roomUserInfoList用户信息列表是本玩家加入房间前的玩家信息列表，不包含本玩家。
 - roomUserInfoList中的玩家的userProfile的值来自于其他客户端调用joinRandomRoom时传递的userProfile的值。
+
+#### 示例
+
+```javascript
+response.joinRoomResponse : this.joinRoomResponse.bind(this)
+joinRoomResponse : function (status, userInfoList, roomInfo) {
+    if (status === 200) {
+        console.log("进入房间成功");
+		console.log("房间用户列表：", roomUserInfoList);
+		console.log("房间信息：", roomInfo);
+    } else {
+        console.log("进入房间失败"+status);
+    }
+}
+```
 
 
 ## joinRoomNotify
@@ -383,7 +484,14 @@ response.joinRoomNotify(roomUserInfo)
 - 某个玩家加入房间之后，如果该房间后来又有其他玩家加入，那么将会收到回调通知，response.joinRoomNotify方法会被SDK调用，调用时传入的roomUserInfo是新加入的其他玩家的信息，不是本玩家的信息。
 - roomUserInfo的属性与response.joinRoomResponse中的[roomUserInfoList中的元素包含的属性](#roomUserInfo)相同。
 
+#### 示例
 
+```javascript
+response.joinRoomNotify : this.joinRoomNotify.bind(this)
+joinRoomNotify : function (roomUserInfo) {
+    console.log(roomUserInfo.userID+"加入了房间");
+}
+```
 
 ## <span id="joinOver">joinOver</span>
 
@@ -414,6 +522,12 @@ engine.joinOver(cpProto)
 
 - 客户端调用该接口通知服务端：房间人数已够，不要再向房间加人。
 
+#### 示例
+
+```javascript
+var result = engine.joinOver("关闭房间");
+console.log("joinOver result"+result);
+```
 
 
 ## joinOverResponse
@@ -433,6 +547,20 @@ response.joinOverResponse(joinOverRsp)
 - 客户端调用engine.joinOver发送关闭房间的指令之后，SDK异步调用reponse.joinOverResponse方法告诉客户端joinOver指令的处理结果。
 
 
+#### 示例
+
+```javascript
+response.joinOverResponse : this.joinOverResponse.bind(this);
+joinOverResponse : function (joinOverRsp) {
+    if(joinOverRsp.status == 200) {
+        console.log("房间关闭成功");
+    } else  {
+        console.log("房间关闭失败"+joinOverRsp.status);
+    }
+}
+```
+
+
 ## joinOverNotify
 
 ```
@@ -450,6 +578,16 @@ response.joinOverNotify(notifyInfo);
 #### 说明
 
 - 当有人调用了 joinOver 接口，同一房间的其他用户就会收到这个 回调信息。
+
+#### 示例
+
+```javascript
+response.joinOverNotify : this.joinOverNotify.bind(this);
+joinOverNotify : function (notifyInfo) {
+    console.log("房间关闭通知");
+	console.log(srcUserID+"关闭了房间");
+}
+```
 
 
 ## <span id="leaveRoom">leaveRoom</span>
@@ -481,7 +619,12 @@ engine.leaveRoom(cpProto)
 
 - 客户端调用该接口通知服务端该客户端对应的用户要离开房间。
 
+#### 示例
 
+```javascript
+var result = engine.leaveRoom("I Love China");
+console.log("leaveRoom result"+result);
+```
 
 ## leaveRoomResponse
 
@@ -494,14 +637,25 @@ response.leaveRoomResponse(leaveRoomRsp)
 | 属性    | 类型   | 描述                            | 示例值 |
 | ------- | ------ | ------------------------------- | ------ |
 | status  | number | 状态返回，200表示成功<br>400 客户端参数错误 <br>404 房间不存在 <br>500 服务器内部错误| 200    |
-| roomID  | string | 房间号                          | 317288 |
-| userId  | number | 用户ID                          | 317288 |
+| roomID  | string | 房间号                          | "317288" |
+| userID  | number | 用户ID                          | 317288 |
 | cpProto | string | 负载信息                        |        |
 
 #### 说明
 - 客户端调用engine.leaveRoom发送关闭房间的指令之后，SDK异步调用reponse.leaveRoomResponse方法告诉客户端leaveRoom指令的处理结果。
 
+#### 示例
 
+```javascript
+response.leaveRoomResponse :this.leaveRoomResponse.bind(this);
+leaveRoomResponse : function (leaveRoomRsp) {
+    if (leaveRoomRsp.status == 200) {
+        console.log("离开房间成功");
+    } else {
+        console.log("离开房间失败"+leaveRoomRsp.status);
+    }
+}
+```
 
 ## leaveRoomNotify
 
@@ -510,17 +664,29 @@ response.leaveRoomNotify(leaveRoomInfo)
 ```
 
 #### 参数 leaveRoomInfo属性
-
+房间号
+刚刚离开房间的用户的信息
 | 参数    | 类型   | 描述                     | 示例值 |
 | ------- | ------ | ------------------------ | ------ |
-| userId  | number | 房间号                   | 200    |
-| roomID  | string | 刚刚离开房间的用户的信息 |        |
+| userID  | number | 刚刚离开房间的用户的ID   | 223545 |
+| roomID  | string | 房间号					  |'234566'|
 | owner   | number | 房主                     |        |
 | cpProto | string | 附加信息                 |        |
 
 #### 说明
 - 当同房间中的其他玩家调用leaveRoom发送离开房间的指令之后，本客户端将会收到回调通知，response.leaveRoomNotify方法会被SDK调用，调用时传入的roomUserInfo是离开房间的玩家的信息。
 - roomUserInfo的属性与response.joinRoomResponse中的[roomUserInfoList中的元素包含的属性](#roomUserInfo)相同。
+
+#### 示例
+
+```javascript
+response.leaveRoomNotify : this.leaveRoomNotify.bind(this);
+leaveRoomNotify : function (leaveRoomInfo) {
+	console.log(userID+'离开了房间,roomID是+'roomID);
+	console.log(”新的房主是:“+userID);
+}
+```
+
 
 ## createRoom
 
@@ -563,6 +729,20 @@ engine.createRoom(createRoomInfo, userProfile)
 
 - 开发者可以在客户端主动创建房间，创建成功后玩家会被自动加入该房间，创建房间者即为房主，如果房主离开房间则Matchvs会自动转移房主并通知房间内所有成员，开发者通过设置CreateRoomInfo创建不同类型的房间
 
+#### 示例
+
+```javascript
+var createRoom = new Matchvs.MsCreateRoomInfo();
+createRoom.name = 'roomName';
+createRoom.maxPlayer = 3;
+createRoom.mode = 0;
+createRoom.canWatch = 1;
+createRoom.visibility = 1;
+createRoom.roomProperty = '白天模式';
+var result = engine.createRoom(createRoom,"I Love China");
+console.log("createRoom result"+result);
+```
+
 ## createRoomResponse
 
 ```javascript
@@ -574,12 +754,25 @@ response.createRoomResponse(CreateRoomRsp)
 | 参数     | 类型     | 描述                | 示例值    |
 | ------ | ------ | ----------------- | ------ |
 | status | number | 状态返回，200表示成功<br>400 客户端参数错误 <br>500 服务器内部错误 | 200    |
-| roomID | number | 房间号               | 210039 |
+| roomID | string | 房间号               | "210039" |
 | owner  | number | 房主                | 210000 |
 
 #### 说明
 
 - response是engine.createRoom方法中传入的对象，createRoom完成之后，会异步回调createRoomResponse方法
+
+#### 示例
+
+```javascript
+response.createRoomResponse : this.createRoomResponse.bind(this);
+createRoomResponse : function (CreateRoomRsp) {
+    if (CreateRoomRsp.status == 200) {
+        console.log("创建指定类型房间接口成功");
+    } else {
+        console.log("创建指定类型房间接口失败 status" + CreateRoomRsp.status);
+    }
+}
+```
 
 ## getRoomList
 
@@ -610,10 +803,22 @@ engine.getRoomList(filter)
 
 - 开发者通过该接口可以获取所有客户端主动创建的房间列表。不同模式(mode)下的玩家不会被匹配到一起，开发者可以利用mode区分竞技模式，普通模式等游戏模式。开发者可以通过设置RoomFilter来对获取的房间进行过滤，getRoomList的过滤规则是并集过滤，与filter中的过滤字段有一个相同都会通过接口返回，getRoomListEx提供了严格匹配。
 
+#### 示例
+
+```javascript
+var createRoom = new Matchvs.MsCreateRoomInfo();
+createRoom.maxPlayer = 3;
+createRoom.mode = 0;
+createRoom.canWatch = 1;
+createRoom.roomProperty = '白天模式';
+var result = engine.getRoomList(createRoom,"I Love China");
+console.log("createRoom result"+result);
+```
+
 ## getRoomListResponse
 
 ```javascript
-response.getRoomListResponse(status, [roomInfos])
+response.getRoomListResponse(status, roomInfos)
 ```
 
 #### 参数
@@ -638,11 +843,26 @@ response.getRoomListResponse(status, [roomInfos])
 
 - response是engine.getRoomList方法中传入的对象，getRoomList完成之后，会异步回调getRoomListResponse方法。
 
+#### 示例
+
+```javascript
+response.getRoomListResponse : this.getRoomListResponse.bind(this);
+getRoomListResponse : function (status, roomInfo) {
+    if (status == 200) {
+        console.log("获取房间列表成功");
+    } else {
+        console.log("获取房间列表失败 status：" + status);
+    }
+}
+```
+
 ## getRoomListEx
 
 ```
 engine.getRoomListEx(filter);
 ```
+
+**注意** 不参与过滤的条件可以不填，或者填null。
 
 #### 参数 filter属性
 
@@ -675,27 +895,19 @@ engine.getRoomListEx(filter);
 
 - getRoomListEx 是 getRoomList 接口的扩展功能接口，只能获取调用 createRoom 接口创建的房间，获取房间列表参数必须和createRoom接口创建的房间参数完全一致而且 createRoom中的参数 visibility 必须设置为1(可见)比如：createRoom 参数结构 如下
 
-```
-var createRoomInfo = new MsCreateRoomInfo("Matchvs",3, 0, 0, 1, "mapA")
-```
-
-那么getRoomList 参数结构应该如下：
+#### 示例
 
 ```
-var filter = new MsRoomFilterEx(
-	    createRoomInfo.maxPlayer, 		//maxPlayer
-        createRoomInfo.mode,		    //mode
-        createRoomInfo.canWatch,		//canWatch
-        createRoomInfo.roomProperty,    //roomProperty
-        0, 	//full 0-未满
-        1,  //state 0-全部，1-开放 2-关闭
-        0,  //sort 0-不排序 1-创建时间排序 2-玩家数量排序 3-状态排序 都可以
-        0,  //order 0-ASC  1-DESC 都可以
-        0,  //pageNo 从0开始 0为第一页
-        3,  //pageSize 每页数量 大于0
-        );
+var createRoomInfoEx = new MsRoomFilterEx()
+createRoomInfoEx.name = 'roomName';
+createRoomInfoEx.maxPlayer = 3;
+createRoomInfoEx.mode = 0;
+createRoomInfoEx.canWatch = 0;
+createRoomInfoEx.visibility = 1;
+createRoomInfoEx.roomProperty = '白天模式';
+var result = engine.getRoomListEx(createRoomInfoEx,"I Love China");
+console.log("getRoomListEx result"+result);
 ```
-
 
 
 ## getRoomListExResponse
@@ -732,10 +944,24 @@ response.getRoomListExResponse(rsp);
 
 - 是接口 getRoomListEx 的回调，参数total  与 roomAttrs 列表length 可能会不同，但是 total 会 >= roomAttrs 列表的 length。
 
+#### 示例
+
+```javascript
+response.getRoomListExResponse : this.getRoomListExResponse.bind(this);
+getRoomListExResponse : function (rsp) {
+    if (rsp.status == 200) {
+        console.log("获取房间列表成功");
+    } else {
+        console.log("获取房间列表失败 status：" + rsp.status);
+    }
+}
+```
+
+
 ## getRoomDetail
 
 ```
-engine.getRoomDetail(roomID)；
+engine.getRoomDetail(roomID);
 ```
 
 #### 参数
@@ -758,6 +984,14 @@ engine.getRoomDetail(roomID)；
 #### 说明
 
 - 获取房间详细信息，可获取的时候 createRoom 接口创建的房间。
+
+#### 示例
+
+```
+var roomID = "34532423423423";
+var result = engine.getRoomDetail(roomID);
+console.log("获取房间详情 result"+ result);
+```
 
 ## getRoomDetailResponse
 
@@ -783,12 +1017,25 @@ response.getRoomDetailResponse(rsp);
 
 | 属性        | 类型   | 描述     | 示例值 |
 | ----------- | ------ | -------- | ------ |
-| userId      | number | 用户ID   | 32322  |
+| userID      | number | 用户ID   | 32322  |
 | userProfile | string | 玩家简介 | ""     |
 
 #### 说明
 
 - 是 getRoomDetail 接口的回调。
+
+#### 示例
+
+```javascript
+response.getRoomDetailResponse : this.getRoomDetailResponse.bind(this);
+getRoomDetailResponse : function (rsp) {
+    if (rsp.status === 200) {
+        console.log("获取房间详情成功");
+    } else {
+        console.log("获取房间详情失败 status "+ rsp.status);
+    }
+};
+```
 
 
 ## setRoomProperty 
@@ -822,6 +1069,16 @@ engine.setRoomProperty(roomID, roomProperty)
 
 - 在进入房间后，可以调用 `setRoomProperty` 修改房间的属性。
 
+#### 示例
+
+```
+var roomID = "34532423423423";
+var newRoomProperty = '我爱中国';
+var result = engine.setRoomProperty(roomID,newRoomProperty);
+console.log("修改房间属性 result"+ result);
+```
+
+
 ## setRoomPropertyResponse
 
 ```typescript
@@ -841,6 +1098,18 @@ response.setRoomPropertyResponse(rsp);
 
 - 开发者调用 setRoomProperty 接口，服务器会回调 setRoomPropertyResponse 接口。
 
+#### 示例
+
+```javascript
+response.setRoomPropertyResponse : this.setRoomPropertyResponse.bind(this);
+setRoomPropertyResponse : function (rsp) {
+    if (rsp.status === 200) {
+        console.log("修改房间属性成功");
+    } else {
+        console.log("修改房间属性失败 status "+ rsp.status);
+    }
+}
+```
 
 ## setRoomPropertyNotify
 
@@ -860,7 +1129,15 @@ response.setRoomPropertyNotify(notify);
 
 - 调用 `setRoomProperty ` 接口后，其他玩家会收到 这个setRoomPropertyNotify 接口的回调。
 
+#### 示例
 
+```javascript
+response.setRoomPropertyNotify = this.setRoomPropertyNotify.bind(this);
+setRoomPropertyNotify : function (notify) {
+	console.log("修改房间属性通知");
+	console.log(rsp.userID+"修改了房间属性，新的房间属性是"+rsp.roomProperty);
+}
+```
 
 ## <span id="sendEvent">sendEvent</span>
 
@@ -870,8 +1147,8 @@ engine.sendEvent(msg)
 
 #### 参数
 
-| 参数   | 类型     | 描述   | 示例值     |
-| ---- | ------ | ---- | ------- |
+| 参数 | 类型   | 描述     | 示例值  |
+| ---- | ------ | -------- | ------- |
 | msg  | string | 消息内容 | "hello" |
 
 #### 返回值
@@ -901,11 +1178,19 @@ engine.sendEvent(msg)
 - 同一客户端多次调用engine.sendEvent方法时，每次返回的sequence都是唯一的。但同一房间的不同客户端调用sendEvent时生成的sequence之间会出现重复。
 - 可以发送二进制数据，开发者可以将数据用json、pb等工具先进行序列化，然后将序列化后的数据通过SendEvent的一系列接口发送。
 
+#### 示例
+
+```javascript
+var data = engine.sendEvent(msg);
+console.log("发送信息 result"+ data.result);
+}
+```
+
 
 ## sendEventEx
 
 ```javascript
-engine.sendEventEx(type, cpProto, targetType, [targetUserId])
+engine.sendEventEx(type, cpProto, targetType, [targetUserID])
 ```
 
 #### 参数
@@ -915,7 +1200,7 @@ engine.sendEventEx(type, cpProto, targetType, [targetUserId])
 | type         | number | 消息类型。0表示转发给房间成员；1表示转发给game server；2表示转发给房间成员及game server | 0           |
 | cpProto      | string | 消息内容                                     | "hello"     |
 | targetType   | number | 目标类型。0表示发送目标为目标列表成员；1表示发送目标为除目标列表成员以外的房间成员 | 0           |
-| targetUserId | array  | 目标列表                                     | [1001,1002] |
+| targetUserID | array  | 目标列表                                     | [1001,1002] |
 
 #### 返回值
 
@@ -946,6 +1231,15 @@ engine.sendEventEx(type, cpProto, targetType, [targetUserId])
 - 在进入房间后即可调用该接口进行消息发送，消息会发给房间里所有成员。
 - 同一客户端多次调用engine.sendEvent方法时，每次返回的sequence都是唯一的。但同一房间的不同客户端调用sendEvent时生成的sequence之间会出现重复。
 
+#### 示例
+
+```javascript
+//发送给房间中的全部玩家
+var data = mvs.engine.sendEventEx(0,msg,1,[]);
+console.log("发送信息 result"+ data.result);
+}
+```
+
 
 ## sendEventResponse
 
@@ -963,7 +1257,18 @@ response.sendEventResponse(sendEventRsp)
 #### 说明
 - 客户端调用engine.sendEvent发送消息之后，SDK异步调用reponse.sendEventResponse方法告诉客户端消息是否发送成功。
 
+#### 示例
 
+```javascript
+response.sendEventResponse = this.sendEventResponse.bind(this);
+sendEventResponse :function (sendEventRsp) {
+    if (sendEventRsp.status == 200) {
+        console.log("发送消息成功");
+    } else {
+        console.log("发送消息失败 status"+sendEventRsp.status);
+    }
+}
+```
 
 ## sendEventNotify
 
@@ -975,12 +1280,22 @@ response.sendEventNotify(eventInfo)
 
 | 参数        | 类型     | 描述                                    | 示例值     |
 | --------- | ------ | ------------------------------------- | ------- |
-| srcUserId | number | 推送方用户ID，表示是谁发的消息                      | 321     |
+| srcUserID | number | 推送方用户ID，表示是谁发的消息                      | 321     |
 | cpProto   | string | 消息内容，对应[sendEvent](#sendEvent)中的msg参数 | "hello" |
 
 #### 说明
 
 - 在其他客户端调用engine.sendEvent方法之后，本客户端的response.sendEventNotify会被SDK调用，调用时传入其他玩家的用户ID和发送的消息。
+
+#### 示例
+
+```javascript
+response.sendEventNotify = this.sendEventNotify.bind(this);
+sendEventNotify : function (eventInfo) {
+    console.log(eventInfo);
+    console.log('ID为'+eventInfo.srcUserID+'通知了'+eventInfo.cpProto);
+}
+```
 
 
 ## networkStateNotify
@@ -1002,6 +1317,16 @@ response.networkStateNotify(netnotify);
 
 - 在房间中如果有其他玩家网络断开就会收到这个异步回调的接口，通过这个接口就可以知道其他玩家的网络状态啦。
 
+#### 示例
+
+```javascript
+response.networkStateNotify = this.networkStateNotify.bind(this);
+networkStateNotify : function (eventInfo) {
+    console.log("netNotify.owner:" + eventInfo.owner);
+}
+```
+
+
 ## gameServerNotify
 
 ```
@@ -1012,25 +1337,33 @@ response.gameServerNotify(eventInfo);
 
 | 参数      | 类型   | 描述                       | 示例值       |
 | --------- | ------ | -------------------------- | ------------ |
-| srcUserId | number | gameServer推送时 这个值为0 | 0            |
+| srcUserID | number | gameServer推送时 这个值为0 | 0            |
 | cpProto   | string | 推送的消息内容             | “gameServer” |
 
 #### 说明
 
 - 开发者有使用 gameServer 的时候，如果有gameServer发送消息到客户端就会收到这个回调，回调的 srcUserID 是固定为0。
 
+#### 示例
+
+```javascript
+response.gameServerNotify = this.gameServerNotify.bind(this);
+gameServerNotify : function (eventInfo) {
+    console.log("推送的消息内容:" + eventInfo.cpProto);
+}
+```
 
 ## kickPlayer
 
 ```javascript
-engine.kickPlayer(userId, cpProto)
+engine.kickPlayer(userID, cpProto)
 ```
 
 #### 参数
 
-| 参数      | 类型     | 描述    | 示例值    |
-| ------- | ------ | ----- | ------ |
-| userId  | number | 用户id  | 655444 |
+| 参数    | 类型   | 描述    | 示例值 |
+| ------- | ------ | ------- | ------ |
+| userID  | number | 用户ID  | 655444 |
 | cpProto | string | 自定义数据 | “kick” |
 
 #### 返回值
@@ -1050,6 +1383,14 @@ engine.kickPlayer(userId, cpProto)
 
 - kickPlayer 用于剔除玩家，房间任何人都可以调用这个接口，参数userID 可以是房间内任意一个，自己也可以剔除自己。主要剔除方式由开发者自己制定。
 
+#### 示例
+
+```javascript
+var userID = 4324532;
+var result = engine.kickPlayer(userID,"I Love China");
+console.log(userID+"被踢出游戏 result"+result);
+```
+
 ## kickPlayerResponse
 
 ```javascript
@@ -1068,6 +1409,19 @@ response.kickPlayerResponse(KickPlayerRsp)
 
 - response是engine.kickPlayerResponse方法中传入的对象，kickPlayer完成之后，会异步回调kickPlayerResponse方法
 
+#### 示例
+
+```javascript
+response.kickPlayerResponse = this.kickPlayerResponse.bind(this);
+kickPlayerResponse : function (KickPlayerRsp) {
+    if (kickPlayerRsp.status == 200) {
+        console.log("踢出指定玩家成功");
+    } else {
+        console.log("踢出指定玩家失败 status" + kickPlayerRsp.status);
+    }
+}
+```
+
 ## kickPlayerNotify
 
 ```javascript
@@ -1078,11 +1432,21 @@ response.kickPlayerNotify(KickPlayerNotify)
 
 | 参数               | 类型     | 描述                                       | 示例值                                      |
 | ---------------- | ------ | ---------------------------------------- | ---------------------------------------- |
-| KickPlayerNotify | object | srcUserId:踢人用户id<br />userId:被踢用户id<br />cpProto:自定义数据<br />owner:房主 | srcUserId:223333<br />userId:344222<br />cpProto:'kick'<br />owner:223333 |
+| KickPlayerNotify | object | srcUserID:踢人用户ID<br />userID:被踢用户ID<br />cpProto:自定义数据<br />owner:房主 | srcUserID:223333<br />userID:344222<br />cpProto:'kick'<br />owner:223333 |
 
 #### 说明
 
 - 某个玩家被踢之后，房间里的其它玩家会收到回调通知，response.kickPlayerNotify方法会被SDK调用，调用时传入的KickPlayerNotify是踢人的信息。
+
+#### 示例
+
+```javascript
+response.kickPlayerNotify = this.kickPlayerNotify.bind(this);
+kickPlayerNotify : function (KickPlayerNotify) {
+    console.log("踢出指定玩家通知");
+}
+```
+
 
 ## subscribeEventGroup
 
@@ -1094,7 +1458,7 @@ engine.subscribeEventGroup([confirms], [cancles])
 
 | 参数     | 类型  | 描述       | 示例值      |
 | -------- | ----- | ---------- | ----------- |
-| confirms | array | 订阅组     | ["MatchVS"] |
+| confirms | array | 订阅组     | ["Matchvs"] |
 | cancles  | array | 取消订阅组 | ["hello"]   |
 
 #### 返回值
@@ -1125,7 +1489,7 @@ response.subscribeEventGroupResponse(status, [group])
 | 参数     | 类型     | 描述         | 示例值         |
 | ------ | ------ | ---------- | ----------- |
 | status | number | 状态，200代表成功 | 200         |
-| group  | array  | 组数组        | ["MatchVS"] |
+| group  | array  | 组数组        | ["Matchvs"] |
 
 #### 说明
 
@@ -1142,7 +1506,7 @@ engine.sendEventGroup(cpProto, [group])
 | 参数      | 类型     | 描述     | 示例值         |
 | ------- | ------ | ------ | ----------- |
 | cpProto | string | 自定义消息  | "test"      |
-| group   | array  | 发送的组列表 | ["MatchVS"] |
+| group   | array  | 发送的组列表 | ["Matchvs"] |
 
 #### 返回值
 
@@ -1190,7 +1554,7 @@ response.sendEventGroupNotify(srcUid, [group], cpProto)
 | 参数      | 类型   | 描述     | 示例值      |
 | --------- | ------ | -------- | ----------- |
 | srcUserID | number | 源用户ID | 277773      |
-| groups    | number | 组数组   | ["MatchVS"] |
+| groups    | number | 组数组   | ["Matchvs"] |
 | cpProto   | string | 消息内容 | "test"      |
 
 #### 说明
@@ -1227,6 +1591,14 @@ engine.setFrameSync(frameRate)
 - 开发者可以通过该接口设置帧同步的帧率。同步帧率有效范围在1≤n≤20，n=0代表取消帧同步。当设置的同步帧率不在合法范围内，将会收到 -20 的错误码。
 - 帧率须能被1000整除
 
+#### 示例
+
+```javascript
+var frameRate = 15;
+var result = engine.setFrameSync(frameRate);
+console.log('设置帧率 result：'+result);
+```
+
 ## setFrameSyncResponse
 
 ```
@@ -1237,11 +1609,26 @@ response.setFrameSyncResponse(rsp)
 
 | 参数    | 类型   | 描述           | 示例值 |
 | ------- | ------ | -------------- | ------ |
-| mStatus | number | 状态：<br>200 成功<br>519 重复设置<br>500 帧率需被1000整除 | 200    |
+| status | number | 状态：<br>200 成功<br>519 重复设置<br>500 帧率需被1000整除 | 200    |
 
 #### 说明
 
 - response是engine.setFrameSyncResponse方法中传入的对象，setFrameSync完成之后，会异步回调engine.setFrameSyncResponse方法
+
+#### 示例
+
+```javascript
+response.setFrameSyncResponse = this.setFrameSyncResponse.bind(this);
+setFrameSyncResponse = function (rsp) {
+    if (rsp.status == 200) {
+        console.log('帧率设置成功');
+    } else if (rsp.status ==519 ) {
+        console.log('帧率设置失败,重复设置');
+    } else if (rsp.status == 500) {
+        console.log('帧率设置失败,帧率需被1000整除');
+    }
+}
+```
 
 ## sendFrameEvent
 
@@ -1251,7 +1638,7 @@ engine.sendFrameEvent(cpProto)
 
 #### 参数
 
-| 参数      | 类型     | 描述      | 示例值       |
+| 参数    | 类型   | 描述    | 示例值    |
 | ------- | ------ | ------- | --------- |
 | cpProto | string | 帧同步消息内容 | "message" |
 
@@ -1272,6 +1659,21 @@ engine.sendFrameEvent(cpProto)
 
 - 开发者可以通过该接口发送帧同步消息。
 
+#### 示例
+
+```javascript
+var self = this;
+var userID = "235445";
+isAllowInput: false,
+var frameData = JSON.stringify({
+	"userID": userID,
+	"action": "playerPosition",
+	"x": self.getPostion(),
+	"arrow": self.isUserInputing
+});
+var result = mvs.engine.sendFrameEvent(frameData);
+```
+
 ## sendFrameEventResponse
 
 ```
@@ -1282,11 +1684,23 @@ response.sendFrameEventResponse(rsp)
 
 | 参数    | 类型   | 描述         | 示例值 |
 | ------- | ------ | ------------ | ------ |
-| mStatus | number | mStatus:状态 | 200    |
+| status  | number | status:状态  | 200    |
 
 #### 说明
 
 - response是engine.sendFrameEventResponse方法中传入的对象，sendFrameEvent完成之后，会异步回调engine.sendFrameEventResponse方法
+
+#### 示例
+
+```javascript
+response.sendFrameEventResponse = this.sendFrameEventResponse.bind(this);
+sendFrameEventResponse : function (rsp) {
+    if (rsp.status == 200) {
+		console.log('帧同步消息发送成功');
+    }
+}
+```
+
 
 ## frameUpdate
 
@@ -1314,13 +1728,21 @@ response.frameUpdate(data)
 
 - frameUpdate是engine.frameUpdate方法中传入的对象，收到帧同步推送之后，会异步回调engine.frameUpdate方法
 
+#### 示例
+
+```javascript
+response.frameUpdate = this.frameUpdate.bind(this);
+frameUpdate : function (rsp) {
+	console.log('帧序号是'+data.frameIndex);
+}
+```
 
 
 
 ## reconnect
 
 ```typescript
-engine.reconnect():number;
+engine.reconnect();
 ```
 
 #### 参数
@@ -1342,6 +1764,13 @@ engine.reconnect():number;
 - 在游戏里面如果网络断开，可以调用 reconnect 函数重新连接，断线重新连接分为两种情况，第一种没有重新启动程序：在游戏进行时网络断开，直接调用 reconnect 重新连接到游戏。第二种重新加载程序：先调用login 然后判断 loginResponse 中的参数 roomID 是否为0 如果不为 0 就调用reconnect 重连到房间
 - reconnect 接口调用，其他玩家收到 netWorkStateNotify 接口信息，接口详情请看netWorkStateNotify的接口说明。
 
+#### 示例
+
+```javascript
+var result = engine.reconnect();
+console.log("重连result"+result);
+```
+
 ## reconnectResponse
 
 ```typescript
@@ -1360,7 +1789,7 @@ response.reconnectResponse(status, roomUserInfoList, roomInfo);
 
 | 属性        | 类型   | 描述     | 示例值 |
 | ----------- | ------ | -------- | ------ |
-| userId      | number | 用户ID   | 32322  |
+| userID      | number | 用户ID   | 32322  |
 | userProfile | string | 玩家简介 | ""     |
 
 #### MsRoomInfo 的属性
@@ -1376,7 +1805,18 @@ response.reconnectResponse(status, roomUserInfoList, roomInfo);
 
 - 玩家掉线后调用reconnect接口重新连接会收到此接口的回调。
 
+#### 示例
 
+```javascript
+response.reconnectResponse = this.reconnectResponse.bind(this);
+reconnectResponse :function (status,roomUserInfoList,roomInfo) {
+    if(status == 200) {
+        console.log("重连成功");
+    } else {
+        console.log("重连失败"+status);
+    }
+}
+```
 
 
 ## joinOpen
@@ -1384,7 +1824,7 @@ response.reconnectResponse(status, roomUserInfoList, roomInfo);
 房间重新打开,运行他人匹配加入, 注意 `在房间的情况才可以调用,否则函数直接返回错误码`
 
 ```javascript
-    engine.joinOpen = function (cpProto) ;//cpProto:string 
+engine.joinOpen = function (cpProto) ;//cpProto:string 
 ```
 #### 参数
 
@@ -1420,7 +1860,7 @@ MsReopenRoomResponse:
 | 属性         | 类型   | 描述               | 示例值 |
 | ------------ | ------ | ------------------ | ------ |
 | status       | number | 接口调用的服务器返回码,200为正确| 200 |
-| cpProto | string | 调用者附带的信息           | ""     |
+| cpProto      | string | 调用者附带的信息           | ""     |
 
 
 
@@ -1429,8 +1869,8 @@ MsReopenRoomNotify:
 | 属性         | 类型   | 描述               | 示例值 |
 | ------------ | ------ | ------------------ | ------ |
 | roomID       | string | 房间号             | "123123123" |
-| cpProto | string | 调用者附带的信息           | ""     |
-| userID      | number | 调用者用户ID | 0      |
+| cpProto      | string | 调用者附带的信息   | ""     |
+| userID       | number | 调用者用户ID       | 0      |
 
 
 
@@ -1439,7 +1879,7 @@ MsReopenRoomNotify:
 无
 
 #### 示例代码片段
-cocos creator示例
+
 ```javascript
 initReopenRoom: function (self) {
         var isOpen = true;
@@ -1490,9 +1930,9 @@ response.errorResponse = function(error) {
 
 | 错误码 | 含义                                                         |
 | ------ | ------------------------------------------------------------ |
-| 1001    | 网络错误                     |
-| 500     | 服务器内部错误                 |
-| 其他     | 参考对应接口回调的错误码说明   |
+| 1001   | 网络错误                       |
+| 500    | 服务器内部错误                 |
+| 其他   | 参考对应接口回调的错误码说明   |
 
 
 ## CHANGELOG
