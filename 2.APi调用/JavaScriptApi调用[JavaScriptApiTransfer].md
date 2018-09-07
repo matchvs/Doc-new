@@ -1,4 +1,4 @@
-**游戏交互时序图**
+**API调用时序图**
 
 ![](http://imgs.matchvs.com/static/时序图.jpg)
 
@@ -63,8 +63,6 @@ response.registerUserResponse : function(userInfo) {
 ```
 
 ## 登录
-
-
 
 成功获取用户ID后即可连接Matchvs服务：
 
