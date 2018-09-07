@@ -75,7 +75,7 @@ response.initResponse(status:number);
 | ------ | ------ | ------------------------------- | ------ |
 | status | number | 状态返回，200表示成功，其他失败 | 200    |
 
-#### 示例代码
+### 示例代码
 
 ```typescript
 class MsEngine {
@@ -161,7 +161,7 @@ registerUserResponse(userInfo:MsRegistRsp);
 > 注意：如果需要同时调试多个客户端，则需要打开多个不同的浏览器进行调试。
 >
 
-#### 示例代码
+### 示例代码
 
 ```typescript
 class MsEngine {
@@ -227,12 +227,12 @@ response.loginResponse(login:MsLoginRsp);
 
 #### 参数 MsLoginRsp 类的属性
 
-| 属性   | 类型   | 描述                            | 示例值 |
-| ------ | ------ | ------------------------------- | ------ |
-| status | number | 状态返回 <br>200 成功<br>402 应用校验失败，确认是否在未上线时用了release环境，并检查gameId、appkey 和 secret<br>403 检测到该账号已在其他设备登录<br>404 无效用户 <br>500 服务器内部错误 | 200 |
-| roomID | string | 房间号（预留断线重连）          | 210039 |
+| 属性   | 类型   | 描述                                                         | 示例值 |
+| ------ | ------ | ------------------------------------------------------------ | ------ |
+| status | number | 状态返回 <br>200 成功<br>402 应用校验失败，确认是否在未上线时用了release环境，并检查gameID、appkey 和 secret<br>403 检测到该账号已在其他设备登录<br>404 无效用户 <br>500 服务器内部错误 | 200    |
+| roomID | string | 房间号（预留断线重连）                                       | 210039 |
 
-#### 示例代码
+### 示例代码
 
 ````typescript
 class MsEngine {
@@ -421,11 +421,11 @@ response.createRoomResponse(rsp:MsCreateRoomRsp);
 
 #### MsCreateRoomRsp 属性
 
-| 参数   | 类型   | 描述                            | 示例值   |
-| ------ | ------ | ------------------------------- | -------- |
-| status | number | 状态返回，200表示成功<br>400 客户端参数错误 <br>500 服务器内部错误| 200      |
-| roomId | string | 房间号                          | "210039" |
-| owner  | number | 房主                            | 210000   |
+| 参数   | 类型   | 描述                                                         | 示例值   |
+| ------ | ------ | ------------------------------------------------------------ | -------- |
+| status | number | 状态返回，200表示成功<br>400 客户端参数错误 <br>500 服务器内部错误 | 200      |
+| roomID | string | 房间号                                                       | "210039" |
+| owner  | number | 房主                                                         | 210000   |
 
 #### joinRoom
 
@@ -502,12 +502,10 @@ response.joinRoomNotify(roomUserInfo:MsRoomUserInfo);
 | ------------ | -------------- | -------------------- | ------ |
 | roomUserInfo | MsRoomUserInfo | 房间新加的用户的信息 |        |
 
-#### 说明
-
 - 某个玩家加入房间之后，如果该房间后来又有其他玩家加入，那么将会收到回调通知，response.joinRoomNotify方法会被SDK调用，调用时传入的roomUserInfo是新加入的其他玩家的信息，不是本玩家的信息。
 - roomUserInfo的属性与response.joinRoomResponse中的[roomUserInfoList中的元素包含的属性](http://cn.matchvs.com/service?page=APIJavaScript#roomUserInfo)相同。
 
-#### 示例代码
+### 示例代码
 
 ```typescript
 class MsEngine {
@@ -595,7 +593,7 @@ response.joinOverNotify(notifyInfo:MsJoinOverNotifyInfo);
 | srcUserID | number | 发起关闭房间玩家ID |        |
 | cpProto   | string | 负载信息           |        |
 
-#### 示例代码
+### 示例代码
 
 ````typescript
 class MsEngine {
@@ -688,7 +686,7 @@ response.leaveRoomNotify(leaveRoomInfo:MsLeaveRoomNotify);
 
 - roomUserInfo 的属性与response.joinRoomResponse中的[roomUserInfoList中的元素包含的属性](http://cn.matchvs.com/service?page=APIJavaScript#roomUserInfo)相同。
 
-#### 示例代码
+### 示例代码
 
 ````typescript
 class MsEngine {
@@ -713,8 +711,15 @@ class MsEngine {
 
 ## 获取房间列表
 
+调用`createRoom`创建房间可以使用 `getRoomList` 或者 `getRoomListEx` 接口获取房间列表，由系统创建的房间是不能被获取的。`getRoomList`  接口参数要简单一些，对应的 `getRoomListResponse` 回调信息也少很多。 `getRoomListEx` 接口请求返回的信息要多一些，支持房间信息排序等功能。
 
-## getRoomList
+- 请求接口：getRoomList，getRoomListEx
+
+- 回调接口：getRoomListResponse , getRoomListExResponse
+
+### getRoomList
+
+获取主动创建房间的列表信息，简单版。
 
 ```typescript
 engine.getRoomList(filter:MsRoomFilter):number
@@ -742,7 +747,7 @@ engine.getRoomList(filter:MsRoomFilter):number
 | -8     | 已在房间                        |
 | -21    | filter 过长，总字节不能超过1024 |
 
-## getRoomListResponse
+### getRoomListResponse
 
 ```
 response.getRoomListResponse(status:number, roomInfos:Array<MsRoomInfoEx>);
@@ -766,12 +771,9 @@ response.getRoomListResponse(status:number, roomInfos:Array<MsRoomInfoEx>);
 | canWatch     | number | 是否可以观战 1-可以 2-不可以 | 2              |
 | roomProperty | string | 房间属性                     | “roomProperty” |
 
-#### 说明
+### getRoomListEx
 
-- response是engine.getRoomList方法中传入的对象，getRoomList完成之后，会异步回调getRoomListResponse方法
-
-
-## getRoomListEx
+获取房间列表信息扩展版，可获得更多的房间信息。
 
 ```typescript
 engine.getRoomListEx(filter:MsRoomFilterEx);
@@ -804,17 +806,15 @@ engine.getRoomListEx(filter:MsRoomFilterEx);
 | -7     | 正在创建或者进入房间            |
 | -21    | filter 过长，总字节不能超过1024 |
 
-#### 说明
+获取房间列表参数必须和 `createRoom` 接口创建的房间参数一致而且 `createRoom` 中的参数 `visibility`  必须设置为1(可见)。比如：`createRoom` 参数结构 如下：
 
-- getRoomListEx 是 getRoomList 接口的扩展功能接口，只能获取调用 createRoom 接口创建的房间，获取房间列表参数必须和createRoom接口创建的房间参数一致而且 createRoom中的参数 visibility 必须设置为1(可见)。比如：createRoom 参数结构 如下
-
-```
+```typescript
 var createRoomInfo = new MsCreateRoomInfo("Matchvs",3, 0, 0, 1, "mapA")
 ```
 
 那么getRoomList 参数结构应该如下：
 
-```
+```typescript
 var filter = new MsRoomFilterEx(
 	    createRoomInfo.maxPlayer, 		//maxPlayer
         createRoomInfo.mode,		    //mode
@@ -829,10 +829,7 @@ var filter = new MsRoomFilterEx(
         );
 ```
 
-
-
-
-## getRoomListExResponse
+### getRoomListExResponse
 
 ```typescript
 response.getRoomListExResponse(rsp:MsGetRoomListExRsp);
@@ -862,10 +859,35 @@ response.getRoomListExResponse(rsp:MsGetRoomListExRsp);
 | state        | number | 房间状态  1-开放 2-关闭      | 1              |
 | createTime   | string | 创建时间                     |                |
 
-#### 说明
+参数total  与 roomAttrs 列表length 可能会不同，但是 total 会 >= roomAttrs 列表的 length。
 
-- 是接口 getRoomListEx 的回调，参数total  与 roomAttrs 列表length 可能会不同，但是 total 会 >= roomAttrs 列表的 length。
+### 示例代码
 
+```typescript
+class MsEgine {
+    ......
+    private getRoomListEx():void{
+        this.response.getRoomListExResponse = (rsp:MsGetRoomListExRsp)=>{
+            if(status == 200){
+                //获取成功
+            }else{
+                //获取失败
+            }
+        };
+        let filter = new MsRoomFilterEx(3, 0, 0, "matchvs", 0, 1, 0, 0, 0, 3);
+       	this.engine.getRoomListEx(filter);
+    }
+}
+```
+
+
+
+## 获取房间详情
+
+在获取房间列表扩展接口会返回房间一些信息，但是在房间里面后房间信息可能会有变动，或者在显示房间列表后想查看更多信息，可以使用获取房间详情接口。只可获取 createRoom 接口创建的房间。
+
+- 请求接口：getRoomDetail
+- 回调接口：getRoomDetailResponse
 
 ## getRoomDetail
 
@@ -889,10 +911,6 @@ engine.getRoomDetail(roomID:string)
 | -4     | 未登陆       |
 | -7     | 正在加入房间 |
 | -3     | 正在初始化   |
-
-#### 说明
-
-- 获取房间详细信息，可获取的时候 createRoom 接口创建的房间。
 
 
 ## getRoomDetailResponse
@@ -919,14 +937,19 @@ response.getRoomDetailResponse(rsp:MsGetRoomDetailRsp);
 
 | 属性        | 类型   | 描述     | 示例值 |
 | ----------- | ------ | -------- | ------ |
-| userId      | number | 用户ID   | 32322  |
+| userID      | number | 用户ID   | 32322  |
 | userProfile | string | 玩家简介 | ""     |
 
-#### 说明
 
-- 是 getRoomDetail 接口的回调。
 
-## setRoomProperty 
+## 设置房间属性
+
+创建房间时需要传入房间属性参数，当房间创建好后可以调用 `setRoomProperty` 接口修改房间的属性。比如：房间地图，房间人员的等级要求等等。
+
+- 请求接口：setRoomProperty 
+- 回调接口：setRoomPropertyResponse，setRoomPropertyNotify
+
+### setRoomProperty 
 
 ```typescript
 engine.setRoomProperty(roomID:string, roomProperty:string):number
@@ -953,11 +976,7 @@ engine.setRoomProperty(roomID:string, roomProperty:string):number
 | -11    | 正在离开房间                            |
 | -21    | roomProperty 长度过长，不能超过1023字符 |
 
-#### 说明
-
-- 在进入房间后，可以调用 `setRoomProperty` 修改房间的属性。
-
-## setRoomPropertyResponse
+### setRoomPropertyResponse
 
 ```typescript
 response.setRoomPropertyResponse(rsp:MsSetRoomPropertyRspInfo);
@@ -972,12 +991,9 @@ response.setRoomPropertyResponse(rsp:MsSetRoomPropertyRspInfo);
 | userID       | number | 玩家            | 123                  |
 | roomProperty | string | 修改后的属性值  | “changeRoomProperty” |
 
-#### 说明
+### setRoomPropertyNotify
 
-- 开发者调用 setRoomProperty 接口，服务器会回调 setRoomPropertyResponse 接口。
-
-
-## setRoomPropertyNotify
+房间有人调用 setRoomProperty 接口，其他人就会收到 setRoomPropertyNotify接口的回调。
 
 ```typescript
 response.setRoomPropertyNotify(notify:MsRoomPropertyNotifyInfo);
@@ -991,11 +1007,39 @@ response.setRoomPropertyNotify(notify:MsRoomPropertyNotifyInfo);
 | userID       | number | 玩家           | 123                  |
 | roomProperty | string | 修改后的属性值 | “changeRoomProperty” |
 
-#### 说明
+### 示例代码
 
-- 调用 `setRoomProperty ` 接口后，其他玩家会收到 这个setRoomPropertyNotify 接口的回调。
+```typescript
+class MsEngine{
+    ......
+    private setRoomProperty(roomID){
+        this.response.setRoomPropertyResponse = (rsp:MsSetRoomPropertyRspInfo)=>{
+            if(rsp.status == 200){
+                //设置成功
+            }else{
+                //设置失败
+            }
+        }
+        this.response.setRoomPropertyNotify = (notify:MsRoomPropertyNotifyInfo)=>{
+            //notify.userID 有人修改了房间的属性，属性值为 notify.roomProperty
+        }
+        
+        this.engine.setRoomProperty(roomID,"属性A");
+    }
+    ......
+}
+```
 
-## sendEvent
+
+
+## 消息发送
+
+在游戏中，玩家之间相互同步信息，把自己的位置，得分等情况发送给其他玩家，让其他玩家能够同步修改自己的信息。一个房间消息的总传递速率是每秒500次，500次是指房间 **所有人接收和发送的总次数** 。
+
+- 请求接口：sendEvent、sendEventEx
+- 回调接口：sendEventResponse、sendEventNotify、gameServerNotify (gameServer 推送的消息回调)
+
+### sendEvent
 
 ```typescript
 engine.sendEvent(data:string):any
@@ -1029,16 +1073,14 @@ engine.sendEvent(data:string):any
 | -6     | 未加入房间                            |
 | -21    | data 过长, data长度不能超过1024个字符 |
 
-#### 说明
+消息会发给房间里**除自己外** 其他所有成员。同一客户端多次调用 `sendEvent` 方法时，每次返回的 `sequence`都是唯一的。但同一房间的不同客户端调用 `sendEven` t时生成的 `sequence` 之间会出现重复。可以发送二进制数据，开发者可以将数据用json、pb等工具先进行序列化，然后将序列化后的数据通过SendEvent的一系列接口发送。
 
-- 在进入房间后即可调用该接口进行消息发送，消息会发给房间里除自己外其他所有成员。
-- 同一客户端多次调用engine.sendEvent方法时，每次返回的sequence都是唯一的。但同一房间的不同客户端调用sendEvent时生成的sequence之间会出现重复。
-- 可以发送二进制数据，开发者可以将数据用json、pb等工具先进行序列化，然后将序列化后的数据通过SendEvent的一系列接口发送。
+### sendEventEx
 
-## sendEventEx
+ `sendEvent` 是 `sendEventEx` 接口的二次封装，只是 `sendEvent` 接口默认把消息发送给了房间其他人。如果需要把消息发送房间指定人员，或者只想把消息发送给 `gameServer` 那么就需要使用 `sendEventEx` 这个接口。想了解 `gameServer` 查看 [gameServer 文挡](http://www.matchvs.com/service?page=guideJSgameServer)
 
 ```typescript
-engine.sendEventEx(msgType:number, data:string, desttype:number, userids:Array<number>):any
+engine.sendEventEx(msgType:number, data:string, desttype:number, userids:Array <number> ):any
 ```
 
 #### 参数
@@ -1074,13 +1116,9 @@ engine.sendEventEx(msgType:number, data:string, desttype:number, userids:Array<n
 | -23    | msgType 非法                           |
 | -24    | desttype 非法                          |
 
-#### 说明
+同一客户端多次调用engine.sendEvent方法时，每次返回的sequence都是唯一的。但同一房间的不同客户端调用sendEvent时生成的sequence之间会出现重复。
 
-- 在进入房间后即可调用该接口进行消息发送，消息会发给房间里所有成员。
-- 同一客户端多次调用engine.sendEvent方法时，每次返回的sequence都是唯一的。但同一房间的不同客户端调用sendEvent时生成的sequence之间会出现重复。
-
-
-## sendEventResponse
+### sendEventResponse
 
 ```typescript
 response.sendEventResponse(rsp:MsSendEventRsp);
@@ -1097,7 +1135,7 @@ response.sendEventResponse(rsp:MsSendEventRsp);
 
 - 客户端调用engine.sendEvent或engine.sendEventEx 发送消息之后，SDK异步调用reponse.sendEventResponse 方法告诉客户端消息是否发送成功。
 
-## sendEventNotify
+### sendEventNotify
 
 ```typescript
 response.sendEventNotify(eventInfo:MsSendEventNotify);
@@ -1107,17 +1145,79 @@ response.sendEventNotify(eventInfo:MsSendEventNotify);
 
 | 参数      | 类型   | 描述                                                         | 示例值  |
 | --------- | ------ | ------------------------------------------------------------ | ------- |
-| srcUserId | number | 推送方用户ID，表示是谁发的消息                               | 321     |
+| srcUserID | number | 推送方用户ID，表示是谁发的消息                               | 321     |
 | cpProto   | string | 消息内容，对应[sendEvent](http://cn.matchvs.com/service?page=APIJavaScript#sendEvent)中的msg参数 | "hello" |
 
-#### 说明
+### gameServerNotify
 
-- 在其他客户端调用 engine.sendEvent 或engine.sendEventEx 方法之后，本客户端的response.sendEventNotify会被SDK调用，调用时传入其他玩家的用户ID和发送的消息。
+开发者有使用 gameServer 的时候，如果有gameServer发送消息到客户端就会收到这个回调，回调的 srcUserID 是固定为0。
+
+```typescript
+response.gameServerNotify(eventInfo:MsGameServerNotifyInfo);
+```
+
+#### 参数 MsGameServerNotifyInfo属性
+
+| 参数      | 类型   | 描述                       | 示例值       |
+| --------- | ------ | -------------------------- | ------------ |
+| srcUserID | number | gameServer推送时 这个值为0 | 0            |
+| cpProto   | string | 推送的消息内容             | “gameServer” |
+
+### 示例代码
+
+```typescript
+class MsEngine{
+    ......
+    public constructor(){
+        this.response.sendEventResponse = (rsp:MsSendEventRsp)=>{
+            if(rsp.status == 200){
+                //发送成功
+            }else{
+                //发送失败
+            }
+        };
+        
+        this.response.sendEventNotify = (eventInfo:MsSendEventNotify)=>{
+            //eventInfo.srcUserID 发送数据 eventInfo.cpProto
+        };
+        this.response.gameServerNotify = (eventInfo:MsSendEventNotify)=>{
+            //gameServer 推送了消息 eventInfo.cpProto
+        };
+    }
+    public sendEventEx(){
+        //这里发给其他用户和 gameServer
+        this.engine.sendEventEx(0, data, 2, [123.456.789]);
+    }
+    ......
+}
+```
 
 
 
+## 玩家断线错误提示
 
-## networkStateNotify
+在游戏中如果自己断线了就会收到 errorResponse 的错误码为1001的消息，如果是其他玩家掉线了就会收到 networkStateNotify 的回调消息。通过这个接口就可以知道其他玩家的网络状态啦。断线后会有20秒内还可以调用 reconnect 接口重新连接进入房间。
+
+> 注意：不要在 errorResponse 接口内直接调用 reconnect 接口，不然会出现死循环问题。
+
+### errorResponse
+
+在调用Matchvs SDK 所有接口是，如果服务有异常就会触发 errorResponse 接口。通过错误码判断是属于哪一个类型的错误，比如 1001 是网络错误。
+
+```typescript
+response.errorResponse(errCode:number, errMsg:string)
+```
+
+#### 参数 
+
+| 参数    | 类型   | 描述     | 示例值   |
+| ------- | ------ | -------- | -------- |
+| errCode | number | 错误码   | 1001     |
+| errMsg  | string | 错误描述 | 网络错误 |
+
+### networkStateNotify
+
+其他用户断线了会触发 networkStateNotify 接口。根据接口参数 state 判断其他玩家当前的状态。
 
 ```typescript
 response.networkStateNotify(netnotify:MsNetworkStateNotify);
@@ -1132,29 +1232,39 @@ response.networkStateNotify(netnotify:MsNetworkStateNotify);
 | state  | number | 网络断开状态1-网络异常，正在重连  2-重连成功 3-重连失败，退出房间 |        |
 | owner  | number | 房主ID                                                       |        |
 
-#### 说明
-
-- 在房间中如果有其他玩家网络断开就会收到这个异步回调的接口，通过这个接口就可以知道其他玩家的网络状态啦。
-
-## gameServerNotify
+### 示例代码
 
 ```typescript
-response.gameServerNotify(eventInfo:MsGameServerNotifyInfo);
+class MsEngine{
+    ......
+    public constructor(){
+        this.response.networkStateNotify = ( netnotify:MsNetworkStateNotify )=>{
+            if(state == 1){
+                //netnotify.userID 用户掉线
+            }else if(state == 2){
+                //netnotify.userID 用户重新登录了游戏，但是还没有重连进房间
+            }else{
+                //netnotify.userID 用户已经退出房间了
+            }
+        };
+        
+        this.response.errorResponse = (errCode:number, errMsg:string)=>{
+            //发生错误 errCode + errMsg
+        };
+    }
+}
 ```
 
-#### 参数 MsGameServerNotifyInfo属性
-
-| 参数      | 类型   | 描述                       | 示例值       |
-| --------- | ------ | -------------------------- | ------------ |
-| srcUserId | number | gameServer推送时 这个值为0 | 0            |
-| cpProto   | string | 推送的消息内容             | “gameServer” |
-
-#### 说明
-
-- 开发者有使用 gameServer 的时候，如果有gameServer发送消息到客户端就会收到这个回调，回调的 srcUserID 是固定为0。
 
 
-## kickPlayer
+## 踢除玩家
+
+在房间没有关闭状态下，在房间中的任何人都可以把其他人踢出房间。参数 userID 可以是房间内任意一个，自己也可以剔除自己。主要剔除方式由开发者自己制定。
+
+- 请求接口：kickPlayer
+- 回调接口：kickPlayerResponse
+
+### kickPlayer
 
 ```typescript
 engine.kickPlayer(userID:number, cpProto:string);
@@ -1180,12 +1290,7 @@ engine.kickPlayer(userID:number, cpProto:string);
 | -6     | 未加入房间                    |
 | -21    | data 过长，不能超过1024个字符 |
 
-#### 说明
-
-- kickPlayer 用于剔除玩家，房间任何人都可以调用这个接口，参数userID 可以是房间内任意一个，自己也可以剔除自己。主要剔除方式由开发者自己制定。
-
-
-## kickPlayerResponse
+### kickPlayerResponse
 
 ```typescript
 response.kickPlayerResponse(rsp:MsKickPlayerRsp);
@@ -1199,12 +1304,7 @@ response.kickPlayerResponse(rsp:MsKickPlayerRsp);
 | owner  | nunber | 房主ID            |        |
 | userID | number | 被踢玩家ID        |        |
 
-#### 说明
-
-- 玩家调用 kickPlayer 接口就会收到 kickPlayerResponse 接口的回调。而其他玩家会收到 kickPlayerNotify 接口的回调。
-
-
-## kickPlayerNotify
+### kickPlayerNotify
 
 ```typescript
 response.kickPlayerNotify(knotify:MsKickPlayerNotify)
@@ -1214,18 +1314,46 @@ response.kickPlayerNotify(knotify:MsKickPlayerNotify)
 
 | 参数      | 类型   | 描述           | 示例值 |
 | --------- | ------ | -------------- | ------ |
-| userId    | number | 被踢玩家ID     |        |
-| srcUserId | number | 发起踢人玩家ID |        |
+| userID    | number | 被踢玩家ID     |        |
+| srcUserID | number | 发起踢人玩家ID |        |
 | cpProto   | string | 附加消息       |        |
 | owner     | number | 房主ID         |        |
 
-#### 说明
+### 示例代码
 
-- 有玩家调用 kickPlayer 接口踢人，其它玩家就会收到 kickPlayerNotify的回调。
+````typescript
+class MsEngine{
+    ......
+    public constructor(){
+        this.response.kickPlayerResponse = ( rsp:MsKickPlayerRsp )=>{
+            if(rsp.status == 200){
+                //rsp.userID 用户被踢掉
+            }else{
+                //用户踢除失败
+            }
+        };
+        
+        this.response.kickPlayerNotify = (knotify:MsKickPlayerNotify)=>{
+            //srcUserID 把userID 踢掉了
+        };
+    }
+
+    public kickPlayer(){
+        this.engine.kickPlayer(123,"不想和你一起玩")
+    }
+}
+````
 
 
 
-## subscribeEventGroup
+## 分组订阅
+
+分组订阅功能就是群组功能，使用 subscribeEventGroup 接口加入订阅组 。一个玩家可以订阅多个分组。
+
+- 请求接口：subscribeEventGroup
+- 回调接口：subscribeEventGroupResponse
+
+### subscribeEventGroup
 
 ```typescript
 engine.subscribeEventGroup(confirms:Array<string>, cancles:Array<string>):number
@@ -1251,13 +1379,7 @@ engine.subscribeEventGroup(confirms:Array<string>, cancles:Array<string>):number
 | -6     | 未加入房间                     |
 | -20    | confirms 和 cancles 不能都为空 |
 
-#### 说明
-
-- 订阅分组，分组属性可以自行设置，比如两个人需要组队，可以给他们加入到一个订阅分组里就可以相互发送消息，而其他人无感知。
-
-
-
-## subscribeEventGroupResponse
+### subscribeEventGroupResponse
 
 ```typescript
 response.subscribeEventGroupResponse(status:number, groups:Array<string>);
@@ -1270,11 +1392,37 @@ response.subscribeEventGroupResponse(status:number, groups:Array<string>);
 | status | number        | 状态值：成功200，其他失败 | 200         |
 | groups | Array<string> | 订阅的组                  | ["MatchVS"] |
 
-#### 说明
+### 示例代码
 
-- 进行分组消息订阅接口，订阅相同组的用户是可以发送消息的，一个用户可以订阅多个消息组。
+```typescript
+class MsEngine{
+    ......
+    public constructor(){
+        this.response.subscribeEventGroupResponse = ( status:number, groups:Array <string> )=>{
+            if(status == 200){
+                //订阅成功
+            }else{
+                //订阅失败
+            }
+        };
+    }
 
-## sendEventGroup
+    public subscribeEventGroup(){
+        this.engine.subscribeEventGroup(["MatchVS"],[]);
+    }
+}
+```
+
+
+
+## 分组订阅消息发送
+
+加入同一个组的玩家是可以相互广播消息，其他没有加入该组的玩家是收不到组消息的。发送组消息使用 sendEventGroup 接口。消息分组发送可以根据 groups 参数发送多个分组。
+
+- 请求接口：sendEventGroup
+- 回调接口：sendEventGroupResponse
+
+### sendEventGroup
 
 ```typescript
 engine.sendEventGroup(groups:Array<string>, data:string):number
@@ -1301,11 +1449,9 @@ engine.sendEventGroup(groups:Array<string>, data:string):number
 | -20    | groups 不能都为空    |
 | -21    | data 过长（1K）      |
 
-#### 说明
+### sendEventGroupResponse
 
-- 消息分组发送可以根据 groups 参数发送多个分组。
-
-## sendEventGroupResponse
+调用 sendEventGroup 接口发送消息成功会收到sendEventGroupResponse的回调。dstNum表示这个分组消息会有多少个人收到。
 
 ```typescript
 response.sendEventGroupResponse(status:number);
@@ -1318,13 +1464,9 @@ response.sendEventGroupResponse(status:number);
 | status | number | 状态值 200成功，其他失败 | 200    |
 | dstNum | number | 将被发送给多少个客户端   | 3      |
 
-#### 说明
+### sendEventGroupNotify
 
-- 调用 sendEventGroup 接口发送消息成功会收到sendEventGroupResponse的回调。dstNum表示这个分组消息会有多少个人收到。
-
-
-
-## sendEventGroupNotify
+多个用户在同一个分组时，有一个用户发送消息，那么其他用户就会收到 sendEventGroupNotify 的异步回调。
 
 ```typescript
 response.sendEventGroupNotify(srcUid:number, groups:Array<string>, cpProto:string);
@@ -1338,13 +1480,45 @@ response.sendEventGroupNotify(srcUid:number, groups:Array<string>, cpProto:strin
 | groups    | Array<string> | 消息来源分组 | ["MatchVS"] |
 | cpProto   | string        | 负载消息     | "test"      |
 
-#### 说明
+### 示例代码
 
-- 多个用户在同一个分组时，有一个用户发送消息，那么其他用户就会收到 sendEventGroupNotify 的异步回调。
+```typescript
+class MsEngine{
+    ......
+    public constructor(){
+        this.response.sendEventGroupResponse = ( status:number)=>{
+            if(status == 200){
+                //成功
+            }else{
+                //失败
+            }
+        };
+        this.response.sendEventGroupNotify = (srcUserID:number, groups:Array<string>, cpProto:string)=>{
+            //有人发送组消息
+        };
+    }
+
+    public sendEventGroup(){
+        this.engine.sendEventGroup(["MatchVS"], "hello matchvs");
+    }
+}
+```
 
 
 
-## setFrameSync
+## 帧同步
+
+Matchvs提供了帧同步的功能，开发者可以让房间内的玩家保持帧同步。 Matchvs 所提供的帧同步能力，让您可以根据游戏需要，直接设置同步帧率，比如10帧每秒，然后您可以调用发送帧同步数据的接口来发送逻辑帧数据。 Matchvs 会缓存每100毫秒的数据，将这100毫秒的数据作为一帧发给各个客户端。
+
+- 请求设置帧同步：setFrameSync
+- 帧同步设置回调：setFrameSyncResponse
+- 发送帧同步请求：sendFrameEvent
+- 发送帧同步回调：sendFrameEventResponse
+- 帧数据更新回调：frameUpdate
+
+### setFrameSync
+
+设置帧同步速率，发送帧同步消息之前一定要先设置帧同步。帧同步最大值为20。也就是 50ms 发送一次数据。
 
 ```typescript
 engine.setFrameSync(frameRate:number):number
@@ -1369,14 +1543,9 @@ engine.setFrameSync(frameRate:number):number
 | -6     | 未加入房间                       |
 | -20    | frameRate 不能超过 20，不能小于0 |
 
-#### 说明
+setFrameSync 设置帧率，参数值设置 0表示关闭，参数值大于0表示打开，不调用为关闭。帧率须能被1000整除
 
-- setFrameSync 设置帧率，参数值设置 0表示关闭，参数值大于0表示打开，不调用为关闭。
-- 帧率须能被1000整除
-
-
-
-## setFrameSyncResponse
+### setFrameSyncResponse
 
 ```typescript
 response.setFrameSyncResponse(rsp:MsSetChannelFrameSyncRsp);
@@ -1388,13 +1557,9 @@ response.setFrameSyncResponse(rsp:MsSetChannelFrameSyncRsp);
 | ------- | ------ | ---------------------------------------------------------- | ------ |
 | mStatus | number | 状态：<br>200 成功<br>519 重复设置<br>500 帧率需被1000整除 | 200    |
 
-#### 说明
+### sendFrameEvent
 
-- response是engine.setFrameSyncResponse方法中传入的对象，setFrameSync完成之后，会异步回调engine.setFrameSyncResponse方法
-
-
-
-## sendFrameEvent
+发送帧同步数据，调用 sendFrameEvent 接口之前一定要先设置帧率。
 
 ```typescript
 engine.sendFrameEvent(cpProto:string):number
@@ -1419,11 +1584,9 @@ engine.sendFrameEvent(cpProto:string):number
 | -6     | 未加入房间                     |
 | -21    | cpProto 过长，不能超过1024字符 |
 
-#### 说明
+### sendFrameEventResponse
 
-- 开发者可以通过该接口发送帧同步消息
-
-## sendFrameEventResponse
+帧消息发送回调，用来检测帧消息是否发送成功。
 
 ```typescript
 response.sendFrameEventResponse(rsp:MsSendFrameEventRsp);
@@ -1431,15 +1594,13 @@ response.sendFrameEventResponse(rsp:MsSendFrameEventRsp);
 
 #### MsSendFrameEventRsp 的属性
 
-| 参数    | 类型   | 描述           | 示例值 |
-| ------- | ------ | -------------- | ------ |
-| mStatus | number | 状态值 200成功 | 200    |
+| 参数   | 类型   | 描述           | 示例值 |
+| ------ | ------ | -------------- | ------ |
+| status | number | 状态值 200成功 | 200    |
 
-#### 说明
+### frameUpdate
 
-- response是engine.sendFrameEventResponse方法中传入的对象，sendFrameEvent完成之后，会异步回调engine.sendFrameEventResponse方法
-
-## frameUpdate
+帧消息下发，根据设置的帧率来下发玩家发送的帧消息，比如设置的帧率为10(100ms/次) ，那么frameUpdate接口会 100ms 触发一次，把在这段时间缓存的所有数据一次性下发（包括自己发送的帧消息）。
 
 ```typescript
 response.frameUpdate(data:MsFrameData);
@@ -1461,12 +1622,54 @@ response.frameUpdate(data:MsFrameData);
 | cpProto   | string | 附加消息 |        |
 | timestamp | string | 时间戳   |        |
 
-#### 说明
+### 示例代码
 
-- frameUpdate是engine.frameUpdate 方法中传入的对象，收到帧同步推送之后，会异步回调engine.frameUpdate 方法
+````typescript
+class MsEngine{
+    ......
+    public constructor(){
+        this.response.setFrameSyncResponse = ( rsp:MsSetChannelFrameSyncRsp)=>{
+            if(rsp.status == 200){
+                //设置帧率成功
+            }else{
+                //设置帧率失败
+            }
+        };
+        this.response.sendFrameEventResponse = (rsp:MsSendFrameEventRsp)=>{
+            if(rsp.status == 200){
+                //发送帧消息成功
+            }else{
+                //发送帧消息失败
+            }
+        };
+        this.response.frameUpdate = (data:MsFrameData)=>{
+            //收到帧数据，这里处理
+        };
+    }
+    public setFrameSync(){
+        this.engine.setFrameSync(10);
+    }
+
+    public sendFrameEvent(){
+        this.engine.sendFrameEvent("hello matchvs");
+    }
+}
+````
 
 
-## reconnect
+
+## 断线重连
+
+用户断线后可以调用次接口进行重连，重连具体教程可以参考 [断线重连详细文档](http://www.matchvs.com/service?page=reconnect) 。
+
+- 请求重连接口：reconnect
+- 重连回调接口：reconnectResponse，networkStateNotify
+
+### reconnect
+
+- 用户在中途断线后服务器会保存用户20秒在房间状态，20秒内用户可以重新登录连接到原来的房间里面。
+- 在游戏里面如果网络断开，可以调用 reconnect 函数重新连接，断线重新连接分为两种情况，第一种没有重新启动程序：在游戏进行时网络断开，直接调用 reconnect 重新连接到游戏。第二种重新加载程序：先调用login 然后判断 loginResponse 中的参数 roomID 是否为0 如果不为 0 就调用reconnect 重连到房间
+- reconnect 接口调用，其他玩家收到 netWorkStateNotify 接口信息，接口详情请看netWorkStateNotify的接口说明。
 
 ```typescript
 engine.reconnect():number;
@@ -1485,13 +1688,7 @@ engine.reconnect():number;
 | -2     | 未初始化 |
 | -9     | 正在重连 |
 
-#### 说明
-
-- 用户在中途断线后服务器会保存用户20秒在房间状态，20秒内用户可以重新登录连接到原来的房间里面。
-- 在游戏里面如果网络断开，可以调用 reconnect 函数重新连接，断线重新连接分为两种情况，第一种没有重新启动程序：在游戏进行时网络断开，直接调用 reconnect 重新连接到游戏。第二种重新加载程序：先调用login 然后判断 loginResponse 中的参数 roomID 是否为0 如果不为 0 就调用reconnect 重连到房间
-- reconnect 接口调用，其他玩家收到 netWorkStateNotify 接口信息，接口详情请看netWorkStateNotify的接口说明。
-
-## reconnectResponse
+### reconnectResponse
 
 ```typescript
 response.reconnectResponse(status:number, roomUserInfoList:Array<MsRoomUserInfo>, roomInfo:MsRoomInfo);
@@ -1509,7 +1706,7 @@ response.reconnectResponse(status:number, roomUserInfoList:Array<MsRoomUserInfo>
 
 | 属性        | 类型   | 描述     | 示例值 |
 | ----------- | ------ | -------- | ------ |
-| userId      | number | 用户ID   | 32322  |
+| userID      | number | 用户ID   | 32322  |
 | userProfile | string | 玩家简介 | ""     |
 
 #### MsRoomInfo 的属性
@@ -1520,11 +1717,14 @@ response.reconnectResponse(status:number, roomUserInfoList:Array<MsRoomUserInfo>
 | roomProperty | string | 房间属性           | ""     |
 | owner        | number | 房间创建者的用户ID | 0      |
 
-#### 说明
 
-- 玩家掉线后调用reconnect接口重新连接会收到此接口的回调。
 
-## joinOpen
+## 重新打开房间
+
+- 请求接口：joinOpen
+- 回调接口：joinOpenNotify、joinOpenResponse
+
+### joinOpen
 
 设置房间重新打开,允许他人匹配加入当前房间, 注意 `在房间的情况才可以调用,否则函数直接返回错误码`
 
@@ -1576,16 +1776,14 @@ joinOpenNotify(data:MsReopenRoomNotify);
 joinOpenResponse(data:MsReopenRoomResponse);
 ```
 
-MsReopenRoomResponse:
+#### MsReopenRoomResponse
 
 | 属性    | 类型   | 描述                             | 示例值 |
 | ------- | ------ | -------------------------------- | ------ |
 | status  | number | 接口调用的服务器返回码,200为正确 | 200    |
 | cpProto | string | 调用者附带的信息                 | ""     |
 
-
-
-MsReopenRoomNotify:
+#### MsReopenRoomNotify
 
 | 属性    | 类型   | 描述             | 示例值      |
 | ------- | ------ | ---------------- | ----------- |
@@ -1593,14 +1791,7 @@ MsReopenRoomNotify:
 | cpProto | string | 调用者附带的信息 | ""          |
 | userID  | number | 调用者用户ID     | 0           |
 
-
-
-#### 返回值
-
-无
-
-#### 示例代码片段
-Egret 代码示例
+#### 示例代码
 ```javascript
  		var checkbox = new eui.CheckBox();
         checkbox.label = "允许加入";
@@ -1632,12 +1823,7 @@ Egret 代码示例
 
 ## 错误码
 
-```typescript
-response.errorResponse = function(errCode, errMsg) {
-	console.log("错误信息：", errMsg);
-}
-
-```
+接口回调错误码说明。
 
 **注意** Matchvs相关的异常信息可通过该接口获取
 
