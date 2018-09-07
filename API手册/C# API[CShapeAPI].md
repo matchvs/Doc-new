@@ -1,4 +1,4 @@
-**游戏交互时序图**
+**API调用时序图**
 
 ![](http://imgs.matchvs.com/static/时序图.jpg)
 
@@ -401,7 +401,7 @@ http://vsopen.matchvs.com/wc5/hashGet.do?gameID=102003&userID=21023&key=1&sign=b
 
 **sign值获取方法**
 
-1. 按照如下格式拼接出字符串:
+##### 1. 按照如下格式拼接出字符串:
 
 ```
 appKey&param1=value1&param2=value2&param3=value3&token
@@ -817,33 +817,4 @@ int sendEventGroupNotify(MsSendEventGroupNotify tRsp)
 | priority  | int      | 权重       | 3       |
 | groups    | string[] | 订阅组     |         |
 | cpProto   | string   | 负载消息   |         |
-
-
-
-## 错误码
-
-```
-int errorResponse(string error)
-```
-**注意** Matchvs相关的异常信息可通过该接口获取
-
-| 错误消息                              | 含义         |
-| --------------------------------- | ---------- |
-| fail                              | 失败         |
-| network error or exception        | 网络异常       |
-| server closed                     | 服务器关闭      |
-| unkown message from server        | 消息无法识别     |
-| room request failed               | 房间请求失败     |
-| sdk not inited                    | sdk未初始化    |
-| not connected to server           | 无法与服务器建立连接 |
-| bad request parameters            | 请求参数错误     |
-| user not exists                   | 用户不存在      |
-| user already registed             | 用户已经注册     |
-| connect to server failed          | 连接服务器失败    |
-| matchvs not support the protocol  | 协议错误       |
-| network recv timeout              | 接收超时       |
-| network send timeout              | 发送超时       |
-| cannot find available gate server | gateway不存在 |
-| reconnect failed                  | 重连失败       |
-| heart beat timeout                | 心跳超时       |
 
