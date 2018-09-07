@@ -20,8 +20,6 @@
 
 ## Matchvs 集成
 
-
-
 #### 1、创建egret游戏开发项目。
 
 打开Lanucher 定位到项目页面。创建项目。在项目创建页面勾选Matchvs游戏云。并创建。
@@ -133,7 +131,7 @@ class Main extends eui.UILayer {
 
 
 
-#### 注册合法用户
+#### 注册用户
 
 Matchvs提供的 `userID` 被用于在各个服务中校验连接的有效性，调试前开发者需要先获取到一个合法的`userID`。调用registerUser接口获取，在registerResponse回调返回。
 

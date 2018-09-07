@@ -102,7 +102,7 @@ Matchvs提供的 `userID` 被用于在各个服务中校验连接的有效性，
 
 每次调用 registerUser 接口都会生成新的 `userID` 为了节省资源消耗， `userID`和 `token` 有需要的可以缓存起来，在之后的应用启动中不必重复获取。如果你有自己的用户系统，可以将Matchvs 提供的 userID 和用户系统进行映射。可以参考 [Matchvs 第三方账号绑定](http://www.matchvs.com/service?page=third)，让您的用户唯一对应一个userID，以节省资源。
 
-为了资源节省，我们在registerUserResponse 回调前把userID信息缓存在本地，数据会暂存在浏览器中。所以使用同一个浏览器调用 registerUser 接口会返回相同的 userID信息。如果需要清除缓存的用户信息请调用 `LocalStore_Clear()` 接口。
+为了资源节省，我们在registerUserResponse 回调前把userID信息缓存在本地，数据会暂存在浏览器中。所以使用同一个浏览器调用 registerUser 接口会返回相同的 userID信息。如果需要清除缓存的用户信息请调用 。`LocalStore_Clear()` 接口。
 
 - 请求接口：registerUser
 - 回调接口：registerUserResponse

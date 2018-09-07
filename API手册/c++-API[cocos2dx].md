@@ -299,7 +299,7 @@ virtual void getRoomListExResponse(const MsGetRoomListExRsp &rsp) = 0;
 | roomProperty| MsString   | 房间属性  					| "roomProperty"|
 | owner   	  | uint32_t   | 房主  						| 5      |
 | state       | RoomState  | 房间状态  					| 5      |
-| createTime  | uint64_t   | 房间创建事件  				| 5      | 
+| createTime  | uint64_t   | 房间创建事件  				| 5      |
 
 ### 说明
 
@@ -633,7 +633,7 @@ virtual void kickPlayerRsp(const MsKickPlayerRsp &rsp) = 0;
 | 参数      | 类型             | 描述   | 示例值    |
 | -------   | --------------   | -------| --------- |
 | status    | int32_t          | 返回值 | 200       |
-| owner     | uint32_t         | 房主ID | 43564     |  
+| owner     | uint32_t         | 房主ID | 43564     |
 | userID    | uint32_t         | 被踢玩家ID | 43566  |
 
 ## kickPlayerNotify
@@ -647,7 +647,7 @@ virtual void kickPlayerNotify(const MsKickPlayerNotify &notify) = 0;
 | 参数      | 类型             | 描述   | 示例值    |
 | -------   | --------------   | -------| --------- |
 | srcUserID | uint32_t         | 返回值 | 200       |
-| owner     | uint32_t         | 房主ID | 43564     |  
+| owner     | uint32_t         | 房主ID | 43564     |
 | userID    | uint32_t         | 被踢玩家ID | 43566  |
 | cpProto   | MsString         | 负载消息 | ""  |
 
@@ -931,100 +931,6 @@ virtual int networkStateNotify(const MsNetworkStateNotify &notify) = 0;
 | owner  | uint32_t  | 房主   | ""  |
 
 
-
-
-## hashSet
-
-**接口地址**
-`http://alphavsopen.matchvs.com/wc5/hashSet.do`
-
-**注意** Matchvs 环境分为测试环境（alpha）和 正式环境（release），所以在使用http接口时，需要通过域名进行区分。使用正式环境需要先在官网将您的游戏发布上线。
-
-**alpha环境域名：alphavsopen.matchvs.com**
-
-**release环境域名：vsopen.matchvs.com**
-
-
-
-**说明**
-
-服务器存储设置 
-
-**参数**
-
-| 参数名    | 说明        |
-| ------ | --------- |
-| gameID | 游戏ID      |
-| userID | 用户ID      |
-| key    | 自定义存储字段编号 |
-| value  | 自定义存储字段的值 |
-| sign   |           |
-
-**返回值**
-
-- 部分参数说明
-
-| Key    | 含义                          |
-| ------ | --------------------------- |
-| data   | data=success表示存储数据成功，其他代表异常 |
-| status | status=0 表示成功，其他代表异常        |
-
-## hashGet
-
-**接口地址**
-`http://alphavsopen.matchvs.com/wc5/hashGet.do`
-
-
-
-**注意** Matchvs 环境分为测试环境（alpha）和 正式环境（release），所以在使用http接口时，需要通过域名进行区分。使用正式环境需要先在官网将您的游戏发布上线。
-
-**alpha环境域名：alphavsopen.matchvs.com**
-
-**release环境域名：vsopen.matchvs.com**
-
-
-
-**说明**
-
-服务器存储查询
-
-**参数**
-
-| 参数名 | 说明      |
-| ------ | --------- |
-| gameID | 游戏ID      |
-| userid | 用户ID      |
-| key    | 自定义存储字段键值 |
-| sign   |           |
-
-**返回值**
-
-- 部分参数说明
-
-| Key    | 含义                   |
-| ------ | -------------------- |
-| data   | 查询的数据结果              |
-| status | status=0 表示成功，其他代表异常 |
-
-
-
-## sign值获取方法
-
-##### 1. 按照如下格式拼接出字符串:
-
-```
-appKey&param1=value1&param2=value2&param3=value3&token
-```
-
-- `appKey`为您在官网配置游戏所得
-
-- `param1、param2、param3`等所有参数，按照数字`0-9`、英文字母`a~z`的顺序排列
-
-  例 ： 有三个参数`gameID`、`userID`、`key`，则按照`appkey&gameID=xxx&key=xxx&userID=xxx&token` 的顺序拼出字符串。
-
-- `token`通过用户注册请求获取
-
-##### 2. 计算第一步拼接好的字符串的`MD5`值，即为`sign`的值。
 
 
 ## 通用错误码
