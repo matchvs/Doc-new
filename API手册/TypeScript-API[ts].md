@@ -24,11 +24,11 @@ class MsEngine {
 
 ##初始化
 
-在连接至 Matchvs前须对SDK进行初始化操作。此时选择连接测试环境（alpha）还是正式环境（release）。[环境说明](http://www.matchvs.com/service?page=envGuide) 。
+在连接至 Matchvs前须对SDK进行初始化操作。此时选择连接测试环境（alpha）还是正式环境（release）。[环境说明](http://www.matchvs.com/service?page=envGuide) 。初始化请求接口有两个，如果你是使用 Matchvs 官网账号在 Matchvs 控制台创建的游戏（简称Matchvs云服务）使用 init 接口初始化，如果是使用 Matchvs 服务端引擎代码在自己自定的服务器上部署的游戏服务就使用（简称 [Matchvs独立部署]() ） premiseInit 接口初始化。
 
 如果游戏属于调试阶段则连接至测试环境，游戏调试完成后即可发布到正式环境运行。  
 
-- 请求接口：init
+- 请求接口：init、premiseInit
 - 回调接口：initResponse
 
 ### init
@@ -60,6 +60,29 @@ response 中设置一些回调方法，在执行注册、登录、发送事件�
 | -1     | 失败                                                     |
 | -25    | channel 非法，请检查是否正确填写为 “Matchvs”             |
 | -26    | platform 非法，请检查是否正确填写为 “alpha” 或 “release” |
+
+### premiseInit
+
+使用独立部署的游戏调用此接口初始化SDK。
+
+```typescript
+function engine.premiseInit(response:MatchvsResponse, endPoint:string, gameID:number):number
+```
+
+#### 参数
+
+| 参数     | 类型            | 描述                          | 示例值         |
+| -------- | --------------- | ----------------------------- | -------------- |
+| response | MatchvsResponse | 回调类型MatchvsResponse的对象 | response       |
+| endPoint | string          | 服务配置的域名地址            | test.xxxxx.com |
+| gameID   | number          | 服务配置的游戏ID              | 123456         |
+
+#### 返回值
+
+| 错误码 | 含义         |
+| ------ | ------------ |
+| 0      | 接口调用成功 |
+| -1     | 接口调用失败 |
 
 ### initResponse
 
