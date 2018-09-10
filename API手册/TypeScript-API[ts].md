@@ -1,34 +1,12 @@
 # Matchvs SDK TypeScript 版接口说明
 
-## 阅读前
-
-在阅读我们API文档之前，请确保你已经阅读了我们的 [新手入门]() 文档，并且了解了我们 Matchvs SDK的 使用流程，如果不清楚可查阅 [Matchvs 接口工作流程]() 。
-
-MatcvhsSDK 库文件可到 [官网下载]()
-
-MatcvhsSDK库 `matchvs`文件夹包括以下三个文件：
-
-- matchvs.js： MatchvsSDK  JavaScript 源代码代码文件。
-- matchvs.d.ts：MatchvsSDK TypScript 定义文件。
-- matchvs.min.js：MatchvsSDK JavaScript 源码压缩文件。
-
-Matchvs SDK 接口服务分为 **请求服务** 和 **回调服务** ， 使用是以简单的接口调用和接口返回的方式实现相关联网操作。比如随机加入房间只需要调用`joinRandRoom接口`，加入房间结果就以接口 `joinRoomResponse` 返回。在整个使用过程中，开发者只需要关心`MatchvsEngine`(接口请求调用对象)和 `MatchvsResponse`(接口调用返回对象)。接口请求使用 `MatchvsEngine`对象实例，接口返回使用 `MatchvsResponse` 对象实例。先获取这两个类的对象作为全局使用。例如：
-
-```typescript
-class MsEngine {
-    private static engine = new MatchvsEngine();
-	private static response = new MatchvsResponse();
-}
-
-```
-
 ##初始化
 
-在连接至 Matchvs前须对SDK进行初始化操作。此时选择连接测试环境（alpha）还是正式环境（release）。[环境说明](http://www.matchvs.com/service?page=envGuide) 。
+在连接至 Matchvs前须对SDK进行初始化操作。此时选择连接测试环境（alpha）还是正式环境（release）。[环境说明](http://www.matchvs.com/service?page=envGuide) 。初始化请求接口有两个，如果你是使用 Matchvs 官网账号在 Matchvs 控制台创建的游戏（简称Matchvs云服务）使用 init 接口初始化，如果是使用 Matchvs 服务端引擎代码在自己自定的服务器上部署的游戏服务就使用（简称 [Matchvs独立部署]() ） premiseInit 接口初始化。
 
 如果游戏属于调试阶段则连接至测试环境，游戏调试完成后即可发布到正式环境运行。  
 
-- 请求接口：init
+- 请求接口：init、premiseInit
 - 回调接口：initResponse
 
 ### init
@@ -60,6 +38,29 @@ response 中设置一些回调方法，在执行注册、登录、发送事件�
 | -1     | 失败                                                     |
 | -25    | channel 非法，请检查是否正确填写为 “Matchvs”             |
 | -26    | platform 非法，请检查是否正确填写为 “alpha” 或 “release” |
+
+### premiseInit
+
+使用独立部署的游戏调用此接口初始化SDK。
+
+```typescript
+function engine.premiseInit(response:MatchvsResponse, endPoint:string, gameID:number):number
+```
+
+#### 参数
+
+| 参数     | 类型            | 描述                          | 示例值         |
+| -------- | --------------- | ----------------------------- | -------------- |
+| response | MatchvsResponse | 回调类型MatchvsResponse的对象 | response       |
+| endPoint | string          | 服务配置的域名地址            | test.xxxxx.com |
+| gameID   | number          | 服务配置的游戏ID              | 123456         |
+
+#### 返回值
+
+| 错误码 | 含义         |
+| ------ | ------------ |
+| 0      | 接口调用成功 |
+| -1     | 接口调用失败 |
 
 ### initResponse
 
@@ -1820,31 +1821,6 @@ joinOpenResponse(data:MsReopenRoomResponse);
             checkbox.selected = ((d.status == 200)?false:checkbox.selected);
         }
 ```
-
-## 错误码
-
-接口回调错误码说明。
-
-**注意** Matchvs相关的异常信息可通过该接口获取
-
-| 错误码 | 含义                                                         |
-| ------ | ------------------------------------------------------------ |
-| 1001   | 网络错误                                                     |
-| 201    | 重连到大厅，没有进入房间                                     |
-| 400    | 请求不存在                                                   |
-| 401    | 无效 appkey                                                  |
-| 403    | 访问禁止，该用户多端登录。                                   |
-| 404    | 无服务                                                       |
-| 405    | 房间已满                                                     |
-| 406    | 房间关闭                                                     |
-| 500    | 服务错误，请确认是否正确打开gameServer                       |
-| 502    | 服务停止，许可证失效 或者账号欠费                            |
-| 503    | ccu 超出额                                                   |
-| 504    | 流量用完                                                     |
-| 507    | 房间号不存在，或您没有进入房间                               |
-| 521    | gameServer 不存在。                                          |
-| 522    | 没有打开帧同步，请调用setFrameSync接口设置帧率               |
-| 527    | 消息发送太频繁，请不要超过每个房间 500次(总人数*(总接收+总发送)) |
 
 
 

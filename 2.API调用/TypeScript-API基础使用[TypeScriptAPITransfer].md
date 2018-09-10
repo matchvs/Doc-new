@@ -2,7 +2,11 @@
 
 ## 阅读前
 
-在阅读我们文档之前，请确保你已经阅读了我们的 [新手入门]() 文档，并且了解了我们 Matchvs SDK的 使用流程，如果不清楚可查阅 [Matchvs 接口工作流程]() 。SDK 接口调用是需要安装相应的顺序才能成功调用。下面是介绍一个普通的游戏如何接入我们Matchvs SDK ，根据接口的调用顺序
+在阅读我们文档之前，请确保你已经阅读了我们的 [新手入门]() 文档，并且了解了我们 Matchvs SDK的 使用流程，SDK 接口调用是需要安装相应的顺序才能成功调用。下面是介绍一个普通的游戏如何接入我们Matchvs SDK 。
+
+#### Matchvs 接口调用时序图
+
+![](http://imgs.matchvs.com/static/%E6%97%B6%E5%BA%8F%E5%9B%BE.jpg)
 
 MatcvhsSDK 库文件可到 [官网下载](http://www.matchvs.com/serviceDownload) 
 
@@ -100,9 +104,9 @@ class MsEngine {
 
 Matchvs提供的 `userID` 被用于在各个服务中校验连接的有效性，调试前开发者需要先获取到一个合法的`userID`。调用registerUser接口获取，在registerResponse回调返回。
 
-每次调用 registerUser 接口都会生成新的 `userID` 为了节省资源消耗， `userID`和 `token` 有需要的可以缓存起来，在之后的应用启动中不必重复获取。如果你有自己的用户系统，可以将Matchvs 提供的 userID 和用户系统进行映射。可以参考 [Matchvs 第三方账号绑定](http://www.matchvs.com/service?page=third)，让您的用户唯一对应一个userID，以节省资源。
+每次调用 registerUser 接口都会生成新的 `userID` 为了节省资源消耗， `userID`和 `token` 有需要的可以缓存起来，在之后的应用启动中不必重复获取。如果你有自己的用户系统，可以将Matchvs 提供的 userID 和用户系统进行映射。可以参考 [Matchvs 第三方账号绑定](http://www.matchvs.com/service?page=third)，让您的用户唯一对应一个userID，以节省资源。[可参考多开说明](http://www.matchvs.com/service?page=MultipleIdentities) 
 
-为了资源节省，我们在registerUserResponse 回调前把userID信息缓存在本地，数据会暂存在浏览器中。所以使用同一个浏览器调用 registerUser 接口会返回相同的 userID信息。如果需要清除缓存的用户信息请调用 `LocalStore_Clear()` 接口。
+为了资源节省，我们在registerUserResponse 回调前把userID信息缓存在本地，数据会暂存在浏览器中。所以使用同一个浏览器调用 registerUser 接口会返回相同的 userID信息。如果需要清除缓存的用户信息请调用 。`LocalStore_Clear()` 接口。
 
 - 请求接口：registerUser
 - 回调接口：registerUserResponse
@@ -659,4 +663,7 @@ response.logoutResponse(status:number);
 | ------ | ------ | ------------------------------- | ------ |
 | status | number | 状态返回，200表示成功 <br>500 服务器内部错误 | 200    |
 
-更多接口调用和说明请看 [接口使用说明](http://www.matchvs.com/service?page=ts) 
+
+
+### 错误码说明:<http://www.matchvs.com/service?page=ErrCode> 
+### 更多接口调用和说明请看 [接口使用说明](http://www.matchvs.com/service?page=ts) 

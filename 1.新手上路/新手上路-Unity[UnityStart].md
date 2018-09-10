@@ -454,28 +454,9 @@ int errorResponse(string error)
 
 ## 错误码
 
-| 错误消息                          | 含义                 |
-| --------------------------------- | -------------------- |
-| fail                              | 失败                 |
-| network error or exception        | 网络异常             |
-| server closed                     | 服务器关闭           |
-| unkown message from server        | 消息无法识别         |
-| room request failed               | 房间请求失败         |
-| sdk not inited                    | sdk未初始化          |
-| not connected to server           | 无法与服务器建立连接 |
-| bad request parameters            | 请求参数错误         |
-| user not exists                   | 用户不存在           |
-| user already registed             | 用户已经注册         |
-| connect to server failed          | 连接服务器失败       |
-| matchvs not support the protocol  | 协议错误             |
-| network recv timeout              | 接收超时             |
-| network send timeout              | 发送超时             |
-| cannot find available gate server | gateway不存在        |
-| reconnect failed                  | 重连失败             |
-| heart beat timeout                | 心跳超时             |
+错误码表 <http://www.matchvs.com/service?page=ErrCode> 
 
+## 更多详细说明
 
-
-## Matchvs SDK交互时序图
-
-![](http://imgs.matchvs.com/static/时序图.jpg)
+更多详细说明见 API手册
+<http://www.matchvs.com/service?page=CShapeAPI>

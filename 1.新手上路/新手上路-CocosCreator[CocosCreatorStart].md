@@ -18,7 +18,7 @@ Creator开发者可以通过本文档开始Matchvs之旅。
 
 打开zip后双击CocosCreator_setup.exe,选择对应的安装路径进行安装，此过程需要几分钟。
 
-## SDK的安装
+## 项目创建
 
 CreatorIDE安装成功后，双击打开CreatorIDE，选择新建项目选择一个空白工程，如下图所示
 
@@ -36,7 +36,7 @@ CreatorIDE安装成功后，双击打开CreatorIDE，选择新建项目选择一
 
 ![](新手上路-CocosCreatorImg/creatorStore.png)
 
-进入插件页面后，点击下载完成以后点击安装按钮,选择安装到项目目录
+进入插件页面后，点击下载完成以后点击安装按钮,选择安装到 **项目目录**
 
 ![](新手上路-CocosCreatorImg/creatorMatchvsInstall.png)
 
@@ -85,7 +85,7 @@ cc.Class({
 
 ![](新手上路-CocosCreatorImg/creator_12.png)
 
- 6：在代码中翱翔
+ 6：Matchvs SDK 接口使用
 	
  - 第一步初始化 init
 

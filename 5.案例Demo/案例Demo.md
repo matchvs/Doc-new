@@ -14,11 +14,11 @@
 
 ### Demo
 
-​    `Demo` 相比案例,更侧重于站在工程师的角度,以游戏开发语言如`JavaScript`/`TypeScript`/`C#`/`C++` 和游戏开发引擎如`Cocos2D-X`/`Cocos Creator`/`Egret`/`Unity`向游戏开发工程师阐述Matchvs的能力. 演示登录,匹配,数据传输,实时同步等联网游戏必备的功能使用场景和使用方法.
+    `Demo` 相比案例,更侧重于站在工程师的角度,以游戏开发语言如`JavaScript`/`TypeScript`/`C#`/`C++` 和游戏开发引擎如`Cocos2D-X`/`Cocos Creator`/`Egret`/`Unity`向游戏开发工程师阐述Matchvs的能力. 演示登录,匹配,数据传输,实时同步等联网游戏必备的功能使用场景和使用方法.
 
 ## 1.案例
 
-### 1.1 案例专题页
+### 1.1 案例专题页（在线体验）
 
 [http://www.matchvs.com/clientcase](http://www.matchvs.com/clientcase)
 
@@ -79,31 +79,31 @@
 
 #### 2.1.1 demo-Creator(JavaScript)
 
-​    用Matchvs SDK 和 creator 开发的多人摘星星，用于演示多人匹配、数据传输、帧同步、消息订阅等功能 
+    用Matchvs SDK 和 creator 开发的多人摘星星，用于演示多人匹配、数据传输、帧同步、消息订阅等功能 
 
 https://github.com/matchvs/demo-creator
 
 https://github.com/matchvs/demo-creator-gameServer-JS(带GameServer)
 
-#### 2.1.2 demo-Unity(C#)
+#### 2.1.2 demo-Laya(TypeScirpt)
+
+  用Matchvs SDK 和 Laya 开发的多人抢球，用于演示多人匹配、数据传输、帧同步、消息订阅等功能 
+
+https://github.com/matchvs/demo-Laya
+
+#### 2.1.3 demo-Egret(TypeScirpt)
+
+  用Matchvs SDK 和 白鹭Egret 开发的多人抢球，用于演示多人匹配、数据传输、帧同步、消息订阅等功能 
+
+https://github.com/matchvs/demo-Egret
+
+#### 2.1.4 demo-Unity(C#)
 
   用Matchvs SDK 和 unity 开发的多人竞速，用于演示多人匹配、数据传输、帧同步、消息订阅等功能 
 
 https://github.com/matchvs/demo-unity
 
 https://github.com/matchvs/gameServer-Csharp(带GameServer)
-
-#### 2.1.3 demo-Laya(TypeScirpt)
-
-  用Matchvs SDK 和 Laya 开发的多人抢球，用于演示多人匹配、数据传输、帧同步、消息订阅等功能 
-
-https://github.com/matchvs/demo-Laya
-
-#### 2.1.4 demo-Egret(TypeScirpt)
-
-  用Matchvs SDK 和 白鹭Egret 开发的多人抢球，用于演示多人匹配、数据传输、帧同步、消息订阅等功能 
-
-https://github.com/matchvs/demo-Egret
 
 #### 2.1.5 demo-Cocos2DX(C++)
 

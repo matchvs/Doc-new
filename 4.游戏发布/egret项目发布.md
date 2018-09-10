@@ -31,7 +31,7 @@
 
 #### 发布微信小游戏
 
-微信小游戏发布可以参考 [egret的教程](http://developer.egret.com/cn/github/egret-docs/Engine2D/minigame/publish/index.html) 。也可在满足 egret最新支持的微信小游戏版本发布的条件情况下直接在 egret 发布设置界面中选择微信小程序，如下图：
+微信小游戏发布可以参考 [Egret的教程](http://developer.egret.com/cn/github/egret-docs/Engine2D/minigame/publish/index.html) 。也可在满足 Egret最新支持的微信小游戏版本发布的条件情况下直接在 Egret 发布设置界面中选择微信小程序，如下图：
 
 ![](egret项目发布img/egret_report3.png)
 
@@ -39,7 +39,7 @@
 
 微信小游戏发布成功可以选择使用微信开发者工具打开。打开可能会有点慢，等个一分钟就可以了，如果还没有打开，自己打开微信开发者工具打开导入刚刚发布的小程序。
 
-打开刚刚使用 Egret发布的微信小程序可能会遇到，fixedWidth 模式不匹配问题，可参考下图配置：
+打开刚刚使用 Egret发布的微信小程序可能会遇到，**fixedWidth**  模式不匹配问题，可参考下图配置：
 
 ![](egret项目发布img/egret_report5.png)
 
@@ -56,5 +56,5 @@
 
 具体如何把使用已经发布好的QQ玩一玩代码可以参考 [egret相关教程](http://developer.egret.com/cn/github/egret-docs/Engine2D/bricksgame/start/index.html) ，以及 [QQ轻游](http://hudong.qq.com/) 相关说明。
 
-## 其他平台请查看 [egret发布教程](http://developer.egret.com/cn/github/egret-docs/Engine2D/publish/index.html) 
+## 其他平台请查看 [Egret发布教程](http://developer.egret.com/cn/github/egret-docs/Engine2D/publish/index.html) 
 

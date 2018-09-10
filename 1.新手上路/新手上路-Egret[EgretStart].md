@@ -20,25 +20,38 @@
 
 ## Matchvs 集成
 
-
-
 #### 1、创建egret游戏开发项目。
 
 打开Lanucher 定位到项目页面。创建项目。在项目创建页面勾选Matchvs游戏云。并创建。
 
 ![](Egret新手上路img/egret_start2.png)
 
-#### 2、使用 wing打开项目
+#### 2、替换matchvs文件夹下面的内容
+
+到 [Matchvs官网下载](http://www.matchvs.com/serviceDownload) TypeScript版本的 MatchvsSDK 解压并取出 matchvs 文件内容到 egret项目的libs目录里面。
+
+>  `matchvs`文件下三个文件(matchvs.d.ts、matchvs.js、matchvs.min.js)。
+
+#### 3、使用 wing打开项目
 
 创建好项目后，在打开项目的wing左边导航可以的libs目录下可以看到有 matchvs文件夹，如下图：
 
 ![](Egret新手上路img/egret_start3.png)
 
-#### 3、替换matchvs文件夹下面的内容
+#### 4、配置 egretProperties.json 文件
 
-到 [Matchvs官网下载](http://www.matchvs.com/serviceDownload) TypeScript版本的 MatchvsSDK 解压并替换 egret项目`matchvs`文件下的三个文件(matchvs.d.ts、matchvs.js、matchvs.min.js)。
+打开 egretProperties.json 文件添加如下配置：
 
-**注意：如果不替换 matchvs官网下载的 SDK就无法使用 Matchvs账号在Matchvs官网创建的游戏服务。**
+```typescript
+{
+      "name": "matchvs",
+      "path": "./libs/matchvs"
+ }
+```
+
+如图所示：
+
+![](Egret新手上路img/egret_start5.png)
 
 以上步骤已经完美集成 Matchvs SDK，接下来就开启你的 联网对战之旅。
 
@@ -84,19 +97,6 @@ class Main extends eui.UILayer {
 engine.init(response, "Matchvs", "alpha", 201016);
 ```
 
-Matchvs 提供了两个环境，alpha 调试环境和 release 正式环境。游戏开发调试阶段请使用 alpha 环境，即 platform 传参"alpha"，具体可参考 [环境说明](http://www.matchvs.com/service?page=envGuide) 
-
-参数说明:
-
-| 参数     | 含义                                          |
-| :------- | --------------------------------------------- |
-| response | 回调对象(`MatchvsResponse` 实例)              |
-| channel  | 渠道，填“Matchvs”即可                         |
-| platform | 平台，调试环境填“alpha” ，正式环境填“release” |
-| gameID   | 游戏ID，来自 Matchvs 官网控制台创建的游戏信息 |
-
-> **注意** 在整个应用全局，开发者只需要对引擎做一次初始化
-
 回调示例:
 
 ```typescript
@@ -133,7 +133,7 @@ class Main extends eui.UILayer {
 
 
 
-#### 注册合法用户
+#### 注册用户
 
 Matchvs提供的 `userID` 被用于在各个服务中校验连接的有效性，调试前开发者需要先获取到一个合法的`userID`。调用registerUser接口获取，在registerResponse回调返回。
 
@@ -151,19 +151,9 @@ response.registerUserResponse = function(userInfo:MsRegistRsp){
 }
 ```
 
-MsRegistRsp 参数说明
-
-| 参数   | 类型   | 说明            |
-| ------ | ------ | --------------- |
-| status | number | 0-成功 其他失败 |
-| userID | number | 用户ID          |
-| token  | string | 合法令牌        |
-| name   | string | 随机用户名      |
-| avatar | string | 随机头像        |
-
 > **注意** : 每次调用 registerUser 接口都会生成新的 `userID` 为了节省资源消耗， `userID`和 `token` 有需要的可以缓存起来，在之后的应用启动中不必重复获取。如果你有自己的用户系统，可以将Matchvs 提供的 userID 和用户系统进行映射。可以参考 [Matchvs 第三方账号绑定](http://www.matchvs.com/service?page=third)，让您的用户唯一对应一个userID，以节省资源。
 >
-> 为了资源节省，我们在registerUserResponse 回调前把userID信息缓存在本地，数据会暂存在浏览器中。所以使用同一个浏览器调用 registerUser 接口会返回相同的 userID信息。
+> 为了资源节省，我们在registerUserResponse 回调前把userID信息缓存在本地，数据会暂存在浏览器中。所以使用同一个浏览器调用 registerUser 接口会返回相同的 userID信息。请看 [多开说明](http://www.matchvs.com/service?page=MultipleIdentities) 
 
 在egret 项目中使用示例如下：
 
@@ -202,19 +192,6 @@ response.loginResponse = function(rsp:MsLoginRsp){
 }
 ```
 
-参数说明:
-
-| 参数        | 含义                                     |
-| ----------- | ---------------------------------------- |
-| userID      | 用户ID，调用注册接口后获取               |
-| token       | 用户token，调用注册接口后获取            |
-| gameID      | 游戏ID，来自Matchvs官网控制台游戏信息    |
-| gameVersion | 游戏版本，自定义，用于隔离匹配空间       |
-| appkey      | 游戏Appkey，来自Matchvs控制台游戏信息    |
-| secret      | secret key，来自Matchvs控制台游戏信息    |
-| deviceID    | 设备ID，用于多端登录检测，请保证是唯一ID |
-| gatewayID   | 服务器节点ID，默认为0                    |
-
 - 其中，appKey，secret，gameID是你在Matchvs官网创建游戏后获取的信息，可以[前往控制台](http://www.matchvs.com/manage/gameContentList)查看。appkey和secret是校验游戏合法性的关键信息，请妥善保管secret信息。  
 - userID 和 token 是调用 registerUser 接口 **注册成功** 的回调信息。
 - deviceID 用于检测是否存在多个设备同时登录同一个用户的情况，如果一个账号在两台设备上登录，则后登录的设备会连接失败。
@@ -238,8 +215,6 @@ private loginResponse(rsp:MsLoginRsp){
 }
 ```
 
-
-
 #### 随机匹配
 
 登录成功后，可以调用Matchvs加入房间接口，将若干用户匹配至一个房间开始一局游戏（如：《荒野行动》的开始匹配、《球球大作战》的开始比赛等）
@@ -254,13 +229,6 @@ Matchvs默认提供了随机加入房间的模式，调用加入房间逻辑后�
 engine.joinRandomRoom(3,"hello matchvs");
 ```
 
-参数说明:
-
-| 参数       | 含义                                     |
-| ---------- | ---------------------------------------- |
-| maxPlayer  | 最大玩家数，不超过20（后面会放宽到100）  |
-| uerProfile | 玩家自定义内容，可以填写昵称、段位等信息 |
-
 回调示例：
 
 ```typescript
@@ -273,30 +241,7 @@ this.response.joinRoomResponse = function(status:number, roomUserInfoList: Array
 }
 ```
 
-status 说明：200 成功 其他值失败
-
-MsRoomUserInfo 说明
-
-| 属性        | 类型   | 描述     | 示例值 |
-| ----------- | ------ | -------- | ------ |
-| userID      | number | 用户ID   | 32322  |
-| userProfile | string | 玩家简介 | ""     |
-
-MsRoomInfo 说明
-
-| 属性         | 类型   | 描述               | 示例值 |
-| ------------ | ------ | ------------------ | ------ |
-| roomID       | string | 房间号             | 238211 |
-| roomProperty | string | 房间属性           | ""     |
-| owner        | number | 房间创建者的用户ID | 0      |
-
-> **注意** ：
->
-> 1、随机匹配不能匹配到客户端主动创建的房间里，即通过`createRoom()`（见联网扩展）创建的房间。
->
-> 2、加入房间后，服务器会指定一个房主，当房主离开房间后，服务器会随机指定下一个房主，并通过`leaveRoomNotify` 通知房间内其他成员。
-
-在egret 项目中使用示例如下：
+在 Egret  项目中使用示例如下：
 
 ```typescript
 private loginResponse(rsp:MsLoginRsp){
@@ -327,6 +272,136 @@ Matchvs 提供四种加入房间的操作，他们加入房间的操作都是相
 - 属性匹配( joinRoomWithProperties ): 由开发设定属性相同的用户匹配到一起
 - 加入指定房间 ( joinRoom )：加入指定房间，这个是与 createRoom配合使用，只能加入到 createRoom 创建的房间。
 - 创建房间( createRoom )：开发者自己创建房间。其他玩家要加入必须使用 joinRoom 加入。
+
+### 完整示例代码
+
+```typescript
+
+class Main extends eui.UILayer {
+
+    private engine:MatchvsEngine = new MatchvsEngine();
+	private response:MatchvsResponse = new MatchvsResponse();
+
+    protected createChildren(): void {
+        super.createChildren();
+
+        //注入自定义的素材解析器
+        let assetAdapter = new AssetAdapter();
+        egret.registerImplementation("eui.IAssetAdapter", assetAdapter);
+        egret.registerImplementation("eui.IThemeAdapter", new ThemeAdapter());
+
+        this.runGame().catch(e => {
+            console.log(e);
+        })
+    }
+
+    private async runGame() {
+        await this.loadResource()
+        this.createGameScene();
+        const result = await RES.getResAsync("description_json")
+        await platform.login();
+        const userInfo = await platform.getUserInfo();
+        console.log(userInfo);
+
+    }
+
+    private async loadResource() {
+        try {
+            const loadingView = new LoadingUI();
+            this.stage.addChild(loadingView);
+            await RES.loadConfig("resource/default.res.json", "resource/");
+            await this.loadTheme();
+            await RES.loadGroup("preload", 0, loadingView);
+            this.stage.removeChild(loadingView);
+        }
+        catch (e) {
+            console.error(e);
+        }
+    }
+
+    private loadTheme() {
+        return new Promise((resolve, reject) => {
+            // load skin theme configuration file, you can manually modify the file. And replace the default skin.
+            //加载皮肤主题配置文件,可以手动修改这个文件。替换默认皮肤。
+            let theme = new eui.Theme("resource/default.thm.json", this.stage);
+            theme.addEventListener(eui.UIEvent.COMPLETE, () => {
+                resolve();
+            }, this);
+
+        })
+    }
+
+    private textfield: egret.TextField;
+    /**
+     * 创建场景界面
+     * Create scene interface
+     */
+    protected createGameScene(): void {
+        let sky = this.createBitmapByName("bg_jpg");
+        this.addChild(sky);
+        let stageW = this.stage.stageWidth;
+        let stageH = this.stage.stageHeight;
+        sky.width = stageW;
+        // sky.height = stageH;
+        this.runMatchvs();
+    }
+    /**
+     * 根据name关键字创建一个Bitmap对象。name属性请参考resources/resource.json配置文件的内容。
+     * Create a Bitmap object according to name keyword.As for the property of name please refer to the configuration file of resources/resource.json.
+     */
+    private createBitmapByName(name: string): egret.Bitmap {
+        let result = new egret.Bitmap();
+        let texture: egret.Texture = RES.getRes(name);
+        result.texture = texture;
+        return result;
+    }
+
+    private runMatchvs(){
+        this.response.initResponse = this.initResponse.bind(this);
+        this.engine.init(this.response, "Matchvs", "alpha", 201479);
+    }
+
+    private initResponse(status:number){
+        if(status === 200){
+            console.log("初始化成功!");
+            this.response.registerUserResponse = this.registerUserResponse.bind(this);
+            this.engine.registerUser();
+        }
+    }
+
+    private registerUserResponse(userInfo:MsRegistRsp){
+        if(userInfo.status == 0){
+            console.log("注册成功");
+            this.response.loginResponse = this.loginResponse.bind(this);
+            this.engine.login(userInfo.userID, userInfo.token, 201479, 1, "xxxxxxxxxxxxxxxxxxxxx","xxxxxxxxxxxxxxxxxxxx","v",0);
+        }else{
+            console.log("注册失败",userInfo.status );
+        }
+    }
+
+    private loginResponse(rsp:MsLoginRsp){
+        if(rsp.status == 200){
+            console.log("登录Matchvs联网SDK成功");
+            this.response.joinRoomNotify = this.joinRoomNotify.bind(this);
+            this.response.joinRoomResponse = this.joinRoomResponse.bind(this);
+            this.engine.joinRandomRoom(3,"hello matchvs");
+        }
+    }
+
+    private joinRoomResponse(status:number, roomUserInfoList:Array<MsRoomUserInfo>, roomInfo:MsRoomInfo){
+        if(status === 200){
+            console.log("我自己进入房间成功");
+        }
+    }
+    private joinRoomNotify(roomUserInfo:MsRoomUserInfo){
+        console.log("有其他人进入房间");
+    }
+}
+```
+
+
+
+### 下一步 [Matchvs SDK 基础功能使用]()
 
 
 
