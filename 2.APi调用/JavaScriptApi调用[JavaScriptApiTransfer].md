@@ -28,14 +28,6 @@ engine.init(response, channel, platform, gameID);
 
 Matchvs 提供了两个环境，alpha 调试环境和 release 正式环境。游戏开发调试阶段请使用 alpha 环境，即 platform 传参"alpha"。参数列表如下：
 
-参数说明:
-
-| 参数     | 含义                                          |
-| -------- | --------------------------------------------- |
-| response | 回调对象，将创建的回调对象传入                                      |
-| channel  | 渠道，填“Matchvs”即可                         |
-| platform | 平台，调试环境填“alpha” ，正式环境填“release” |
-| gameID   | 游戏ID，来自官网控制台游戏信息                |
 
 gameID获取请[前往控制台](http://www.matchvs.com/manage/gameContentList)
 
@@ -70,18 +62,6 @@ response.registerUserResponse : function(userInfo) {
 engine.login(userID, token, gameID, gameVersion, appKey, secret, deviceID, gatewayID);
 ```
 
-参数说明:
-
-| 参数        | 含义                                     |
-| ----------- | ---------------------------------------- |
-| userID      | 用户ID，调用注册接口后获取               |
-| token       | 用户token，调用注册接口后获取            |
-| gameID      | 游戏ID，来自Matchvs官网控制台游戏信息    |
-| gameVersion | 游戏版本，自定义，用于隔离匹配空间       |
-| appKey      | 游戏Appkey，来自Matchvs控制台游戏信息    |
-| serect      | secret key，来自Matchvs控制台游戏信息    |
-| deviceID    | 设备ID，用于多端登录检测，请保证是唯一ID |
-| gatewayID   | 服务器节点ID，默认为0                    |
 
 - 其中，appKey，secret，gameID是你创建游戏后从官网获取的信息，可以[前往控制台](http://www.matchvs.com/manage/gameContentList)查看。appkey和secret是校验游戏合法性的关键信息，请妥善保管secret信息。  
 - userID 和 token 是第二步 **注册成功** 的回调信息。  
@@ -151,11 +131,7 @@ response.joinRoomResponse = function(status, roomUserInfoList, roomInfo) {
 engine.joinOver(cpProto);
 ```
 
-参数说明:
 
-| 参数    | 含义   |
-| ----- | ---- |
-| cpProto | 负载数据 |
 
 停止加入的回调 ：
 
@@ -224,11 +200,7 @@ response.sendEventNotify = function(eventInfo) {
 engine.leaveRoom(cpProto);
 ```
 
-参数说明:
 
-| 参数      | 含义   |
-| ------- | ---- |
-| cpProto | 负载信息 |
 
 自己离开房间回调 ：
 
@@ -279,3 +251,4 @@ response.logoutResponse = function(status) {
 engine.uninit();
 ```
 
+[更多完整API介绍请参考API手册](http://www.matchvs.com/service?page=js)
