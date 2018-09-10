@@ -28,11 +28,11 @@ Matchvs 使用 git 管理 gameServer，所以在创建 gameServer 之前，你�
 
 SSH key 上传成功后，点击 “创建gameServer”，填写 gameServer 基本信息：
 
-![](gameserverimg/creategameserver.png)
+![](gameServerimg/creategameserver.png)
 
 创建成功后的 gameServer 相关信息展示：
 
-![](gameserverimg/creategameserversuccess.png)
+![](gameServerimg/creategameserversuccess.png)
 
 gameServer 创建成功后，Matchvs 会为每个 gameServer 分配一个唯一的 git 仓库地址。在本示例中，Matchvs 分配的 git 仓库地址为： `ssh://git@git.matchvs.com:3879/1424769556baec5362f5b1513f7e1167.git`。下一小节将介绍如何使用 git 仓库。
 
