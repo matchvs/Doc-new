@@ -201,8 +201,8 @@ cc.Class({
             appkey,secret,DeviceID,gatewayID)
     },
 
-    loginResponse:function (MsLoginRsp) {
-        if (MsLoginRsp.status === 200) {
+    loginResponse:function (loginRsp) {
+        if (loginRsp.status === 200) {
             this.labelLog('恭喜你登录成功，来到Matchvs的世界，你已经成功的迈出了第一步，Hello World');
         } else {
             this.labelLog('登录失败');
@@ -221,3 +221,6 @@ cc.Class({
 
 
 ```
+
+
+[更多Matchvs文档查看基础功能文档](http://www.matchvs.com/service?page=JavaScriptApITransfer)
