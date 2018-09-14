@@ -43,27 +43,10 @@ class MsEngine {
 engine.init(response: MatchvsResponse, channel: string, platform: string, gameID: string): number
 ```
 
-#### 参数：
-
-| 参数     | 类型            | 描述                                     | 示例值    |
-| -------- | --------------- | ---------------------------------------- | --------- |
-| response | MatchvsResponse | 回调类型MatchvsResponse的对象            | response  |
-| channel  | string          | 渠道，固定值                             | "Matchvs" |
-| platform | string          | 平台，选择测试(alpha)or正式环境(release) | "alpha"   |
-| gameID   | number          | 游戏ID，在引擎官网创建游戏给出的ID       | 200103    |
-
 response 中设置一些回调方法，在执行注册、登录、发送事件等操作对应的方法之后，reponse中的回调函数会被SDK异步调用。
 
 > **注意** 发布之前须到官网控制台申请“发布上线”，申请通过后在调用init方法时传“release”才会生效，否则将不能使用release环境。
 
-#### 错误码：
-
-| 错误码 | 含义                                                     |
-| ------ | -------------------------------------------------------- |
-| 0      | 成功                                                     |
-| -1     | 失败                                                     |
-| -25    | channel 非法，请检查是否正确填写为 “Matchvs”             |
-| -26    | platform 非法，请检查是否正确填写为 “alpha” 或 “release” |
 
 ### initResponse
 
@@ -72,12 +55,6 @@ initResponse是 MatchvsResponse对象属性，在 engine.init 方法中传入的
 ```typescript
 response.initResponse(status:number);
 ```
-
-#### 参数
-
-| 参数   | 类型   | 描述                            | 示例值 |
-| ------ | ------ | ------------------------------- | ------ |
-| status | number | 状态返回，200表示成功，其他失败 | 200    |
 
 ### 示例代码
 
@@ -117,36 +94,18 @@ Matchvs提供的 `userID` 被用于在各个服务中校验连接的有效性，
 engine.registerUser()
 ```
 
-#### 返回值
-
-| 错误码 | 含义     |
-| ------ | -------- |
-| 0      | 成功     |
-| -1     | 失败     |
-| -2     | 未初始化 |
-
 ###  registerUserResponse
 
 ```
 registerUserResponse(userInfo:MsRegistRsp);
-```
-
-#### 参数MsRegistRsp类的属性
-
-| 属性   | 类型   | 描述                               | 示例值                                                 |
-| ------ | ------ | ---------------------------------- | ------------------------------------------------------ |
-| userID | number | 用户ID                             | 123456                                                 |
-| token  | string | 用户Token                          | "XGBIULHHBBSUDHDMSGTUGLOXTAIPICMT"                     |
-| name   | string | 用户名称                           | "张三"                                                 |
-| avatar | string | 头像                               | "<http://pic.vszone.cn/upload/head/1416997330299.jpg>" |
-| status | number | 接口回调状态码,0表示成功，其他失败 | 0 成功                                                 |
+​```                                       |
 
 > 注意：如果需要同时调试多个客户端，则需要打开多个不同的浏览器进行调试。
 >
 
 ### 示例代码
 
-```typescript
+​```typescript
 class MsEngine {
 	......
     private registerUser(){
@@ -177,43 +136,11 @@ class MsEngine {
 engine.login(userID: number, token: string, gameID: number, gameVersion: number, appKey: string, secretKey: string, deviceID: string, gatewayID: number): number
 ```
 
-#### 参数
-
-| 参数        | 类型   | 描述                                     | 示例值 |
-| ----------- | ------ | ---------------------------------------- | ------ |
-| userID      | number | 用户ID，调用注册接口后获取               | 123546 |
-| token       | string | 用户token，调用注册接口后获取            | ""     |
-| gameID      | number | 游戏ID，来自Matchvs控制台游戏信息        | 210329 |
-| gameVersion | number | 游戏版本，自定义，用于隔离匹配空间       | 1      |
-| appKey      | string | 游戏App key，来自Matchvs控制台游戏信息   | ""     |
-| secretKey   | string | secret key，来自Matchvs控制台游戏信息    | ""     |
-| deviceID    | string | 设备ID，用于多端登录检测，请保证是唯一ID | ""     |
-| gatewayID   | number | 服务器节点ID，默认为0                    | 0      |
-
-#### 返回值
-
-| 错误码 | 含义                         |
-| ------ | ---------------------------- |
-| 0      | 成功                         |
-| -1     | 失败                         |
-| -2     | 未初始化，请先调用初始化接口 |
-| -3     | 正在初始化                   |
-| -5     | 正在登录                     |
-| -6     | 已经登录，请勿重复登录       |
-| -11    | 正在登出                     |
-
 ### loginResponse
 
 ```typescript
 response.loginResponse(login:MsLoginRsp);
 ```
-
-#### 参数 MsLoginRsp 类的属性
-
-| 属性   | 类型   | 描述                                                         | 示例值 |
-| ------ | ------ | ------------------------------------------------------------ | ------ |
-| status | number | 状态返回 <br>200 成功<br>402 应用校验失败，确认是否在未上线时用了release环境，并检查gameID、appkey 和 secret<br>403 检测到该账号已在其他设备登录<br>404 无效用户 <br>500 服务器内部错误 | 200    |
-| roomID | string | 房间号（预留断线重连）                                       | 210039 |
 
 ### 示例代码
 
@@ -255,55 +182,11 @@ class MsEngine {
 engine.joinRandomRoom(maxPlayer:number, userProfile:string):number
 ```
 
-#### 参数
-
-| 参数        | 类型   | 描述             | 示例值 |
-| ----------- | ------ | ---------------- | ------ |
-| maxPlayer   | number | 房间内最大玩家数 | 3      |
-| userProfile | string | 玩家简介         | ""     |
-
-#### 返回值
-
-| 错误码 | 含义                                   |
-| ------ | -------------------------------------- |
-| 0      | 成功                                   |
-| -1     | 失败                                   |
-| -2     | 未初始化                               |
-| -3     | 正在初始化                             |
-| -4     | 未登录                                 |
-| -7     | 正在创建或者进入房间                   |
-| -8     | 已经在房间中                           |
-| -20    | 1 <maxPlayer超出范围 ，maxPlayer须≤100 |
-| -21    | userProfile 过长，不能超过512个字符    |
-
 ### joinRoomResponse
 
 ```typescript
 response.joinRoomResponse(status:number, roomUserInfoList:Array<MsRoomUserInfo>, roomInfo:MsRoomInfo);
 ```
-
-#### 参数
-
-| 参数             | 类型                  | 描述                            | 示例值 |
-| ---------------- | --------------------- | ------------------------------- | ------ |
-| status           | number                | 状态返回，200表示成功 <br>400 客户端参数错误 <br>404 指定房间不存在 <br>405 房间已满 <br>406 房间已joinOver <br>500 服务器内部错误       | 200    |
-| roomUserInfoList | Array<MsRoomUserInfo> | 房间内玩家信息列表              |        |
-| roomInfo         | MsRoomInfo            | 房间信息构成的对象              |        |
-
-#### MsRoomUserInfo 的属性
-
-| 属性        | 类型   | 描述     | 示例值 |
-| ----------- | ------ | -------- | ------ |
-| userID      | number | 用户ID   | 32322  |
-| userProfile | string | 玩家简介 | ""     |
-
-#### MsRoomInfo 的属性	
-
-| 属性         | 类型   | 描述               | 示例值 |
-| ------------ | ------ | ------------------ | ------ |
-| roomID       | string | 房间号             | 238211 |
-| roomProperty | string | 房间属性           | ""     |
-| owner        | number | 房间创建者的用户ID | 0      |
 
 - 如果本房间是某个玩家调用joinRandomRoom随机加入房间时创建的，那么roomInfo中的owner为服务器随机指定的房主ID。在调用engine.createRoom主动创建房间时owner为创建房间者（即房主）的ID。以上两种情况下，如果房主离开房间，服务器均会指定下一个房主，并通过`leaveRoomNotify`通知房间其他成员。
 - roomUserInfoList 用户信息列表是本玩家加入房间前的玩家信息列表，不包含本玩家。
@@ -314,13 +197,6 @@ response.joinRoomResponse(status:number, roomUserInfoList:Array<MsRoomUserInfo>,
 ```typescript
 response.joinRoomNotify(roomUserInfo:MsRoomUserInfo);
 ```
-
-#### 参数 
-
-| 参数         | 类型           | 描述                 | 示例值 |
-| ------------ | -------------- | -------------------- | ------ |
-| roomUserInfo | MsRoomUserInfo | 房间新加的用户的信息 |        |
-
 - 某个玩家加入房间之后，如果该房间后来又有其他玩家加入，那么将会收到回调通知，response.joinRoomNotify方法会被SDK调用，调用时传入的roomUserInfo是新加入的其他玩家的信息，不是本玩家的信息。
 - roomUserInfo的属性与response.joinRoomResponse中的[roomUserInfoList中的元素包含的属性](http://cn.matchvs.com/service?page=APIJavaScript#roomUserInfo)相同。
 
@@ -360,25 +236,6 @@ class MsEngine {
 engine.joinOver(cpProto:string):number
 ```
 
-#### 参数
-
-| 参数    | 类型   | 描述     | 示例值 |
-| ------- | ------ | -------- | ------ |
-| cpProto | string | 负载信息 | ""     |
-
-#### 返回值
-
-| 错误码 | 含义                            |
-| ------ | ------------------------------- |
-| 0      | 成功                            |
-| -1     | 失败                            |
-| -2     | 未初始化                        |
-| -3     | 正在初始化                      |
-| -4     | 未登录                          |
-| -7     | 正在创建或者进入房间            |
-| -6     | 不在房间                        |
-| -21    | cpProto过长，不能超过 1024 字符 |
-
 ### joinOverResponse
 
 客户端调用engine.joinOver发送关闭房间的指令之后，SDK异步调用reponse.joinOverResponse方法告诉客户端joinOver指令的处理结果。
@@ -387,13 +244,6 @@ engine.joinOver(cpProto:string):number
 response.joinOverResponse(rsp:MsJoinOverRsp);
 ```
 
-#### MsJoinOverRsp的属性
-
-| 属性    | 类型   | 描述                                                         | 示例值 |
-| ------- | ------ | ------------------------------------------------------------ | ------ |
-| status  | number | 状态返回，200表示成功<br>400 客户端参数错误 <br>404 用户或房间不存在 <br>403 该用户不在房间 <br>500 服务器内部错误 | 200    |
-| cpProto | string | 负载信息                                                     |        |
-
 ### joinOverNotify
 
 当有人调用了 joinOver 接口，同一房间的其他用户就会收到这个 回调信息。
@@ -401,14 +251,6 @@ response.joinOverResponse(rsp:MsJoinOverRsp);
 ```typescript
 response.joinOverNotify(notifyInfo:MsJoinOverNotifyInfo);
 ```
-
-#### 参数 MsJoinOverNotifyInfo 的属性 
-
-| 属性      | 类型   | 描述               | 示例值 |
-| --------- | ------ | ------------------ | ------ |
-| roomID    | string | 房间ID             |        |
-| srcUserID | number | 发起关闭房间玩家ID |        |
-| cpProto   | string | 负载信息           |        |
 
 ### 示例代码
 
@@ -443,34 +285,8 @@ class MsEngine {
 ```typescript
 engine.sendEvent(data:string):any
 ```
+sendEventResponse 也会收到 sequence 标识，通过此标识来确定这个sendEventResponse 是由哪次sendEvent 发送的。主要用于在游戏中做信息同步的时候，网络传输都有延迟会出现sendEvent与sendEventResponse 收到顺序不同。 
 
-#### 参数
-
-| 参数 | 类型   | 描述     | 示例值  |
-| ---- | ------ | -------- | ------- |
-| data | string | 消息内容 | "hello" |
-
-#### 返回值
-
-- 返回值为一个对象，该对象包含以下属性：
-
-| 属性     | 类型   | 描述                                                         | 示例值 |
-| -------- | ------ | ------------------------------------------------------------ | ------ |
-| result   | number | 错误码，0表示成功，其他表示失败                              | 0      |
-| sequence | number | 事件序号，作为事件的唯一标识。客户端发送消息后收到的sendEventResponse 也会收到 sequence 标识，通过此标识来确定这个sendEventResponse 是由哪次sendEvent 发送的。主要用于在游戏中做信息同步的时候，网络传输都有延迟会出现sendEvent与sendEventResponse 收到顺序不同。 | 231212 |
-
-#### result 说明
-
-| 返回码 | 含义                                  |
-| ------ | ------------------------------------- |
-| 0      | 成功                                  |
-| -1     | 失败                                  |
-| -2     | 未初始化                              |
-| -3     | 正在初始化                            |
-| -4     | 未登录                                |
-| -7     | 正在创建或者进入房间                  |
-| -6     | 未加入房间                            |
-| -21    | data 过长, data长度不能超过1024个字符 |
 
 消息会发给房间里**除自己外** 其他所有成员。同一客户端多次调用 `sendEvent` 方法时，每次返回的 `sequence`都是唯一的。但同一房间的不同客户端调用 `sendEven` t时生成的 `sequence` 之间会出现重复。可以发送二进制数据，开发者可以将数据用json、pb等工具先进行序列化，然后将序列化后的数据通过SendEvent的一系列接口发送。
 
@@ -482,15 +298,6 @@ engine.sendEvent(data:string):any
 response.sendEventResponse(rsp:MsSendEventRsp);
 ```
 
-#### MsSendEventRsp 的属性
-
-| 属性     | 类型   | 描述                                                         | 示例值 |
-| -------- | ------ | ------------------------------------------------------------ | ------ |
-| status   | number | 状态返回，200表示成功<br>521 gameServer不存在，请检查是否已开启本地调试或在正式环境发布运行gameServer | 200    |
-| sequence | number | 事件序号，作为事件的唯一标识，可以参考sendEvent，对这个字段的详细说明 | 231212 |
-
-#### 说明
-
 - 客户端调用engine.sendEvent或engine.sendEventEx 发送消息之后，SDK异步调用reponse.sendEventResponse 方法告诉客户端消息是否发送成功。
 
 ### sendEventNotify
@@ -498,13 +305,6 @@ response.sendEventResponse(rsp:MsSendEventRsp);
 ```typescript
 response.sendEventNotify(eventInfo:MsSendEventNotify);
 ```
-
-#### MsSendEventNotify的属性
-
-| 参数      | 类型   | 描述                                                         | 示例值  |
-| --------- | ------ | ------------------------------------------------------------ | ------- |
-| srcUserID | number | 推送方用户ID，表示是谁发的消息                               | 321     |
-| cpProto   | string | 消息内容，对应[sendEvent](http://cn.matchvs.com/service?page=APIJavaScript#sendEvent)中的msg参数 | "hello" |
 
 ### 示例代码
 
@@ -547,25 +347,6 @@ class MsEngine{
 engine.leaveRoom(cpProto:string):number
 ```
 
-#### 参数
-
-| 参数    | 类型   | 描述     | 示例值 |
-| ------- | ------ | -------- | ------ |
-| cpProto | string | 负载信息 | ""     |
-
-#### 返回值
-
-| 错误码 | 含义                           |
-| ------ | ------------------------------ |
-| 0      | 成功                           |
-| -1     | 失败                           |
-| -2     | 未初始化                       |
-| -3     | 正在初始化                     |
-| -4     | 未登录                         |
-| -7     | 正在创建或者进入房间           |
-| -6     | 不在房间                       |
-| -21    | userProfile 过长，不能超过1024 |
-
 ### leaveRoomResponse
 
 客户端调用engine.leaveRoom发送关闭房间的指令之后，SDK异步调用reponse.leaveRoomResponse方法告诉客户端leaveRoom指令的处理结果。
@@ -574,15 +355,6 @@ engine.leaveRoom(cpProto:string):number
 response.leaveRoomResponse(rsp:MsLeaveRoomRsp);
 ```
 
-#### 参数MsLeaveRoomRsp的属性
-
-| 属性    | 类型   | 描述                                                         | 示例值 |
-| ------- | ------ | ------------------------------------------------------------ | ------ |
-| status  | number | 状态返回，200表示成功<br>400 客户端参数错误 <br>404 房间不存在 <br>500 服务器内部错误 | 200    |
-| roomID  | string | 房间号                                                       | 317288 |
-| userID  | number | 用户ID                                                       | 317288 |
-| cpProto | string | 负载信息                                                     |        |
-
 ### leaveRoomNotify
 
 当同房间中的其他玩家调用leaveRoom发送离开房间的指令之后，本客户端将会收到回调通知，response.leaveRoomNotify方法会被SDK调用，调用时传入的roomUserInfo是离开房间的玩家的信息。
@@ -590,18 +362,6 @@ response.leaveRoomResponse(rsp:MsLeaveRoomRsp);
 ```typescript
 response.leaveRoomNotify(leaveRoomInfo:MsLeaveRoomNotify);
 ```
-
-#### 参数 MsLeaveRoomNotify 属性
-
-| 参数    | 类型   | 描述                     | 示例值 |
-| ------- | ------ | ------------------------ | ------ |
-| userID  | number | 房间号                   | 200    |
-| roomID  | string | 刚刚离开房间的用户的信息 |        |
-| owner   | number | 房主                     |        |
-| cpProto | string | 附加信息                 |        |
-
-- roomUserInfo 的属性与response.joinRoomResponse中的 [roomUserInfoList中的元素包含的属性](http://cn.matchvs.com/service?page=APIJavaScript#roomUserInfo) 相同。
-
 ### 示例代码
 
 ```typescript
@@ -637,33 +397,12 @@ class MsEngine {
 engine.logout(cpProto:string):number
 ```
 
-#### 参数
-
-| 参数    | 类型   | 描述     | 示例值 |
-| ------- | ------ | -------- | ------ |
-| cpProto | string | 负载信息 | ""     |
-
-#### 返回值
-
-| 错误码 | 含义   |
-| ------ | ------ |
-| 0      | 成功   |
-| -1     | 失败   |
-| -4     | 未登录 |
-
 ### logoutResponse
 
 ```typescript
 response.logoutResponse(status:number);
 ```
 
-#### 参数
+### 错误码说明:<http://www.matchvs.com/service?page=ErrCode>
 
-| 参数   | 类型   | 描述                            | 示例值 |
-| ------ | ------ | ------------------------------- | ------ |
-| status | number | 状态返回，200表示成功 <br>500 服务器内部错误 | 200    |
-
-
-
-### 错误码说明:<http://www.matchvs.com/service?page=ErrCode> 
-### 更多接口调用和说明请看 [接口使用说明](http://www.matchvs.com/service?page=ts) 
+### 更多接口调用和说明请看 [接口使用说明](http://www.matchvs.com/service?page=TypeScript) 
