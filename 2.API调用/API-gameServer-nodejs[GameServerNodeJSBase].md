@@ -1,6 +1,6 @@
 ## 创建房间
 
-房间被创建时，gameServer 会触发`onCreateRoom`消息，如有"房间创建“的相关逻辑应写在该方法里。
+房间被创建时，gameServer 会触发`onCreateRoom()`消息，如有"房间创建“的相关逻辑应写在该方法里。
 
 ```javascript
 /**
@@ -25,9 +25,49 @@
 onCreateRoom(request)
 ```
 
+Matchvs 提供了在 gameServer 里主动创建房间的接口`createRoom()`。调用该接口向 Matchvs 请求创建一个空房间。
+
+```js
+ /**
+ * 创建房间
+ * @param {Object} msg 创建房间消息结构
+ * @param {number} msg.gameID 游戏ID
+ * @param {number} msg.ttl 空房间存活时长，单位秒
+ * @param {Object} msg.roomInfo 房间信息
+ * @param {string} msg.roomInfo.roomName 房间名称
+ * @param {number} msg.roomInfo.maxPlayer 房间最大人数
+ * @param {number} msg.roomInfo.mode 模式
+ * @param {number} msg.roomInfo.canWatch 是否可观战
+ * @param {number} msg.roomInfo.visibility 房间是否可见：0不可见，1可见
+ * @param {string|Uint8Array} msg.roomInfo.roomProperty 房间属性
+ * @param {function} callback 房间创建结果回调
+ * @memberof Push
+ */
+ createRoom(msg, callback)
+```
+
+TTL（time to live）：Mathcvs 从房间变成空时开始计时，超过 TTL 后销毁房间。在 TTL 内如有玩家加入房间则重置超时时长，而当房间再次变为空时重新开始计时。
+
+## 设置空房间存活时长
+
+gameServer 在创建一个房间之后，可以通过`touchRoom()`重新设置该房间的存活时长。
+
+```javascript
+/**
+* 修改房间存活时长
+* @param {Object} msg 修改房间存活时长消息结构
+* @param {number} msg.gameID 游戏ID
+* @param {string} msg.roomID 房间ID
+* @param {number} msg.ttl 空房间存活时长
+* @param {function} callback 结果回调
+* @memberof Push
+*/
+touchRoom(msg, callback)
+```
+
 ## 删除房间
 
-房间被销毁时，gameServer 会触发`onDeleteRoom`，开发者可以将“销毁房间的逻辑”写到该方法里。
+房间被销毁时，gameServer 会触发`onDeleteRoom()`，开发者可以将“销毁房间的逻辑”写到该方法里。
 
 ```javascript
 /**
@@ -40,9 +80,23 @@ onCreateRoom(request)
 onDeleteRoom(request)
 ```
 
+Matchvs 提供了在 gameServer 里主动删除房间的接口`destroyRoom()`。调用该接口向 Matchvs 请求删除一个房间。允许在房间内还有玩家时删除房间，这时会先踢出房间内的玩家再执行删除操作。
+
+```javascript
+/**
+* 销毁房间
+* @param {Object} msg 销毁房间消息结构
+* @param {number} msg.gameID 游戏ID
+* @param {string} msg.roomID 房间ID
+* @param {function} callback 结果回调
+* @memberof Push
+*/
+destroyRoom(msg, callback)
+```
+
 ## 加入房间
 
-玩家进入房间时，gameServer 会触发`onJoinRoom`，开发者可以将“玩家加入房间的逻辑”写到该方法里。
+玩家进入房间时，gameServer 会触发`onJoinRoom()`，开发者可以将“玩家加入房间的逻辑”写到该方法里。
 
 ```javascript
 /**
@@ -221,7 +275,7 @@ onUserState(request)
 
 ## 房间详情
 
-Matchvs 提供了在gameServer 里查询房间详情的接口，查询结果在`onRoomDetail`中返回。
+Matchvs 提供了在gameServer 里查询房间详情的接口，查询结果在`onRoomDetail()`中返回。
 
 ```javascript
 /**
@@ -287,5 +341,77 @@ onSetRoomProperty(request)
  * @memberof Push
  */
 setRoomProperty(msg)
+```
+
+## 设置帧同步帧率
+
+当客户端修改房间帧同步帧率时，gameServer 触发`onSetFrameSyncRate()`，开发者可以将"设置房间帧同步帧率“的相关逻辑写到该方法里。
+
+```javascript
+/**
+* 设置帧率
+* @param {Object} request
+* @param {number} request.gameID
+* @param {string} request.roomID
+* @param {number} request.frameRate 帧率
+* @param {number} request.frameIndex 初始帧编号
+* @param {string} request.timestamp 时间戳
+* @param {number} request.enableGS gameServer 是否参与帧同步
+* @memberof App
+*/
+onSetFrameSyncRate(request)
+```
+
+另外 Matchvs 提供了在 gameServer 里设置房间帧同步帧率的接口：
+
+```javascript
+/**
+* 设置帧率
+* @param {Object} msg
+* @param {number} msg.gameID 游戏ID 
+* @param {string} msg.roomID 房间ID
+* @param {number} msg.frameRate 帧率（0到20，且能被1000整除）
+* @param {number} msg.enableGS gameServer 是否参与帧同步（0：不参与；1：参与）
+* @memberof Push
+*/
+setFrameSyncRate(msg)
+```
+
+## 接收帧同步消息
+
+当房间启用了 gameServer 帧同步，同时客户端指定了将帧同步消息发往 gameServer 时，gameServer 即可接收到该房间的帧同步消息。
+
+```javascript
+/**
+* 帧数据
+* @param {Object} request
+* @param {number} request.gameID
+* @param {string} request.roomID
+* @param {number} request.frameIndex 帧编号
+* @param {Object[]} request.frameItems 元数据集合
+* @param {number} request.frameItems[].srcUserID 发送用户ID
+* @param {string} request.frameItems[].cpProto 自定义消息内容
+* @param {string} request.frameItems[].timestamp 时间戳
+* @param {number} request.frameWaitCount 等待的帧数
+* @memberof App
+*/
+onFrameUpdate(request) 
+```
+
+## 发送帧同步消息
+
+当房间启用了 gameServer 帧同步时，gameServer 可以主动发送帧同步消息。
+
+```javascript
+/**
+* 发送帧数据
+* @param {Object} msg
+* @param {number} msg.gameID 游戏ID
+* @param {string} msg.roomID 房间ID
+* @param {string|Uint8Array} msg.cpProto 消息内容
+* @param {number} msg.operation 0：只发客户端；1：只发GS；2：同时发送客户端和GS
+* @memberof Push
+*/
+frameBroadcast(msg)
 ```
 
