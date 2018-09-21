@@ -1564,14 +1564,15 @@ response.sendEventGroupNotify(srcUid, [group], cpProto)
 ## setFrameSync
 
 ```
-engine.setFrameSync(frameRate)
+engine.setFrameSync(frameRate, enableGS)
 ```
 
 #### 参数
 
-| 参数      | 类型   | 描述                       | 示例值 |
-| --------- | ------ | -------------------------- | ------ |
-| frameRate | number | 每秒钟同步的帧数 : 0关闭。 | 5      |
+| 参数      | 类型   | 描述                                     | 示例值 |
+| --------- | ------ | ---------------------------------------- | ------ |
+| frameRate | number | 每秒钟同步的帧数 : 0关闭。               | 5      |
+| enableGS  | number | 是否启用gameServer帧同步 0-启用 1-不启用 | 0      |
 
 #### 返回值
 
@@ -1630,10 +1631,29 @@ setFrameSyncResponse = function (rsp) {
 }
 ```
 
+## setFrameSyncNotify
+
+设置帧同步异步回调同时会回调给自己。可能是gameServer 设置的帧同步，也可以是玩家设置的帧同步。
+
+```typescript
+response.setFrameSyncNotify(rsp);
+```
+
+#### 参数 rsp 属性
+
+| 参数       | 类型   | 描述                                     | 示例值 |
+| ---------- | ------ | ---------------------------------------- | ------ |
+| frameRate  | number | 帧率                                     | 10     |
+| startIndex | number | 序号                                     | 1      |
+| timestamp  | string | 时间戳                                   |        |
+| enableGS   | number | 是否启用gameServer帧同步 0-启用 1-不启用 | 0      |
+
+
+
 ## sendFrameEvent
 
 ```
-engine.sendFrameEvent(cpProto)
+engine.sendFrameEvent(cpProto, op)
 ```
 
 #### 参数
@@ -1641,6 +1661,7 @@ engine.sendFrameEvent(cpProto)
 | 参数    | 类型   | 描述    | 示例值    |
 | ------- | ------ | ------- | --------- |
 | cpProto | string | 帧同步消息内容 | "message" |
+| op | number | 帧同步数据操作 0-只发送客户端 1-只发送GS 2-客户端和GS | 0 |
 
 #### 返回值
 

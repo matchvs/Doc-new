@@ -1513,6 +1513,7 @@ Matchvs提供了帧同步的功能，开发者可以让房间内的玩家保持�
 
 - 请求设置帧同步：setFrameSync
 - 帧同步设置回调：setFrameSyncResponse
+- 设置帧同步异步回调：setFrameSyncNotify
 - 发送帧同步请求：sendFrameEvent
 - 发送帧同步回调：sendFrameEventResponse
 - 帧数据更新回调：frameUpdate
@@ -1522,14 +1523,15 @@ Matchvs提供了帧同步的功能，开发者可以让房间内的玩家保持�
 设置帧同步速率，发送帧同步消息之前一定要先设置帧同步。帧同步最大值为20。也就是 50ms 发送一次数据。
 
 ```typescript
-engine.setFrameSync(frameRate:number):number
+engine.setFrameSync(frameRate:number，enableGS?:number):number
 ```
 
 #### 参数
 
-| 参数      | 类型   | 描述          | 示例值 |
-| --------- | ------ | ------------- | ------ |
-| frameRate | number | 帧率: 0关闭。 | 10     |
+| 参数      | 类型   | 描述                                     | 示例值 |
+| --------- | ------ | ---------------------------------------- | ------ |
+| frameRate | number | 帧率: 0关闭。其他值表示帧率              | 10     |
+| enableGS  | number | 是否启用gameServer帧同步 0-启用 1-不启用 | 0      |
 
 #### 返回值
 
@@ -1554,23 +1556,43 @@ response.setFrameSyncResponse(rsp:MsSetChannelFrameSyncRsp);
 
 #### 参数 MsSetChannelFrameSyncRsp的属性
 
-| 参数    | 类型   | 描述                                                       | 示例值 |
-| ------- | ------ | ---------------------------------------------------------- | ------ |
-| mStatus | number | 状态：<br>200 成功<br>519 重复设置<br>500 帧率需被1000整除 | 200    |
+| 参数   | 类型   | 描述                                                       | 示例值 |
+| ------ | ------ | ---------------------------------------------------------- | ------ |
+| status | number | 状态：<br>200 成功<br>519 重复设置<br>500 帧率需被1000整除 | 200    |
+
+### setFrameSyncNotify
+
+设置帧同步异步回调同时会回调给自己。可能是gameServer 设置的帧同步，也可以是玩家设置的帧同步。
+
+```typescript
+response.setFrameSyncNotify(rsp:MVS.MsSetFrameSyncNotify);
+```
+
+#### 参数 MsSetFrameSyncNotify属性
+
+| 参数       | 类型   | 描述                                     | 示例值 |
+| ---------- | ------ | ---------------------------------------- | ------ |
+| frameRate  | number | 帧率                                     | 10     |
+| startIndex | number | 序号                                     | 1      |
+| timestamp  | string | 时间戳                                   |        |
+| enableGS   | number | 是否启用gameServer帧同步 0-启用 1-不启用 | 0      |
+
+
 
 ### sendFrameEvent
 
 发送帧同步数据，调用 sendFrameEvent 接口之前一定要先设置帧率。
 
 ```typescript
-engine.sendFrameEvent(cpProto:string):number
+engine.sendFrameEvent(cpProto:string, op?:number):number
 ```
 
 #### 参数
 
-| 参数    | 类型   | 描述           | 示例值    |
-| ------- | ------ | -------------- | --------- |
-| cpProto | string | 帧同步消息内容 | ”message“ |
+| 参数    | 类型   | 描述                                                  | 示例值    |
+| ------- | ------ | ----------------------------------------------------- | --------- |
+| cpProto | string | 帧同步消息内容                                        | ”message“ |
+| op      | number | 帧同步数据操作 0-只发送客户端 1-只发送GS 2-客户端和GS | 0         |
 
 #### 返回值
 
@@ -1648,7 +1670,7 @@ class MsEngine{
         };
     }
     public setFrameSync(){
-        this.engine.setFrameSync(10);
+        this.engine.setFrameSync(10,0);
     }
 
     public sendFrameEvent(){
