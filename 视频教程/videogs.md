@@ -13,8 +13,7 @@ Sort: 55
 
 <div style="text-align: center">
 
-<iframe st style="width: 800px;height: 600px;" src="//player.bilibili.com/player.html?aid=25356968&cid=43880730&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"> </iframe>
+<iframe style="width: 800px;height: 600px;" src="//player.bilibili.com/player.html?aid=25356968&cid=43880730&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"> </iframe>
 
 </div>
-
 

@@ -10,6 +10,6 @@ Sort: 50
 
 <div style="text-align: center">
 
-<iframe style="width: 800px;height: 600px;" src="//player.bilibili.comcom/player.html?aid=28087280&cid=48537268&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"> </iframe>
+<iframe style="width: 800px;height: 600px;" src="//player.bilibili.com/player.html?aid=28087280&cid=48537268&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"> </iframe>
 
 </div>
