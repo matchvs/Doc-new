@@ -1,166 +1,166 @@
 [
     {
-        "file": "/新手上路",
+        "file": "/QuickStart",
         "alias": "新手上路"
     },
     {
-        "file": "/新手上路/MatchvsStart.md",
+        "file": "/QuickStart/MatchvsStart.md",
         "alias": "MatchvsStart"
     },
     {
-        "file": "/新手上路/CocosCreatorStart.md",
+        "file": "/QuickStart/CocosCreatorStart.md",
         "alias": "CocosCreatorStart"
     },
     {
-        "file": "/新手上路/EgretStart.md",
+        "file": "/QuickStart/EgretStart.md",
         "alias": "EgretStart"
     },
     {
-        "file": "/新手上路/javaGsStart.md",
+        "file": "/QuickStart/javaGsStart.md",
         "alias": "Java gameServer"
     },
     {
-        "file": "/新手上路/jsGsStart.md",
+        "file": "/QuickStart/jsGsStart.md",
         "alias": "NodeJS GameServer"
     },
     {
-        "file": "/新手上路/WeChatDevelopmentStart.md",
+        "file": "/QuickStart/WeChatDevelopmentStart.md",
         "alias": "微信小游戏开发"
     },
     {
-        "file": "/新手上路/2dxStart.md",
+        "file": "/QuickStart/2dxStart.md",
         "alias": "2dxStart"
     },
     {
-        "file": "/新手上路/csharpGsStart.md",
+        "file": "/QuickStart/csharpGsStart.md",
         "alias": "Csharp GameServer"
     },
     {
-        "file": "/新手上路/sort",
+        "file": "/QuickStart/sort",
         "alias": "sort"
     },
     {
-        "file": "/新手上路/UnityStart.md",
+        "file": "/QuickStart/UnityStart.md",
         "alias": "UnityStart"
     },
     {
-        "file": "/API调用",
+        "file": "/APIBasic",
         "alias": "API调用"
     },
     {
-        "file": "/API调用/JavaScriptBase.md",
+        "file": "/APIBasic/JavaScriptBase.md",
         "alias": "JavaScript 基础使用"
     },
     {
-        "file": "/API调用/TypeScriptBase.md",
+        "file": "/APIBasic/TypeScriptBase.md",
         "alias": "TypeScript 基础使用"
     },
     {
-        "file": "/API调用/GameServerNodeJSBase.md",
+        "file": "/APIBasic/GameServerNodeJSBase.md",
         "alias": "GameServer NodeJS 基础使用"
     },
     {
-        "file": "/API调用/GameServerCSharpBase.md",
+        "file": "/APIBasic/GameServerCSharpBase.md",
         "alias": "GameServer CSharp 基础使用"
     },
     {
-        "file": "/API调用/2dxCuide.md",
+        "file": "/APIBasic/2dxCuide.md",
         "alias": "2dx 基础指南"
     },
     {
-        "file": "/API调用/unityGuide.md",
+        "file": "/APIBasic/unityGuide.md",
         "alias": "unity 基础指南"
     },
     {
-        "file": "/进阶使用",
+        "file": "/Advanced",
         "alias": "进阶使用"
     },
     {
-        "file": "/进阶使用/DataStoreGuide.md",
+        "file": "/Advanced/DataStoreGuide.md",
         "alias": "DataStoreGuide"
     },
     {
-        "file": "/进阶使用/envGuide.md",
+        "file": "/Advanced/envGuide.md",
         "alias": "多套环境说明"
     },
     {
-        "file": "/进阶使用/GameServerCMD.md",
+        "file": "/Advanced/GameServerCMD.md",
         "alias": "GameServer命令行工具"
     },
     {
-        "file": "/进阶使用/GameServerUpload.md",
+        "file": "/Advanced/GameServerUpload.md",
         "alias": "GameServer代码上传"
     },
     {
-        "file": "/进阶使用/MultipleIdentities.md",
+        "file": "/Advanced/MultipleIdentities.md",
         "alias": "Demo多开方案"
     },
     {
-        "file": "/进阶使用/reconnect.md",
+        "file": "/Advanced/reconnect.md",
         "alias": "断线重连"
     },
     {
-        "file": "/进阶使用/ThirdAccount.md",
+        "file": "/Advanced/ThirdAccount.md",
         "alias": "第三方绑定"
     },
     {
-        "file": "/进阶使用/VSPGuide.md",
+        "file": "/Advanced/VSPGuide.md",
         "alias": "V盟广告接入"
     },
     {
-        "file": "/进阶使用/wechatInvite.md",
+        "file": "/Advanced/wechatInvite.md",
         "alias": "微信约战"
     },
     {
-        "file": "/进阶使用/wxrank.md",
+        "file": "/Advanced/wxrank.md",
         "alias": "微信下游戏排行榜"
     },
     {
-        "file": "/游戏发布",
+        "file": "/Release",
         "alias": "游戏发布"
     },
     {
-        "file": "/游戏发布/creatorPublish.md",
+        "file": "/Release/creatorPublish.md",
         "alias": "creator发布"
     },
     {
-        "file": "/游戏发布/domain.md",
+        "file": "/Release/domain.md",
         "alias": "微信小游戏发布"
     },
     {
-        "file": "/游戏发布/egretPublish.md",
+        "file": "/Release/egretPublish.md",
         "alias": "Egret发布"
     },
     {
-        "file": "/游戏发布/gspublish.md",
+        "file": "/Release/gspublish.md",
         "alias": "GameServer发布"
     },
     {
-        "file": "/游戏发布/unityPublish.md",
+        "file": "/Release/unityPublish.md",
         "alias": "unity发布"
     },
     {
-        "file": "/API手册",
+        "file": "/APIDoc",
         "alias": "API手册"
     },
     {
-        "file": "/API手册/JavaScript.md",
+        "file": "/APIDoc/JavaScript.md",
         "alias": "JavaScript使用"
     },
     {
-        "file": "/API手册/TypeScript.md",
+        "file": "/APIDoc/TypeScript.md",
         "alias": "TypeScript"
     },
     {
-        "file": "/API手册/Cocos2dx.md",
+        "file": "/APIDoc/Cocos2dx.md",
         "alias": "Cocos2dx"
     },
     {
-        "file": "/API手册/CShapeAPI.md",
+        "file": "/APIDoc/CShapeAPI.md",
         "alias": "CShapeAPI"
     },
     {
-        "file": "/API手册/sort",
+        "file": "/APIDoc/sort",
         "alias": "sort"
     },
     {
@@ -176,63 +176,63 @@
         "alias": "付费说明"
     },
     {
-        "file": "/案例Demo",
+        "file": "/Simple",
         "alias": "案例Demo"
     },
     {
-        "file": "/案例Demo/caseDemo.md",
+        "file": "/Simple/caseDemo.md",
         "alias": "caseDemo"
     },
     {
-        "file": "/视频教程",
+        "file": "/VideoTutorials",
         "alias": "视频教程"
     },
     {
-        "file": "/视频教程/videobasic2.md",
+        "file": "/VideoTutorials/videobasic2.md",
         "alias": "videobasic2"
     },
     {
-        "file": "/视频教程/videobasic3.md",
+        "file": "/VideoTutorials/videobasic3.md",
         "alias": "videobasic3"
     },
     {
-        "file": "/视频教程/videobind.md",
+        "file": "/VideoTutorials/videobind.md",
         "alias": "videobind"
     },
     {
-        "file": "/视频教程/videocard.md",
+        "file": "/VideoTutorials/videocard.md",
         "alias": "videocard"
     },
     {
-        "file": "/视频教程/videocard2.md",
+        "file": "/VideoTutorials/videocard2.md",
         "alias": "videocard2"
     },
     {
-        "file": "/视频教程/videocreator.md",
+        "file": "/VideoTutorials/videocreator.md",
         "alias": "videocreator"
     },
     {
-        "file": "/视频教程/videoextend.md",
+        "file": "/VideoTutorials/videoextend.md",
         "alias": "videoextend"
     },
     {
-        "file": "/视频教程/videogs.md",
+        "file": "/VideoTutorials/videogs.md",
         "alias": "videogs"
     },
     {
-        "file": "/视频教程/videoquickstart.md",
+        "file": "/VideoTutorials/videoquickstart.md",
         "alias": "videoquickstart"
     },
     {
-        "file": "/参考资料",
+        "file": "/References",
         "alias": "参考资料"
     },
     {
-        "file": "/参考资料/git.md",
+        "file": "/References/git.md",
         "alias": "git 使用"
     },
     {
-        "file": "/参考资料/ssh.md",
+        "file": "/References/ssh.md",
         "alias": "添加 ssh"
     }
 ]
