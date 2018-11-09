@@ -1,5 +1,5 @@
 /*
-Title: GameServer视频教程
+Title: 视频教程-GameServer
 Sort: 55
 */
 ## 视频简介
