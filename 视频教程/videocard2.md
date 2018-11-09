@@ -1,5 +1,5 @@
 /*
-Title: videocard2
+Title: 视频教程-联网斗地主开发2
 Sort: 52
 */
 ## 视频简介

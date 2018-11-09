@@ -1,5 +1,5 @@
 /*
-Title: videocreator
+Title: 视频教程-Cocos Creator插件
 Sort: 53
 */
 ## 视频简介

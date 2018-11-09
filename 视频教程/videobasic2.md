@@ -1,5 +1,5 @@
 /*
-Title: videobasic2
+Title: 视频教程(二)-基础联网
 Sort: 48
 */
 ## 视频简介

@@ -1,6 +1,6 @@
 /*
-Title: videobind
-Sort: 50
+Title: 视频教程-微信帐号绑定
+Sort: 54
 */
 ## 视频简介
 
