@@ -9,7 +9,7 @@ Sort: 34
 
 ## 推送代码
 
-gameServer 本地开发调试完成后需要将代码推送到 Matchvs 远程仓库，这里以 Node.js 版 gameServer 为例演示使用 git 命令推送代码的流程，其它语言的 gameServer 与此流����致。如果你使用的是 git GUI 工具，请参考相应的工具使用说明。
+gameServer 本地开发调试完成后需要将代码推送到 Matchvs 远程仓库，这里以 Node.js 版 gameServer 为例演示使用 git 命令推送代码的流程，其它语言的 gameServer 与此流一致。如果你使用的是 git GUI 工具，请参考相应的工具使用说明。
 
 1. 查看 git 仓库当前状态
 

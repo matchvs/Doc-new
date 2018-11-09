@@ -11,7 +11,7 @@ Sort: 6
 
 ## 创建 gameServer  
 
-成功创建��创�建游戏后，�左侧菜单栏 “gameServer” 即可进入 gameServer 列表页。
+成功创建游戏后，左侧菜单栏 “gameServer” 即可进入 gameServer 列表页。
 
 ![](http://imgs.matchvs.com/static/Doc-img/new-start/gameServerimg/init.png)
 

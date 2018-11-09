@@ -4,7 +4,7 @@ Sort: 58
 */
 Git是一个开源的分布式版本控制系统，可以有效、高速的处理从很小到非常大的项目版本管理。Git 是 Linus Torvalds 为了帮助管理 Linux 内核开发而开发的一个开放源码的版本控制软件。
 
-Matchvs 使用Git管理开发者提交的 gameServer 代码，并通过 Git 自动获取代码、进行编译发布，这里简单介��Git的安装和使用。
+Matchvs 使用Git管理开发者提交的 gameServer 代码，并通过 Git 自动获取代码、进行编译发布，这里简单介绍Git的安装和使用。
 
 Git支持在Linux、Windows等系统上使用，这里主要对这两种系统平台进行说明，使用其它系统需自行网上查找。  
 
@@ -31,20 +31,20 @@ Git支持在Linux、Windows等系统上使用，这里主要对这两种系统�
   ![image](http://imgs.matchvs.com/static/gitSetup6.png)  
   ![image](http://imgs.matchvs.com/static/gitSetup7.png)   
   ![image](http://imgs.matchvs.com/static/gitSetup8.png)   
- 
-  
+
+
  点击"Finish"即完成安装。  
- 
+
   然后鼠标"右键"，如下图所示，点击 "Git Bash Here"便可打开Git命令行窗口  
  ![image](http://imgs.matchvs.com/static/gitBash.png)   
- 
- 
+
+
 ### Linux  
  很多新版的Linux系统都已经集成了git，先尝试执行 git；  
  如果出现如下的界面（不同系统可能稍有不同），表示已经安装，无需再重新安装。  
-  
+
  ![image](http://imgs.matchvs.com/static/gitLinux.png)   
- 
+
 如果提示"command not found"，表示未安装。 
 对于未安装的情况，CentOS系统可以通过`yum`命令安装，如下 ：  
 `yum -y install git`  

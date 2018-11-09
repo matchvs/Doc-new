@@ -9,7 +9,7 @@ Sort: 2
 
 ## 新建游戏
 
-登录Matchvs后选择 [控制台](http://www.matchvs.com/manage/gameContentList) ，根据以下流程创创建��创建游戏
+登录Matchvs后选择 [控制台](http://www.matchvs.com/manage/gameContentList) ，根据以下流程创建游戏
 
 ```flow
 st=>start: 登录

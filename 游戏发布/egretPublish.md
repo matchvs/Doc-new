@@ -14,7 +14,7 @@ Sort: 33
 
 ## HTML5 
 
-打开 Egret Lanucher 定位到项目页面，点击发布按�按钮如下图：
+打开 Egret Lanucher 定位到项目页面，点击发布按钮如下图：
 
 
 ![](http://imgs.matchvs.com/static/Doc-img/gamePub/EgretImg/egret_report1.png)

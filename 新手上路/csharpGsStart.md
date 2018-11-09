@@ -11,7 +11,7 @@ Sort: 9
 
 ## 创建 gameServer
 
-成功创建游戏后，�点��左侧菜单栏 “gameServer” 即可进入 gameServer 列表页。
+成功创建游戏后，点左侧菜单栏 “gameServer” 即可进入 gameServer 列表页。
 
 ![](http://imgs.matchvs.com/static/Doc-img/new-start/gameServerimg/init.png)
 
@@ -136,7 +136,7 @@ gameServer 配置文件路径为`myGameServer/gameServer/conf/gs.json`，其中�
   - podName：gameServer 实例名，开启`matchvs debug`时在终端显示，与 svcName 组合作为该 gameServer 的唯一标识。
   - remoteHost：gameServer 房间管理服务地址，开启`matchvs debug`时在终端显示。
   - remotePort：gameServer  房间管理服务端口，开启`matchvs debug`时在终端显示。
-```
+ ```
 为了方便开发者在开发过程中快速调试和定位问题，[matchvs 命令行工具](http://www.matchvs.com/service?page=GameServerCMD)提供了本地调试命令`matchvs debug <GS_key>`。使用时只需把 <GS_key> 替换为需要开启本地调试的 gameServer 的 GS_key，然后执行命令即可开启本地调试。例如：
 
 ```shell
@@ -180,5 +180,5 @@ $ dotnet run
 2018-09-10 18:13:13,105 [INFO] 1 MainServer:36 game service run...
 2018-09-10 18:13:13,107 [INFO] 1 GameServer:44 GameServer Run! listening hostIP:0.0.0.0, port:30381
 ```
-  
+
 gameServer 详细使用[参考此处](http://www.matchvs.com/service?page=GameServerCSharpBase)

@@ -11,7 +11,7 @@ Sort: 40
 
 新建一个子类（如：`MatchVSResponseInner`）继承抽象类`MatchVSResponse`，并实现其中的的抽象方法。代码如下:
 ```
-// 以下是 �� atSResponseInner.cs 文件的代码片段
+// 以下是 MatchVSResponseInner.cs 文件的代码片段
 public class MatchVSResponseInner : MatchVSResponse
 {
 	// 实现所有父类的抽象方法

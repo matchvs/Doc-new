@@ -13,7 +13,7 @@ Sort: 4
 
 - [Lanucher 下载](https://www.egret.com/)  
 
-######## 2、安装egre�。
+######## 2、安装egre。
 
 打开Lanucher选择对应的egret引擎版本下载安装（egret更新较快建议安装最新的Stableb版本），如下图：
 
