@@ -1,5 +1,5 @@
 /*
-Title: CocosCreatorStart
+Title: 快速入门-CocosCreator
 Sort: 3
 */
 
@@ -9,7 +9,9 @@ Creator开发者可以通过本文档开始Matchvs之旅。
 
 ## IDE的下载
 
-如果你的电脑还没有安装cocosCreator可以前往cocos官网进行下载[cocos下载地址](http://www.cocos.com/download) ) 
+如果你的电脑还没有安装cocosCreator可以前往cocos官网进行下载[cocos下载地址](http://www.cocos.com/download) 
+) 
+
 
 !ttp://imgs.matchvs.com/static/Doc-img/new-start/CocosCreatorImg/creatorDownload.png)
 

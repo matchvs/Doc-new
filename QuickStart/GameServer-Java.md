@@ -1,5 +1,5 @@
 /*
-Title: Java gameServer
+Title:快速入门- GameServer-Java
 Sort: 5
 */
 

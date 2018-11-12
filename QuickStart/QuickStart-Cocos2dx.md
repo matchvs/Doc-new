@@ -1,5 +1,5 @@
 /*
-Title: 2dxStart
+Title: 快速入门-Cocos2dx
 Sort: 8
 */
 
