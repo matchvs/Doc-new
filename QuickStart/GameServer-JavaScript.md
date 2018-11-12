@@ -1,5 +1,5 @@
 /*
-Title: 快速入门- GameServer-NodeJS
+Title: 快速入门-GameServer-NodeJS
 Sort: 6
 */
 
