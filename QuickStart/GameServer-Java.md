@@ -107,7 +107,7 @@ java-gameServer
 ├── README.md
 ```
 
-从控制台启动。GameServer现网启动需要游戏转商用后才可以 转商用参考  [Matchvs环境说明](http://www.matchvs.com/service?page=envGuide)
+从控制台启动。GameServer现网启动需要游戏转商用后才可以 转商用参考  [Matchvs环境说明](../Advanced/EnvGuide)
 
 
 
