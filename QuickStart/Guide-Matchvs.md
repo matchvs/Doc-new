@@ -27,4 +27,8 @@ st->op1->op2->op3->ed
 
 使用 Matchvs SDK 需要用到` appKey、secret, gameID` 等信息。
 
+## 更多Matchvs
+
+[Matchvs环境说明](../Advanced/EnvGuide)
+
 

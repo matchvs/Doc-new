@@ -178,4 +178,4 @@ $ node main.js
      createTime: '1536576460' } }
 ```
 
-gameServer 详细使用[参考此处](http://www.matchvs.com/service?page=GameServerNodeJSBase)
+gameServer 详细使用[参考此处](../APIBasic/GameServerNodeJSBase)

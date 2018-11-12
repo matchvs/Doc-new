@@ -462,5 +462,4 @@ int errorResponse(string error)
 
 ## 更多详细说明
 
-更多详细说明见 API手册
-<http://www.matchvs.com/service?page=CShapeAPI>
+ [Matchvs SDK 基础功能使用](../APIBasic/UnityGuide)

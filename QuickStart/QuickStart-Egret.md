@@ -406,7 +406,9 @@ class Main extends eui.UILayer {
 
 
 
-### 下一步 [Matchvs SDK 基础功能使用](http://www.matchvs.com/service?page=TypeScriptBase)
+### 下一步
+
+ [Matchvs SDK 基础功能使用](../APIBasic/TypeScriptBase)
 
 
 
