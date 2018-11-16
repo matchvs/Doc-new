@@ -1,13 +1,10 @@
 /*
 Title: 测试发布和分享facebook小游戏
-Sort: 3
+Sort: 39
 */
 
 
 # 测试、发布和分享facebook小游戏
-
-[TOC]
-
 
 
 ## 流程图
