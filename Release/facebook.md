@@ -1,5 +1,5 @@
 /*
-Title: 测试发布和分享FaceBook小游戏
+Title: 发布FaceBook小游戏
 Sort: 39
 */
 
