@@ -1,12 +1,7 @@
-
-
-
-
 /*
 Title: 测试发布和分享facebook小游戏
-Sort: 35
+Sort: 3
 */
-
 
 
 # 测试、发布和分享facebook小游戏
