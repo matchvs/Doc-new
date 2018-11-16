@@ -1,11 +1,7 @@
 /*
-Title: 测试发布和分享facebook小游戏
+Title: 测试发布和分享FaceBook小游戏
 Sort: 39
 */
-
-
-# 测试、发布和分享facebook小游戏
-
 
 ## 流程图
 
