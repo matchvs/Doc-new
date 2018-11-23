@@ -284,7 +284,7 @@ http://vsopen.matchvs.com/wc5/hashGet.do?gameID=102003&userID=21023&key=1&sign=b
 
 ## sign值获取方法-用户
 
-##### 1. 按照如下格式拼接出字符串:
+1. 按照如下格式拼接出字符串:
 
 ```
 appKey&gameID=xxx&userID=xxx&token
@@ -293,7 +293,7 @@ appKey&gameID=xxx&userID=xxx&token
 - `appKey`为您在官网配置游戏所得
 - `token`通过用户注册请求获取
 
-##### 2. 计算第一步拼接好的字符串的`MD5`值，即为`sign`的值。
+2. 计算第一步拼接好的字符串的`MD5`值，即为`sign`的值。
 
 ## sign值获取方法-全局
 
