@@ -297,7 +297,7 @@ appKey&gameID=xxx&userID=xxx&token
 
 ## sign值获取方法-全局
 
-##### 1. 按照如下格式拼接出字符串:
+1. 按照如下格式拼接出字符串:
 
 ```
 appkey&gameID=xxx&userID=xxx&appSecret
@@ -305,11 +305,11 @@ appkey&gameID=xxx&userID=xxx&appSecret
 
 - `appKey和appSecret`为您在官网配置游戏所得
 
-##### 2. 计算第一步拼接好的字符串的`MD5`值，即为`sign`的值。
+2. 计算第一步拼接好的字符串的`MD5`值，即为`sign`的值。
 
 ## sign值获取方法-哈希
 
-##### 1. 按照如下格式拼接出字符串:
+1. 按照如下格式拼接出字符串:
 
 ```
 appKey&param1=value1&param2=value2&param3=value3&token
@@ -323,7 +323,7 @@ appKey&param1=value1&param2=value2&param3=value3&token
 
 - `token`通过用户注册请求获取
 
-##### 2. 计算第一步拼接好的字符串的`MD5`值，即为`sign`的值。
+2. 计算第一步拼接好的字符串的`MD5`值，即为`sign`的值。
 
 
 
