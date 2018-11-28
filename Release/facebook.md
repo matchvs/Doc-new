@@ -8,12 +8,12 @@ Sort: 39
 1. 创建小游戏->
 1. 得到AccessToken和AppID->
 1. 集成FaceBookSDK->
-1. 打包zip上传至facebook托管并推送至生产环境->
-1. 验证开发者企业身份->
+1. 打包zip上传至facebook托管并推送至生产状态(https://developers.facebook.com)
+1. 验证开发者企业身份(必须先创建商务平台https://business.facebook.com)
 1. 上传小游戏的logo等素材->
 1. 配置隐私政策和用户协议->
-1. 提交审核->
-1. 上线成功
+1. 申请权限->
+1. 提交审核上线
 
   
 
