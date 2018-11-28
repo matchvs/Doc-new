@@ -151,12 +151,12 @@ public class Room {
 
 具体做法为:
 
-拓展 App.java中的 `onGameClientEvent` 函数. 监听`client`端的中的`checkin`事件(玩家checkin即进入房间事件)
+拓展 App.java中的 `onReceive` 函数. 监听`client`端的中的`checkin`事件(玩家checkin即进入房间事件)
 
 ```java
  @Override
-    public boolean onGameClientEvent(Simple.Package.Frame clientEvent, StreamObserver<Simple.Package.Frame> clientChannel) throws InvalidProtocolBufferException {
-        super.onGameClientEvent(clientEvent, clientChannel);
+    public boolean onReceive(Simple.Package.Frame clientEvent, StreamObserver<Simple.Package.Frame> clientChannel) throws InvalidProtocolBufferException {
+        super.onReceive(clientEvent, clientChannel);
         Gsmvs.Request request = Gsmvs.Request.parseFrom(clientEvent.getMessage());
         switch (clientEvent.getCmdId()) {
             // 玩家checkin
@@ -252,8 +252,8 @@ public class Room {
 - 监听来自`client`端的`Input`消息,更新玩家状态
 ```java
  @Override
-    public boolean onGameClientEvent(Simple.Package.Frame clientEvent, StreamObserver<Simple.Package.Frame> clientChannel) throws InvalidProtocolBufferException {
-        super.onGameClientEvent(clientEvent, clientChannel);
+    public boolean onReceive(Simple.Package.Frame clientEvent, StreamObserver<Simple.Package.Frame> clientChannel) throws InvalidProtocolBufferException {
+        super.onReceive(clientEvent, clientChannel);
         Gsmvs.Request request = Gsmvs.Request.parseFrom(clientEvent.getMessage());
         switch (clientEvent.getCmdId()) {
                        case Gshotel.HotelGsCmdID.HotelBroadcastCMDID_VALUE:
