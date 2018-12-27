@@ -27,21 +27,64 @@ Sort: 39
 #### 方式二: FaceBook官方教程
 
 > facebook官方教程较为详细,当使用方式一遇到问题时,可选用方式二
+>
+> https://developers.facebook.com/docs/games/instant-games/getting-started/quickstart
+
+
+
+
 
 
 
 ## 发布审核必要条件
+### 商业平台验证
+https://business.facebook.com
 
 - 1.公司验证
 
-	- 公司注册证明 --营业执照
-	- 公司地址或电话号码验证 --营业执照 
-	- 您与公司的关联证明 --公司域名邮箱(如xxx@matchvs.com)
+  - 公司注册证明 --营业执照
 
-- 2.Apple Developer ID
+  - 公司地址或电话号码验证 --营业执照 
+
+  - 公司官方网站的链接,带备案信息.(kobox.tv)
+
+  - 域名邮箱(与公司官网域名一致,如xxx@kobox.tv)
+
+验证通过后会有邮件通知
+
+
+
+### 开发者后台验证
+
+https://developers.facebook.com
+
+- 1.Apple Developer ID 和teamID验证(我填的过期的也验证通过了)
+
+  - teamID在苹果开发者后台可以看到.
 
 >  https://www.facebook.com/business/help/2058515294227817
 
+- 2.上传游戏的zip到 fb开发者后台的网页托管(产品->小游戏->网络托管).并设置为生产环境.
+- 3.上传各种规格的宣传图片和操作视频,隐私网站链接(必须能访问)
+- 4.提交审核(产品->小游戏->网络托管). 等通知,一般2个工作日会审核.
+
+审核结果没有邮件通知,需到后台查看
+
+> ps 在 fbinstant6.2的版本中需要在zip包的根目录下创建一个文件:fbapp-config.json,内容如下.
+
+```
+{
+  "instant_games": {
+    "platform_version": "RICH_GAMEPLAY",
+	"navigation_menu_version":"NAV_FLOATING",
+    "custom_update_templates": {
+      "play_turn": {
+        "example": "Edgar played their move"
+      }
+    }
+  }
+}
+```
 ---
 
 
