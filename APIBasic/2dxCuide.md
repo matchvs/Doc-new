@@ -12,7 +12,7 @@ Sort: 17
 
 新建一个类（如：`MatchVSDemo_Response`）在对应的头文件中继承抽象类`MatchVSResponse`，并实现其中的的抽象方法。代码如下:
 
-`````VSDemo_Response : public MatchVSResponse
+```class MatchVSDemo_Response : public MatchVSResponse
 {
 public:
 	

@@ -16,7 +16,6 @@ Sort: 33
 
 打开 Egret Lanucher 定位到项目页面，点击发布按钮如下图：
 
-
 ![](http://imgs.matchvs.com/static/Doc-img/gamePub/EgretImg/egret_report1.png)
 
 点击发布按钮，会弹出发布配置页面，在这里可以选择你想发布的任何支持的平台，同时我们Matchvs也是支持的。如下图所示：

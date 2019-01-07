@@ -4,7 +4,7 @@ Sort: 58
 */
 Git是一个开源的分布式版本控制系统，可以有效、高速的处理从很小到非常大的项目版本管理。Git 是 Linus Torvalds 为了帮助管理 Linux 内核开发而开发的一个开放源码的版本控制软件。
 
-Matchvs 使用Git管理开发者提交的 gameServer 代码，并通过 Git 自动获取代码、进行编译发布，这里简单介绍Git的安装和使用。
+Matchvs 使用Git管理开发者提交的 gameServer 代码，并通过 Git 自动获取代码、进行编译发布，这里简单介绍下Git的安装和使用。
 
 Git支持在Linux、Windows等系统上使用，这里主要对这两种系统平台进行说明，使用其它系统需自行网上查找。  
 

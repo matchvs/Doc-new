@@ -12,7 +12,7 @@ Unity平台的发布步骤 , 完全遵循Unity的工作流.
 对目标构建平台进行配置,需要注意的是:
 
 1. Android平台的NDK推荐使用`android-ndk-r10e`,勾选arm-v7a
-2. Window平台使用x64位的UUnity(Unity5.x以上的版本默认为64位),否则可能会找不到Matchvs的函数,同时增大文件体积
+2. Window平台使用x64位的Unity(Unity5.x以上的版本默认为64位),否则可能会找不到Matchvs的函数,同时增大文件体积
 ### 1.2 发布
 
 `build` 导出可执行二进制文件

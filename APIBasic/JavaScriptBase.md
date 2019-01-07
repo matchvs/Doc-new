@@ -14,7 +14,7 @@ Sort: 13
 调用下面的代码获取Matchvs引擎对象：
 
 ```javascript
-var vartchvs = require("matchvs.all");
+var jsMatchvs = require("matchvs.all");
 var engine = new jsMatchvs.MatchvsEngine();
 ```
 

@@ -11,7 +11,7 @@ Sort: 9
 
 ## 创建 gameServer
 
-成功创建游戏后，点左侧菜单栏 “gameServer” 即可进入 gameServer 列表页。
+成功创建游戏后，点击左侧菜单栏 “gameServer” 即可进入 gameServer 列表页。
 
 ![](http://imgs.matchvs.com/static/Doc-img/new-start/gameServerimg/init.png)
 
@@ -146,9 +146,18 @@ $ matchvs debug 1424769556baec5362f5b1513f7e1167
 	PodName:        deploy-201994-0-5f5d8785f8-9545j
 	RemoteHost:     directory10.matchvs.com
 	RemotePort:     9982
+	
+2018/11/13 15:38:01 [I] [proxy_manager.go:298] proxy removed: []
+2018/11/13 15:38:01 [I] [proxy_manager.go:308] proxy added: [matchvs]
+2018/11/13 15:38:01 [I] [proxy_manager.go:331] visitor removed: []
+2018/11/13 15:38:01 [I] [proxy_manager.go:340] visitor added: []
+2018/11/13 15:38:01 [I] [control.go:240] [37ff6c2d5cc54535] login to server success, get run id [37ff6c2d5cc54535], server udp port [0]
+2018/11/13 15:38:01 [I] [control.go:165] [37ff6c2d5cc54535] [matchvs] start proxy success
 ```
 
-开启本地调试模式后，启动本地 gameServer 服务：
+`matchvs debug`命令在启动时与 Matchvs 服务建立代理连接。启动完成后，客户端发送给 gameServer 的消息将通过代理服务转发到开发者本地运行的 gameServer。同样的，gameServer 发送的消息也通过代理服务转发给客户端。
+
+保留这个窗口，然后在另外一个窗口里启动 gameServer 服务：
 
 ```shell
 $ cd myGameServer/gameServer

@@ -5,12 +5,12 @@ Sort: 16
 
 ## 创建房间   
 
-房间被创建时，gameServer 会触发`onCreateRoom()`消息，如有"房间创建“的相关逻辑应写在该方法里。 
+房间被创建时，gameServer 会触发`onCreateRoom()`消息，如有"房间创建“的相关逻辑应写在该方法里。
 
 ```c#
 public override IMessage OnCreateRoom(ByteString msg)
 {
-    equest request = new Request();
+    Request request = new Request();
     ByteUtils.ByteStringToObject(request, msg);
 
     Reply reply = new Reply()
@@ -43,18 +43,18 @@ public override IMessage OnCreateRoom(ByteString msg)
 
 通过`Request`.`CpProto`反序列化获取创建房间扩展信息`CreateExtInfo`，数据结构如下：
 
-| 字段         | 类型       | 含义                                         |
-| :----------- | :--------- | :--------------------------------------- |
-| UserID       | uint       | 创建者ID                                     |
-| UserProfile  | ByteString | 创建者profile                                |
-| RoomID       | ulong      | 房间ID                                       |
-| State        | uint       | 房间状态：1开放、2关闭                       |
-| MaxPlayer    | uint       | 最大人数                                     |
-| Mode         | int        | 游戏模式                                     |
-| CanWatch     | int        | 是否可观战                                   |
-| RoomProperty | ByteString | 房间属性                                     |
-| CreateFlag   | uint       | 房间创建途径：1 系统创建房间、2 玩家创建房间 |
-| CreateTime   | ulong      | 创建时间                                     |
+| 字段         | 类型       | 含义                                                         |
+| :----------- | :--------- | :----------------------------------------------------------- |
+| UserID       | uint       | 创建者ID                                                     |
+| UserProfile  | ByteString | 创建者profile                                                |
+| RoomID       | ulong      | 房间ID                                                       |
+| State        | uint       | 房间状态：1开放、2关闭                                       |
+| MaxPlayer    | uint       | 最大人数                                                     |
+| Mode         | int        | 游戏模式                                                     |
+| CanWatch     | int        | 是否可观战：1 可以、2 不可以                                 |
+| RoomProperty | ByteString | 房间属性                                                     |
+| CreateFlag   | uint       | 房间创建途径：1 系统创建房间、2 玩家创建房间、3 gameServer创建房间 |
+| CreateTime   | ulong      | 创建时间                                                     |
 
 Matchvs 提供了在 gameServer 里主动创建房间的接口`CreateRoom`。调用该接口向 Matchvs 请求创建一个空房间。
 
@@ -67,13 +67,14 @@ public CreateRoomAck CreateRoom(CreateRoom request)
 
 `CreateRoom`数据结构：
 
-| 字段     | 类型     | 含义                                                         |
-| -------- | -------- | ------------------------------------------------------------ |
-| SvcName  | string   | gameServer 服务名，该字段由内部自动设置，开发者无须设置      |
-| PodName  | string   | gameServer 实例名，该字段由内部自动设置，开发者无须设置      |
-| GameID   | uint     | 游戏ID                                                       |
-| RoomInfo | RoomInfo | 房间信息                                                     |
-| Ttl      | uint     | 空房间存活时长，单位秒。Mathcvs 从房间变成空时开始计时，超过 TTL 后销毁房间。在 TTL 内如有玩家加入房间则重置超时时长，而当房间再次变为空时重新开始计时。 |
+| 字段         | 类型         | 含义                                                         |
+| ------------ | ------------ | ------------------------------------------------------------ |
+| SvcName      | string       | gameServer 服务名，该字段由内部自动设置，开发者无须设置      |
+| PodName      | string       | gameServer 实例名，该字段由内部自动设置，开发者无须设置      |
+| GameID       | uint         | 游戏ID                                                       |
+| RoomInfo     | RoomInfo     | 房间信息                                                     |
+| Ttl          | uint         | 空房间存活时长，单位秒，最大取值86400秒（1天）。Mathcvs 从房间变成空时开始计时，超过 TTL 后销毁房间。在 TTL 内如有玩家加入房间则重置超时时长，而当房间再次变为空时重新开始计时。 |
+| WatchSetting | WatchSetting | 房间观战设置                                                 |
 
 `RoomInfo`数据结构：
 
@@ -97,6 +98,16 @@ public CreateRoomAck CreateRoom(CreateRoom request)
 | Open   | 开放，允许玩家加入   |
 | Closed | 关闭，不允许玩家加入 |
 
+`WatchSetting`数据结构：
+
+| 字段            | 类型 | 含义                                          |
+| --------------- | ---- | --------------------------------------------- |
+| MaxWatch        | uint | 最大观观战人数                                |
+| WatchPersistent | bool | 观战是否持久化                                |
+| WatchDelayMs    | uint | 观战延迟时间，单位为毫秒，最大取值3600000毫秒 |
+| CacheTime       | uint | 缓存时间                                      |
+
+**房间总人数(maxPlayer + maxWatch)须小于100**
 
 
 ## 设置空房间存活时长
@@ -116,7 +127,7 @@ public TouchRoomAck TouchRoom(TouchRoom request)
 | PodName | string | gameServer 实例名，该字段由内部自动设置，开发者无须设置      |
 | GameID  | uint   | 游戏ID                                                       |
 | RoomID  | ulong  | 房间ID                                                       |
-| Ttl     | uint   | 空房间存活时长，单位秒。Mathcvs 从房间变成空时开始计时，超过 TTL 后销毁房间。在 TTL 内如有玩家加入房间则重置超时时长，而当房间再次变为空时重新开始计时。 |
+| Ttl     | uint   | 空房间存活时长，单位秒，最大取值86400秒（1天）。Mathcvs 从房间变成空时开始计时，超过 TTL 后销毁房间。在 TTL 内如有玩家加入房间则重置超时时长，而当房间再次变为空时重新开始计时。 |
 
 
 
@@ -164,7 +175,7 @@ public DestroyRoomAck DestroyRoom(DestroyRoom request)
 
 
 
-## 加入房间 
+## 加入房间
 
 玩家进入房间时，gameServer 会触发`onJoinRoom()`，开发者可以将“玩家加入房间的逻辑”写到该方法里。
 
@@ -369,7 +380,7 @@ public override IMessage OnHotelBroadCast(ByteString msg)
     Logger.Info("HotelBroadcast start, userID:{0} gameID:{1} roomID:{2} cpProto:{3}", broadcast.UserID, broadcast.GameID, broadcast.RoomID, broadcast.CpProto.ToStringUtf8());
 
     HotelBroadcastAck broadcastAck = new HotelBroadcastAck() { UserID = broadcast.UserID, Status = (UInt32)ErrorCode.Ok };
-    
+
  	Logger.Info("HotelBroadcast end, userID:{0} gameID:{1} roomID:{2} cpProto:{3}", broadcast.UserID, broadcast.GameID, broadcast.RoomID, broadcast.CpProto.ToStringUtf8());
 
     return broadcastAck;
@@ -411,13 +422,13 @@ public void PushToHotel(UInt64 roomID, IMessage msg, UInt32 userId = 1, UInt32 v
 
 `PushToHotelMsg`数据结构：
 
-| 字段     | 类型        | 含义           |
-| :------- | :---------- | :------------- |
-| PushType | PushMsgType | 推送类型       |
-| GameID   | uint        | 游戏ID         |
-| RoomID   | ulong       | 房间ID         |
-| DstUids  | uint[]      | 推送目标用户   |
-| CpProto  | ByteString  | 自定义消息内容 |
+| 字段     | 类型        | 含义                           |
+| :------- | :---------- | :----------------------------- |
+| PushType | PushMsgType | 推送类型                       |
+| GameID   | uint        | 游戏ID                         |
+| RoomID   | ulong       | 房间ID                         |
+| DstUids  | uint[]      | 推送目标用户                   |
+| CpProto  | ByteString  | 自定义消息内容，不超过1024字节 |
 
 `PushMsgType`枚举值：
 
@@ -582,13 +593,14 @@ public override IMessage OnConnectStatus(ByteString msg)
 Matchvs提供了在gameServer里查询房间详情的接口，查询结果在`onRoomDetail()`中返回。
 
 ```c#
-public void PushGetRoomDetail(UInt64 roomId, UInt32 gameId, UInt32 userId = 0, UInt32 version = 2)
+public void PushGetRoomDetail(UInt64 roomId, UInt32 gameId, UInt32 latestWatcherNum, UInt32 userId = 0, UInt32 version = 2)
 {
     Logger.Info("PushGetRoomDetail, roomID:{0}, gameId:{1}", roomId, gameId);
     GetRoomDetailReq roomDetail = new GetRoomDetailReq()
     {
         RoomID = roomId,
         GameID = gameId
+        LatestWatcherNum = latestWatcherNum,
     };
     baseServer.PushToMvs(userId, version, (UInt32)MvsGsCmdID.MvsGetRoomDetailReq, roomDetail);
 }
@@ -612,10 +624,11 @@ public override void OnRoomDetail(ByteString msg)
 
 `GetRoomDetailReq`数据结构：
 
-| 字段   | 类型  | 含义   |
-| :----- | :---- | :----- |
-| GameID | uint  | 游戏ID |
-| RoomID | ulong | 房间ID |
+| 字段             | 类型  | 含义                          |
+| :--------------- | :---- | :---------------------------- |
+| GameID           | uint  | 游戏ID                        |
+| RoomID           | ulong | 房间ID                        |
+| LatestWatcherNum | uint  | 查询最新加入的n名观战人员信息 |
 
 `OnRoomDetail`.`Request`数据结构：
 
@@ -634,11 +647,13 @@ public override void OnRoomDetail(ByteString msg)
 | State        | uint         | 房间状态：1开放、2关闭                       |
 | MaxPlayer    | uint         | 最大人数                                     |
 | Mode         | int          | 游戏模式                                     |
-| CanWatch     | int          | 是否可观战                                   |
+| CanWatch     | int          | 是否可观战：1 可以、2 不可以                 |
 | RoomProperty | ByteString   | 房间属性                                     |
 | Owner        | uint         | 房主                                         |
 | CreateFlag   | uint         | 房间创建途径：1 系统创建房间、2 玩家创建房间 |
 | PlayerInfos  | PlayerInfo[] | 房间用户列表                                 |
+| WatchRoom    | WatchInfo    | 房间观战详情                                 |
+| Brigades     | BrigadeInfo[]| 大队列表                                     |
 
 `PlayerInfo`数据结构：
 
@@ -646,6 +661,56 @@ public override void OnRoomDetail(ByteString msg)
 | ----------- | ---------- | ----------- |
 | UserID      | uint       | 用户ID      |
 | UserProfile | ByteString | 玩家profile |
+
+`WatchRoom`数据结构：
+
+| 字段         | 类型         | 含义                                                   |
+| ------------ | ------------ | ------------------------------------------------------ |
+| WatchInfo    | WatchInfo    | 房间详情                                               |
+| WatchPlayers | PlayerInfo[] | 最新加入的n名观战用户，n由请求参数LatestWatcherNum确定 |
+
+`WatchInfo`数据结构：
+
+| 字段         | 类型         | 含义                                     |
+| ------------ | ------------ | ---------------------------------------- |
+| RoomID       | ulong        | 房间ID                                   |
+| State        | uint         | 观战房间状态。1：回放房间；2：游戏中房间 |
+| WatchSetting | WatchSetting | 房间观战设置                             |
+| CurWatch     | uint         | 当前观战人数                             |
+
+`WatchSetting`数据结构：
+
+| 字段            | 类型 | 含义                     |
+| --------------- | ---- | ------------------------ |
+| MaxWatch        | uint | 最大观观战人数           |
+| WatchPersistent | bool | 观战是否持久化           |
+| WatchDelayMs    | uint | 观战延迟时间，单位为毫秒 |
+| CacheTime       | uint | 缓存时间                 |
+
+`BrigadeInfo`数据结构：
+
+| 字段      | 类型          | 含义    |
+| --------- | ------------ | ------- |
+| BrigadeID | uint         | 大队ID   |
+| Teams     | TeamDetail[] | 小队列表 |
+
+`TeamDetail`数据结构：
+
+| 字段     | 类型          | 含义        |
+| -------- | ------------ | ----------- |
+| TeamInfo | TeamInfo     | 小队信息     |
+| Player   | PlayerInfo[] | 小队队员列表 |
+
+`TeamInfo`数据结构：
+
+| 字段        | 类型   | 含义                       |
+| ---------- | ------ | -------------------------- |
+| TeamID     | ulong  | 小队ID                     |
+| Password   | string | 小队密码                    |
+| Capacity   | uint   | 小队的容量                  |
+| Mode       | int    | 游戏模式                    |
+| Visibility | int    | 小队的可见性：0不可见，1可见 |
+| Owner      | uint   | 小队队长                    |
 
 
 
@@ -716,9 +781,9 @@ public void PushSetRoomProperty(UInt64 roomId, UInt32 gameId, ByteString roomPro
 
 
 
-## 设置帧同步帧率
+## 设置帧同步帧率以及帧缓存
 
-当客户端修改房间帧同步帧率时，gameServer 触发`OnHotelSetFrameSyncRate()`，开发者可以将"设置房间帧同步帧率“的相关逻辑写到该方法里。
+当客户端修改房间帧同步帧率以及帧缓存时，gameServer 触发`OnHotelSetFrameSyncRate()`，开发者可以将“设置房间帧同步帧率以及帧缓存”的相关逻辑写到该方法里。
 
 ```c#
 public override void OnHotelSetFrameSyncRate(FrameSyncRate request)
@@ -730,19 +795,20 @@ public override void OnHotelSetFrameSyncRate(FrameSyncRate request)
 
 `FrameSyncRate`数据结构：
 
-| 字段       | 类型  | 含义                                           |
-| ---------- | ----- | ---------------------------------------------- |
-| GameID     | uint  | 游戏ID                                         |
-| RoomID     | ulong | 房间ID                                         |
-| FrameRate  | uint  | 同步帧率                                       |
-| FrameIndex | uint  | 初始帧编号                                     |
-| Timestamp  | ulong | 系统时间戳                                     |
-| EnableGS   | uint  | GameServer是否参与帧同步（0：不参与；1：参与） |
+| 字段         | 类型  | 含义                                                  |
+| ------------ | ----- | -----------------------------------------------------|
+| GameID       | uint  | 游戏ID                                               |
+| RoomID       | ulong | 房间ID                                               |
+| FrameRate    | uint  | 同步帧率                                             |
+| FrameIndex   | uint  | 初始帧编号                                            |
+| Timestamp    | ulong | 系统时间戳                                            |
+| EnableGS     | uint  | GameServer是否参与帧同步（0：不参与；1：参与）          |
+| CacheFrameMS | int   | 缓存帧的毫秒数(0为不开启缓存功能，-1为缓存所有数据，毫秒数的上限为1小时) |
 
-另外 Matchvs 提供了在 gameServer 里设置房间帧同步帧率的接口：
+另外 Matchvs 提供了在 gameServer 里设置房间帧同步帧率以及帧缓存的接口：
 
 ```c#
-public void SetFrameSyncRate(UInt64 roomId, UInt32 gameId, UInt32 rate, UInt32 enableGS, UInt32 userId = 1, UInt32 version = 2)
+public void SetFrameSyncRate(UInt64 roomId, UInt32 gameId, UInt32 rate, UInt32 enableGS, Int32 cacheFrameMS, UInt32 userId = 1, UInt32 version = 2)
 {
     GSSetFrameSyncRate setFrameSyncRateReq = new GSSetFrameSyncRate()
     {
@@ -752,6 +818,7 @@ public void SetFrameSyncRate(UInt64 roomId, UInt32 gameId, UInt32 rate, UInt32 e
         Priority = 0,
         FrameIdx = 1,
         EnableGS = enableGS,
+        CacheFrameMS = cacheFrameMS,
     };
     baseServer.PushToHotel(userId, version, roomId, (UInt32)HotelGsCmdID.GssetFrameSyncRateCmdid, setFrameSyncRateReq);
 }
@@ -759,14 +826,42 @@ public void SetFrameSyncRate(UInt64 roomId, UInt32 gameId, UInt32 rate, UInt32 e
 
 `GSSetFrameSyncRate`数据结构：
 
-| 字段       | 类型  | 含义                                                  |
-| ---------- | ----- | ----------------------------------------------------- |
-| GameID     | uint  | 游戏ID                                                |
-| RoomID     | ulong | 房间ID                                                |
-| Priority   | uint  | 保留字段，固定设置为0                                 |
-| FrameRate  | uint  | 同步帧率（0到20，且能被1000整除）                     |
-| FrameIndex | uint  | 初始帧编号（frameRate > 0 时有效），FrameIndex 需 > 0 |
-| EnableGS   | uint  | gameServer是否参与帧同步（0：不参与；1：参与）        |
+| 字段         | 类型  | 含义                                                  |
+| ------------ | ----- | ----------------------------------------------------- |
+| GameID       | uint  | 游戏ID                                                |
+| RoomID       | ulong | 房间ID                                                |
+| Priority     | uint  | 保留字段，固定设置为0                                 |
+| FrameRate    | uint  | 同步帧率（0到20，且能被1000整除）                     |
+| FrameIndex   | uint  | 初始帧编号（frameRate > 0 时有效），FrameIndex 需 > 0 |
+| EnableGS     | uint  | gameServer是否参与帧同步（0：不参与；1：参与）        |
+| CacheFrameMS | int   | 缓存帧的毫秒数(0为不开启缓存功能，-1为缓存所有数据，毫秒数的上限为1小时)|
+
+
+
+## 获取帧缓存数据（补帧）
+
+gameServer 可以主动获取“已经设置了帧缓存”的房间的历史帧数据。该接口：
+```c#
+public void GetCacheData(UInt64 roomId, UInt32 gameId, Int32 cacheFrameMS, UInt32 userId = 1, UInt32 version = 2)
+{
+    GSGetCacheData getCacheDataReq = new GSGetCacheData()
+    {
+        GameID = gameId,
+        RoomID = roomId,
+        CacheFrameMS = cacheFrameMS,
+    };
+    baseServer.PushToHotel(userId, version, roomId, (UInt32)HotelGsCmdID.GsgetCacheDataCmdid, getCacheDataReq);
+}
+```
+`GSGetCacheData`数据结构：
+
+| 字段          | 类型  | 含义                                             |
+| ------------ | ----- | ------------------------------------------------ |
+| GameID       | uint  | 游戏ID                                           |
+| RoomID       | ulong | 房间ID                                           |
+| CacheFrameMS | int   | 缓存帧的毫秒数(-1表示获取所有，毫秒数的上限为1小时)  |
+
+该接口在 gameServer 中为“通知类型”的接口（不会有响应的ACK），而想要获取的帧缓存数据（历史帧数据）会直接从下面的函数“ **OnHotelFrameUpdate** ”中返回。
 
 
 
@@ -835,3 +930,26 @@ public void FrameBroadcast(UInt64 roomId, UInt32 gameId, ByteString cpProto, Int
 | CpProto   | ByteString | 自定义消息内容                                  |
 | Operation | int        | 0：只发客户端；1：只发GS；2：同时发送客户端和GS |
 
+## gameServer 错误码
+
+| 错误码 | 含义                                            |
+| ------ | ----------------------------------------------- |
+| 200    | 成功                                            |
+| 400    | 请求格式错误                                    |
+| 401    | gameID错误                                      |
+| 402    | roomID错误                                      |
+| 403    | userID错误                                      |
+| 404    | 推送用户消息失败                                |
+| 405    | 房间已满                                        |
+| 406    | 房间已停止加人                                  |
+| 407    | 超过总人数（观战人数+玩家人数）的限制           |
+| 408    | 超过观战数据延迟时间限制                        |
+| 409    | 房间不存在                                      |
+| 410    | 用户不存在                                      |
+| 411    | 请求用户不在房间内                              |
+| 412    | 目标用户不在房间内                              |
+| 413    | TTL超过最大限制                                 |
+| 414    | 房间为空                                        |
+| 415    | 房间不为空                                      |
+| 416    | 不允许自己踢自己                                |
+| 50x    | 未找到运行中的 gameServer，请检查 roomConf 配置 |

@@ -4,7 +4,7 @@ Sort: 23
 */
 
 ## 1.准备
-开发者需要先在官网的控制台[创建游戏](http://www.matchvs.com/manage/addGame)并且[添加gameServer服务](http://www.matchvs.com/manage/gameServer)，[下载gameServer框架](http://.mw.matchvs.com/serviceDownload)并且完成开发，同时在控制台上传了SSH key,SSH key的获取方式参考[ssh key 手册](http://www.matchvs.com/service?page=ssh).   
+开发者需要先在官网的控制台[创建游戏](http://www.matchvs.com/manage/addGame)并且[添加gameServer服务](http://www.matchvs.com/manage/gameServer)，[下载gameServer框架](http://www.matchvs.com/serviceDownload)并且完成开发，同时在控制台上传了SSH key,SSH key的获取方式参考[ssh key 手册](http://www.matchvs.com/service?page=ssh).   
 
 
 ## 2.环境

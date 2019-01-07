@@ -11,7 +11,7 @@ int32_t init(MatchVSResponse *pMatchVSResponse, const MsString &channel, const M
 
 ### 参数
 
-| 参数                | 类型            | 描述                 | 示例值    |
+| 参数             | 类型            | 描述                 | 示例值    |
 | ---------------- | --------------- | -------------------- | --------- |
 | pMatchVSResponse | MatchVSResponse | MatchVSResponse派生类指针 |           |
 | channel          | const MsString  | 渠道，固定值              | "Matchvs" |

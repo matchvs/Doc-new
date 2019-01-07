@@ -1,5 +1,5 @@
 /*
-Title: gameServer简介
+Title: GameServer简介
 Sort: -1
 */
 

@@ -3,6 +3,7 @@ Title: JavaScript使用
 Sort: 37
 */
 
+
 ## JavaScriptSDK接口说明
 
 ```javascript
@@ -11,8 +12,8 @@ var engine = new Matchvs.MatchvsEngine();
 ```
 
 #### 说明
-- 根据上面的代码片段获取Matchvs引擎的实例，接下来可以调用这个实例的方法实现联网对战功能。
-- 建议在获取一个实例之后，将其作为单例或全局变量。
+- 根据上面的代码片段获取Matchvs引擎的一个实例，接下来可以调用这个实例的方法实现联网对战功能。
+- 建议在获取一个实例之后，将其作为单例或全局变量。  
 
 ## response
 
@@ -47,6 +48,7 @@ engine.init(response, channel, platform, gameID)
 - response中设置一些回调方法，在执行注册、登录、发送事件等操作对应的方法之后，reponse中的回调函数会被SDK异步调用。
 - 在连接至 Matchvs前须对SDK进行初始化操作。此时选择连接测试环境（alpha）还是正式环境（release）。
 - 如果游戏属于调试阶段则连接至测试环境，游戏调试完成后即可发布到正式环境运行。
+- 如果 Matchvs 服务正在升级，init 接口会放回 510 错误码，开发者可以选择是否需要展示“服务升级”的提示。
 
 
 
@@ -203,7 +205,7 @@ registerUserResponse :function (userInfo) {
 ## login
 
 ```javascript
-engine.login(userID, token, gameID, gameVersion, appKey, secretKey, deviceID, gatewayID)
+engine.login(userID, token, gameID, gameVersion, appKey, deviceID)
 ```
 
 #### 参数
@@ -215,9 +217,7 @@ engine.login(userID, token, gameID, gameVersion, appKey, secretKey, deviceID, ga
 | gameID      | number | 游戏ID，来自Matchvs控制台游戏信息        | 210329 |
 | gameVersion | number | 游戏版本，自定义，用于隔离匹配空间       | 1      |
 | appKey      | string | 游戏App key，来自Matchvs控制台游戏信息   | ""     |
-| secretKey   | string | secret key，来自Matchvs控制台游戏信息    | ""     |
 | deviceID    | string | 设备ID，用于多端登录检测，请保证是唯一ID | ""     |
-| gatewayID   | number | 服务器节点ID，默认为0                    | 0      |
 
 #### 返回值
 
@@ -353,27 +353,40 @@ console.log("随机匹配result"+result);
 ```
 
 
+
 ## joinRoomWithProperties
 
 ```javascript
-engine.joinRoomWithProperties(matchInfo, userProfile)
+engine.joinRoomWithProperties(matchInfo, userProfile, watchSet)
 ```
 
 #### 参数
 
-| 参数        | 类型        | 描述     | 示例值 |
-| ----------- | ----------- | -------- | ------ |
-| matchInfo   | MsMatchInfo | 配置信息 |        |
-| userProfile | string      | 玩家简介 | ""     |
+| 参数        | 类型           | 描述     | 示例值 |
+| ----------- | -------------- | -------- | ------ |
+| matchinfo   | MsMatchInfo    | 配置信息 |        |
+| userProfile | string         | 玩家简介 | ""     |
+| watchSet    | MVS.MsWatchSet | 观战信息 |        |
 
-#### MsMatchInfo的属性
+#### MsMatchInfo 的属性
 
-| 属性      | 类型   | 描述                         | 示例值                        |
-| --------- | ------ | ---------------------------- | ----------------------------- |
-| maxPlayer | number | 玩家最大人数                 | 3                             |
-| mode      | number | 模式可 默认填0               | 0                             |
-| canWatch  | number | 是否可以观战 1-可以 2-不可以 | 1                             |
-| tags      | object | 匹配属性值                   | {title:"Matchvs",name:"demo"} |
+| 属性         | 类型   | 描述                         | 示例值                        |
+| ------------ | ------ | ---------------------------- | ----------------------------- |
+| maxPlayer    | number | 玩家最大人数                 | 3                             |
+| mode         | number | 模式可 默认填0               | 0                             |
+| canWatch     | number | 是否可以观战 1-可以 2-不可以 | 1                             |
+| tags         | object | 匹配属性值                   | {title:"Matchvs",name:"demo"} |
+| visibility   | number | 是否可见 0-不可见 1-可见     | 1                             |
+| roomProperty | string | 自定义房间附加信息           | “roomProperty”                |
+
+#### MVS.MsWatchSet 的属性
+
+| 属性       | 类型    | 描述                 | 示例值          |
+| ---------- | ------- | -------------------- | --------------- |
+| cacheMS    | number  | 缓存多久的数据       | 6*1000（6分钟） |
+| maxWatch   | number  | 最大人数             | 3               |
+| delayMS    | number  | 观看延迟多久后的数据 | 2000            |
+| persistent | boolean | 是否持久缓存         | false           |
 
 #### 返回值
 
@@ -1038,17 +1051,19 @@ response.getRoomDetailResponse(rsp);
 
 #### 参数 rsp 的属性
 
-| 参数         | 类型                  | 描述                                  | 示例值 |
-| ------------ | --------------------- | ------------------------------------- | ------ |
-| status       | number                | 接口状态 200 成功 <br>404 房间不存在 <br>500 服务器内部错误                   |        |
-| state        | number                | 房间状态 1-开放 2-关闭                |        |
-| maxPlayer    | number                | 最大人数                              |        |
-| mode         | number                | 模式                                  |        |
-| canWatch     | number                | 是否可以观战 1-可以 2-不可以          |        |
-| roomProperty | string                | 房间属性                              |        |
-| owner        | number                | 房主                                  |        |
-| createFlag   | number                | 创建方式 0-未知 1-系统创建 2-玩家创建 |        |
-| userInfos    | Array<MsRoomUserInfo> | 用户列表信息                          |        |
+| 参数         | 类型                  | 描述                                                        | 示例值 |
+| ------------ | --------------------- | ----------------------------------------------------------- | ------ |
+| status       | number                | 接口状态 200 成功 <br>404 房间不存在 <br>500 服务器内部错误 |        |
+| state        | number                | 房间状态 1-开放 2-关闭                                      |        |
+| maxPlayer    | number                | 最大人数                                                    |        |
+| mode         | number                | 模式                                                        |        |
+| canWatch     | number                | 是否可以观战 1-可以 2-不可以                                |        |
+| roomProperty | string                | 房间属性                                                    |        |
+| owner        | number                | 房主                                                        |        |
+| createFlag   | number                | 创建方式 0-未知 1-系统创建 2-玩家创建                       |        |
+| userInfos    | Array<MsRoomUserInfo> | 用户列表信息                                                |        |
+| watchinfo    | object                | 观战信息                                                    |        |
+| brigades     | Array<object>         | 组队列表信息                                                |        |
 
 #### MsRoomUserInfo 的属性
 
@@ -1056,6 +1071,35 @@ response.getRoomDetailResponse(rsp);
 | ----------- | ------ | -------- | ------ |
 | userID      | number | 用户ID   | 32322  |
 | userProfile | string | 玩家简介 | ""     |
+
+#### watchinfo 属性
+
+| 属性       | 类型    | 描述                                         | 示例值 |
+| ---------- | ------- | -------------------------------------------- | ------ |
+| curWatch   | number  | 房间当前观战者人数                           | 3      |
+| persistent | boolean | 观战信息是否持久保存                         | false  |
+| maxWatch   | number  | 最大观战人数                                 | 6      |
+| delayMS    | number  | 延迟时间，可观看延迟多久的数据（单位毫秒）   | 6000   |
+| cacheTime  | number  | 缓存时间，游戏最大能缓存多久的数据(单位毫秒) | 60000  |
+
+#### brigades 属性
+
+| 属性      | 类型          | 描述           | 示例值 |
+| --------- | ------------- | -------------- | ------ |
+| brigadeID | number        | 大队伍的ID     | 1      |
+| teamList  | Array<object> | 小队伍信息列表 |        |
+
+#### teamList 数据项属性
+
+| 属性       | 类型          | 描述       | 示例值                |
+| ---------- | ------------- | ---------- | --------------------- |
+| teamID     | string        | 小队伍ID号 | 131113213211323121231 |
+| capacity   | number        | 小队伍人数 | 5                     |
+| mode       | number        | 自定义参数 | 0                     |
+| owner      | number        | 队长       | 123456                |
+| playerList | Array<object> | 队伍成员   |                       |
+
+
 
 #### 说明
 
@@ -1182,6 +1226,8 @@ setRoomPropertyNotify : function (notify) {
 engine.sendEvent(msg)
 ```
 
+**注意** 给GameServer发送消息调用sendEventEx()。
+
 #### 参数
 
 | 参数 | 类型   | 描述     | 示例值  |
@@ -1211,7 +1257,7 @@ engine.sendEvent(msg)
 
 #### 说明
 
-- 在进入房间后即可调用该接口进行消息发送，消息会发给房间里除自己外其他所有成员。
+- 在进入房间后即可调用该接口进行消息发送，消息会发给房间里除自己外其他所有成员。回调函数是   sendEventResponse
 - 同一客户端多次调用engine.sendEvent方法时，每次返回的sequence都是唯一的。但同一房间的不同客户端调用sendEvent时生成的sequence之间会出现重复。
 - 可以发送二进制数据，开发者可以将数据用json、pb等工具先进行序列化，然后将序列化后的数据通过SendEvent的一系列接口发送。
 
@@ -1227,17 +1273,17 @@ console.log("发送信息 result"+ data.result);
 ## sendEventEx
 
 ```javascript
-engine.sendEventEx(type, cpProto, targetType, [targetUserID])
+engine.sendEventEx(msgType, data, destType, userIDs)
 ```
 
 #### 参数
 
-| 参数         | 类型   | 描述                                     | 示例值      |
-| ------------ | ------ | ---------------------------------------- | ----------- |
-| type         | number | 消息类型。0表示转发给房间成员；1表示转发给game server；2表示转发给房间成员及game server | 0           |
-| cpProto      | string | 消息内容                                 | "hello"     |
-| targetType   | number | 目标类型。0表示发送目标为目标列表成员；1表示发送目标为除目标列表成员以外的房间成员 | 0           |
-| targetUserID | array  | 目标列表                                 | [1001,1002] |
+| 参数     | 类型   | 描述                                                         | 示例值      |
+| -------- | ------ | ------------------------------------------------------------ | ----------- |
+| msgType  | number | 消息类型。0表示转发给房间成员；1表示转发给game server；2表示转发给房间成员及game server | 0           |
+| data     | string | 消息内容                                                     | "hello"     |
+| destType | number | 目标类型。0表示发送目标为目标列表成员；1表示发送目标为除目标列表成员以外的房间成员 | 0           |
+| userIDs  | array  | 目标列表                                                     | [1001,1002] |
 
 #### 返回值
 
@@ -1265,14 +1311,22 @@ engine.sendEventEx(type, cpProto, targetType, [targetUserID])
 
 #### 说明
 
-- 在进入房间后即可调用该接口进行消息发送，消息会发给房间里所有成员。
+- 在进入房间后即可调用该接口进行消息发送，msgType 参数控制消息发送到哪了， destType 和 userIDs 参数控制消息发送给谁。消息回调接口 sendEventResponse
 - 同一客户端多次调用engine.sendEvent方法时，每次返回的sequence都是唯一的。但同一房间的不同客户端调用sendEvent时生成的sequence之间会出现重复。
 
 #### 示例
 
 ```javascript
-//发送给房间中的全部玩家
+//发送给房间中的全部玩家，destType = 1, userIDs = []
 var data = mvs.engine.sendEventEx(0,msg,1,[]);
+console.log("发送信息 result"+ data.result);
+}
+//发送指定玩家 123456，destType = 0, userIDs = [123456]
+var data = mvs.engine.sendEventEx(0,msg,0,[123456]);
+console.log("发送信息 result"+ data.result);
+}
+//发送 排除 123456 玩家，destType = 1, userIDs = []
+var data = mvs.engine.sendEventEx(0,msg, 1,[123456]);
 console.log("发送信息 result"+ data.result);
 }
 ```
@@ -1292,7 +1346,7 @@ response.sendEventResponse(sendEventRsp)
 | sequence | number | 事件序号，作为事件的唯一标识，可以参考sendEvent，对这个字段的详细说明 | 231212 |
 
 #### 说明
-- 客户端调用engine.sendEvent发送消息之后，SDK异步调用reponse.sendEventResponse方法告诉客户端消息是否发送成功。
+- 客户端调用engine.sendEvent或engine.sendEventEx发送消息之后，SDK异步调用reponse.sendEventResponse方法告诉客户端消息是否发送成功。
 
 #### 示例
 
@@ -1322,7 +1376,7 @@ response.sendEventNotify(eventInfo)
 
 #### 说明
 
-- 在其他客户端调用engine.sendEvent方法之后，本客户端的response.sendEventNotify会被SDK调用，调用时传入其他玩家的用户ID和发送的消息。
+- 在其他客户端调用engine.sendEvent或engine.sendEventEx方法之后，本客户端的response.sendEventNotify会被SDK调用，调用时传入其他玩家的用户ID和发送的消息。
 
 #### 示例
 
@@ -1419,6 +1473,7 @@ engine.kickPlayer(userID, cpProto)
 #### 说明
 
 - kickPlayer 用于剔除玩家，房间任何人都可以调用这个接口，参数userID 可以是房间内任意一个，自己也可以剔除自己。主要剔除方式由开发者自己制定。
+- 如果是房主被踢出房间，服务器会在房间中剩下的玩家中重新指定一个房主通过`kickPlayerResponse`,`kickPlayerNotify`返回给房间中剩余的玩家。
 
 #### 示例
 
@@ -1606,10 +1661,11 @@ engine.setFrameSync(frameRate, enableGS)
 
 #### 参数
 
-| 参数      | 类型   | 描述                                     | 示例值 |
-| --------- | ------ | ---------------------------------------- | ------ |
-| frameRate | number | 每秒钟同步的帧数 : 0关闭。               | 5      |
-| enableGS  | number | 是否启用gameServer帧同步 0-启用 1-不启用 | 0      |
+| 参数      | 类型   | 描述                                                         | 示例值 |
+| --------- | ------ | ------------------------------------------------------------ | ------ |
+| frameRate | number | 每秒钟同步的帧数 : 0关闭。                                   | 5      |
+| enableGS  | number | 是否启用gameServer帧同步 0-启用 1-不启用                     | 0      |
+| other     | object | 其他数，目前包含一个值：cacheMs 断线后缓存帧数据的时间，只有帧同步有效，单位毫秒，最多有效一个小时 | 10000  |
 
 #### 返回值
 
@@ -1678,12 +1734,13 @@ response.setFrameSyncNotify(rsp);
 
 #### 参数 rsp 属性
 
-| 参数       | 类型   | 描述                                     | 示例值 |
-| ---------- | ------ | ---------------------------------------- | ------ |
-| frameRate  | number | 帧率                                     | 10     |
-| startIndex | number | 序号                                     | 1      |
-| timestamp  | string | 时间戳                                   |        |
-| enableGS   | number | 是否启用gameServer帧同步 0-启用 1-不启用 | 0      |
+| 参数         | 类型   | 描述                                                         | 示例值 |
+| ------------ | ------ | ------------------------------------------------------------ | ------ |
+| frameRate    | number | 帧率                                                         | 10     |
+| startIndex   | number | 序号                                                         | 1      |
+| timestamp    | string | 时间戳                                                       |        |
+| enableGS     | number | 是否启用gameServer帧同步 0-启用 1-不启用                     | 0      |
+| cacheFrameMS | number | 断线后缓存帧数据的时间，只有帧同步有效，单位毫秒，最多有效一个小时 | 10000  |
 
 
 
@@ -1876,6 +1933,50 @@ reconnectResponse :function (status,roomUserInfoList,roomInfo) {
 }
 ```
 
+## setReconnectTimeout
+
+用户进入房间后默认断线20秒会被剔除，在用户加入房间之前调用这个接口，服务就会从新设置断线重连时间，设置范围为 `0-600 秒` 如果设置的值为0, 则在用户断开就马上被踢出。
+
+```javascript
+engine.setReconnectTimeout(timeout)
+```
+
+#### 参数
+
+| 参数    | 类型   | 描述             | 示例值 |
+| ------- | ------ | ---------------- | ------ |
+| timeout | number | 断线重连超时时间 | 60     |
+
+#### 返回值
+
+| 返回码 | 说明                                |
+| ------ | ----------------------------------- |
+| 0      | 接口调用成功                        |
+| -2     | 未初始化                            |
+| -3     | 正在初始化                          |
+| -4     | 未登录                              |
+| -5     | 正在登录                            |
+| -7     | 正在创建房间，或者正在加入游戏房间  |
+| -6     | 没有进入房间                        |
+| -10    | 正在离开房间                        |
+| -11    | 正在登出                            |
+| -12    | 正在加入观战房间                    |
+| -27    | timeout 超出范围  0=< timeout <=600 |
+| -30    | 设置的 rType 值与当前模式冲突。     |
+
+## setReconnectTimeoutResponse
+
+设置重连时间回调
+
+```javascript
+response.setReconnectTimeoutResponse(status)
+```
+
+#### 参数
+
+| 参数   | 类型   | 描述                | 示例值 |
+| ------ | ------ | ------------------- | ------ |
+| status | number | 状态值 200 设置成功 | 200    |
 
 ## joinOpen
 

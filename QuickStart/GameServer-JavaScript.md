@@ -11,27 +11,13 @@ Sort: 6
 
 ## 创建 gameServer  
 
-成功创建游戏后，左侧菜单栏 “gameServer” 即可进入 gameServer 列表页。
+成功创建游戏后，点击左侧菜单栏 “gameServer” 即可进入 gameServer 列表页。
 
-![](http://imgs.matchvs.com/static/Doc-img/new-start/gameServerimg/init.png)
+![](http://imgs.matchvs.com/static/Doc-img/new-start/gameServerimg/gsCLI1.png)
 
-Matchvs 使用 git 管理 gameServer，所以在创建 gameServer 之前，你需要将自己的 SSH key 上传至 Matchvs 账号。
+gameServer 使用 git 仓库管理代码，git 仓库账号密码在 gameServer 列表页顶部可获取。
 
-1. 复制 SSH key 到粘贴板
-
-   SSH key 文件通常位于 `~/.ssh/id_rsa.pub`。如果文件不存在，请参阅[SSHKey 手册](http://www.matchvs.com/service?page=ssh) 生成 SSH key。
-
-2. 点击上图中的 “立即上传”
-
-   ![](http://imgs.matchvs.com/static/Doc-img/new-start/gameServerimg/uploadsshkey.png)
-
-   把第1步复制的内容粘贴到输入框，**注意不要输入多余的空格或空行**，点击确定。
-
-3. 确定上传成功
-
-   ![](http://imgs.matchvs.com/static/Doc-img/new-start/gameServerimg/uploadsshkeysuccess.png)
-
-SSH key 上传成功后，点击 “创建gameServer”，填写 gameServer 基本信息：
+点击 “创建gameServer”，填写 gameServer 基本信息：
 
 ![](http://imgs.matchvs.com/static/Doc-img/new-start/gameServerimg/creategameserver.png)
 
@@ -128,9 +114,18 @@ $ matchvs debug 1424769556baec5362f5b1513f7e1167
 	PodName:        deploy-201994-0-5f5d8785f8-9545j
 	RemoteHost:     directory10.matchvs.com
 	RemotePort:     9982
+	
+2018/11/13 15:38:01 [I] [proxy_manager.go:298] proxy removed: []
+2018/11/13 15:38:01 [I] [proxy_manager.go:308] proxy added: [matchvs]
+2018/11/13 15:38:01 [I] [proxy_manager.go:331] visitor removed: []
+2018/11/13 15:38:01 [I] [proxy_manager.go:340] visitor added: []
+2018/11/13 15:38:01 [I] [control.go:240] [37ff6c2d5cc54535] login to server success, get run id [37ff6c2d5cc54535], server udp port [0]
+2018/11/13 15:38:01 [I] [control.go:165] [37ff6c2d5cc54535] [matchvs] start proxy success
 ```
 
-开启本地调试模式后，启动本地 gameServer 服务：
+`matchvs debug`命令在启动时与 Matchvs 服务建立代理连接。启动完成后，客户端发送给 gameServer 的消息将通过代理服务转发到开发者本地运行的 gameServer。同样的，gameServer 发送的消息也通过代理服务转发给客户端。
+
+保留这个窗口，然后在另外一个窗口里启动 gameServer 服务：
 
 ```shell
 $ cd myGameServer

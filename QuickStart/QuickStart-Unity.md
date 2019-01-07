@@ -12,7 +12,7 @@ Unity安装和下载(必须Unity 5+):
 
 ### Matchvs SDK下载
 
-Matchvs SDK是一个Unity的插件包,同Unity Stroe里面的其他资源一样,通过UniUnityIImport进工程即可
+Matchvs SDK是一个Unity的插件包,同Unity Stroe里面的其他资源一样,通过UnityIDE Import进工程即可
 
 http://www.matchvs.com/serviceDownload 选择UnitySDK.
 

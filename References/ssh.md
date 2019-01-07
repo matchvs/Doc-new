@@ -9,7 +9,8 @@ Sort: 59
 
 
 ### 2.1 打开git bash   
-单击鼠标右键，选择Git Bash here## 2.2 进入.ssh目录：  
+单击鼠标右键，选择Git Bash here
+### 2.2 进入.ssh目录：  
 在bash窗口执行`cd C:\Users\Administrator\.ssh`   
 
 如果提示 “ No such file or directory”，你可以手动的创建一个 .ssh文件夹即可: `mkdir .ssh`

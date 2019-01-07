@@ -9,7 +9,8 @@ Sort: 29
 2.获取好友列表,并获取好友的分数  
 3.渲染排行榜    
 
-![friendlist](http://imgs.matchvs.com/static/res/rank
+![friendlist](http://imgs.matchvs.com/static/res/rank.jpg)
+
 ## 保存每个用户的分数
 
    保存每个用户的分数,需要调用微信的云存储API,将用户的分数持久化的存起来 . 
