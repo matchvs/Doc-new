@@ -1,5 +1,5 @@
 /*
-Title: JavaScript使用
+Title: JavaScript
 Sort: 37
 */
 

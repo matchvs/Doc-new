@@ -406,7 +406,7 @@ http://vsopen.matchvs.com/wc5/hashGet.do?gameID=102003&userID=21023&key=1&sign=b
 
 **sign值获取方法**
 
-##### 1. 按照如下格式拼接出字符串:
+1. 按照如下格式拼接出字符串:
 
 ```
 appKey&param1=value1&param2=value2&param3=value3&token
