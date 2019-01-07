@@ -12,7 +12,8 @@ Sort: 17
 
 新建一个类（如：`MatchVSDemo_Response`）在对应的头文件中继承抽象类`MatchVSResponse`，并实现其中的的抽象方法。代码如下:
 
-```class MatchVSDemo_Response : public MatchVSResponse
+```
+class MatchVSDemo_Response : public MatchVSResponse
 {
 public:
 	
@@ -394,7 +395,7 @@ http://vsopen.matchvs.com/wc5/hashGet.do?gameID=102003&userID=21023&key=1&sign=b
 
 **sign值获取方法**
 
-##### 1. 按照如下格式拼接出字符串:
+1. 按照如下格式拼接出字符串:
 
 ```
 appKey&param1=value1&param2=value2&param3=value3&token
@@ -407,7 +408,7 @@ appKey&param1=value1&param2=value2&param3=value3&token
   例 ： 有三个参数`gameID`、`userID`、`key`，则按照`appkey&gameID=xxx&key=xxx&userID=xxx&token` 的顺序拼出字符串。
 
 - `token`通过用户注册请求获取
-##### 2. 计算第一步拼接好的字符串的`MD5`值，即为`sign`的值。
+2. 计算第一步拼接好的字符串的`MD5`值，即为`sign`的值。
 
 
 ## 错误码
