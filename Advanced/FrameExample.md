@@ -31,7 +31,7 @@ Matchvs 游戏云服务提供了一个叫 [帧同步](http://www.matchvs.com/ser
 
 小游戏“游侠姐妹”，玩法类似与节奏大师。不同的是，双方玩家共用同一个屏幕、场景与战场体系，双方均可见对方血量、分数、障碍物。双方将只能消除自身的障碍物获得分数（红蓝分组），消除对方的障碍物将失去部分生命值。
 
-![clip_image002](/JoinRoomWithNumber.Assets/clip_image002.png)
+![](./JoinRoomWithNumber.Assets/clip_image002.png)
 
 - UI用Egret游戏引擎，Egret有一整套工具来支撑UI上的开发.
 
@@ -51,15 +51,15 @@ Matchvs 游戏云服务提供了一个叫 [帧同步](http://www.matchvs.com/ser
 
 - 基本原则；先绑定，再使用
 
-![clip_image001](/JoinRoomWithNumber.Assets/FrameExample03.png)
+![](./JoinRoomWithNumber.Assets/FrameExample03.png)
 
 - 发送帧同步事件(其实和普通接口一样的使用方式)
 
-![FrameExample04](/JoinRoomWithNumber.Assets/FrameExample04.png)
+![](./JoinRoomWithNumber.Assets/FrameExample04.png)
 
 - 接受帧同步数据， 根据不同的event判断不同的事件
 
-![FrameExample04](/JoinRoomWithNumber.Assets/FrameExample05.png)
+![](./JoinRoomWithNumber.Assets/FrameExample05.png)
 
 Matchvs解决了服务器延迟和同步问题，节省了很多时间。写一个小游戏分享出去，是一件很有趣的事情。项目开发前的准备一定要充分，对使用的引擎或者工具，要有一定的熟悉度和了解。整体和细节规划一样重要。如果对引擎某一块功能不是很熟，可以考虑下对这部分功能跑个demo，测测功能和性能。从网上得来的结论，不一定是准确的，性能好不好，使用过一段时间才知道。开头就一心扑在既定的规则上，可能会把项目弄糟，实践之后，再知道适不适合你的项目。
 
