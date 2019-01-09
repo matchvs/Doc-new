@@ -1603,11 +1603,11 @@ engine.setFrameSync(frameRate:number，enableGS?:number, other?:any ):number
 
 #### 参数
 
-| 参数      | 类型   | 描述                                                         | 示例值 |
-| --------- | ------ | ------------------------------------------------------------ | ------ |
-| frameRate | number | 帧率: 0关闭。其他值表示帧率                                  | 10     |
-| enableGS  | number | 是否启用gameServer帧同步 0-启用 1-不启用                     | 0      |
-| other     | object | 其他数，目前包含一个值：cacheMs 断线后缓存帧数据的时间，只有帧同步有效，单位毫秒，最多有效一个小时 | 10000  |
+| 参数      | 类型   | 描述                                                         | 示例值               |
+| --------- | ------ | ------------------------------------------------------------ | -------------------- |
+| frameRate | number | 帧率: 0关闭。其他值表示帧率                                  | 10                   |
+| enableGS  | number | 是否启用gameServer帧同步 0-启用 1-不启用                     | 0                    |
+| other     | object | 其他数，目前包含一个值：cacheFrameMS断线后缓存帧数据的时间，只有帧同步有效，单位毫秒，最多有效一个小时 | {cacheFrameMS:10000} |
 
 #### 返回值
 
@@ -1747,7 +1747,7 @@ class MsEngine{
         };
     }
     public setFrameSync(){
-        this.engine.setFrameSync(10,0);
+        this.engine.setFrameSync(10,0, {cacheFrameMS:10000});
     }
 
     public sendFrameEvent(){
@@ -1762,8 +1762,8 @@ class MsEngine{
 
 用户断线后可以调用次接口进行重连，重连具体教程可以参考 [断线重连详细文档](http://www.matchvs.com/service?page=reconnect) 。
 
-- 请求重连接口：reconnect, setReconnectTimeout
-- 重连回调接口：reconnectResponse, setReconnectTimeoutResponse
+- 请求重连接口：reconnect, setReconnectTimeout，getOffLineDataResponse
+- 重连回调接口：reconnectResponse, setReconnectTimeoutResponse，getOffLineDataResponse
 
 ### reconnect
 
@@ -1863,6 +1863,38 @@ response.setReconnectTimeoutResponse(status:number):void
 | ------ | ------ | ------------------- | ------ |
 | status | number | 状态值 200 设置成功 | 200    |
 
+## getOffLineData
+
+获取断线期间的帧数据，只有在开启了帧同步的时候使用，调用这个接口后，在断线期间游戏的数据会通过 frameUpdate 接口返回指定时间内的数据。
+```typescript
+engine.getOffLineData(cacheFrameMS:number)
+```
+
+#### 参数
+
+| 参数         | 类型   | 描述                                                         | 示例值 |
+| ------------ | ------ | ------------------------------------------------------------ | ------ |
+| cacheFrameMS | number | 获取断线多久之内的缓存数据，上限为1个小时与setFrameSync 接口中的参数同步最好，cacheFrameMS 为-1 代表获取缓存这个房间里面所有的缓存帧数据，同时 setFrameSync 接口也要设置为 -1 | 10000  |
+
+#### 返回码
+
+- 略 可参考其他接口的返回码。
+
+## getOffLineDataResponse
+
+调用 getOffLineData 接口获取断线期间的帧数据，这个接口会返回是否调用成功通知和，缓存的帧数据数量。
+
+```javascript
+response.getOffLineDataResponse(rsp)
+```
+
+#### 参数 rsp 属性
+
+| 属性       | 类型   | 描述             | 示例值 |
+| ---------- | ------ | ---------------- | ------ |
+| status     | number | 状态值           | 200    |
+| frameCount | number | 当前游戏帧索引号 | 10     |
+| msgCount   | number | 消息数量         | 20     |
 
 
 
