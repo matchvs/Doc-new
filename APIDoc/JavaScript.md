@@ -31,17 +31,19 @@ var response = new Matchvs.MatchvsResponse();
 **注意** 发布之前须到官网控制台申请“发布上线”，申请通过后在调用init方法时传“release”才会生效，否则将不能使用release环境。
 
 ```javascript
-engine.init(response, channel, platform, gameID)
+engine.init(response, channel, platform, gameID, appkey, gameVersion)
 ```
 
 #### 参数
 
-| 参数     | 类型   | 描述                     | 示例值    |
-| -------- | ------ | ------------------------ | --------- |
-| response | object | 回调对象                 | {}        |
-| channel  | string | 渠道，固定值             | "Matchvs" |
-| platform | string | 平台，选择测试or正式环境 | "alpha"   |
-| gameID   | number | 游戏ID                   | 200978    |
+| 参数        | 类型   | 描述                                   | 示例值    |
+| ----------- | ------ | -------------------------------------- | --------- |
+| response    | object | 回调对象                               | {}        |
+| channel     | string | 渠道，固定值                           | "Matchvs" |
+| platform    | string | 平台，选择测试or正式环境               | "alpha"   |
+| gameID      | number | 游戏ID                                 | 200978    |
+| appkey      | string | 游戏App key，来自Matchvs控制台游戏信息 |           |
+| gameVersion | number | 游戏版本，自定义，用于隔离匹配空间     | 1         |
 
 #### 说明
 
@@ -64,7 +66,7 @@ engine.init(response, channel, platform, gameID)
 #### 示例
 
 ```javascript
-var result = engine.init(response,'Matchvs','alpha','200978');
+var result = engine.init(response,'Matchvs','alpha','200978', "4fd4a67c10e84e259a2c3c417b9114f4", 1);
 if(result === 0) {
 	console.log(“初始化请求成功”);
 }
@@ -205,7 +207,7 @@ registerUserResponse :function (userInfo) {
 ## login
 
 ```javascript
-engine.login(userID, token, gameID, gameVersion, appKey, deviceID)
+engine.login(userID, token, deviceID)
 ```
 
 #### 参数
@@ -214,9 +216,6 @@ engine.login(userID, token, gameID, gameVersion, appKey, deviceID)
 | ----------- | ------ | ---------------------------------------- | ------ |
 | userID      | number | 用户ID，调用注册接口后获取               | 123546 |
 | token       | string | 用户token，调用注册接口后获取            | ""     |
-| gameID      | number | 游戏ID，来自Matchvs控制台游戏信息        | 210329 |
-| gameVersion | number | 游戏版本，自定义，用于隔离匹配空间       | 1      |
-| appKey      | string | 游戏App key，来自Matchvs控制台游戏信息   | ""     |
 | deviceID    | string | 设备ID，用于多端登录检测，请保证是唯一ID | ""     |
 
 #### 返回值
@@ -236,7 +235,7 @@ engine.login(userID, token, gameID, gameVersion, appKey, deviceID)
 //userID 和token 在注册回调接口中获得
 var DeviceID = 'TestDevice';
 var gatewayID = 0;
-var result = engine.login(userID,token,200978,1, '4fd4a67c10e84e259a2c3c417b9114f4','bd00c3953f6a447eaaa1e36f19684764',DeviceID,gatewayID);
+var result = engine.login(userID,token,DeviceID);
 console.log("登录result"+result);
 ```
 
@@ -652,7 +651,6 @@ engine.leaveRoom(cpProto)
 | -3     | 正在初始化                |
 | -4     | 未登录                    |
 | -7     | 正在创建或者进入房间      |
-| -6     | 不在房间                  |
 | -21    | cpProto过长，不能超过1024 |
 
 #### 说明

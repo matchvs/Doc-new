@@ -24,17 +24,19 @@ Sort: 38
 初始化请求接口。
 
 ```typescript
-engine.init(response: MatchvsResponse, channel: string, platform: string, gameID: string): number
+engine.init(pResponse: MatchvsResponse, pChannel: string, pPlatform: string, gameID: number, appKey: string, gameVersion: number): number
 ```
 
 #### 参数：
 
-| 参数     | 类型            | 描述                                     | 示例值    |
-| -------- | --------------- | ---------------------------------------- | --------- |
-| response | MatchvsResponse | 回调类型MatchvsResponse的对象            | response  |
-| channel  | string          | 渠道，固定值                             | "Matchvs" |
-| platform | string          | 平台，选择测试(alpha)or正式环境(release) | "alpha"   |
-| gameID   | number          | 游戏ID，在引擎官网创建游戏给出的ID       | 200103    |
+| 参数        | 类型            | 描述                                     | 示例值    |
+| ----------- | --------------- | ---------------------------------------- | --------- |
+| response    | MatchvsResponse | 回调类型MatchvsResponse的对象            | response  |
+| channel     | string          | 渠道，固定值                             | "Matchvs" |
+| platform    | string          | 平台，选择测试(alpha)or正式环境(release) | "alpha"   |
+| gameID      | number          | 游戏ID，在引擎官网创建游戏给出的ID       | 200103    |
+| appKey      | string          | 游戏 App Key 官网生成                    |           |
+| gameVersion | number          | 游戏版本，自定义，用于隔离匹配空间       |           |
 
 response 中设置一些回调方法，在执行注册、登录、发送事件等操作对应的方法之后，reponse中的回调函数会被SDK异步调用。
 
@@ -54,7 +56,7 @@ response 中设置一些回调方法，在执行注册、登录、发送事件�
 使用独立部署的游戏调用此接口初始化SDK。
 
 ```typescript
-function engine.premiseInit(response:MatchvsResponse, endPoint:string, gameID:number):number
+function engine.premiseInit(response:MatchvsResponse, endPoint:string, gameID:number, appKey: string):number
 ```
 
 #### 参数
@@ -64,6 +66,7 @@ function engine.premiseInit(response:MatchvsResponse, endPoint:string, gameID:nu
 | response | MatchvsResponse | 回调类型MatchvsResponse的对象 | response       |
 | endPoint | string          | 服务配置的域名地址            | test.xxxxx.com |
 | gameID   | number          | 服务配置的游戏ID              | 123456         |
+| appKey   | string          | 游戏 App Key 官网生成         |                |
 
 #### 返回值
 
@@ -101,7 +104,7 @@ class MsEngine {
                 //失败
             }
         }
-        this.engine.init(this.response, "Matchvs", "alpha", 123456);
+        this.engine.init(this.response, "Matchvs", "alpha", 123456, "xxxxappkey", 1);
     }
 }
 ```
@@ -202,7 +205,7 @@ class MsEngine {
 ### login
 
 ```typescript
-engine.login(userID: number, token: string, gameID: number, gameVersion: number, appKey: string, deviceID: string): number
+engine.login(userID: number, token: string, deviceID: string): number
 ```
 
 #### 参数
@@ -211,9 +214,6 @@ engine.login(userID: number, token: string, gameID: number, gameVersion: number,
 | ----------- | ------ | ---------------------------------------- | ------ |
 | userID      | number | 用户ID，调用注册接口后获取               | 123546 |
 | token       | string | 用户token，调用注册接口后获取            | ""     |
-| gameID      | number | 游戏ID，来自Matchvs控制台游戏信息        | 210329 |
-| gameVersion | number | 游戏版本，自定义，用于隔离匹配空间       | 1      |
-| appKey      | string | 游戏App key，来自Matchvs控制台游戏信息   | ""     |
 | deviceID    | string | 设备ID，用于多端登录检测，请保证是唯一ID | ""     |
 
 #### 返回值
@@ -254,7 +254,7 @@ class MsEngine {
                 //失败
             }
         }
-        this.engine.login(1234, "xxxxxtoken", 123456, 1, "xxxxxappkey", "xxxxxsecret", "v",0);
+        this.engine.login(1234, "xxxxxtoken", "v");
     }
 }
 ````
@@ -678,7 +678,6 @@ engine.leaveRoom(cpProto:string):number
 | -3     | 正在初始化                     |
 | -4     | 未登录                         |
 | -7     | 正在创建或者进入房间           |
-| -6     | 不在房间                       |
 | -21    | userProfile 过长，不能超过1024 |
 
 ### leaveRoomResponse

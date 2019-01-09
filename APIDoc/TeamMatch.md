@@ -378,20 +378,10 @@ response.teamMatchResultNotify(notify);
 
 #### brigades 属性
 
-| 属性      | 类型          | 描述           | 示例值 |
-| --------- | ------------- | -------------- | ------ |
-| brigadeID | number        | 大队伍的ID     | 1      |
-| teamList  | Array<object> | 小队伍信息列表 |        |
-
-####teamList 数据项属性
-
-| 属性       | 类型          | 描述       | 示例值                |
-| ---------- | ------------- | ---------- | --------------------- |
-| teamID     | string        | 小队伍ID号 | 131113213211323121231 |
-| capacity   | number        | 小队伍人数 | 5                     |
-| mode       | number        | 自定义参数 | 0                     |
-| owner      | number        | 队长       | 123456                |
-| playerList | Array<object> | 队伍成员   |                       |
+| 属性       | 类型          | 描述           | 示例值 |
+| ---------- | ------------- | -------------- | ------ |
+| brigadeID  | number        | 大队伍的ID     | 1      |
+| playerList | Array<object> | 小队伍信息列表 |        |
 
 #### playerList 数据项属性
 
@@ -408,59 +398,39 @@ response.teamMatchResultNotify(notify);
   "brigades": [
     {
       "brigadeID": 1,
-      "teamList": [
+      "playerList": [
         {
-          "teamInfo": {
-            "teamID": "1713309221715447821",
-            "capacity": 2,
-            "mode": 0,
-            "owner": 388060
-          },
-          "playerList": [
-            {
-              "userID": 388060,
-              "userProfile": "temamode"
-            },
-            {
-              "userID": 388061,
-              "userProfile": "i come team 哈哈"
-            }
-          ]
+          "userID": 388139,
+          "userProfile": "temamode"
+        },
+        {
+          "userID": 388138,
+          "userProfile": "i come team 哈哈"
         }
       ]
     },
     {
       "brigadeID": 2,
-      "teamList": [
+      "playerList": [
         {
-          "teamInfo": {
-            "teamID": "1713309221715447822",
-            "capacity": 2,
-            "mode": 0,
-            "owner": 388058
-          },
-          "playerList": [
-            {
-              "userID": 388058,
-              "userProfile": "temamode"
-            },
-            {
-              "userID": 388059,
-              "userProfile": "i come team 哈哈"
-            }
-          ]
+          "userID": 388149,
+          "userProfile": "temamode"
+        },
+        {
+          "userID": 388148,
+          "userProfile": "i come team 哈哈"
         }
       ]
     }
   ],
   "roomInfo": {
-    "roomID": "1713309213679161348",
+    "roomID": "1722967918502744099",
     "roomProperty": "STTeamMatch",
-    "ownerId": 388059,
-    "owner": 388059,
+    "ownerId": 388138,
+    "owner": 388138,
     "state": 0
   }
-}
+} 
 ````
 
 #### 示例代码
