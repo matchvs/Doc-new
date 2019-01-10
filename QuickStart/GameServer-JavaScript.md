@@ -174,3 +174,24 @@ $ node main.js
 ```
 
 gameServer 详细使用[参考此处](../APIBasic/GameServerNodeJSBase)
+
+
+
+## 常见问题
+
+#### 1、 gameServer 与 matchvs.exe 无法连接问题。
+
+解决方法：请修改配置文件中的端口号。
+
+#### 2、本地调试用户名或者秘密不正确
+
+解决方法：用户账号为手机号或者邮箱，密码不是官网的登录密码，是生成 官网中 gameServer控制台生成的密码。
+
+#### 3、nodejs gameServer 发布后无效
+
+解决方法：
+
+1、去掉 node_modules 再上传发布一下，依赖模块添加到 package.json 里面，发布时会执行 npm install。
+
+2、多操作几次发布。
+
