@@ -776,6 +776,8 @@ engine.createRoom(createRoomInfo, userProfile,watchSet)
 #### 说明
 
 - 开发者可以在客户端主动创建房间，创建成功后玩家会被自动加入该房间，创建房间者即为房主，如果房主离开房间则Matchvs会自动转移房主并通知房间内所有成员，开发者通过设置CreateRoomInfo创建不同类型的房间
+- 创建房间时，如果没有设置watchSet 参数，则默认是不可观战的， watchSet 参数要与canWatch参结合使用，如果没有设置观战参数，再获取房间列表的时候 canWatch参数需要设置0。
+- 创建房间成功，如果需要再次创建房间需要调用离开房间接口(leaveRoom)先离开当前房间。
 
 #### 示例
 

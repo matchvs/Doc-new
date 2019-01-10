@@ -81,7 +81,7 @@ Sort: 46
 
 https://github.com/matchvs/demo-creator
 
-https://github.com/matchvs/demo-creator-gameServer-JS(带GameServer)
+https://github.com/matchvs/demo-creator-gameServer-JS (带GameServer)
 
 #### 2.1.2 demo-Laya(TypeScirpt)
 
@@ -101,7 +101,7 @@ https://github.com/matchvs/demo-Egret
 
 https://github.com/matchvs/demo-unity
 
-https://github.com/matchvs/gameServer-Csharp(带GameServer)
+https://github.com/matchvs/gameServer-Csharp (带GameServer)
 
 #### 2.1.5 demo-Cocos2DX(C++)
 
