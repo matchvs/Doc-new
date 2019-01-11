@@ -11,7 +11,7 @@ Matchvs 提供了断线重连的功能：当客户端网络异常（包含网络
 
 **断线重连超时时间默认是 20秒，可以由开发者自己调用 setReconnectTimeout 自己设置超时时间（可支持的SDK版本 v3.7.5.0+）** ，需要每次进入房间之前设置超时时间。
 
-断线重连接口使用说明请看 [API文档](http://www.matchvs.com/service?page=JavaScript)    
+断线重连接口使用说明请看 [API文档](../APIDoc/JavaScript)    
 
 #### 玩家重连结果通知
 
@@ -37,7 +37,7 @@ networkStateNotify 接口 state 结果值
 
 ## 重连时间设置
 
-断线重连超时时间可以通过 setReconnectTimeout 接口设置，每次进入房间都要调用这个接口，设置才能生效，如果进入房间前没有设置，那么就会变成默认时间 20 秒。 超时时间不能设置 0。接口说明可查看这里  [API文档](http://www.matchvs.com/service?page=JavaScript)   
+断线重连超时时间可以通过 setReconnectTimeout 接口设置，每次进入房间都要调用这个接口，设置才能生效，如果进入房间前没有设置，那么就会变成默认时间 20 秒。 超时时间不能设置 0。接口说明可查看这里  [API文档](../APIDoc/JavaScript)   
 
 
 

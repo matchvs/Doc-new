@@ -78,7 +78,7 @@ MVS集群(set)组成可参见如下结构图：
 
 ![](http://imgs.matchvs.com/static/guangwang/paas5.png)
 
-各API功能和详细说明可参考[API手册](http://www.matchvs.com/service?page=JavaScript)
+各API功能和详细说明可参考[API手册](../APIDoc/JavaScript)
 
 ## 2. PaaS与GameServer
 

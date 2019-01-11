@@ -5,7 +5,7 @@ Sort: 9
 
 ## 创建游戏  
 
-在开始使用 gameServer 之前，你需要创建自己的游戏。如何创建游戏详见 [Matchvs快速入门](http://www.matchvs.com/service?page=MatchvsStart) 。
+在开始使用 gameServer 之前，你需要创建自己的游戏。如何创建游戏详见 [Matchvs快速入门](../Matchvs) 。
 
 
 
@@ -19,7 +19,7 @@ Matchvs 使用 git 管理 gameServer，所以在创建 gameServer 之前，你�
 
 1. 复制 SSH key 到粘贴板 
 
-   SSH key 文件通常位于 `~/.ssh/id_rsa.pub`。如果文件不存在，请参阅 [SSHKey 手册](http://www.matchvs.com/service?page=ssh)生成 SSH key。
+   SSH key 文件通常位于 `~/.ssh/id_rsa.pub`。如果文件不存在，请参阅 [SSHKey 手册](../References/git)生成 SSH key。
 
 2. 点击上图中的 “立即上传”
 
@@ -137,7 +137,7 @@ gameServer 配置文件路径为`myGameServer/gameServer/conf/gs.json`，其中�
   - remoteHost：gameServer 房间管理服务地址，开启`matchvs debug`时在终端显示。
   - remotePort：gameServer  房间管理服务端口，开启`matchvs debug`时在终端显示。
  ```
-为了方便开发者在开发过程中快速调试和定位问题，[matchvs 命令行工具](http://www.matchvs.com/service?page=GameServerCMD)提供了本地调试命令`matchvs debug <GS_key>`。使用时只需把 <GS_key> 替换为需要开启本地调试的 gameServer 的 GS_key，然后执行命令即可开启本地调试。例如：
+为了方便开发者在开发过程中快速调试和定位问题，[matchvs 命令行工具](../Advanced/=GameServerCMDD)提供了本地调试命令`matchvs debug <GS_key>`。使用时只需把 <GS_key> 替换为需要开启本地调试的 gameServer 的 GS_key，然后执行命令即可开启本地调试。例如：
 
 ```shell
 $ matchvs debug 1424769556baec5362f5b1513f7e1167

@@ -10,7 +10,7 @@ Sort: 38
 
 ## 初始化
 
-在连接至 Matchvs前须对SDK进行初始化操作。此时选择连接测试环境（alpha）还是正式环境（release）。[环境说明](http://www.matchvs.com/service?page=envGuide) 。初始化请求接口有两个，如果你是使用 Matchvs 官网账号在 Matchvs 控制台创建的游戏（简称Matchvs云服务）使用 init 接口初始化，如果是使用 Matchvs 服务端引擎代码在自己自定的服务器上部署的游戏服务就使用（简称 [Matchvs独立部署]() ） premiseInit 接口初始化。
+在连接至 Matchvs前须对SDK进行初始化操作。此时选择连接测试环境（alpha）还是正式环境（release）。[环境说明](../Advanced/EnvGuide) 。初始化请求接口有两个，如果你是使用 Matchvs 官网账号在 Matchvs 控制台创建的游戏（简称Matchvs云服务）使用 init 接口初始化，如果是使用 Matchvs 服务端引擎代码在自己自定的服务器上部署的游戏服务就使用（简称 [Matchvs独立部署]() ） premiseInit 接口初始化。
 
 **如果 Matchvs 服务正在升级，init 接口会放回 510 错误码，开发者可以选择是否需要展示“服务升级”的提示。**
 
@@ -135,7 +135,7 @@ engine.uninit()
 
 Matchvs提供的 `userID` 被用于在各个服务中校验连接的有效性，调试前开发者需要先获取到一个合法的`userID`。调用registerUser接口获取，在registerResponse回调返回。
 
-每次调用 registerUser 接口都会生成新的 `userID` 为了节省资源消耗， `userID`和 `token` 有需要的可以缓存起来，在之后的应用启动中不必重复获取。如果你有自己的用户系统，可以将Matchvs 提供的 userID 和用户系统进行映射。可以参考 [Matchvs 第三方账号绑定](http://www.matchvs.com/service?page=third)，让您的用户唯一对应一个userID，以节省资源。
+每次调用 registerUser 接口都会生成新的 `userID` 为了节省资源消耗， `userID`和 `token` 有需要的可以缓存起来，在之后的应用启动中不必重复获取。如果你有自己的用户系统，可以将Matchvs 提供的 userID 和用户系统进行映射。可以参考 [Matchvs 第三方账号绑定](../Advanced/ThirdAccount)，让您的用户唯一对应一个userID，以节省资源。
 
 为了资源节省，我们在registerUserResponse 回调前把userID信息缓存在本地，数据会暂存在浏览器中。所以使用同一个浏览器调用 registerUser 接口会返回相同的 userID信息。如果需要清除缓存的用户信息请调用 `LocalStore_Clear()` 接口。
 
@@ -318,7 +318,7 @@ response.logoutResponse(status:number);
 
 ### joinRandomRoom
 
-当房间里人数等于maxPlayer时，房间人满。系统会将玩家随机加入到人未满且没有 [joinOver](http://cn.matchvs.com/service?page=APIJavaScript#joinOver) 的房间。如果不存在人未满且没有joinOver的房间，则系统会再创建一个房间，然后将玩家加入到该房间。玩家 `userProfile` 的值可以自定义，接下来会通过回调函数（如 `joinRoomResponse ` ）传给其他客户端。
+当房间里人数等于maxPlayer时，房间人满。系统会将玩家随机加入到人未满且没有 [joinOver](../APIDoc/JavaScript#joinOver) 的房间。如果不存在人未满且没有joinOver的房间，则系统会再创建一个房间，然后将玩家加入到该房间。玩家 `userProfile` 的值可以自定义，接下来会通过回调函数（如 `joinRoomResponse ` ）传给其他客户端。
 
 ```typescript
 engine.joinRandomRoom(maxPlayer:number, userProfile:string):number
@@ -534,7 +534,7 @@ response.joinRoomNotify(roomUserInfo:MsRoomUserInfo);
 | roomUserInfo | MsRoomUserInfo | 房间新加的用户的信息 |        |
 
 - 某个玩家加入房间之后，如果该房间后来又有其他玩家加入，那么将会收到回调通知，response.joinRoomNotify方法会被SDK调用，调用时传入的roomUserInfo是新加入的其他玩家的信息，不是本玩家的信息。
-- roomUserInfo的属性与response.joinRoomResponse中的[roomUserInfoList中的元素包含的属性](http://cn.matchvs.com/service?page=APIJavaScript#roomUserInfo)相同。
+- roomUserInfo的属性与response.joinRoomResponse中的[roomUserInfoList中的元素包含的属性](../APIDoc/JavaScript#roomUserInfo)相同。
 
 ### 示例代码
 
@@ -714,7 +714,7 @@ response.leaveRoomNotify(leaveRoomInfo:MsLeaveRoomNotify);
 | owner   | number | 房主                     |        |
 | cpProto | string | 附加信息                 |        |
 
-- roomUserInfo 的属性与response.joinRoomResponse中的[roomUserInfoList中的元素包含的属性](http://cn.matchvs.com/service?page=APIJavaScript#roomUserInfo)相同。
+- roomUserInfo 的属性与response.joinRoomResponse中的[roomUserInfoList中的元素包含的属性](../APIDoc/JavaScript#roomUserInfo)相同。
 
 ### 示例代码
 
@@ -1138,7 +1138,7 @@ engine.sendEvent(data:string):any
 
 ### sendEventEx
 
- `sendEvent` 是 `sendEventEx` 接口的二次封装，只是 `sendEvent` 接口默认把消息发送给了房间其他人。如果需要把消息发送房间指定人员，或者只想把消息发送给 `gameServer` 那么就需要使用 `sendEventEx` 这个接口。想了解 `gameServer` 查看 [gameServer 文挡](http://www.matchvs.com/service?page=guideJSgameServer) 
+ `sendEvent` 是 `sendEventEx` 接口的二次封装，只是 `sendEvent` 接口默认把消息发送给了房间其他人。如果需要把消息发送房间指定人员，或者只想把消息发送给 `gameServer` 那么就需要使用 `sendEventEx` 这个接口。想了解 `gameServer` 查看 [gameServer 文挡](../QuickStart/GameServer-JavaScript) 
 
 ```typescript
 engine.sendEventEx(msgType:number, data:string, destType:number, userIDs:Array <number> ):any
@@ -1222,7 +1222,7 @@ response.sendEventNotify(eventInfo:MsSendEventNotify);
 | 参数      | 类型   | 描述                                                         | 示例值  |
 | --------- | ------ | ------------------------------------------------------------ | ------- |
 | srcUserID | number | 推送方用户ID，表示是谁发的消息                               | 321     |
-| cpProto   | string | 消息内容，对应[sendEvent](http://cn.matchvs.com/service?page=APIJavaScript#sendEvent)中的msg参数 | "hello" |
+| cpProto   | string | 消息内容，对应[sendEvent](../APIDoc/JavaScript#sendEvent)中的msg参数 | "hello" |
 
 ### gameServerNotify
 
@@ -1760,7 +1760,7 @@ class MsEngine{
 
 ## 断线重连
 
-用户断线后可以调用次接口进行重连，重连具体教程可以参考 [断线重连详细文档](http://www.matchvs.com/service?page=reconnect) 。
+用户断线后可以调用次接口进行重连，重连具体教程可以参考 [断线重连详细文档](../Advanced/reconnect) 。
 
 - 请求重连接口：reconnect, setReconnectTimeout，getOffLineDataResponse
 - 重连回调接口：reconnectResponse, setReconnectTimeoutResponse，getOffLineDataResponse
@@ -2059,7 +2059,7 @@ getWatchRoomsResponse(rooms:MsGetRoomListExRsp);
 
 | 参数      | 类型                   | 说明                                                         | 示例值 |
 | --------- | ---------------------- | ------------------------------------------------------------ | ------ |
-| status    | number                 | 接口调用状态 200 成功，其他值请看 [错误码说明](http://www.matchvs.com/service?page=ErrCode) |        |
+| status    | number                 | 接口调用状态 200 成功，其他值请看 [错误码说明](../ErrCode) |        |
 | total     | number                 | 房间                                                         |        |
 | roomAttrs | Array<MsRoomAttribute> | 房间信息列信息                                               |        |
 
@@ -2140,7 +2140,7 @@ joinWatchRoomResponse(rsp:MVS.MsJoinWatchRoomRsp):void
 
 | 参数       | 类型                | 说明                                                         | 示例值 |
 | ---------- | ------------------- | ------------------------------------------------------------ | ------ |
-| status     | number              | 状态值 200 成功，其他错误值请看 [错误码文档](http://www.matchvs.com/service?page=ErrCode) | 200    |
+| status     | number              | 状态值 200 成功，其他错误值请看 [错误码文档](../ErrCode) | 200    |
 | roomStatus | number              | 当前房间状态                                                 |        |
 | reserved   |                     |                                                              |        |
 | wathchInfo | MVS.MsLiveWatchInfo | 观战房间信息                                                 |        |
@@ -2258,7 +2258,7 @@ setLiveOffsetResponse(status:number):void
 
 | 参数   | 类型   | 说明                                                         | 示例值 |
 | ------ | ------ | ------------------------------------------------------------ | ------ |
-| status | number | 200 成功，其他错误值请看 [错误码文档](http://www.matchvs.com/service?page=ErrCode) | 200    |
+| status | number | 200 成功，其他错误值请看 [错误码文档](../ErrCode) | 200    |
 
 ### liveFrameUpdate
 
@@ -2373,7 +2373,7 @@ changeRoleResponse(status:MVS.MsChangeRoleRsp):void
 
 | 参数           | 类型   | 描述                                                         | 示例值 |
 | -------------- | ------ | ------------------------------------------------------------ | ------ |
-| status         | number | 200 成功，其他错误值请看 [错误码文档](http://www.matchvs.com/service?page=ErrCode) | 200    |
+| status         | number | 200 成功，其他错误值请看 [错误码文档](../ErrCode) | 200    |
 | targetRoomType | number | 当前的模式 0-游戏模式 1-观战模式                             | 0      |
 
 #### 示例代码
@@ -2440,7 +2440,7 @@ leaveWatchRoomResponse(status:number):void
 
 | 参数   | 类型   | 描述                                                         | 示例值 |
 | ------ | ------ | ------------------------------------------------------------ | ------ |
-| status | number | 200 成功，其他错误值请看 [错误码文档](http://www.matchvs.com/service?page=ErrCode) | 200    |
+| status | number | 200 成功，其他错误值请看 [错误码文档](../ErrCode) | 200    |
 
 ### leaveWatchRoomNotify
 

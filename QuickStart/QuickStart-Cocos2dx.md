@@ -52,7 +52,7 @@ MatchVSEngine::getInstance()->login(userid, token.c_str(), gameid, gameversion, 
 
 ## 游戏逻辑
 
-接下来就可以使用Matchvs提供的接口进行游戏逻辑的实现啦，详情请参考 [接入指南](http://www.matchvs.com/service?page=2dxCuide)
+接下来就可以使用Matchvs提供的接口进行游戏逻辑的实现啦，详情请参考 [接入指南](../APIBasic/2dxGuide)
 
 
 ## 发布上线

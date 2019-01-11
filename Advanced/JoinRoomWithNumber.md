@@ -50,7 +50,7 @@ Sort: 99
 
 #### 分享传播房间短号有4种方式:
 
-- 1.微信分享:  可参考这篇文章(http://www.matchvs.com/service?page=wechatInvite)
+- 1.微信分享:  可参考这篇文章(../Advanced/wechatInvite)
 - 2.短信分享:  对与navite应用, 可调用手机系统的短信功能发送给联系人.
 - 3.URL分享:  对于H5应用.可以通过web url传参的形式来传递房间短号,直接加入游戏
 - 4.二维码分享: 二维码分享建立在URL分享的基础之上, 将URL编码为二维码图片.利用手机扫一扫来启动应用.

@@ -2178,7 +2178,7 @@ response.getWatchRoomsResponse(rooms);
 
 | 参数      | 类型                   | 说明                                                         | 示例值 |
 | --------- | ---------------------- | ------------------------------------------------------------ | ------ |
-| status    | number                 | 接口调用状态 200 成功，其他值请看 [错误码说明](http://www.matchvs.com/service?page=ErrCode) |        |
+| status    | number                 | 接口调用状态 200 成功，其他值请看 [错误码说明](./ErrCode) |        |
 | total     | number                 | 房间                                                         |        |
 | roomAttrs | Array<MsRoomAttribute> | 房间信息列信息                                               |        |
 
@@ -2261,7 +2261,7 @@ response.joinWatchRoomResponse= function (rsp){};
 
 | 参数       | 类型                | 说明                                                         | 示例值 |
 | ---------- | ------------------- | ------------------------------------------------------------ | ------ |
-| status     | number              | 状态值 200 成功，其他错误值请看 [错误码文档](http://www.matchvs.com/service?page=ErrCode) | 200    |
+| status     | number              | 状态值 200 成功，其他错误值请看 [错误码文档](../ErrCode) | 200    |
 | roomStatus | number              | 当前房间状态                                                 |        |
 | reserved   |                     |                                                              |        |
 | wathchInfo | MVS.MsLiveWatchInfo | 观战房间信息                                                 |        |
@@ -2385,7 +2385,7 @@ response.setLiveOffsetResponse = function(status){};
 
 | 参数   | 类型   | 说明                                                         | 示例值 |
 | ------ | ------ | ------------------------------------------------------------ | ------ |
-| status | number | 200 成功，其他错误值请看 [错误码文档](http://www.matchvs.com/service?page=ErrCode) | 200    |
+| status | number | 200 成功，其他错误值请看 [错误码文档](../ErrCode) | 200    |
 
 #### 示例代码
 
@@ -2503,7 +2503,7 @@ response.changeRoleResponse = function(rsp){}
 
 | 参数           | 类型   | 描述                                                         | 示例值 |
 | -------------- | ------ | ------------------------------------------------------------ | ------ |
-| status         | number | 200 成功，其他错误值请看 [错误码文档](http://www.matchvs.com/service?page=ErrCode) | 200    |
+| status         | number | 200 成功，其他错误值请看 [错误码文档](../ErrCode) | 200    |
 | targetRoomType | number | 当前的模式 0-游戏模式 1-观战模式                             | 0      |
 
 #### 示例代码
@@ -2569,7 +2569,7 @@ response.leaveWatchRoomResponse = function(status){}
 
 | 参数   | 类型   | 描述                                                         | 示例值 |
 | ------ | ------ | ------------------------------------------------------------ | ------ |
-| status | number | 200 成功，其他错误值请看 [错误码文档](http://www.matchvs.com/service?page=ErrCode) | 200    |
+| status | number | 200 成功，其他错误值请看 [错误码文档](../ErrCode) | 200    |
 
 #### 代码示例
 
@@ -2626,7 +2626,7 @@ response.errorResponse = function(error) {
 	console.log("错误信息：", error);
 }
 ```
-**注意** Matchvs相关的异常信息可通过该接口获取 更多[错误码说明](http://www.matchvs.com/service?page=ErrCode) 
+**注意** Matchvs相关的异常信息可通过该接口获取 更多[错误码说明](../ErrCode) 
 
 
 

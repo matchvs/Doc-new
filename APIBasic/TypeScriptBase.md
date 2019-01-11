@@ -7,7 +7,7 @@ Sort: 14
 
 ## 阅读前
 
-在阅读我们文档之前，请确保你已经阅读了我们的 [新手入门](http://www.matchvs.com/service?page=EgretStart) 文档，并且了解了我们 Matchvs SDK的 使用流程，SDK 接口调用是需要安装相应的顺序才能成功调用。下面是介绍一个普通的游戏如何接入我们Matchvs SDK 。
+在阅读我们文档之前，请确保你已经阅读了我们的 [新手入门](../QuickStart/EgretStart) 文档，并且了解了我们 Matchvs SDK的 使用流程，SDK 接口调用是需要安装相应的顺序才能成功调用。下面是介绍一个普通的游戏如何接入我们Matchvs SDK 。
 
 #### Matchvs 接口调用时序图
 
@@ -33,7 +33,7 @@ class MsEngine {
 
 ##初始化
 
-在连接至 Matchvs前须对SDK进行初始化操作。此时选择连接测试环境（alpha）还是正式环境（release）。[环境说明](http://www.matchvs.com/service?page=envGuide) 。
+在连接至 Matchvs前须对SDK进行初始化操作。此时选择连接测试环境（alpha）还是正式环境（release）。[环境说明](../Advanced/EnvGuide) 。
 
 如果游戏属于调试阶段则连接至测试环境，游戏调试完成后即可发布到正式环境运行。  
 
@@ -86,7 +86,7 @@ class MsEngine {
 
 Matchvs提供的 `userID` 被用于在各个服务中校验连接的有效性，调试前开发者需要先获取到一个合法的`userID`。调用registerUser接口获取，在registerResponse回调返回。
 
-每次调用 registerUser 接口都会生成新的 `userID` 为了节省资源消耗， `userID`和 `token` 有需要的可以缓存起来，在之后的应用启动中不必重复获取。如果你有自己的用户系统，可以将Matchvs 提供的 userID 和用户系统进行映射。可以参考 [Matchvs 第三方账号绑定](http://www.matchvs.com/service?page=ThirdAccount)，让您的用户唯一对应一个userID，以节省资源。[可参考多开说明](http://www.matchvs.com/service?page=MultipleIdentities) 
+每次调用 registerUser 接口都会生成新的 `userID` 为了节省资源消耗， `userID`和 `token` 有需要的可以缓存起来，在之后的应用启动中不必重复获取。如果你有自己的用户系统，可以将Matchvs 提供的 userID 和用户系统进行映射。可以参考 [Matchvs 第三方账号绑定](../Advanced/ThirdAccount)，让您的用户唯一对应一个userID，以节省资源。[可参考多开说明](../Advanced/MultipleIdentities) 
 
 为了资源节省，我们在registerUserResponse 回调前把userID信息缓存在本地，数据会暂存在浏览器中。所以使用同一个浏览器调用 registerUser 接口会返回相同的 userID信息。如果需要清除缓存的用户信息请调用 。`LocalStore_Clear()` 接口。
 
@@ -408,6 +408,6 @@ engine.logout(cpProto:string):number
 response.logoutResponse(status:number);
 ```
 
-### 错误码说明:<http://www.matchvs.com/service?page=ErrCode>
+### 错误码说明:<../ErrCode>
 
-### 更多接口调用和说明请看 [接口使用说明](http://www.matchvs.com/service?page=TypeScript) 
+### 更多接口调用和说明请看 [接口使用说明](../APIDoc/TypeScript) 

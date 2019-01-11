@@ -31,14 +31,14 @@ var response = new jsMatchvs.MatchvsResponse();
 engine.init(response, channel, platform, gameID);
 ```
 
-Matchvs 提供了两个环境，alpha 调试环境和 release 正式环境。游戏开发调试阶段请使用 alpha 环境，即 platform 传参"alpha"。[环境说明](http://www.matchvs.com/service?page=envGuide)，参数列表如下：
+Matchvs 提供了两个环境，alpha 调试环境和 release 正式环境。游戏开发调试阶段请使用 alpha 环境，即 platform 传参"alpha"。[环境说明](../Advanced/EnvGuide)，参数列表如下：
 
 
 gameID获取请[前往控制台](http://www.matchvs.com/manage/gameContentList)
 
 ## 注册
 
-**注意** userID和token有需要的可以缓存起来，在之后的应用启动中不必重复获取。如果你有自己的用户系统，可以将Matchvs 提供的 userID 和用户系统进行映射，也可以使用我们提供的第三方账号绑定功能，详情参考[第三方绑定解决方法](http://www.matchvs.com/service?page=ThirdAccount)。
+**注意** userID和token有需要的可以缓存起来，在之后的应用启动中不必重复获取。如果你有自己的用户系统，可以将Matchvs 提供的 userID 和用户系统进行映射，也可以使用我们提供的第三方账号绑定功能，详情参考[第三方绑定解决方法](../Advanced/ThirdAccount)。
 
 Matchvs提供的用户ID被用于在各个服务中校验连接的有效性，调试前开发者需要先获取到一个合法的用户ID。
 
@@ -255,6 +255,6 @@ response.logoutResponse = function(status) {
 ```javascript
 engine.uninit();
 ```
-[错误码说明](http://www.matchvs.com/service?page=ErrCode)  
+[错误码说明](../ErrCode)  
 
-[更多完整API介绍请参考API手册](http://www.matchvs.com/service?page=JavaScript)
+[更多完整API介绍请参考API手册](../APIDoc/JavaScript)

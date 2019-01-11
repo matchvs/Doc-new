@@ -15,7 +15,7 @@ Matchvs 提供了两套环境，测试环境 alpha 和正式环境 release，两
 #### alpha 环境和 release 环境有什么区别？
 
 - alpha 环境是创建游戏后Matchvs默认使用的环境，一般用于开发者调试和开发游戏使用，每天有固定的1G免费流量使用。如果不超出流量范围是不会产生费用。 
-- release 环境是需要开发者开启发布上线才能使用。是用于众多开发者的正式线上环境。release 环境上会根据流量和用户来计算相关的费用，具体的费用扣除方法可以参考我们的 [付费说明](http://www.matchvs.com/service?page=paymentHelp) 。
+- release 环境是需要开发者开启发布上线才能使用。是用于众多开发者的正式线上环境。release 环境上会根据流量和用户来计算相关的费用，具体的费用扣除方法可以参考我们的 [付费说明](../PaymentHelp) 。
 
 #### Matchvs 环境怎么切换？
 

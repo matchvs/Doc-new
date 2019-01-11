@@ -5,7 +5,7 @@ Sort: 6
 
 ## 创建游戏
 
-在开始使用 gameServer 之前，你需要创建自己的游戏。如何创建游戏详见 [Matchvs快速入门](http://www.matchvs.com/service?page=MatchvsStart )。 
+在开始使用 gameServer 之前，你需要创建自己的游戏。如何创建游戏详见 [Matchvs快速入门](../Matchvs)。 
 
 
 
@@ -105,7 +105,7 @@ gameServer 配置文件路径为`myGameServer/conf/config.json`，其中包含�
   - remoteHost：gameServer 房间管理服务地址，开启`matchvs debug`时在终端显示。
   - remotePort：gameServer  房间管理服务端口，开启`matchvs debug`时在终端显示。
 ```
-为了方便开发者在开发过程中快速调试和定位问题，[matchvs 命令行工具](http://www.matchvs.com/service?page=GameServerCMD)提供了本地调试命令`matchvs debug <GS_key>`。使用时只需把 <GS_key> 替换为需要开启本地调试的 gameServer 的 GS_key，然后执行命令即可开启本地调试。例如：
+为了方便开发者在开发过程中快速调试和定位问题，[matchvs 命令行工具](../Advanced/GameServerCMD)提供了本地调试命令`matchvs debug <GS_key>`。使用时只需把 <GS_key> 替换为需要开启本地调试的 gameServer 的 GS_key，然后执行命令即可开启本地调试。例如：
 
 ```shell
 $ matchvs debug 1424769556baec5362f5b1513f7e1167
@@ -144,7 +144,7 @@ $ node main.js
 ## Demo 客户端与 gameServer 建立连接
 
 本地调试模式只支持测试环境，所以 Demo 客户端需要切换到测试环境，即 Demo 客户端 Matchvs `init`接口的 `channel`需要修改为 `Matchvs`，`platform`需要修改为`alpha`。  
-本地调试和线上运行的区别，请参考[环境说明](http://www.matchvs.com/service?page=envGuide)
+本地调试和线上运行的区别，请参考[环境说明](../Advanced/EnvGuide)
 
 运行Demo客户端，此时Matchvs 引擎就会将客户端的请求转发到开发者本地 gameServer 服务，开发者无须提交代码即可在本地调试代码。
 

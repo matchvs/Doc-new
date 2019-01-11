@@ -42,7 +42,7 @@ Sort: 28
 
 好友点击微信分享的链接进入小游戏后,拿到RoomID(如何拿RoomID,见后文),再通过这个API进入指定房间开始对战游戏
 
-[详细内容](http://www.matchvs.com/service?page=JavaScriptBase)
+[详细内容](../APIBasic/JavaScriptBase)
 
 ## 微信社交分享传播RoomID
 

@@ -458,7 +458,7 @@ int errorResponse(string error)
 
 ## 错误码
 
-错误码表 <http://www.matchvs.com/service?page=ErrCode> 
+错误码表 <../ErrCode> 
 
 ## 更多详细说明
 

@@ -27,7 +27,7 @@ java-gameServer
 
 ### 本地开发调试
 
-下载Matchvs命令行工具 参考 [gameServer命令行工具](http://www.matchvs.com/service?page=GameServerCMD)
+下载Matchvs命令行工具 参考 [gameServer命令行工具](../Advanced/GameServerCMD)
 
 为了方便开发者在开发过程中快速调试和定位问题，matchvs 命令行工具提供了本地调试命令matchvs debug <GS_key>
 
