@@ -64,7 +64,7 @@ canvas DOM渲染,属于代码库,基于组件的开发模式
 示例:http://jawsjs.com/jawsjs/examples/example12.html
 
 ### 3. enchantjs(2D,开源免费)
-http://enchantjs.com/+
+http://enchantjs.com/
 A simple JavaScript framework for creating games and apps
 >属于代码库
 

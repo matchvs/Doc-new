@@ -2178,7 +2178,7 @@ response.getWatchRoomsResponse(rooms);
 
 | 参数      | 类型                   | 说明                                                         | 示例值 |
 | --------- | ---------------------- | ------------------------------------------------------------ | ------ |
-| status    | number                 | 接口调用状态 200 成功，其他值请看 [错误码说明](./ErrCode) |        |
+| status    | number                 | 接口调用状态 200 成功，其他值请看 [错误码说明](../ErrCode) |        |
 | total     | number                 | 房间                                                         |        |
 | roomAttrs | Array<MsRoomAttribute> | 房间信息列信息                                               |        |
 

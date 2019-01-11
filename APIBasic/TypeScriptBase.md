@@ -7,7 +7,7 @@ Sort: 14
 
 ## 阅读前
 
-在阅读我们文档之前，请确保你已经阅读了我们的 [新手入门](../QuickStart/EgretStart) 文档，并且了解了我们 Matchvs SDK的 使用流程，SDK 接口调用是需要安装相应的顺序才能成功调用。下面是介绍一个普通的游戏如何接入我们Matchvs SDK 。
+在阅读我们文档之前，请确保你已经阅读了我们的 [新手入门](../QuickStart/QuickStart-Egret) 文档，并且了解了我们 Matchvs SDK的 使用流程，SDK 接口调用是需要安装相应的顺序才能成功调用。下面是介绍一个普通的游戏如何接入我们Matchvs SDK 。
 
 #### Matchvs 接口调用时序图
 
