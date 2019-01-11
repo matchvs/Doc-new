@@ -17,7 +17,7 @@ Sort: 27
 
 为了确保第一条中的每帧输入输出一致性,我们需要用到服务器.但对于为个人游戏开发者或者小团队开发者，租一套的服务器并且开发完善服务器功能，费钱费时，成本过高。 所以这时选择一款满足上述需求的游戏云服务器引擎就成为一个节省成本的好方法.
 
-Matchvs 游戏云服务提供了一个叫 [帧同步](http://www.matchvs.com/service?page=netExtensionJS) 的游戏服务
+Matchvs 游戏云服务提供了一个叫 [帧同步](../APIDoc/TypeScript#帧同步) 的游戏服务
 
 ![1547022064901](./JoinRoomWithNumber.Assets/FrameExample01.png)
 
