@@ -3,9 +3,6 @@ Title: 快速入门-CocosCreator
 Sort: 3
 */
 
-# CocosCreator新手上路 
-
-Creator开发者可以通过本文档开始Matchvs之旅。
 
 ## IDE的下载
 
