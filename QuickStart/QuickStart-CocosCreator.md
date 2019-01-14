@@ -10,10 +10,8 @@ Creator开发者可以通过本文档开始Matchvs之旅。
 ## IDE的下载
 
 如果你的电脑还没有安装cocosCreator可以前往cocos官网进行下载[cocos下载地址](http://www.cocos.com/download) 
-) 
 
-
-!ttp://imgs.matchvs.com/static/Doc-img/new-start/CocosCreatorImg/creatorDownload.png)
+![](http://imgs.matchvs.com/static/Doc-img/new-start/CocosCreatorImg/creatorDownload.jpg)
 
 选取对应的版本进行下载和使用。
 
@@ -31,9 +29,42 @@ CreatorIDE安装成功后，双击打开CreatorIDE，选择新建项目选择一
 
 ![](http://imgs.matchvs.com/static/Doc-img/new-start/CocosCreatorImg/creatorNewProject.jpg)
 
+**注意** Matchvs的联网游戏案例已经集成进如了Cocos Creator v2.0.7版本中，建议新使用的玩家可以先建立一个联网游戏案例进行体验。
+
 选择好自己的工程路径后，点击新建项目,新的工程就创建好了。
 
 ## SDK的集成
+
+#### Creator V2.0.7
+
+在CreatorV2.0.7 版本之后推出了新的服务模块。同时在服务模块中也集成了Matchvs，使大家集成更加方便 `服务模块在面板选项中`。
+
+
+服务模块如下图:
+
+![](http://imgs.matchvs.com/static/Doc-img/new-start/CocosCreatorImg/CocosServer.png)
+
+**注意** 服务模块加载SDK为Cocos渠道SDK，必须使用CreatorIDE登录的账号Cocos渠道账户必须绑定公司才可以使用。
+
+ - 服务模块加载SDK路径为project/assets/scripts/matchvs/matchvs.all.js。
+ 
+```javascript
+let engine;
+let response = {};
+try {
+    engine =  new window.MatchvsEngine();
+    response = new window.MatchvsResponse();
+	} catch (e) {
+	console.warn("load matchvs fail,"+e.message);
+}
+module.exports = {
+    engine: engine,
+    response: response,
+};
+```
+ 服务模块加载SDK参考以上代码。
+
+#### Creator V2.0.7 使用插件形式加载。
 
 工程打开以后，点击CreatorIDE上方的扩展按钮，如图所示
 
@@ -50,6 +81,12 @@ CreatorIDE安装成功后，双击打开CreatorIDE，选择新建项目选择一
 安装成功后，重启CreatorIDE，如下图所示
 
 ![](http://imgs.matchvs.com/static/Doc-img/new-start/CocosCreatorImg/creatorInstallSuccess.png)
+
+**注意** 插件的卸载和替换
+
+ - 全局插件路径默认为 C:/user/admin/.CocosCreator/packages/plugin-matchvs。如需卸载，删除plugin-matchvs文件夹即可。如果手动更换过cocosCreator的配置地址，全局插件地址跟随 .CocosCreator进行变动。
+
+ - 项目插件路径为 project/packages/plugin-matchvs，如需卸载删除plugin-matchvs文件夹即可。 
 
 ## 第一行代码
 
@@ -98,7 +135,9 @@ cc.Class({
 
 ```javascript
     MatchvsInit() {
-        this.engine.init(this.rsp,'Matchvs','release',this.gameID);
+		var appkey = '4fd4a67c10e84e259a2c3c417b9114f4';
+		var gameVersion = 1;
+        this.engine.init(this.rsp,'Matchvs','release',this.gameID,appkey,gameVersion);
     },
 
     initResponse :function (status) {
@@ -135,13 +174,8 @@ registerUserResponse:function(userInfo) {
 this.Login(userInfo.id,userInfo.token);
 
 Login(userID,token) {
-	var appkey = '4fd4a67c10e84e259a2c3c417b9114f4';
-	var secret = 'bd00c3953f6a447eaaa1e36f19684764';
 	var DeviceID = 'abcdef';
-	var gatewayID = 0;
-	var gameVersion = 1;
-	this.engine.login(userID,token,this.gameID,gameVersion,
-		appkey,secret,DeviceID,gatewayID)
+	this.engine.login(userID,token,this.gameID,DeviceID)
 },
 
 loginResponse:function (MsLoginRsp) {
@@ -178,7 +212,9 @@ cc.Class({
     },
 
     MatchvsInit() {
-        this.engine.init(this.rsp,'Matchvs','release',this.gameID);
+		var appkey = '4fd4a67c10e84e259a2c3c417b9114f4';
+		var gameVersion = 1;
+        this.engine.init(this.rsp,'Matchvs','release',this.gameID,appkey,gameVersion);
     },
 
     initResponse :function (status) {
@@ -199,13 +235,8 @@ cc.Class({
         }
     },
     Login(userID,token) {
-        var appkey = '4fd4a67c10e84e259a2c3c417b9114f4';
-        var secret = 'bd00c3953f6a447eaaa1e36f19684764';
-        var DeviceID = 'abcdef';
-        var gatewayID = 0;
-        var gameVersion = 1;
-        this.engine.login(userID,token,this.gameID,gameVersion,
-            appkey,secret,DeviceID,gatewayID)
+		var DeviceID = 'abcdef';
+		this.engine.login(userID,token,this.gameID,DeviceID)
     },
 
     loginResponse:function (loginRsp) {
@@ -229,5 +260,137 @@ cc.Class({
 
 ```
 
+## 在Cocos Creator中使用Ts
 
-[更多Matchvs文档查看基础功能文档](../APIBasic/JavaScriptBase)
+当前项目支持Ts后，按照上面步骤成功导入JSSDK后，在官网的[下载页面](http://matchvs.com/serviceDownload)下载TypeScript，将其中的matchvs.d.ts拷贝到JSSDK的同路径下即可使用。
+
+下面是一段TS的演示代码，实现的主要功能有初始化，注册，登录。[工程地址](https://github.com/matchvs/demo-creator)
+
+```javascript
+const {ccclass, property} = cc._decorator;
+
+
+@ccclass
+export default class NewClass extends cc.Component {
+
+    @property(cc.EditBox)
+    gameIdInput: cc.EditBox = null;
+
+    @property(cc.EditBox)
+    appKeyInput: cc.EditBox = null;
+
+    @property(cc.Node)
+    confirm: cc.Node = null;
+
+    @property(cc.Node)
+    clear: cc.Node = null;
+
+    @property(cc.Node)
+    independent: cc.Node = null;
+
+    @property(cc.Node)
+    labelInfo: cc.Label = null;
+    private Engine:MatchvsEngine;
+    private Response:MatchvsResponse;
+    private GameID:number = 200978;
+    private AppKey:string = "4fd4a67c10e84e259a2c3c417b9114f4";
+
+    start () {
+        let self = this;
+        self.Engine = new MatchvsEngine();
+        self.Response = new MatchvsResponse();
+        this.confirm.on(cc.Node.EventType.TOUCH_END, function () {
+            if (Number(self.gameIdInput.string) === 0 && Number(self.gameIdInput.placeholder) === 0  && self.appKeyInput.string === "" && self.appKeyInput.placeholder === ""){
+                return;
+            }
+            if (self.appKeyInput.string === "") {
+                self.AppKey = self.appKeyInput.placeholder;
+		    } else {
+                self.AppKey = self.appKeyInput.string;
+            }
+            if (Number(self.gameIdInput.string) === 0) {
+                self.Engine.init(self.Response,"Matchvs","alpha",Number(self.gameIdInput.placeholder));
+            }else {
+                self.Engine.init(self.Response,"Matchvs","alpha",Number(self.gameIdInput.string));
+            }
+		});
+        self.initEvent();
+    }
+
+    /**
+     * 注册对应的事件监听和把自己的原型传递进入，用于发送事件使用
+     */
+    private initEvent () {
+        this.Response.initResponse = this.initRsp.bind(this);
+        this.Response.registerUserResponse = this.registerUserRsp.bind(this);
+        this.Response.loginResponse = this.loginRsp.bind(this);
+    }
+
+    /**
+     * 初始化回调
+     * @param status
+     */
+    initRsp(status) {
+        if (status === 200) {
+            console.log("Ts版本 初始化成功");
+            this.Engine.registerUser();
+        } else {
+            console.log("Ts版本 初始化失败");
+        }
+    }
+
+    /**
+     * 注册回调
+     * @param userInfo
+     */
+    registerUserRsp(userInfo) {
+        if  (userInfo.status === 0) {
+            this.login(userInfo.userID,userInfo.token);
+            console.log("Ts版本 注册成功");
+        } else {
+            console.log("Ts版本 注册失败");
+        }
+    }
+
+    /**
+     * 登录回调
+     * @param loginRsp
+     */
+    loginRsp(loginRsp) {
+        if  (loginRsp.status === 200) {
+            console.log("Ts版本 登录成功");
+            if (loginRsp.roomID !== null && loginRsp.roomID !== '0') {
+                this.Engine.leaveRoom("");
+                cc.director.loadScene("Lobby");
+            } else {
+                cc.director.loadScene("Lobby");
+            }
+
+        } else {
+            console.log("Ts版本 登录失败");
+        }
+
+    }
+
+    /**
+     * 登录
+     * @param id
+     * @param token
+     */
+    login (id, token) {
+        // this.labelLog('开始登录...用户ID:' + id + " gameID " + "200978");
+        this.Engine.login(id,token,this.GameID,1,this.AppKey,"0");
+    }
+
+    /**
+     * 页面log打印
+     * @param info
+     */
+    labelLog (info) {
+        this.labelInfo.string += '\n[LOG]: ' + info;
+    }
+
+}
+```
+
+[更多Matchvs文档查看基础功能文档](http://www.matchvs.com/service?page=JavaScriptBase)
