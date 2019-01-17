@@ -2049,12 +2049,11 @@ joinOpenResponse = function (notify)
 ```
 
 MsReopenRoomResponse:
+
 | 属性         | 类型   | 描述               | 示例值 |
 | ------------ | ------ | ------------------ | ------ |
 | status       | number | 接口调用的服务器返回码,200为正确| 200 |
 | cpProto      | string | 调用者附带的信息   | ""     |
-
-
 
 MsReopenRoomNotify:
 
