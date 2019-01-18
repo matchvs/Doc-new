@@ -337,7 +337,7 @@ appKey&param1=value1&param2=value2&param3=value3&token
 
 ## 接口代码示例
 
- 这里以 [demo-Egret](https://github.com/matchvs/demo-Egret/blob/master/MatchvsDemo_Egret/src/matchvs/MvsHttpApi.ts) 的代码为例 ，下面这些是公共用代码:
+ 这里以 [demo](https://github.com/matchvs/demo-Egret/blob/master/MatchvsDemo_Egret/src/matchvs/MvsHttpApi.ts) 的代码为例 ，下面这些是公共用代码:
 
 ```typescript
 class MvsHttpApi {

@@ -2629,38 +2629,5 @@ response.errorResponse = function(error) {
 
 
 
-## CHANGELOG
 
-时间：2018.07.13
-
-小版本：v1.7.000
-
-```
-1.添加观战功能，此功能添加了一些新接口.
-2.修复若干bug
-
-```
-
-
-
-时间：2018.07.13
-
-JSSDK版本：v3.7.3.0+
-
-```
-1. 新增 joinRoomResponse 接口参数 state
-2. 所有包含userId参数的数据类型都新增了一个userID字段，原来userId也存在，建议使用userID。
-```
-
-时间：2018.05.29
-
-JSSDK版本：v1.6.202
-
-    1. 新增joinOpen 房间重新打开功能
-    2. 修复微信小游戏真机断线问题
-    3. 调整微信小游戏适配机制,只需引用matchvs.all.js,不再引用matchvs.all.weixin.js
-    4. 修复Egret打包H5平台 `找不到 wx define` 的问题
-    5. 修复uninit后不能后登录的问题
-    6. 修复被kickPlayer后不能进入房间,返回-8或-10的问题.
-    7. 代码优化,减少代码体积
 
