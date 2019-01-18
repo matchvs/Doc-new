@@ -392,4 +392,4 @@ export default class NewClass extends cc.Component {
 }
 ```
 
-[更多Matchvs文档查看基础功能文档](http://www.matchvs.com/service?page=JavaScriptBase)
+[更多Matchvs文档查看基础功能文档](../APIBasic/JavaScriptBase)
