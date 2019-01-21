@@ -169,12 +169,6 @@ gameServer 本地开发调试完成后需要将代码推送到 Matchvs 远程仓
 
 2. 哪些文件需要上传？
 
-基本目录结构必须保证和各语言框架一致，参考各语言“新手上路”文档：
-
-    Node.js：https://doc.matchvs.com/QuickStart/GameServer-JavaScript
-
-    C#：https://doc.matchvs.com/QuickStart/QuickStart-CSharp
-
-    Java：https://doc.matchvs.com/QuickStart/GameServer-Java
+基本目录结构必须保证和各语言框架一致，参考各语言“新手上路”文档。
 
 有些文件是不需要提交的，比如操作系统自动生成的文件、编译生成的中间文件和可执行文件、本地调试产生的日志文件、包含敏感信息的文件等等。将需要忽略的文件名添加到`.gitignore`文件里，这样在提交代码时 git 就会自动忽略这些文件。另外各语言有一些特定的需要忽略的文件名，参考 github 提供的 `.gitignore` 模板：https://github.com/github/gitignore
