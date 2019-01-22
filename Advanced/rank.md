@@ -416,7 +416,7 @@ Content-Type: application/json
 ### 6 上报分数
 
 ```
-接口: PUT /rank/scores
+接口: PUT /rank/scores?mode=xxx
 ```
 
 - 接口说明：该接口用于上报玩家分数。上报成功，排行榜会立即更新排名。
