@@ -4,7 +4,7 @@ Sort: 22
 */
 
 ## 命令行工具简介
-matchvs命令行工具是由Matchvs开发平台提供的命令行执行工具，可以在Windows、Linux和Mac系统中使用。
+jdge 命令行工具是由京东云战网提供的命令行执行工具，可以在Windows、Linux和Mac系统中使用。
 该命令行工具提供了以下功能：创建gameServer、启动服务、重启服务、查看gameServer列表。
 
 
@@ -18,13 +18,13 @@ matchvs命令行工具是由Matchvs开发平台提供的命令行执行工具，
 
 ![image](http://imgs.matchvs.com/static/mvs1.png)
 
-- 安装完成后，打开DOS窗口，执行 `matchvs`；结果如下，表示安装成功。    
+- 安装完成后，打开DOS窗口，执行 `jdge`；结果如下，表示安装成功。    
 
 ![image](http://imgs.matchvs.com/static/mvs02.png)
 
 ### Linux环境  
-- 将下载的可执行文件matchvs放到随意的目录，比如 `/home/test/mvs`
-- 添加可执行权限：`chmod +x matchvs`
+- 将下载的可执行文件 jdge 放到随意的目录，比如 `/home/test/mvs`
+- 添加可执行权限：`chmod +x jdge`
 - 修改环境变量：
   执行命令：`export PATH=$PATH:/home/test/mvs` （这种每次打开终端都要执行）
   为了在启动终端时都有效，在帐号根目录的文件 .bash_profile 中添加，然后执行 `source .bash_profile`    
