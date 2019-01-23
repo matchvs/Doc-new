@@ -132,15 +132,15 @@ gameServer 配置文件路径为`myGameServer/gameServer/conf/gs.json`，其中�
 
  ```
  - enable：房间管理服务控制开关，设为 true 时开启房间管理服务，设为 false 时关闭房间管理服务。
-  - svcName：gameServer 服务名，开启`matchvs debug`时在终端显示，与 podName 组合作为该 gameServer 的唯一标识。
-  - podName：gameServer 实例名，开启`matchvs debug`时在终端显示，与 svcName 组合作为该 gameServer 的唯一标识。
-  - remoteHost：gameServer 房间管理服务地址，开启`matchvs debug`时在终端显示。
-  - remotePort：gameServer  房间管理服务端口，开启`matchvs debug`时在终端显示。
+  - svcName：gameServer 服务名，开启`jdge debug`时在终端显示，与 podName 组合作为该 gameServer 的唯一标识。
+  - podName：gameServer 实例名，开启`jdge debug`时在终端显示，与 svcName 组合作为该 gameServer 的唯一标识。
+  - remoteHost：gameServer 房间管理服务地址，开启`jdge debug`时在终端显示。
+  - remotePort：gameServer  房间管理服务端口，开启`jdge debug`时在终端显示。
  ```
-为了方便开发者在开发过程中快速调试和定位问题，[matchvs 命令行工具](../Advanced/GameServerCMD)提供了本地调试命令`matchvs debug <GS_key>`。使用时只需把 <GS_key> 替换为需要开启本地调试的 gameServer 的 GS_key，然后执行命令即可开启本地调试。例如：
+为了方便开发者在开发过程中快速调试和定位问题，[jdge 命令行工具](../Advanced/GameServerCMD)提供了本地调试命令`jdge debug <GS_key>`。使用时只需把 <GS_key> 替换为需要开启本地调试的 gameServer 的 GS_key，然后执行命令即可开启本地调试。例如：
 
 ```shell
-$ matchvs debug 1424769556baec5362f5b1513f7e1167
+$ jdge debug 1424769556baec5362f5b1513f7e1167
 	==================== Develop config ====================
 	SvcName:        svc-201994-0
 	PodName:        deploy-201994-0-5f5d8785f8-9545j
@@ -155,7 +155,7 @@ $ matchvs debug 1424769556baec5362f5b1513f7e1167
 2018/11/13 15:38:01 [I] [control.go:165] [37ff6c2d5cc54535] [matchvs] start proxy success
 ```
 
-`matchvs debug`命令在启动时与 Matchvs 服务建立代理连接。启动完成后，客户端发送给 gameServer 的消息将通过代理服务转发到开发者本地运行的 gameServer。同样的，gameServer 发送的消息也通过代理服务转发给客户端。
+`jdge debug`命令在启动时与 Matchvs 服务建立代理连接。启动完成后，客户端发送给 gameServer 的消息将通过代理服务转发到开发者本地运行的 gameServer。同样的，gameServer 发送的消息也通过代理服务转发给客户端。
 
 保留这个窗口，然后在另外一个窗口里启动 gameServer 服务：
 

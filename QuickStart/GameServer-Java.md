@@ -29,7 +29,7 @@ java-gameServer
 
 下载Matchvs命令行工具 参考 [gameServer命令行工具](../Advanced/GameServerCMD)
 
-为了方便开发者在开发过程中快速调试和定位问题，matchvs 命令行工具提供了本地调试命令matchvs debug <GS_key>
+为了方便开发者在开发过程中快速调试和定位问题，matchvs 命令行工具提供了本地调试命令jdge debug <GS_key>
 
 在APP.java文件中 path填入本地配置文件信息。配置文件参考下载文件中的Config.json文件。
 
