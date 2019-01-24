@@ -3,25 +3,25 @@ Title: TypeScript 基础使用
 Sort: 14
 */
 
-# Matchvs SDK TypeScript 接口调用
+# jdge SDK TypeScript 接口调用
 
 ## 阅读前
 
-在阅读我们文档之前，请确保你已经阅读了我们的 [新手入门](../QuickStart/QuickStart-Egret) 文档，并且了解了我们 Matchvs SDK的 使用流程，SDK 接口调用是需要安装相应的顺序才能成功调用。下面是介绍一个普通的游戏如何接入我们Matchvs SDK 。
+在阅读我们文档之前，请确保你已经阅读了我们的 [新手入门](../QuickStart/QuickStart-Egret) 文档，并且了解了我们 jdge SDK的 使用流程，SDK 接口调用是需要安装相应的顺序才能成功调用。下面是介绍一个普通的游戏如何接入我们jdge SDK 。
 
-#### Matchvs 接口调用时序图
+#### jdge 接口调用时序图
 
 ![](http://imgs.matchvs.com/static/%E6%97%B6%E5%BA%8F%E5%9B%BE.jpg)
 
-MatcvhsSDK 库文件可到 [官网下载](http://www.matchvs.com/serviceDownload) 
+MatcvhsSDK 库文件可到 [官网下载](http://home-ge.matrix.jdcloud.com/serviceDownload) 
 
-MatcvhsSDK库 `matchvs`文件夹包括以下三个文件：
+MatcvhsSDK库 `jdge`文件夹包括以下三个文件：
 
 - matchvs.js： MatchvsSDK  JavaScript 源代码代码文件。
 - matchvs.d.ts：MatchvsSDK  TypScript 定义文件。
 - matchvs.min.js：MatchvsSDK  JavaScript 源码压缩文件。 
 
-Matchvs SDK 接口服务分为 **请求服务** 和 **回调服务** ， 使用是以简单的接口调用和接口返回的方式实现相关联网操作。比如随机加入房间只需要调用`joinRandRoom接口`，加入房间结果就以接口 `joinRoomResponse` 返回。在整个使用过程中，开发者只需要关心`MatchvsEngine`(接口请求调用对象)和 `MatchvsResponse`(接口调用返回对象)。接口请求使用 `MatchvsEngine`对象实例，接口返回使用 `MatchvsResponse` 对象实例。先获取这两个类的对象作为全局使用。例如：
+jdge SDK 接口服务分为 **请求服务** 和 **回调服务** ， 使用是以简单的接口调用和接口返回的方式实现相关联网操作。比如随机加入房间只需要调用`joinRandRoom接口`，加入房间结果就以接口 `joinRoomResponse` 返回。在整个使用过程中，开发者只需要关心`MatchvsEngine`(接口请求调用对象)和 `MatchvsResponse`(接口调用返回对象)。接口请求使用 `MatchvsEngine`对象实例，接口返回使用 `MatchvsResponse` 对象实例。先获取这两个类的对象作为全局使用。例如：
 
 ```typescript
 class MsEngine {
@@ -29,11 +29,11 @@ class MsEngine {
     private static response = new MatchvsResponse();
 }
 
-```  
+```
 
 ##初始化
 
-在连接至 Matchvs前须对SDK进行初始化操作。此时选择连接测试环境（alpha）还是正式环境（release）。[环境说明](../Advanced/EnvGuide) 。
+在连接至 jdge前须对SDK进行初始化操作。此时选择连接测试环境（alpha）还是正式环境（release）。[环境说明](../Advanced/EnvGuide) 。
 
 如果游戏属于调试阶段则连接至测试环境，游戏调试完成后即可发布到正式环境运行。  
 
@@ -76,7 +76,7 @@ class MsEngine {
                 //失败
             }
         }
-        this.engine.init(this.response, "Matchvs", "alpha", 123456);
+        this.engine.init(this.response, "jdge", "alpha", 123456);
     }
 }
 ```
@@ -84,9 +84,9 @@ class MsEngine {
 
 ## 注册用户
 
-Matchvs提供的 `userID` 被用于在各个服务中校验连接的有效性，调试前开发者需要先获取到一个合法的`userID`。调用registerUser接口获取，在registerResponse回调返回。
+jdge提供的 `userID` 被用于在各个服务中校验连接的有效性，调试前开发者需要先获取到一个合法的`userID`。调用registerUser接口获取，在registerResponse回调返回。
 
-每次调用 registerUser 接口都会生成新的 `userID` 为了节省资源消耗， `userID`和 `token` 有需要的可以缓存起来，在之后的应用启动中不必重复获取。如果你有自己的用户系统，可以将Matchvs 提供的 userID 和用户系统进行映射。可以参考 [Matchvs 第三方账号绑定](../Advanced/ThirdAccount)，让您的用户唯一对应一个userID，以节省资源。[可参考多开说明](../Advanced/MultipleIdentities) 
+每次调用 registerUser 接口都会生成新的 `userID` 为了节省资源消耗， `userID`和 `token` 有需要的可以缓存起来，在之后的应用启动中不必重复获取。如果你有自己的用户系统，可以将jdge 提供的 userID 和用户系统进行映射。可以参考 [jdge 第三方账号绑定](../Advanced/ThirdAccount)，让您的用户唯一对应一个userID，以节省资源。[可参考多开说明](../Advanced/MultipleIdentities) 
 
 为了资源节省，我们在registerUserResponse 回调前把userID信息缓存在本地，数据会暂存在浏览器中。所以使用同一个浏览器调用 registerUser 接口会返回相同的 userID信息。如果需要清除缓存的用户信息请调用 。`LocalStore_Clear()` 接口。
 
@@ -130,7 +130,7 @@ class MsEngine {
 
 ## 登录
 
-登录Matchvs服务端，与Matchvs建立连接。服务端会校验游戏信息是否合法，保证连接的安全性。如果一个账号在两台设备上登录，则后登录的设备会连接失败，提示403错误。如果用户加入房间之后掉线，再重新登录进来，则roomID为之前加入的房间的房间号。
+登录jdge服务端，与jdge建立连接。服务端会校验游戏信息是否合法，保证连接的安全性。如果一个账号在两台设备上登录，则后登录的设备会连接失败，提示403错误。如果用户加入房间之后掉线，再重新登录进来，则roomID为之前加入的房间的房间号。
 
 - 请求接口：login
 - 回调接口：loginResponse
@@ -167,7 +167,7 @@ class MsEngine {
 
 ## 加入房间
 
-登录游戏后，需要与其他在线玩家一起对战，先要进行进入房间，类似英雄联盟这样的匹配功能将若干用户匹配至一个房间开始一局游戏，Matchvs 提供4中加入房间的方法。
+登录游戏后，需要与其他在线玩家一起对战，先要进行进入房间，类似英雄联盟这样的匹配功能将若干用户匹配至一个房间开始一局游戏，jdge 提供4中加入房间的方法。
 
 - 请求接口：
   - joinRandomRoom：随机接入房间。
@@ -221,7 +221,7 @@ class MsEngine {
         this.response.joinRoomNotify = (roomUserInfo:MsRoomUserInfo)=>{
             //roomUserInfo.userID 加入房间
         }
-        this.engine.joinRandRoom(3, "hello matchvs");
+        this.engine.joinRandRoom(3, "hello jdge");
     }
 }
 ```
@@ -273,7 +273,7 @@ class MsEngine {
         this.response.joinOverNotify = (notifyInfo:MsJoinOverNotifyInfo)=>{
             //notifyInfo.srcUserID 关闭房间 notifyInfo.roomID
         }
-        this.engine.joinOver("hello matchvs");
+        this.engine.joinOver("hello jdge");
     }
 }
 ```
@@ -383,7 +383,7 @@ class MsEngine {
         this.response.leaveRoomNotify = (leaveRoomInfo:MsLeaveRoomNotify)=>{
             //leaveRoomInfo.srcUserID 离开房间 leaveRoomInfo.roomID
         }
-        this.engine.leaveRoom("hello matchvs");
+        this.engine.leaveRoom("hello jdge");
     }
 }
 ```
@@ -391,7 +391,7 @@ class MsEngine {
 
 ## 登出
 
-退出游戏时要退出登录，断开与Matchvs的连接。
+退出游戏时要退出登录，断开与jdge的连接。
 
 - 请求接口：logout
 - 回调接口：logoutResponse

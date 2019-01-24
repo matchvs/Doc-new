@@ -4,17 +4,17 @@ Sort: 26
 */
 #### 什么是第三方绑定？
 
-Matchvs 服务器会通过注册接口下发“用于在服务器校验的 userID”，开发者在使用时，可将此 userID 与自己游戏的玩家ID进行绑定。
+JDGE 服务器会通过注册接口下发“用于在服务器校验的 userID”，开发者在使用时，可将此 userID 与自己游戏的玩家ID进行绑定。
 
-第三方绑定是指：使用其他的 **用户身份代号** 与Matchvs平台的userID做映射。以实现使用 **用户身份代号** 就能获取 Matchvs 对应平台的 userID 。比如：身份证号，手机号，qq 号等等。
+第三方绑定是指：使用其他的 **用户身份代号** 与JDGE平台的userID做映射。以实现使用 **用户身份代号** 就能获取 JDGE 对应平台的 userID 。比如：身份证号，手机号，qq 号等等。
 
 
 
 #### 为什么要使用第三方绑定？
 
-开发者使用Matchvs服务的时候，每次都要调用 register 接口注册一个 userID，虽然这个 userID 信息会暂时保存在平台的缓存数据中，但是一旦清理掉了，这个 userID 就会变化。如果想长久的使用一个固定的 userID 就需要开发者使用一个 用户身份识别号与 Matchvs 的userID 映射起来。每次开始游戏前获得这个 userID。
+开发者使用JDGE服务的时候，每次都要调用 register 接口注册一个 userID，虽然这个 userID 信息会暂时保存在平台的缓存数据中，但是一旦清理掉了，这个 userID 就会变化。如果想长久的使用一个固定的 userID 就需要开发者使用一个 用户身份识别号与 JDGE 的userID 映射起来。每次开始游戏前获得这个 userID。
 
-为了方便开发者使用，Matchvs 提供了第三方绑定功能。开发者可以直接调用绑定接口，传入 openID  即可获取绑定后的 Matchvs userID 。如果开发者使用绑定接口，则无需再调用注册接口获取 userID。 
+为了方便开发者使用，JDGE 提供了第三方绑定功能。开发者可以直接调用绑定接口，传入 openID  即可获取绑定后的 JDGE userID 。如果开发者使用绑定接口，则无需再调用注册接口获取 userID。 
 
 
 
@@ -24,7 +24,7 @@ Matchvs 服务器会通过注册接口下发“用于在服务器校验的 userI
 
 openID 可以理解为一个在某个系统或者软件中用来识别用户身份的唯一值（身份识别号），可能在其他平台不叫openID，但只要是可以用来对应一个用户即可。这个值可以来源其他的系统或者平台，也可以由开发者自己去定义，可以是手机号码，也可以是身份证号码。比如：你可以获取微信平台用户的openID，也可以是 QQ 平台的 qq号等等。如果不获取其他平台的 openID 也可以自己去实现一套身份定义的openID，你甚至可以使用 1, 2，3 等这样的数据。最终使用什么什么样的数据来 当做 openID 由开发者自己决定。
 
-**提示：** 如果开发者有自己服务器，并且有服务器开发相关技术，也可以自己实现一套 openID 服务来映射Matchvs 的 userID。
+**提示：** 如果开发者有自己服务器，并且有服务器开发相关技术，也可以自己实现一套 openID 服务来映射JDGE 的 userID。
 
 
 
@@ -77,7 +77,7 @@ wx.request({
 
 ## 调用绑定接口
 
-获取到微信用户信息和 openID后， 再调用 matchvs 第三方账号绑定接口获取 Matchvs 用户信息。
+获取到微信用户信息和 openID后， 再调用 JDGE 第三方账号绑定接口获取 JDGE 用户信息。
 
 这里以 egret 代码请求为例：
 
@@ -129,7 +129,7 @@ private static bindOpenIDWithUserID(wxUserInfo:any){
 }
 ```
 
-> 注意：调用第三方绑定接口请求参数 userID 传 0，如果是第一次绑定，接口会返回新的Matchvs userID ，如果已经绑定过，接口会返回您绑定了的Matchvs userID 信息。
+> 注意：调用第三方绑定接口请求参数 userID 传 0，如果是第一次绑定，接口会返回新的JDGE userID ，如果已经绑定过，接口会返回您绑定了的JDGE userID 信息。
 
 ## thirdBind.do 
 
@@ -137,8 +137,8 @@ private static bindOpenIDWithUserID(wxUserInfo:any){
 
 #### 请求地址
 
-- release: https://vsuser.matchvs.com/wc6/thirdBind.do?
-- alpha : http://alphavsuser.matchvs.com/wc6/thirdBind.do?
+- release: https://vsuser-ge.matrix.jdcloud.com/wc6/thirdBind.do?
+- alpha : http://alphavsuser-ge.matrix.jdcloud.com/wc6/thirdBind.do?
 
 #### 请求参数
 
@@ -153,7 +153,7 @@ private static bindOpenIDWithUserID(wxUserInfo:any){
 
 > sign 计算方式：md5(appKey&gameID=value1&openID=value2&session=value3&thirdFlag=value4&appSecret)得到的md5值就是 sign参数的值。这个签名是取 32 为的 小写字符。
 >
-> appkey 和 appSecret 是在 matchvs 官网创建游戏时的信息。
+> appkey 和 appSecret 是在 JDGE 官网创建游戏时的信息。
 
 #### 返回参数
 
@@ -215,7 +215,7 @@ statue 非零
 
 
 
-#### 如果在 Matchvs 第三方绑定使用安全校验？
+#### 如果在 JDGE 第三方绑定使用安全校验？
 
 在调用 `thirdBind.do ` 接口时，传入的 openID 可以进行有效性检测，即验证 openID 是否合法，确保信息安全。官网-> 控制台->我的游戏->设置-> 安全校验 配置有效性检测的接口地址。
 

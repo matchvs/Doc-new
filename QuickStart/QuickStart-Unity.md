@@ -10,15 +10,15 @@ Unity安装和下载(必须Unity 5+):
 
  https://store.unity.com/
 
-### Matchvs SDK下载
+### jdge SDK下载
 
-Matchvs SDK是一个Unity的插件包,同Unity Stroe里面的其他资源一样,通过UnityIDE Import进工程即可
+jdge SDK是一个Unity的插件包,同Unity Stroe里面的其他资源一样,通过UnityIDE Import进工程即可
 
-http://www.matchvs.com/serviceDownload 选择UnitySDK.
+http://home-ge.matrix.jdcloud.com/serviceDownload 选择UnitySDK.
 
 ## Demo上手
 
-为了便于开发者使用和理解Matchvs的实时联网SDK，Matchvs提供了简洁的Demo来展示多人实时联网游戏的开发过程和效果。  
+为了便于开发者使用和理解jdge的实时联网SDK，jdge提供了简洁的Demo来展示多人实时联网游戏的开发过程和效果。  
 
 Demo支持两人或三人同时游戏，匹配成功后，玩家通过向左、向右、加速按钮可以操纵图标移动，先到达终点者胜利。
 
@@ -30,7 +30,7 @@ https://github.com/matchvs/demo-unity
 
 ## 游戏配置
 
-Demo运行之前需要去 [官网](http://www.matchvs.com ) 配置游戏相关信息，以获取Demo运行所需要的GameID、AppKey、SecretID。如图：
+Demo运行之前需要去 [官网](http://home-ge.matrix.jdcloud.com ) 配置游戏相关信息，以获取Demo运行所需要的GameID、AppKey、SecretID。如图：
 
 ![](http://imgs.matchvs.com/static/2_1.png)
 
@@ -44,7 +44,7 @@ Demo运行之前需要去 [官网](http://www.matchvs.com ) 配置游戏相关�
 
 ## 初始化SDK
 
-Matchvs SDK提供了两个重要文件：`MatchVSEngine`和`MatchVSResponse`。想要获取游戏中玩家加入、离开房间、数据收发的信息，需要先实现`MatchVSResponse`中的抽象方法。  
+jdge SDK提供了两个重要文件：`MatchVSEngine`和`MatchVSResponse`。想要获取游戏中玩家加入、离开房间、数据收发的信息，需要先实现`MatchVSResponse`中的抽象方法。  
 
 我们现在新建子类MatchVSResponseInner继承自抽象类MatchVSResponse，如下：
 
@@ -72,7 +72,7 @@ engine.init(matchVSResponses, channel, platform, gameid);
 
 ## 建立连接
 
-接下来，我们就可以从Matchvs获取一个合法的用户ID，通过该ID连接至Matchvs服务端。  
+接下来，我们就可以从jdge获取一个合法的用户ID，通过该ID连接至jdge服务端。  
 
 获取用户ID：
 
@@ -91,7 +91,7 @@ engine.login(userID,token,gameid,gameVersion,appkey,
 
 ## 加入房间
 
-成功连接至Matchvs后，即可点击随机匹配加入一个房间进行游戏。  
+成功连接至jdge后，即可点击随机匹配加入一个房间进行游戏。  
 
 代码如下:
 
@@ -107,7 +107,7 @@ engine.joinRandomRoom(int iMaxPlayer, string strUserProfile);
 
 ## 停止加入
 
-如果游戏人数已经满足开始条件且游戏设计中不提供中途加入，此时需告诉Matchvs不要再向房间里加人。  
+如果游戏人数已经满足开始条件且游戏设计中不提供中途加入，此时需告诉jdge不要再向房间里加人。  
 
 代码如下:
 
@@ -428,7 +428,7 @@ MatchVSHttp.HashSet(this,gameid,userID,key,value,appkey,token, (context,error) =
 
 ## 游戏登出
 
-退出游戏时，需要调用登出接口将与Matchvs的连接断开。
+退出游戏时，需要调用登出接口将与jdge的连接断开。
 
 ```
 engine.logout();
@@ -452,7 +452,7 @@ engine.uninit();
 int errorResponse(string error)
 ```
 
-**注意 ：**Matchvs SDK相关的异常信息可通过该接口获取
+**注意 ：**jdge SDK相关的异常信息可通过该接口获取
 
 文件路径：`Assets\Script\MainUI\GameManager.cs`
 
@@ -462,4 +462,4 @@ int errorResponse(string error)
 
 ## 更多详细说明
 
- [Matchvs SDK 基础功能使用](../APIBasic/unityGuide)
+ [jdge SDK 基础功能使用](../APIBasic/unityGuide)

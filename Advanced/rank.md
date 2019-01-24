@@ -3,7 +3,7 @@ Title: 排行榜教程
 Sort: -1
 */
 
-为方便开发者做游戏全局排行榜，Matchvs 提供了便捷的排行榜功能，主要流程为：
+为方便开发者做游戏全局排行榜，jdge 提供了便捷的排行榜功能，主要流程为：
 
 1.创建排行榜
 
@@ -13,10 +13,10 @@ Sort: -1
 
 ## 域名
 
-Matchvs 环境分为测试环境（alpha）和 正式环境（release），所以在使用http接口时，需要通过域名进行区分。使用正式环境需要先在官网控制台将您的游戏发布上线。
+jdge 环境分为测试环境（alpha）和 正式环境（release），所以在使用http接口时，需要通过域名进行区分。使用正式环境需要先在官网控制台将您的游戏发布上线。
 
-- alpha环境域名：alphavsopen.matchvs.com
-- release环境域名：vsopen.matchvs.com
+- alpha环境域名：alphavsopen-ge.matrix.jdcloud.com
+- release环境域名：vsopen-ge.matrix.jdcloud.com
 
 ## 请求与响应格式
 

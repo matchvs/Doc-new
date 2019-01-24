@@ -29,7 +29,7 @@ Sort: 15
 onCreateRoom(request)
 ```
 
-Matchvs 提供了在 gameServer 里主动创建房间的接口`createRoom()`。调用该接口向 Matchvs 请求创建一个空房间。
+JDGE 提供了在 gameServer 里主动创建房间的接口`createRoom()`。调用该接口向 JDGE 请求创建一个空房间。
 
 ```js
  /**
@@ -90,7 +90,7 @@ touchRoom(msg, callback)
 onDeleteRoom(request)
 ```
 
-Matchvs 提供了在 gameServer 里主动删除房间的接口`destroyRoom()`。调用该接口向 Matchvs 请求删除一个房间。允许在房间内还有玩家时删除房间，这时会先踢出房间内的玩家再执行删除操作。
+JDGE 提供了在 gameServer 里主动删除房间的接口`destroyRoom()`。调用该接口向 JDGE 请求删除一个房间。允许在房间内还有玩家时删除房间，这时会先踢出房间内的玩家再执行删除操作。
 
 ```javascript
 /**
@@ -141,7 +141,7 @@ onJoinRoom(request)
 onJoinOver(request)
 ```
 
-Matchvs提供了在 gameServer 里主动发起 JoinOver 的接口。调用该接口向 Matchvs 通知不要再向房间加人。
+JDGE提供了在 gameServer 里主动发起 JoinOver 的接口。调用该接口向 JDGE 通知不要再向房间加人。
 
 ```javascript
 /**
@@ -170,7 +170,7 @@ joinOver(msg)
 onJoinOpen(request)
 ```
 
-Matchvs 提供了在 gameServer 里主动发起JoinOpen的接口。调用该接口向Matchvs通知允许向房间加人。
+JDGE 提供了在 gameServer 里主动发起JoinOpen的接口。调用该接口向JDGE通知允许向房间加人。
 
 ```javascript
 /**
@@ -253,7 +253,7 @@ onLeaveRoom(request)
 onKickPlayer(request)
 ```
 
-Matchvs 提供了在 gameServer 里主动踢除房间成员的接口。当发现有玩家恶意不准备等情况，可以调用该接口将该玩家踢出房间。
+JDGE 提供了在 gameServer 里主动踢除房间成员的接口。当发现有玩家恶意不准备等情况，可以调用该接口将该玩家踢出房间。
 
 ```javascript
 /**
@@ -285,7 +285,7 @@ onUserState(request)
 
 ## 房间详情
 
-Matchvs 提供了在gameServer 里查询房间详情的接口，查询结果在`onRoomDetail()`中返回。
+JDGE 提供了在gameServer 里查询房间详情的接口，查询结果在`onRoomDetail()`中返回。
 
 ```javascript
 /**
@@ -366,7 +366,7 @@ onRoomDetail(request)
 onSetRoomProperty(request)
 ```
 
-另外 Matchvs 提供了在 gameServer 里修改房间自定义属性的接口。
+另外 JDGE 提供了在 gameServer 里修改房间自定义属性的接口。
 
 ```javascript
 /**
@@ -400,7 +400,7 @@ setRoomProperty(msg)
 onSetFrameSyncRate(request)
 ```
 
-另外 Matchvs 提供了在 gameServer 里设置房间帧同步帧率以及帧缓存的接口：
+另外 JDGE 提供了在 gameServer 里设置房间帧同步帧率以及帧缓存的接口：
 
 ```javascript
 /**

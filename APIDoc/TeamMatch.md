@@ -2,7 +2,7 @@
 Title: 组队匹配
 */
 
-[组队示例](http://demo.matchvs.com/RombBoy/)
+[组队示例](http://demo-ge.matrix.jdcloud.com/RombBoy/)
 
 当前页面是组队相关的API说明。我们同样是以 MatchvsEngine 和 MatchvsResponse 的对象 engine 和 response 来说明。
 
@@ -279,7 +279,7 @@ info 是 MVS.MsTeamMatchInfo 类型。
 
 | 属性         | 类型                | 描述                                                         | 示例值     |
 | ------------ | ------------------- | ------------------------------------------------------------ | ---------- |
-| roomName     | string              | 房间名称                                                     | “matchvs”  |
+| roomName     | string              | 房间名称                                                     | “jdge”  |
 | maxPlayer    | number              | 房间最大人数                                                 | 10         |
 | canWatch     | number              | 是否可以观战 1-可以观战 02不可以观战。                       | 1          |
 | mode         | number              | 玩家自定义数据                                               | 0          |

@@ -4,17 +4,17 @@ Sort: 38
 */
 
 
-# Matchvs SDK TypeScript 版接口说明
+# JDGE SDK TypeScript 版接口说明
 
 
 
 ## 初始化
 
-在连接至 Matchvs前须对SDK进行初始化操作。此时选择连接测试环境（alpha）还是正式环境（release）。[环境说明](../Advanced/EnvGuide) 。初始化请求接口有两个，如果你是使用 Matchvs 官网账号在 Matchvs 控制台创建的游戏（简称Matchvs云服务）使用 init 接口初始化，如果是使用 Matchvs 服务端引擎代码在自己自定的服务器上部署的游戏服务就使用（简称 [Matchvs独立部署]() ） premiseInit 接口初始化。
+在连接至 jdge前须对SDK进行初始化操作。此时选择连接测试环境（alpha）还是正式环境（release）。[环境说明](../Advanced/EnvGuide) 。初始化请求接口有两个，如果你是使用 京东云战网账号在京东云战网控制台创建的游戏（简称jdge云服务）使用 init 接口初始化，如果是使用 JDGE 服务端引擎代码在自己自定的服务器上部署的游戏服务就使用（简称 [jdge独立部署]() ） premiseInit 接口初始化。
 
-**如果 Matchvs 服务正在升级，init 接口会放回 510 错误码，开发者可以选择是否需要展示“服务升级”的提示。**
+**如果 JDGE 服务正在升级，init 接口会放回 510 错误码，开发者可以选择是否需要展示“服务升级”的提示。**
 
-如果游戏属于调试阶段则连接至测试环境，游戏调试完成后即可发布到正式环境运行。  
+如果游戏属于调试阶段则连接至测试环境，游戏调试完成后即可发布到正式环境运行。
 
 - 请求接口：init、premiseInit
 - 回调接口：initResponse
@@ -32,7 +32,7 @@ engine.init(pResponse: MatchvsResponse, pChannel: string, pPlatform: string, gam
 | 参数        | 类型            | 描述                                     | 示例值    |
 | ----------- | --------------- | ---------------------------------------- | --------- |
 | response    | MatchvsResponse | 回调类型MatchvsResponse的对象            | response  |
-| channel     | string          | 渠道，固定值                             | "Matchvs" |
+| channel     | string          | 渠道，固定值                             | "JDGE" |
 | platform    | string          | 平台，选择测试(alpha)or正式环境(release) | "alpha"   |
 | gameID      | number          | 游戏ID，在引擎官网创建游戏给出的ID       | 200103    |
 | appKey      | string          | 游戏 App Key 官网生成                    |           |
@@ -48,7 +48,7 @@ response 中设置一些回调方法，在执行注册、登录、发送事件�
 | ------ | -------------------------------------------------------- |
 | 0      | 成功                                                     |
 | -1     | 失败                                                     |
-| -25    | channel 非法，请检查是否正确填写为 “Matchvs”             |
+| -25    | channel 非法，请检查是否正确填写为 “JDGE”             |
 | -26    | platform 非法，请检查是否正确填写为 “alpha” 或 “release” |
 
 ### premiseInit
@@ -95,7 +95,7 @@ response.initResponse(status:number);
 class MsEngine {
     private static engine = new MatchvsEngine();
 	private static response = new MatchvsResponse();
-    
+
     private init(){
         this.response.initResponse = (status:number)=>{
             if(status == 200){
@@ -104,7 +104,7 @@ class MsEngine {
                 //失败
             }
         }
-        this.engine.init(this.response, "Matchvs", "alpha", 123456, "xxxxappkey", 1);
+        this.engine.init(this.response, "jdge", "alpha", 123456, "xxxxappkey", 1);
     }
 }
 ```
@@ -133,9 +133,9 @@ engine.uninit()
 
 ## 注册用户
 
-Matchvs提供的 `userID` 被用于在各个服务中校验连接的有效性，调试前开发者需要先获取到一个合法的`userID`。调用registerUser接口获取，在registerResponse回调返回。
+jdge提供的 `userID` 被用于在各个服务中校验连接的有效性，调试前开发者需要先获取到一个合法的`userID`。调用registerUser接口获取，在registerResponse回调返回。
 
-每次调用 registerUser 接口都会生成新的 `userID` 为了节省资源消耗， `userID`和 `token` 有需要的可以缓存起来，在之后的应用启动中不必重复获取。如果你有自己的用户系统，可以将Matchvs 提供的 userID 和用户系统进行映射。可以参考 [Matchvs 第三方账号绑定](../Advanced/ThirdAccount)，让您的用户唯一对应一个userID，以节省资源。
+每次调用 registerUser 接口都会生成新的 `userID` 为了节省资源消耗， `userID`和 `token` 有需要的可以缓存起来，在之后的应用启动中不必重复获取。如果你有自己的用户系统，可以将jdge 提供的 userID 和用户系统进行映射。可以参考 [JDGE 第三方账号绑定](../Advanced/ThirdAccount)，让您的用户唯一对应一个userID，以节省资源。
 
 为了资源节省，我们在registerUserResponse 回调前把userID信息缓存在本地，数据会暂存在浏览器中。所以使用同一个浏览器调用 registerUser 接口会返回相同的 userID信息。如果需要清除缓存的用户信息请调用 `LocalStore_Clear()` 接口。
 
@@ -197,7 +197,7 @@ class MsEngine {
 
 ## 登录
 
-登录Matchvs服务端，与Matchvs建立连接。服务端会校验游戏信息是否合法，保证连接的安全性。如果一个账号在两台设备上登录，则后登录的设备会连接失败，提示403错误。如果用户加入房间之后掉线，再重新登录进来，则roomID为之前加入的房间的房间号。
+登录jdge服务端，与jdge建立连接。服务端会校验游戏信息是否合法，保证连接的安全性。如果一个账号在两台设备上登录，则后登录的设备会连接失败，提示403错误。如果用户加入房间之后掉线，再重新登录进来，则roomID为之前加入的房间的房间号。
 
 - 请求接口：login
 - 回调接口：loginResponse
@@ -263,7 +263,7 @@ class MsEngine {
 
 ## 登出
 
-退出登录，断开与Matchvs的连接。
+退出登录，断开与jdge的连接。
 
 - 请求接口：logout
 - 回调接口：logoutResponse
@@ -304,7 +304,7 @@ response.logoutResponse(status:number);
 
 ## 加入房间
 
-登录游戏后，需要与其他在线玩家一起对战，先要进行进入房间，类似英雄联盟这样的匹配功能将若干用户匹配至一个房间开始一局游戏，Matchvs 提供4中加入房间的方法。
+登录游戏后，需要与其他在线玩家一起对战，先要进行进入房间，类似英雄联盟这样的匹配功能将若干用户匹配至一个房间开始一局游戏，JDGE 提供4中加入房间的方法。
 
 - 请求接口：
   - joinRandomRoom：随机接入房间。
@@ -366,7 +366,7 @@ joinRoomWithProperties(matchinfo:MsMatchInfo, userProfile:string, watchSet?: MVS
 | maxPlayer    | number | 玩家最大人数                 | 3                             |
 | mode         | number | 模式可 默认填0               | 0                             |
 | canWatch     | number | 是否可以观战 1-可以 2-不可以 | 1                             |
-| tags         | object | 匹配属性值                   | {title:"Matchvs",name:"demo"} |
+| tags         | object | 匹配属性值                   | {title:"JDGE",name:"demo"} |
 | visibility   | number | 是否可见 0-不可见 1-可见     | 1                             |
 | roomProperty | string | 自定义房间附加信息           | “roomProperty”                |
 
@@ -397,7 +397,7 @@ joinRoomWithProperties(matchinfo:MsMatchInfo, userProfile:string, watchSet?: MVS
 
 ### createRoom
 
-开发者可以在客户端主动创建房间，创建成功后玩家会被自动加入该房间，创建房间者即为房主，如果房主离开房间则Matchvs会自动转移房主并通知房间内所有成员，开发者通过设置CreateRoomInfo创建不同类型的房间。创建房间成功，如果需要再次创建房间需要调用离开房间接口(leaveRoom)先离开当前房间。
+开发者可以在客户端主动创建房间，创建成功后玩家会被自动加入该房间，创建房间者即为房主，如果房主离开房间则jdge会自动转移房主并通知房间内所有成员，开发者通过设置CreateRoomInfo创建不同类型的房间。创建房间成功，如果需要再次创建房间需要调用离开房间接口(leaveRoom)先离开当前房间。
 
 ```typescript
 engine.createRoom(createRoomInfo:MsCreateRoomInfo, userProfile:string, watchSet?:MVS.MsWatchSet): number
@@ -415,7 +415,7 @@ engine.createRoom(createRoomInfo:MsCreateRoomInfo, userProfile:string, watchSet?
 
 | 属性         | 类型   | 描述                         | 示例值         |
 | ------------ | ------ | ---------------------------- | -------------- |
-| roomName     | string | 房间名称                     | “MatchvsRoom”  |
+| roomName     | string | 房间名称                     | “jdgeRoom”  |
 | maxPlayer    | number | 最大玩家数                   | 3              |
 | mode         | number | 模式                         | 1              |
 | canWatch     | number | 是否可以观战 1-可以 2-不可以 | 2              |
@@ -509,7 +509,7 @@ response.joinRoomResponse(status:number, roomUserInfoList:Array<MsRoomUserInfo>,
 | userID      | number | 用户ID   | 32322  |
 | userProfile | string | 玩家简介 | ""     |
 
-#### MsRoomInfo 的属性	
+#### MsRoomInfo 的属性
 
 | 属性         | 类型   | 描述               | 示例值 |
 | ------------ | ------ | ------------------ | ------ |
@@ -527,7 +527,7 @@ response.joinRoomResponse(status:number, roomUserInfoList:Array<MsRoomUserInfo>,
 response.joinRoomNotify(roomUserInfo:MsRoomUserInfo);
 ```
 
-#### 参数 
+#### 参数
 
 | 参数         | 类型           | 描述                 | 示例值 |
 | ------------ | -------------- | -------------------- | ------ |
@@ -552,7 +552,7 @@ class MsEngine {
         this.response.joinRoomNotify = (roomUserInfo:MsRoomUserInfo)=>{
             //roomUserInfo.userID 加入房间
         }
-        this.engine.joinRandRoom(3, "hello matchvs");
+        this.engine.joinRandRoom(3, "hello JDGE");
     }
 }
 ```
@@ -616,7 +616,7 @@ response.joinOverResponse(rsp:MsJoinOverRsp);
 response.joinOverNotify(notifyInfo:MsJoinOverNotifyInfo);
 ```
 
-#### 参数 MsJoinOverNotifyInfo 的属性 
+#### 参数 MsJoinOverNotifyInfo 的属性
 
 | 属性      | 类型   | 描述               | 示例值 |
 | --------- | ------ | ------------------ | ------ |
@@ -640,7 +640,7 @@ class MsEngine {
         this.response.joinOverNotify = (notifyInfo:MsJoinOverNotifyInfo)=>{
             //notifyInfo.srcUserID 关闭房间 notifyInfo.roomID
         }
-        this.engine.joinOver("hello matchvs");
+        this.engine.joinOver("hello JDGE");
     }
 }
 ````
@@ -732,7 +732,7 @@ class MsEngine {
         this.response.leaveRoomNotify = (leaveRoomInfo:MsLeaveRoomNotify)=>{
             //leaveRoomInfo.srcUserID 离开房间 leaveRoomInfo.roomID
         }
-        this.engine.leaveRoom("hello matchvs");
+        this.engine.leaveRoom("hello JDGE");
     }
 }
 ````
@@ -795,7 +795,7 @@ response.getRoomListResponse(status:number, roomInfos:Array<MsRoomInfoEx>);
 | 属性         | 类型   | 描述                         | 示例值         |
 | ------------ | ------ | ---------------------------- | -------------- |
 | roomID       | string | 房间ID                       | "123456786"    |
-| roomName     | string | 房间名称                     | “matchvsRoom”  |
+| roomName     | string | 房间名称                     | “jdgeRoom”  |
 | maxPlayer    | number | 最大人数                     | 3              |
 | mode         | number | 模式                         | 0              |
 | canWatch     | number | 是否可以观战 1-可以 2-不可以 | 2              |
@@ -839,7 +839,7 @@ engine.getRoomListEx(filter:MsRoomFilterEx);
 获取房间列表参数必须和 `createRoom` 接口创建的房间参数一致而且 `createRoom` 中的参数 `visibility`  必须设置为1(可见)。比如：`createRoom` 参数结构 如下：
 
 ```typescript
-var createRoomInfo = new MsCreateRoomInfo("Matchvs",3, 0, 0, 1, "mapA")
+var createRoomInfo = new MsCreateRoomInfo("JDGE",3, 0, 0, 1, "mapA")
 ```
 
 那么getRoomList 参数结构应该如下：
@@ -873,7 +873,7 @@ response.getRoomListExResponse(rsp:MsGetRoomListExRsp);
 | total     | number                 | 房间总数量    | 2      |
 | roomAttrs | Array<MsRoomAttribute> | 房间信息列表  | []     |
 
-#### 参数 MsRoomAttribute 的属性 
+#### 参数 MsRoomAttribute 的属性
 
 | 参数         | 类型   | 描述                         | 示例值         |
 | ------------ | ------ | ---------------------------- | -------------- |
@@ -904,7 +904,7 @@ class MsEgine {
                 //获取失败
             }
         };
-        let filter = new MsRoomFilterEx(3, 0, 0, "matchvs", 0, 1, 0, 0, 0, 3);
+        let filter = new MsRoomFilterEx(3, 0, 0, "JDGE", 0, 1, 0, 0, 0, 3);
        	this.engine.getRoomListEx(filter);
     }
 }
@@ -1005,10 +1005,10 @@ response.getRoomDetailResponse(rsp:MsGetRoomDetailRsp);
 
 创建房间时需要传入房间属性参数，当房间创建好后可以调用 `setRoomProperty` 接口修改房间的属性。比如：房间地图，房间人员的等级要求等等。
 
-- 请求接口：setRoomProperty 
+- 请求接口：setRoomProperty
 - 回调接口：setRoomPropertyResponse，setRoomPropertyNotify
 
-### setRoomProperty 
+### setRoomProperty
 
 ```typescript
 engine.setRoomProperty(roomID:string, roomProperty:string):number
@@ -1082,7 +1082,7 @@ class MsEngine{
         this.response.setRoomPropertyNotify = (notify:MsRoomPropertyNotifyInfo)=>{
             //notify.userID 有人修改了房间的属性，属性值为 notify.roomProperty
         }
-        
+
         this.engine.setRoomProperty(roomID,"属性A");
     }
     ......
@@ -1138,7 +1138,7 @@ engine.sendEvent(data:string):any
 
 ### sendEventEx
 
- `sendEvent` 是 `sendEventEx` 接口的二次封装，只是 `sendEvent` 接口默认把消息发送给了房间其他人。如果需要把消息发送房间指定人员，或者只想把消息发送给 `gameServer` 那么就需要使用 `sendEventEx` 这个接口。想了解 `gameServer` 查看 [gameServer 文挡](../QuickStart/GameServer-JavaScript) 
+ `sendEvent` 是 `sendEventEx` 接口的二次封装，只是 `sendEvent` 接口默认把消息发送给了房间其他人。如果需要把消息发送房间指定人员，或者只想把消息发送给 `gameServer` 那么就需要使用 `sendEventEx` 这个接口。想了解 `gameServer` 查看 [gameServer 文挡](../QuickStart/GameServer-JavaScript)
 
 ```typescript
 engine.sendEventEx(msgType:number, data:string, destType:number, userIDs:Array <number> ):any
@@ -1252,7 +1252,7 @@ class MsEngine{
                 //发送失败
             }
         };
-        
+
         this.response.sendEventNotify = (eventInfo:MsSendEventNotify)=>{
             //eventInfo.srcUserID 发送数据 eventInfo.cpProto
         };
@@ -1278,13 +1278,13 @@ class MsEngine{
 
 ### errorResponse
 
-在调用Matchvs SDK 所有接口是，如果服务有异常就会触发 errorResponse 接口。通过错误码判断是属于哪一个类型的错误，比如 1001 是网络错误。
+在调用jdge SDK 所有接口是，如果服务有异常就会触发 errorResponse 接口。通过错误码判断是属于哪一个类型的错误，比如 1001 是网络错误。
 
 ```typescript
 response.errorResponse(errCode:number, errMsg:string)
 ```
 
-#### 参数 
+#### 参数
 
 | 参数    | 类型   | 描述     | 示例值   |
 | ------- | ------ | -------- | -------- |
@@ -1323,7 +1323,7 @@ class MsEngine{
                 //netnotify.userID 用户已经退出房间了
             }
         };
-        
+
         this.response.errorResponse = (errCode:number, errMsg:string)=>{
             //发生错误 errCode + errMsg
         };
@@ -1408,7 +1408,7 @@ class MsEngine{
                 //用户踢除失败
             }
         };
-        
+
         this.response.kickPlayerNotify = (knotify:MsKickPlayerNotify)=>{
             //srcUserID 把userID 踢掉了
         };
@@ -1439,8 +1439,8 @@ engine.subscribeEventGroup(confirms:Array<string>, cancles:Array<string>):number
 
 | 参数     | 类型          | 描述             | 示例值                 |
 | -------- | ------------- | ---------------- | ---------------------- |
-| confirms | Array<string> | 要订阅的组名     | ["1344333","matchvs1"] |
-| cancles  | Array<string> | 要取消订阅的组名 | ["matchvs","4654"]     |
+| confirms | Array<string> | 要订阅的组名     | ["1344333","jdge1"] |
+| cancles  | Array<string> | 要取消订阅的组名 | ["JDGE","4654"]     |
 
 #### 返回值
 
@@ -1466,7 +1466,7 @@ response.subscribeEventGroupResponse(status:number, groups:Array<string>);
 | 参数   | 类型          | 描述                      | 示例值      |
 | ------ | ------------- | ------------------------- | ----------- |
 | status | number        | 状态值：成功200，其他失败 | 200         |
-| groups | Array<string> | 订阅的组                  | ["MatchVS"] |
+| groups | Array<string> | 订阅的组                  | ["JDGE"] |
 
 ### 示例代码
 
@@ -1484,7 +1484,7 @@ class MsEngine{
     }
 
     public subscribeEventGroup(){
-        this.engine.subscribeEventGroup(["MatchVS"],[]);
+        this.engine.subscribeEventGroup(["JDGE"],[]);
     }
 }
 ```
@@ -1508,8 +1508,8 @@ engine.sendEventGroup(groups:Array<string>, data:string):number
 
 | 参数   | 类型          | 描述       | 示例值          |
 | ------ | ------------- | ---------- | --------------- |
-| data   | string        | 发送的数据 | “hello matchvs” |
-| groups | Array<string> | 发送的分组 | ["MatchVS"]     |
+| data   | string        | 发送的数据 | “hello JDGE” |
+| groups | Array<string> | 发送的分组 | ["JDGE"]     |
 
 #### 返回值
 
@@ -1553,7 +1553,7 @@ response.sendEventGroupNotify(srcUid:number, groups:Array<string>, cpProto:strin
 | 参数      | 类型          | 描述         | 示例值      |
 | --------- | ------------- | ------------ | ----------- |
 | srcUserID | number        | 消息来源用户 | 277773      |
-| groups    | Array<string> | 消息来源分组 | ["MatchVS"] |
+| groups    | Array<string> | 消息来源分组 | ["JDGE"] |
 | cpProto   | string        | 负载消息     | "test"      |
 
 ### 示例代码
@@ -1575,7 +1575,7 @@ class MsEngine{
     }
 
     public sendEventGroup(){
-        this.engine.sendEventGroup(["MatchVS"], "hello matchvs");
+        this.engine.sendEventGroup(["JDGE"], "hello JDGE");
     }
 }
 ```
@@ -1584,7 +1584,7 @@ class MsEngine{
 
 ## 帧同步
 
-Matchvs提供了帧同步的功能，开发者可以让房间内的玩家保持帧同步。 Matchvs 所提供的帧同步能力，让您可以根据游戏需要，直接设置同步帧率，比如10帧每秒，然后您可以调用发送帧同步数据的接口来发送逻辑帧数据。 Matchvs 会缓存每100毫秒的数据，将这100毫秒的数据作为一帧发给各个客户端。
+jdge提供了帧同步的功能，开发者可以让房间内的玩家保持帧同步。 jdge 所提供的帧同步能力，让您可以根据游戏需要，直接设置同步帧率，比如10帧每秒，然后您可以调用发送帧同步数据的接口来发送逻辑帧数据。 jdge 会缓存每100毫秒的数据，将这100毫秒的数据作为一帧发给各个客户端。
 
 - 请求设置帧同步：setFrameSync
 - 帧同步设置回调：setFrameSyncResponse
@@ -1751,7 +1751,7 @@ class MsEngine{
     }
 
     public sendFrameEvent(){
-        this.engine.sendFrameEvent("hello matchvs");
+        this.engine.sendFrameEvent("hello jdge");
     }
 }
 ````
@@ -1941,13 +1941,13 @@ declare class MsReopenRoomNotify{
 	constructor(roomID:string,userID:number, cpProto:string)
 }
 
-	
+
  /**
  * 允许房间加人的通知
  * @param {MsReopenRoomNotify} data
  */
 joinOpenNotify(data:MsReopenRoomNotify);
-	
+
  /**
  * 设置允许房间加人的结果
  * @param {MsReopenRoomResponse} data
@@ -2078,7 +2078,7 @@ class MsEngine {
                 });
             }
         }
-        
+
         var filter = new MsRoomFilterEx(3, 0, 1, "roomProperty", 0, 1, 0, 0, 0, 3);
         engine.getWatchRoomList(filter);
     }
@@ -2202,7 +2202,7 @@ class MsEngine{
             console.log("用户加入观战：",user.userID);
             console.log("用户加入观战时附带的信息：",user.userProfile);
         }
-        
+
         let resNo = this.engine.joinWatchRoom("12345678900000000", "nickName+avatar");
         if(resNo = 0){
             console.log("OK");
@@ -2300,14 +2300,14 @@ class MsEngine{
                 console.log("设置观战数据偏移位置成功");
             }
         }
-        
+
         this.response.liveFrameUpdate = (data)=>{
             var i = 0;
             while ( i < data.frameItems.length){
                 console.log("[Rsp]liveFrameUpdate cpProto:"+ data.frameItems[i++].cpProto );
             }
         }
-        
+
         var resNo = this.engine.setLiveOffset(-1);
         if(resNo == 0){
             console.log("OK");
@@ -2472,13 +2472,13 @@ class MsEngine{
             console.log("用户离开观战：",user.userID)；
             console.log("用户离开时附带的信息：",user.userProfile)
         }
-        
+
         this.response.leaveWatchRoomResponse = (status)=>{
             if(status == 0){
                 console.log("退出观战房间成功");
             }
         }
-        
+
         let resNo = this.engine.leaveWatchRoom("leaveWatchRoom");
         if(resNo == 0){
             console.log("ok");
@@ -2493,15 +2493,15 @@ class MsEngine{
 
 ####  MatchvsLog.closeLog()
 
-关闭Matchvs日志输出。
+关闭jdge日志输出。
 
 #### MatchvsLog.openLog()
 
-打开Matchvs日志输出。
+打开jdge日志输出。
 
 
 
-## 
+##
 
 ## CHANGELOG
 

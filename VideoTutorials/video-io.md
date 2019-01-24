@@ -6,7 +6,7 @@ Title: 视频教程-IO-贪吃星球
 视频包含如下内容：
      
 - java 版 gameServer 新手入门
-- 类球球大作战使用 Matchvs 从立项到上线的完整教程
+- 类球球大作战使用 JDGE 从立项到上线的完整教程
 
 <div style="text-align: center">
 

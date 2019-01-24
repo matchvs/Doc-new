@@ -15,7 +15,7 @@ Sort: 7
 
 ## 导入 SDK
 
-下载[Matchvs JavaScript SDK](http://www.matchvs.com/serviceDownload), 将下载好的压缩包解压, 将其中的文件matchvs.all.js复制到该小游戏项目中, 可放置在小游戏项目的js文件下(实际上, 放在项目的任何位置都可以).
+下载[jdge JavaScript SDK](http://home-ge.matrix.jdcloud.com/serviceDownload), 将下载好的压缩包解压, 将其中的文件matchvs.all.js复制到该小游戏项目中, 可放置在小游戏项目的js文件下(实际上, 放在项目的任何位置都可以).
 
 ![snipaste20180716_163617.png](http://imgs.matchvs.com/static/wechat/snipaste20180716_163617.png)
 

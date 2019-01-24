@@ -3,7 +3,7 @@ Title: 微信约战
 Sort: 28
 */
 
-如何使用微信社交开放能力与Matchvs游戏云,实邀约微信好友进行游戏实时对战
+如何使用微信社交开放能力与JDGE游戏云,实邀约微信好友进行游戏实时对战
 ## 流程图  
 
  
@@ -30,15 +30,15 @@ Sort: 28
 
 ## 创建房间
 
-利用Matchvs提供联网SDK创建房间
+利用JDGE提供联网SDK创建房间
 
-> Matchvs.creatRoom()
+> JDGE.creatRoom()
 
 开发者通过这个API能得到一串RoomID,再通过微信去分享发送给好友或者群
 
 ## 加入房间
 
-> Matchvs.joinRoomSpecial(RoomID)
+> JDGE.joinRoomSpecial(RoomID)
 
 好友点击微信分享的链接进入小游戏后,拿到RoomID(如何拿RoomID,见后文),再通过这个API进入指定房间开始对战游戏
 
@@ -78,10 +78,10 @@ Sort: 28
 
 ###### Object res
 
-| 属性            | 类型                                       | 说明                                       | 
-| ------------- | ---------------------------------------- | ---------------------------------------- | 
-| shareTickets  | Array.< string>                           | 每一项是一个 String 类型的 ShareTicket ，对应每个群。如果此次转发是带 shareTicket 的转发则会有回调此参数。可作为 wx.getShareInfo() 的参数来获取群 id |      
-| groupMsgInfos | Array.< GroupMsgInfo> | 群消息票据信息列表，长度与 res.shareTickets 相等        |      
+| 属性            | 类型                                       | 说明                                       |
+| ------------- | ---------------------------------------- | ---------------------------------------- |
+| shareTickets  | Array.< string>                           | 每一项是一个 String 类型的 ShareTicket ，对应每个群。如果此次转发是带 shareTicket 的转发则会有回调此参数。可作为 wx.getShareInfo() 的参数来获取群 id |
+| groupMsgInfos | Array.< GroupMsgInfo> | 群消息票据信息列表，长度与 res.shareTickets 相等        |
 
 ##### 返回值
 
@@ -121,11 +121,11 @@ API简介如下
 
 ###### Object res
 
-| 属性          | 类型     | 说明          | 
-| ----------- | ------ | ----------- | 
-| scene       | string | 场景值         |      
-| query       | Object | 查询参数        |      
-| shareTicket | string | shareTicket |      
+| 属性          | 类型     | 说明          |
+| ----------- | ------ | ----------- |
+| scene       | string | 场景值         |
+| query       | Object | 查询参数        |
+| shareTicket | string | shareTicket |
 
 [More...](https://mp.weixin.qq.com/debug/wxagame/dev/document/system/life-cycle/wx.getLaunchOptionsSync.html?t=201822)
 

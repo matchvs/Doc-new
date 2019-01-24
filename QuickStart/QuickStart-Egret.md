@@ -3,9 +3,9 @@ Title: 快速入门-Egret
 Sort: 4
 */
 
-# Egret集成Matchvs  
+# Egret集成jdge  
 
-在Egret游戏开发引擎中使用 Matchvs 游戏联网引擎，快速的开发联网对战游戏。
+在Egret游戏开发引擎中使用 jdge 游戏联网引擎，快速的开发联网对战游戏。
 
 ## Egret 环境配置
 
@@ -23,23 +23,23 @@ Sort: 4
 
 打开Lanucher 定位到工具页面，下载wing并安装。  
 
-## Matchvs 集成
+## jdge 集成
 
 #### 1、创建egret游戏开发项目。
 
-打开Lanucher 定位到项目页面。创建项目。在项目创建页面勾选Matchvs游戏云。并创建。
+打开Lanucher 定位到项目页面。创建项目。在项目创建页面勾选jdge游戏云。并创建。
 
 ![](http://imgs.matchvs.com/static/Doc-img/new-start/Egretimg/egret_start2.png)
 
-#### 2、替换matchvs文件夹下面的内容
+#### 2、替换jdge文件夹下面的内容
 
-到 [Matchvs官网下载](http://www.matchvs.com/serviceDownload) TypeScript版本的 MatchvsSDK 解压并取出 matchvs 文件内容到 egret项目的libs目录里面。
+到 [jdge官网下载](http://home-ge.matrix.jdcloud.com/serviceDownload) TypeScript版本的 jdge SDK 解压并取出 jdge 文件内容到 egret项目的libs目录里面。
 
->  `matchvs`文件下三个文件(matchvs.d.ts、matchvs.js、matchvs.min.js)。
+>  `jdge`文件下三个文件(matchvs.d.ts、matchvs.js、matchvs.min.js)。
 
 #### 3、使用 wing打开项目
 
-创建好项目后，在打开项目的wing左边导航可以的libs目录下可以看到有 matchvs文件夹，如下图：
+创建好项目后，在打开项目的wing左边导航可以的libs目录下可以看到有 jdge文件夹，如下图：
 
 ![](http://imgs.matchvs.com/static/Doc-img/new-start/Egretimg/egret_start3.png)
 
@@ -58,17 +58,17 @@ Sort: 4
 
 ![](http://imgs.matchvs.com/static/Doc-img/new-start/Egretimg/egret_start5.png)
 
-以上步骤已经完美集成 Matchvs SDK，接下来就开启你的 联网对战之旅。
+以上步骤已经完美集成 jdge SDK，接下来就开启你的 联网对战之旅。
 
-## Matchvs 使用
+## jdge 使用
 
-在使用 Matchvs 服务之前请确认您已经在 Matchvs官网注册账号并新建好了一款游戏服务。如果还没有注册Matchvs 游戏服务请参考 [Matchvs 快速入门](../matchvs) 文档。
+在使用 jdge 服务之前请确认您已经在 jdge官网注册账号并新建好了一款游戏服务。如果还没有注册jdge 游戏服务请参考 [jdge 快速入门](../jdge) 文档。
 
-Matchvs SDK 接口服务分为 **请求服务** 和 **回调服务** ， 使用是以简单的接口调用和接口返回的方式实现相关联网操作。比如随机加入房间只需要调用`joinRandRoom接口`，加入房间结果就以接口 `joinRoomResponse` 返回。在整个使用过程中，开发者只需要关心`MatchvsEngine`(接口请求调用对象)和 `MatchvsResponse`(接口调用返回对象)。接口请求使用 `MatchvsEngine`对象实例，接口返回使用 `MatchvsResponse` 对象实例。后面后介绍这两个对象的使用方法。此文档只是用于引导开发者接入SDK，需要接口详细的参数说明请看 [API手册](../APIDoc/TypeScript) 
+jdge SDK 接口服务分为 **请求服务** 和 **回调服务** ， 使用是以简单的接口调用和接口返回的方式实现相关联网操作。比如随机加入房间只需要调用`joinRandRoom接口`，加入房间结果就以接口 `joinRoomResponse` 返回。在整个使用过程中，开发者只需要关心`MatchvsEngine`(接口请求调用对象)和 `MatchvsResponse`(接口调用返回对象)。接口请求使用 `MatchvsEngine`对象实例，接口返回使用 `MatchvsResponse` 对象实例。后面后介绍这两个对象的使用方法。此文档只是用于引导开发者接入SDK，需要接口详细的参数说明请看 [API手册](../APIDoc/TypeScript) 
 
-#### Matchvs 变量定义
+#### jdge 变量定义
 
-定义两个全局唯一的Matchvs 服务变量，一个是  `MatchvsEngine` 接口请求对象变量，另一个是`MatchvsResponse` 接口回调对象。示例代码如下：
+定义两个全局唯一的jdge 服务变量，一个是  `MatchvsEngine` 接口请求对象变量，另一个是`MatchvsResponse` 接口回调对象。示例代码如下：
 
 ```typescript
 let engine:MatchvsEngine = new MatchvsEngine();
@@ -92,14 +92,14 @@ class Main extends eui.UILayer {
 
 
 
-#### Matchvs 初始化
+#### jdge 初始化
 
 获取到对象实例后，需要开发者把 `MatchvsResponse` 实例注册到 `MatchvsEngine` 用于注册、登录、加入房间等接口请求后的异步回调。调用 `init` 接口初始化SDK。
 
 请求示例：
 
 ```typescript
-engine.init(response, "Matchvs", "alpha", 201016);
+engine.init(response, "jdge", "alpha", 201016);
 ```
 
 回调示例:
@@ -123,7 +123,7 @@ class Main extends eui.UILayer {
     .....
     private runMatchvs(){
         this.response.initResponse = this.initResponse.bind(this);
-        this.engine.init(this.response, "Matchvs", "alpha", 201016);
+        this.engine.init(this.response, "jdge", "alpha", 201016);
     }
 
 	private initResponse(status:number){
@@ -140,7 +140,7 @@ class Main extends eui.UILayer {
 
 #### 注册用户
 
-Matchvs提供的 `userID` 被用于在各个服务中校验连接的有效性，调试前开发者需要先获取到一个合法的`userID`。调用registerUser接口获取，在registerResponse回调返回。
+jdge提供的 `userID` 被用于在各个服务中校验连接的有效性，调试前开发者需要先获取到一个合法的`userID`。调用registerUser接口获取，在registerResponse回调返回。
 
 请求示例：
 
@@ -156,7 +156,7 @@ response.registerUserResponse = function(userInfo:MsRegistRsp){
 }
 ```
 
-> **注意** : 每次调用 registerUser 接口都会生成新的 `userID` 为了节省资源消耗， `userID`和 `token` 有需要的可以缓存起来，在之后的应用启动中不必重复获取。如果你有自己的用户系统，可以将Matchvs 提供的 userID 和用户系统进行映射。可以参考 [Matchvs 第三方账号绑定](../Advanced/ThirdAccount)，让您的用户唯一对应一个userID，以节省资源。
+> **注意** : 每次调用 registerUser 接口都会生成新的 `userID` 为了节省资源消耗， `userID`和 `token` 有需要的可以缓存起来，在之后的应用启动中不必重复获取。如果你有自己的用户系统，可以将jdge 提供的 userID 和用户系统进行映射。可以参考 [jdge 第三方账号绑定](../Advanced/ThirdAccount)，让您的用户唯一对应一个userID，以节省资源。
 >
 > 为了资源节省，我们在registerUserResponse 回调前把userID信息缓存在本地，数据会暂存在浏览器中。所以使用同一个浏览器调用 registerUser 接口会返回相同的 userID信息。请看 [多开说明](../Advanced/MultipleIdentities) 
 
@@ -179,9 +179,9 @@ private registerUserResponse(userInfo:MsRegistRsp){
 }
 ```
 
-#### 登录Matchvs SDK 联网服务
+#### 登录jdge SDK 联网服务
 
-成功获取 `userID` 后即可连接Matchvs服务。调用 login 接口登录，loginResponse 回调。
+成功获取 `userID` 后即可连接jdge服务。调用 login 接口登录，loginResponse 回调。
 
 请求示例：
 
@@ -197,10 +197,10 @@ response.loginResponse = function(rsp:MsLoginRsp){
 }
 ```
 
-- 其中，`appKey，secret，gameID`是你在Matchvs官网创建游戏后获取的信息，可以[前往控制台](http://www.matchvs.com/manage/gameContentList)查看。appkey和secret是校验游戏合法性的关键信息，请妥善保管secret信息。  
+- 其中，`appKey，secret，gameID`是你在jdge官网创建游戏后获取的信息，可以[前往控制台](http://home-ge.matrix.jdcloud.com/manage/gameContentList)查看。appkey和secret是校验游戏合法性的关键信息，请妥善保管secret信息。  
 - userID 和 token 是调用 registerUser 接口 **注册成功** 的回调信息。
 - deviceID 用于检测是否存在多个设备同时登录同一个用户的情况，如果一个账号在两台设备上登录，则后登录的设备会连接失败。
-- Matchvs默认将相同游戏版本的用户匹配到一起。如果开发者对游戏进行了版本升级，不希望两个版本的用户匹配到一起，此时可以在登录的时候通过`gameVersion`区分游戏版本。 
+- jdge默认将相同游戏版本的用户匹配到一起。如果开发者对游戏进行了版本升级，不希望两个版本的用户匹配到一起，此时可以在登录的时候通过`gameVersion`区分游戏版本。 
 
 在egret 项目中使用示例如下：
 
@@ -215,23 +215,23 @@ private registerUserResponse(userInfo:MsRegistRsp){
 
 private loginResponse(rsp:MsLoginRsp){
     if(rsp.status === 200){
-        console.log("登录Matchvs联网SDK成功");
+        console.log("登录jdge联网SDK成功");
     }
 }
 ```
 
 #### 随机匹配
 
-登录成功后，可以调用Matchvs加入房间接口，将若干用户匹配至一个房间开始一局游戏（如：《荒野行动》的开始匹配、《球球大作战》的开始比赛等）
+登录成功后，可以调用jdge加入房间接口，将若干用户匹配至一个房间开始一局游戏（如：《荒野行动》的开始匹配、《球球大作战》的开始比赛等）
 
-Matchvs默认提供了随机加入房间的模式，调用加入房间逻辑后，Matchvs服务器会自动帮助用户寻找当前可用房间，只有在同一个房间里的用户才可以互相通信。
+jdge默认提供了随机加入房间的模式，调用加入房间逻辑后，jdge服务器会自动帮助用户寻找当前可用房间，只有在同一个房间里的用户才可以互相通信。
 
-随机加入房间的模式下，Matchvs服务器能够快速找到合适的房间，开发者只需要自定义房间人数上限，Matchvs服务端会根据当前房间人数判断是否可继续加入。  加入房间回调有 `joinRoomResponse` 和 `joinRoomNotify` 两个，前者是**调用joinRoom者**收到是否成功加入房间回调的信息，后者是在**房间其他的玩家**收到的回调信息。
+随机加入房间的模式下，jdge服务器能够快速找到合适的房间，开发者只需要自定义房间人数上限，jdge服务端会根据当前房间人数判断是否可继续加入。  加入房间回调有 `joinRoomResponse` 和 `joinRoomNotify` 两个，前者是**调用joinRoom者**收到是否成功加入房间回调的信息，后者是在**房间其他的玩家**收到的回调信息。
 
 请求示例：
 
 ```typescript
-engine.joinRandomRoom(3,"hello matchvs");
+engine.joinRandomRoom(3,"hello jdge");
 ```
 
 回调示例：
@@ -251,12 +251,12 @@ this.response.joinRoomResponse = function(status:number, roomUserInfoList: Array
 ```typescript
 private loginResponse(rsp:MsLoginRsp){
     if(rsp.status === 200){
-        console.log("登录Matchvs联网SDK成功");
+        console.log("登录jdge联网SDK成功");
         this.response.joinRoomNotify = this.joinRoomNotify.bind(this);
         this.response.joinRoomResponse = this.joinRoomResponse.bind(this);
-        this.engine.joinRandomRoom(3,"hello matchvs");
+        this.engine.joinRandomRoom(3,"hello jdge");
     }else{
-        console.log("登录Matchvs联网失败",userInfo.status );
+        console.log("登录jdge联网失败",userInfo.status );
     }
 }
 
@@ -271,9 +271,9 @@ private joinRoomNotify(roomUserInfo:MsRoomUserInfo){
 }
 ```
 
-Matchvs 提供四种加入房间的操作，他们加入房间的操作都是相互平行的，随机匹配只能和随机配的玩家一起，属性匹配只能和属性匹配的玩家一起，但是加入指定房间 与 创建房间是一起的：
+jdge 提供四种加入房间的操作，他们加入房间的操作都是相互平行的，随机匹配只能和随机配的玩家一起，属性匹配只能和属性匹配的玩家一起，但是加入指定房间 与 创建房间是一起的：
 
-- 随机匹配( joinRandRoom ): 由Matchvs 自动匹配用户。
+- 随机匹配( joinRandRoom ): 由jdge 自动匹配用户。
 - 属性匹配( joinRoomWithProperties ): 由开发设定属性相同的用户匹配到一起
 - 加入指定房间 ( joinRoom )：加入指定房间，这个是与 createRoom配合使用，只能加入到 createRoom 创建的房间。
 - 创建房间( createRoom )：开发者自己创建房间。其他玩家要加入必须使用 joinRoom 加入。
@@ -363,7 +363,7 @@ class Main extends eui.UILayer {
 
     private runMatchvs(){
         this.response.initResponse = this.initResponse.bind(this);
-        this.engine.init(this.response, "Matchvs", "alpha", 201479);
+        this.engine.init(this.response, "jdge", "alpha", 201479);
     }
 
     private initResponse(status:number){
@@ -386,10 +386,10 @@ class Main extends eui.UILayer {
 
     private loginResponse(rsp:MsLoginRsp){
         if(rsp.status == 200){
-            console.log("登录Matchvs联网SDK成功");
+            console.log("登录jdge联网SDK成功");
             this.response.joinRoomNotify = this.joinRoomNotify.bind(this);
             this.response.joinRoomResponse = this.joinRoomResponse.bind(this);
-            this.engine.joinRandomRoom(3,"hello matchvs");
+            this.engine.joinRandomRoom(3,"hello jdge");
         }
     }
 
@@ -408,7 +408,7 @@ class Main extends eui.UILayer {
 
 ### 下一步
 
- [Matchvs SDK 基础功能使用](../APIBasic/TypeScriptBase)
+ [jdge SDK 基础功能使用](../APIBasic/TypeScriptBase)
 
 
 

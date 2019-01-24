@@ -6,7 +6,7 @@ Sort: 99
 
 */
 
-# 如何使用Matchvs实现分享房间短号邀请加入指定房间的功能
+# 如何使用 JDGE 实现分享房间短号邀请加入指定房间的功能
 
 
 
@@ -32,7 +32,7 @@ Sort: 99
 
 #### 1. 以UserID作为房间短号,并以房间短号作为属性来创建房间
 
-因为UserID是Matchvs的regist接口返回的,具有唯一性,且长度较小, 所以我们用userID作为房间短号来标识一个房间. 调用`createRoom`并设置房间属性
+因为UserID是 JDGE 的regist接口返回的,具有唯一性,且长度较小, 所以我们用userID作为房间短号来标识一个房间. 调用`createRoom`并设置房间属性
 
 > UserID长度较短,方便用户手动输入. URL和二维码分享的方式没有必要使用短号,直接方向RoomID即可, RoomID通过调用createRoom接口,在 createRoomResponse 取到 .
 

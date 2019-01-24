@@ -9,7 +9,7 @@ Sort: 27
 
 ## 开发者账号注册
 
-进入 [微盟官网](http://union.matchvs.com) 或 [Matchvs](http://www.matchvs.com/home) 点击注册按钮进行开发者账号注册:
+进入 [微盟官网](http://union.matchvs.com) 或 [Matchvs](http://home-ge.matrix.jdcloud.com/home) 点击注册按钮进行开发者账号注册:
 
 ![img](http://imgs.matchvs.com/static/v2.png) 
 

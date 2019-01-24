@@ -2,9 +2,9 @@
 Title: 错误码说明
 */
 
-## 错误码 
+## 错误码
 
-Matchvs SDK 错误码分为两个部分。    
+JDGE SDK 错误码分为两个部分。
 
 - 第一部分：MatchvsEngine 类型接口调用的时候返回值。
 - 第二部分：MatchvsResponse 回调接口中的 status 和 errorResponse 中的 code 值。
@@ -32,7 +32,7 @@ Matchvs SDK 错误码分为两个部分。
 | -21    | 接口调用中包含 cpProto参数或者 userProfile 参数的长度过长，一般限制 1024。 |
 | -23    | msgType 非法                           |
 | -24    | desttype 非法                          |
-| -25    | channel 非法，请检查是否正确填写为 “Matchvs”             |
+| -25    | channel 非法，请检查是否正确填写为 “JDGE”             |
 | -26    | platform 非法，请检查是否正确填写为 “alpha” 或 “release” |
 | -27    | timeout 超出范围  0=< timeout <=600 |
 | -30    | 设置的 rType 值与当前模式冲突。     |
@@ -41,7 +41,7 @@ Matchvs SDK 错误码分为两个部分。
 
 #### MatchvsResponse 回调接口 status
 
-Matchvs SDK 一些附带 status 参数的回调接口中具体的参数值可参考下面表格的说明。
+JDGE SDK 一些附带 status 参数的回调接口中具体的参数值可参考下面表格的说明。
 
 
 **注意** Matchvs相关的异常信息也可通过 errorResponse 接口统一获取。

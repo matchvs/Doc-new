@@ -5,11 +5,11 @@ Sort: 2
 
 ## 注册 Matchvs
 
-[点击登录](http://www.matchvs.com/login) 如果还没有注册账号请先注册
+[点击登录](http://home-ge.matrix.jdcloud.com/login) 如果还没有注册账号请先注册
 
 ## 新建游戏
 
-登录Matchvs后选择 [控制台](http://www.matchvs.com/manage/gameContentList) ，根据以下流程创建游戏
+登录Matchvs后选择 [控制台](http://home-ge.matrix.jdcloud.com/manage/gameContentList) ，根据以下流程创建游戏
 
 ```flow
 st=>start: 登录

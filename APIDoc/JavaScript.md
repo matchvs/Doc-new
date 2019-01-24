@@ -7,23 +7,23 @@ Sort: 37
 ## JavaScriptSDK接口说明
 
 ```javascript
-var Matchvs = require("matchvs.all");
-var engine = new Matchvs.MatchvsEngine();
+var jdge = require("jdge.all");
+var engine = new jdge.MatchvsEngine();
 ```
 
 #### 说明
-- 根据上面的代码片段获取Matchvs引擎的一个实例，接下来可以调用这个实例的方法实现联网对战功能。
+- 根据上面的代码片段获取 jdge 引擎的一个实例，接下来可以调用这个实例的方法实现联网对战功能。
 - 建议在获取一个实例之后，将其作为单例或全局变量。  
 
 ## response
 
 ```javascript
-var Matchvs = require("matchvs.all");
-var response = new Matchvs.MatchvsResponse();
+var jdge = require("matchvs.all");
+var response = new jdge.MatchvsResponse();
 ```
 
 #### 说明
-- 根据上面的代码片段获取Matchvs引擎的一个实例，接下来可以调用这个实例的回调方法实现联网对战功能。
+- 根据上面的代码片段获取 jdge 引擎的一个实例，接下来可以调用这个实例的回调方法实现联网对战功能。
 - 建议在获取一个实例之后，将其作为单例或全局变量。
 
 ## init
@@ -39,18 +39,18 @@ engine.init(response, channel, platform, gameID, appkey, gameVersion)
 | 参数        | 类型   | 描述                                   | 示例值    |
 | ----------- | ------ | -------------------------------------- | --------- |
 | response    | object | 回调对象                               | {}        |
-| channel     | string | 渠道，固定值                           | "Matchvs" |
+| channel     | string | 渠道，固定值                           | "jdge" |
 | platform    | string | 平台，选择测试or正式环境               | "alpha"   |
 | gameID      | number | 游戏ID                                 | 200978    |
-| appkey      | string | 游戏App key，来自Matchvs控制台游戏信息 |           |
+| appkey      | string | 游戏App key，来自 jdge 控制台游戏信息 |           |
 | gameVersion | number | 游戏版本，自定义，用于隔离匹配空间     | 1         |
 
 #### 说明
 
 - response中设置一些回调方法，在执行注册、登录、发送事件等操作对应的方法之后，reponse中的回调函数会被SDK异步调用。
-- 在连接至 Matchvs前须对SDK进行初始化操作。此时选择连接测试环境（alpha）还是正式环境（release）。
+- 在连接至 jdge 前须对SDK进行初始化操作。此时选择连接测试环境（alpha）还是正式环境（release）。
 - 如果游戏属于调试阶段则连接至测试环境，游戏调试完成后即可发布到正式环境运行。
-- 如果 Matchvs 服务正在升级，init 接口会放回 510 错误码，开发者可以选择是否需要展示“服务升级”的提示。
+- 如果 jdge 服务正在升级，init 接口会放回 510 错误码，开发者可以选择是否需要展示“服务升级”的提示。
 
 
 
@@ -60,13 +60,13 @@ engine.init(response, channel, platform, gameID, appkey, gameVersion)
 | ------ | --------------------------------------------------------- |
 | 0      | 成功                                                      |
 | -1     | 失败                                                      |
-| -25    | channel 非法，请检查是否正确填写为 “Matchvs”              |
+| -25    | channel 非法，请检查是否正确填写为 “ jdge ”              |
 | -26    | platform 非法，请检查是否正确填写为 “alpha”  或 “release” |
 
 #### 示例
 
 ```javascript
-var result = engine.init(response,'Matchvs','alpha','200978', "4fd4a67c10e84e259a2c3c417b9114f4", 1);
+var result = engine.init(response,'jdge','alpha','200978', "4fd4a67c10e84e259a2c3c417b9114f4", 1);
 if(result === 0) {
 	console.log(“初始化请求成功”);
 }
@@ -180,7 +180,7 @@ response.registerUserResponse(userInfo)
 
 - response是engine.init方法中传入的对象，调用engine.registerUser注册成功之后，response对象的registerUserResponse方法如果存在则会被调用，调用时传入一个封装了用户信息的参数userInfo。
 
-- 注册用户信息，用以获取一个合法的userID，通过此ID可以连接至Matchvs服务器。一个用户只需注册一次。
+- 注册用户信息，用以获取一个合法的userID，通过此ID可以连接至 jdge 服务器。一个用户只需注册一次。
 
 > 需要注意：调用此接口成功注册用户后，SDK会缓存用户信息。即使再次调用`regist()`会返回相同的UserID,如需重新注册新的用户须调用SDK的 `LocalStore_Clear()` 函数以清除缓存的用户信息。
 >
@@ -253,7 +253,7 @@ response.loginResponse(loginRsp)
 
 #### 说明
 
-- 登录Matchvs服务端，与Matchvs建立连接。
+- 登录 jdge 服务端，与 jdge 建立连接。
 - 服务端会校验游戏信息是否合法，保证连接的安全性。
 - 如果一个账号在两台设备上登录，则后登录的设备会连接失败。
 - 如果用户加入房间之后掉线，再重新登录进来，则roomID为之前加入的房间的房间号。
@@ -292,7 +292,7 @@ engine.logout(cpProto)
 
 #### 说明
 
-- 退出登录，断开与Matchvs的连接。
+- 退出登录，断开与 jdge 的连接。
 
 
 
@@ -374,7 +374,7 @@ engine.joinRoomWithProperties(matchInfo, userProfile, watchSet)
 | maxPlayer    | number | 玩家最大人数                 | 3                             |
 | mode         | number | 模式可 默认填0               | 0                             |
 | canWatch     | number | 是否可以观战 1-可以 2-不可以 | 1                             |
-| tags         | object | 匹配属性值                   | {title:"Matchvs",name:"demo"} |
+| tags         | object | 匹配属性值                   | {title:"jdge",name:"demo"} |
 | visibility   | number | 是否可见 0-不可见 1-可见     | 1                             |
 | roomProperty | string | 自定义房间附加信息           | “roomProperty”                |
 
@@ -407,7 +407,7 @@ engine.joinRoomWithProperties(matchInfo, userProfile, watchSet)
 
 ```javascript
 var mxaNumer = 3;
-var matchinfo = new Matchvs.MsMatchInfo();
+var matchinfo = new jdge.MsMatchInfo();
 matchinfo.maxPlayer =3;
 matchinfo.mode = 0;
 matchinfo.canWatch = 1;
@@ -744,7 +744,7 @@ engine.createRoom(createRoomInfo, userProfile,watchSet)
 
 | 属性         | 类型   | 描述                         | 示例值         |
 | ------------ | ------ | ---------------------------- | -------------- |
-| roomName     | string | 房间名称                     | "MatchvsRoom"  |
+| roomName     | string | 房间名称                     | "jdgeRoom"  |
 | maxPlayer    | number | 最大玩家数                   | 3              |
 | mode         | number | 模式                         | 1              |
 | canWatch     | number | 是否可以观战 1-可以 2-不可以 | 2              |
@@ -775,21 +775,21 @@ engine.createRoom(createRoomInfo, userProfile,watchSet)
 
 #### 说明
 
-- 开发者可以在客户端主动创建房间，创建成功后玩家会被自动加入该房间，创建房间者即为房主，如果房主离开房间则Matchvs会自动转移房主并通知房间内所有成员，开发者通过设置CreateRoomInfo创建不同类型的房间
+- 开发者可以在客户端主动创建房间，创建成功后玩家会被自动加入该房间，创建房间者即为房主，如果房主离开房间则 jdge 会自动转移房主并通知房间内所有成员，开发者通过设置CreateRoomInfo创建不同类型的房间
 - 创建房间时，如果没有设置watchSet 参数，则默认是不可观战的， watchSet 参数要与canWatch参结合使用，如果没有设置观战参数，再获取房间列表的时候 canWatch参数需要设置0。
 - 创建房间成功，如果需要再次创建房间需要调用离开房间接口(leaveRoom)先离开当前房间。
 
 #### 示例
 
 ```javascript
-var createRoom = new Matchvs.MsCreateRoomInfo();
+var createRoom = new jdge.MsCreateRoomInfo();
 createRoom.name = 'roomName';
 createRoom.maxPlayer = 3;
 createRoom.mode = 0;
 createRoom.canWatch = 1;
 createRoom.visibility = 1;
 createRoom.roomProperty = '白天模式';
-var result = engine.createRoom(createRoom,"Matchvs");
+var result = engine.createRoom(createRoom,"jdge");
 console.log("createRoom result"+result);
 ```
 
@@ -856,7 +856,7 @@ engine.getRoomList(filter)
 #### 示例
 
 ```javascript
-var createRoom = new Matchvs.MsCreateRoomInfo();
+var createRoom = new jdge.MsCreateRoomInfo();
 createRoom.maxPlayer = 3;
 createRoom.mode = 0;
 createRoom.canWatch = 1;
@@ -883,7 +883,7 @@ response.getRoomListResponse(status, roomInfos)
 | 属性         | 类型   | 描述                         | 示例值         |
 | ------------ | ------ | ---------------------------- | -------------- |
 | roomID       | string | 房间ID                       | "123456786"    |
-| roomName     | string | 房间名称                     | “matchvsRoom”  |
+| roomName     | string | 房间名称                     | “jdgeRoom”  |
 | maxPlayer    | number | 最大人数                     | 3              |
 | mode         | number | 模式                         | 0              |
 | canWatch     | number | 是否可以观战 1-可以 2-不可以 | 2              |
@@ -1154,7 +1154,7 @@ engine.setRoomProperty(roomID, roomProperty)
 
 ```
 var roomID = "34532423423423";
-var newRoomProperty = 'Matchvs';
+var newRoomProperty = 'jdge';
 var result = engine.setRoomProperty(roomID,newRoomProperty);
 console.log("修改房间属性 result"+ result);
 ```
@@ -1550,7 +1550,7 @@ engine.subscribeEventGroup([confirms], [cancles])
 
 | 参数     | 类型  | 描述       | 示例值      |
 | -------- | ----- | ---------- | ----------- |
-| confirms | array | 订阅组     | ["Matchvs"] |
+| confirms | array | 订阅组     | ["jdge"] |
 | cancles  | array | 取消订阅组 | ["hello"]   |
 
 #### 返回值
@@ -1581,7 +1581,7 @@ response.subscribeEventGroupResponse(status, [group])
 | 参数   | 类型   | 描述       | 示例值      |
 | ------ | ------ | ---------- | ----------- |
 | status | number | 状态，200代表成功 | 200  |
-| group  | array  | 组数组     | ["Matchvs"] |
+| group  | array  | 组数组     | ["jdge"] |
 
 #### 说明
 
@@ -1598,7 +1598,7 @@ engine.sendEventGroup(cpProto, [group])
 | 参数    | 类型   | 描述   | 示例值      |
 | ------- | ------ | ------ | ----------- |
 | cpProto | string | 自定义消息  | "test"      |
-| group   | array  | 发送的组列表 | ["Matchvs"] |
+| group   | array  | 发送的组列表 | ["jdge"] |
 
 #### 返回值
 
@@ -1646,7 +1646,7 @@ response.sendEventGroupNotify(srcUid, [group], cpProto)
 | 参数      | 类型   | 描述     | 示例值      |
 | --------- | ------ | -------- | ----------- |
 | srcUserID | number | 源用户ID | 277773      |
-| groups    | number | 组数组   | ["Matchvs"] |
+| groups    | number | 组数组   | ["-ge.matrix.jdcloud.com"] |
 | cpProto   | string | 消息内容 | "test"      |
 
 #### 说明
@@ -2625,7 +2625,7 @@ response.errorResponse = function(error) {
 	console.log("错误信息：", error);
 }
 ```
-**注意** Matchvs相关的异常信息可通过该接口获取 更多[错误码说明](../ErrCode) 
+**注意** -ge.matrix.jdcloud.com相关的异常信息可通过该接口获取 更多[错误码说明](../ErrCode) 
 
 
 

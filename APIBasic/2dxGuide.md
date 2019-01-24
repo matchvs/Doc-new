@@ -85,7 +85,7 @@ MatchVSEngine::getInstance()->login(userid, token.c_str(), gameid, gameversion, 
 | gatewayid   | 服务器节点ID，默认为0              |
 
 
-- 其中，appKey，secret，gameID是创建游戏后从官网获取的信息，可以前往 [前往控制台](http://www.matchvs.com/manage/gameContentList) 查看。appkey和secret是校验游戏合法性的关键信息，请妥善保管secret信息。  
+- 其中，appKey，secret，gameID是创建游戏后从官网获取的信息，可以前往 [前往控制台](http://home-ge.matrix.jdcloud.com/manage/gameContentList) 查看。appkey和secret是校验游戏合法性的关键信息，请妥善保管secret信息。  
 - userID 和 token 是第二步 **注册成功** 的回调信息。  
 - deviceID 用于检测是否存在多个设备同时登录同一个用户的情况，如果一个账号在两台设备上登录，则后登录的设备会连接失败。
 
@@ -324,11 +324,11 @@ MatchVSEngine::getInstance()->uninit();
 
 ## 数据存取
 
-**注意** Matchvs 环境分为测试环境（alpha）和 正式环境（release），所以在使用http接口时，需要通过域名进行区分。使用正式环境需要先在[官网控制台](http://www.matchvs.com/manage/gameContentList)将您的游戏发布上线。
+**注意** Matchvs 环境分为测试环境（alpha）和 正式环境（release），所以在使用http接口时，需要通过域名进行区分。使用正式环境需要先在[官网控制台](http://home-ge.matrix.jdcloud.com/manage/gameContentList)将您的游戏发布上线。
 
-**alpha环境域名：alphavsopen.matchvs.com**
+**alpha环境域名：alphavsopen-ge.matrix.jdcloud.com**
 
-**release环境域名：releasevsopen.matchvs.com**
+**release环境域名：releasevsopen-ge.matrix.jdcloud.com**
 
 
 存储接口 ： **wc5/hashSet.do**
@@ -336,7 +336,7 @@ MatchVSEngine::getInstance()->uninit();
 开发者可以通过调用该接口将自定义的数据存储至服务器。
 
 ```
-http://alphavsopen.matchvs.com/wc5/hashSet.do?gameID=102003&userID=21023&key=1&value=a&sign=68c592733f19f6c5ae7e8b7ae8e5002f 
+http://alphavsopen-ge.matrix.jdcloud.com/wc5/hashSet.do?gameID=102003&userID=21023&key=1&value=a&sign=68c592733f19f6c5ae7e8b7ae8e5002f 
 ```
 
 **注意：** value的长度上限为255字符，如果长度超过255，Matchvs 在存储时会忽略255后的字符内容。存储上限为每个玩家1000条，如果超过1000条，会返回对应错误。
@@ -372,7 +372,7 @@ http://alphavsopen.matchvs.com/wc5/hashSet.do?gameID=102003&userID=21023&key=1&v
 开发者可以通过调用该接口获取存储在服务器的自定义数据。
 
 ```
-http://vsopen.matchvs.com/wc5/hashGet.do?gameID=102003&userID=21023&key=1&sign=b0244f7ed1d433975512a8f6c2ba4517 
+http://vsopen-ge.matrix.jdcloud.com/wc5/hashGet.do?gameID=102003&userID=21023&key=1&sign=b0244f7ed1d433975512a8f6c2ba4517 
 ```
 
 **注意** 存储前，如果将字符串解码成二进制再用UrlEndcode编码后存储，对应的取出时应用UrlDecode进行解码后显示

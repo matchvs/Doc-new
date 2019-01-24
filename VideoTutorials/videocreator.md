@@ -6,7 +6,7 @@ Sort: 53
 
 视频包含如下内容：
 
-- 介绍如何使用 Matchvs creator 插件
+- 介绍如何使用 JDGE creator 插件
 - 使用插件的注意事项
 
 <div style="text-align: center">

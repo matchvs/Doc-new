@@ -4,9 +4,9 @@ Sort: 23
 */
 
 ## 1.准备
-1. 开发者需要先在官网的控制台[创建游戏](http://www.matchvs.com/manage/addGame)
-2. 并且[添加gameServer服务](http://www.matchvs.com/manage/gameServer)，
-3. [下载gameServer框架](http://www.matchvs.com/serviceDownload)并且完成开发.   
+1. 开发者需要先在官网的控制台[创建游戏](http://home-ge.matrix.jdcloud.com/manage/addGame)
+2. 并且[添加gameServer服务](http://home-ge.matrix.jdcloud.com/manage/gameServer)，
+3. [下载gameServer框架](http://home-ge.matrix.jdcloud.com/serviceDownload)并且完成开发.   
 
 
 ## 2.环境
@@ -26,7 +26,7 @@ Sort: 23
 
 4.3 添加代码：`git add --all`
 
-4.4 提交代码：`git commit -m "对提交代码的说明"`  
+4.4 提交代码：`git commit -m "对提交代码的说明"` 
 
 4.5 上传远程仓库：`git push origin master` （效果如下图）
 

@@ -3,7 +3,7 @@ Title: GameServer简介
 Sort: -1
 */
 
-通过接入 Matchvs SDK ，我们已经可以实现多人在线联网游戏。但对于部分复杂度比较高的游戏，往往需要在服务器端进行个性化的功能实现，如客户端之间的安全性校验、数据校验、结果仲裁、随机道具生成等功能。这时，Matchvs 推荐您使用 gameServer 框架。
+通过接入 jdge SDK ，我们已经可以实现多人在线联网游戏。但对于部分复杂度比较高的游戏，往往需要在服务器端进行个性化的功能实现，如客户端之间的安全性校验、数据校验、结果仲裁、随机道具生成等功能。这时，jdge 推荐您使用 gameServer 框架。
 
 ## 一个例子
 
@@ -33,17 +33,17 @@ gameServer 远不止用于实现以上示例机制，更多丰富的游戏内逻
 
 ## 代码托管
 
-Matchvs 提供了 gameServer 托管的功能，开发者无需自己搭建游戏房间服务器，自然也省去了维护服务器的麻烦。开发者需要做的只有：开发完游戏服务端逻辑，将代码上传到 git 仓库，然后发布启动 gameServer。
+jdge 提供了 gameServer 托管的功能，开发者无需自己搭建游戏房间服务器，自然也省去了维护服务器的麻烦。开发者需要做的只有：开发完游戏服务端逻辑，将代码上传到 git 仓库，然后发布启动 gameServer。
 
-为方便开发者对线上的 gameServer 服务进行管理，Matchvs 提供了 gameServer 日志查看、告警通知、数据监控功能。
+为方便开发者对线上的 gameServer 服务进行管理，jdge 提供了 gameServer 日志查看、告警通知、数据监控功能。
 
-如果您不想将代码托管，可以使用 Matchvs 自托管方式，将 Matchvs 整套服务包括 gameServer 部署在自己的服务器上。
+如果您不想将代码托管，可以使用 jdge 自托管方式，将 jdge 整套服务包括 gameServer 部署在自己的服务器上。
 
 如果想要体验自托管，可以加入技术支持交流群（QQ 群: 450335262）向管理员索取自托管版本。
 
 ## gameServer 管理
 
-Matchvs 提供了一系列 gameServer 管理功能，您可以点击 gameServer 名称进入 gameServer详情 ：
+jdge 提供了一系列 gameServer 管理功能，您可以点击 gameServer 名称进入 gameServer详情 ：
 
 ![](http://imgs.matchvs.com/static/Doc-img/new-start/gameServerimg/gslist.png)
 
@@ -51,7 +51,7 @@ Matchvs 提供了一系列 gameServer 管理功能，您可以点击 gameServer 
 
 ## 数据库
 
-Matchvs 提供了数据存储功能，详情可以参考[数据存储教程](../Advanced//DataStoreGuide)。如果您觉得不够用，则可以使用自己的数据库。
+jdge 提供了数据存储功能，详情可以参考[数据存储教程](../Advanced//DataStoreGuide)。如果您觉得不够用，则可以使用自己的数据库。
 
 或者您有自己的服务器业务需要和 gameServer 进行互通，也通过以下方式实现。
 
@@ -83,7 +83,7 @@ Matchvs 提供了数据存储功能，详情可以参考[数据存储教程](../
 
 ## 告警服务
 
-当您的 gameServer 出现异常时，Matchvs 将会发送告警通知。您需要提前在告警设置页面，添加告警联系人。
+当您的 gameServer 出现异常时，jdge 将会发送告警通知。您需要提前在告警设置页面，添加告警联系人。
 
 ![](http://imgs.matchvs.com/static/Doc-img/new-start/gameServerimg/gswarn.png)
 

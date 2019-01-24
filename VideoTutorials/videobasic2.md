@@ -7,9 +7,9 @@ Sort: 48
 视频包含如下内容：
 
 - 以王者荣耀为例，介绍联网相关功能
-- 介绍 Matchvs 随机匹配功能
+- 介绍 JDGE 随机匹配功能
 - Demo 效果演示  
-- 介绍 Matchvs 数据传输功能
+- 介绍 JDGE 数据传输功能
 
 <div style="text-align: center">  
 

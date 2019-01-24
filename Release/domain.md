@@ -16,34 +16,19 @@ Sort: 32
 
 ## request 合法域名:
 
-https://sdk.matchvs.com
+https://sdk-ge.matrix.jdcloud.com
 
-https://vsopen.matchvs.com
+https://-ge.matrix.jdcloud.com
 
-https://alphavsopen.matchvs.com
+https://alpha-ge.matrix.jdcloud.com
 
 
 
 ## socket 合法域名:
-wss://gateway.matchvs.com  
+wss://bj01-gateway-ge.matrix.jdcloud.com  
 
-wss://alphagateway.matchvs.com  
+wss://gd01-alphagateway-ge.matrix.jdcloud.com  
 
-wss://cn1.gateway.matchvs.com    
-
-wss://cn2.gateway.matchvs.com     
-
-wss://cn3.gateway.matchvs.com    
-
-wss://cn4.gateway.matchvs.com   
-
-wss://cn5.gateway.matchvs.com     
-
-wss://cn6.gateway.matchvs.com     
-
-wss://cn7.gateway.matchvs.com    
-
-wss://cn8.gateway.matchvs.com   
 
 
 
@@ -57,10 +42,6 @@ wss://cn8.gateway.matchvs.com
 
 以下旧的域名还在维护中，建议在配置里添加新域名，删除旧域名：  
 
-https://alphavsuser.matchvs.com  
+https://alphavsuser-ge.matrix.jdcloud.com  
 
-https://vsuser.matchvs.com  
-
-wss://hotel.matchvs.com
-
-wss://alphahotel.matchvs.com
+https://vsuser-ge.matrix.jdcloud.com  

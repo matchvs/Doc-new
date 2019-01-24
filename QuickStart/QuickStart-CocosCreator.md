@@ -26,7 +26,7 @@ CreatorIDE安装成功后，双击打开CreatorIDE，选择新建项目选择一
 
 ![](http://imgs.matchvs.com/static/Doc-img/new-start/CocosCreatorImg/creatorNewProject.jpg)
 
-**注意** Matchvs的联网游戏案例已经集成进如了Cocos Creator v2.0.7版本中，建议新使用的玩家可以先建立一个联网游戏案例进行体验。
+**注意** jdge的联网游戏案例已经集成进如了Cocos Creator v2.0.7版本中，建议新使用的玩家可以先建立一个联网游戏案例进行体验。
 
 选择好自己的工程路径后，点击新建项目,新的工程就创建好了。
 
@@ -34,7 +34,7 @@ CreatorIDE安装成功后，双击打开CreatorIDE，选择新建项目选择一
 
 #### Creator V2.0.7
 
-在CreatorV2.0.7 版本之后推出了新的服务模块。同时在服务模块中也集成了Matchvs，使大家集成更加方便 `服务模块在面板选项中`。
+在CreatorV2.0.7 版本之后推出了新的服务模块。同时在服务模块中也集成了jdge，使大家集成更加方便 `服务模块在面板选项中`。
 
 
 服务模块如下图:
@@ -52,7 +52,7 @@ try {
     engine =  new window.MatchvsEngine();
     response = new window.MatchvsResponse();
 	} catch (e) {
-	console.warn("load matchvs fail,"+e.message);
+	console.warn("load jdge fail,"+e.message);
 }
 module.exports = {
     engine: engine,
@@ -69,7 +69,7 @@ module.exports = {
 
 ![](http://imgs.matchvs.com/static/Doc-img/new-start/CocosCreatorImg/creatorExtend.png)
 
-点击扩展商店，点击Creator插件，选择Matchvs游戏云-联网服务插件，如下图所示
+点击扩展商店，点击Creator插件，选择jdge游戏云-联网服务插件，如下图所示
 
 ![](http://imgs.matchvs.com/static/Doc-img/new-start/CocosCreatorImg/creatorStore.png)
 
@@ -128,7 +128,7 @@ cc.Class({
 
 ![](http://imgs.matchvs.com/static/Doc-img/new-start/CocosCreatorImg/creator_12.png)
 
- 6：Matchvs SDK 接口使用
+ 6：jdge SDK 接口使用
 ​	
  - 第一步初始化 init
 
@@ -136,7 +136,7 @@ cc.Class({
     MatchvsInit() {
 		var appkey = '4fd4a67c10e84e259a2c3c417b9114f4';
 		var gameVersion = 1;
-        this.engine.init(this.rsp,'Matchvs','release',this.gameID,appkey,gameVersion);
+        this.engine.init(this.rsp,'jdge','release',this.gameID,appkey,gameVersion);
     },
 
     initResponse :function (status) {
@@ -179,7 +179,7 @@ Login(userID,token) {
 
 loginResponse:function (MsLoginRsp) {
 	if (MsLoginRsp.status === 200) {
-		this.labelLog('恭喜你登录成功，来到Matchvs的世界，你已经成功的迈出了第一步，Hello World');
+		this.labelLog('恭喜你登录成功，来到jdge的世界，你已经成功的迈出了第一步，Hello World');
 	} else {
 		this.labelLog('登录失败');
 	}
@@ -213,7 +213,7 @@ cc.Class({
     MatchvsInit() {
 		var appkey = '4fd4a67c10e84e259a2c3c417b9114f4';
 		var gameVersion = 1;
-        this.engine.init(this.rsp,'Matchvs','release',this.gameID,appkey,gameVersion);
+        this.engine.init(this.rsp,'jdge','release',this.gameID,appkey,gameVersion);
     },
 
     initResponse :function (status) {
@@ -240,7 +240,7 @@ cc.Class({
 
     loginResponse:function (loginRsp) {
         if (loginRsp.status === 200) {
-            this.labelLog('恭喜你登录成功，来到Matchvs的世界，你已经成功的迈出了第一步，Hello World');
+            this.labelLog('恭喜你登录成功，来到jdge的世界，你已经成功的迈出了第一步，Hello World');
         } else {
             this.labelLog('登录失败');
         }
@@ -308,9 +308,9 @@ export default class NewClass extends cc.Component {
                 self.AppKey = self.appKeyInput.string;
             }
             if (Number(self.gameIdInput.string) === 0) {
-                self.Engine.init(self.Response,"Matchvs","alpha",Number(self.gameIdInput.placeholder));
+                self.Engine.init(self.Response,"jdge","alpha",Number(self.gameIdInput.placeholder));
             }else {
-                self.Engine.init(self.Response,"Matchvs","alpha",Number(self.gameIdInput.string));
+                self.Engine.init(self.Response,"jdge","alpha",Number(self.gameIdInput.string));
             }
 		});
         self.initEvent();
@@ -392,4 +392,4 @@ export default class NewClass extends cc.Component {
 }
 ```
 
-[更多Matchvs文档查看基础功能文档](../APIBasic/JavaScriptBase)
+[更多jdge文档查看基础功能文档](../APIBasic/JavaScriptBase)

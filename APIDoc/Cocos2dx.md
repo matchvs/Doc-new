@@ -14,13 +14,13 @@ int32_t init(MatchVSResponse *pMatchVSResponse, const MsString &channel, const M
 | 参数             | 类型            | 描述                 | 示例值    |
 | ---------------- | --------------- | -------------------- | --------- |
 | pMatchVSResponse | MatchVSResponse | MatchVSResponse派生类指针 |           |
-| channel          | const MsString  | 渠道，固定值              | "Matchvs" |
+| channel          | const MsString  | 渠道，固定值              | "jdge" |
 | platform         | const MsString  | MatchVSResponse派生类指针 | "alpha"   |
 | gameID           | uint32_t        | 游戏ID                    | 2001003   |
 
 ### 说明
 
-1.在连接至 Matchvs 前须对SDK进行初始化操作。此时选择连接测试环境还是正式环境。
+1.在连接至 jdge 前须对SDK进行初始化操作。此时选择连接测试环境还是正式环境。
 
 2.如果游戏属于调试阶段则连接至测试环境，游戏调试完成后即可发布到正式环境运行。
 
@@ -31,7 +31,7 @@ int32_t init(MatchVSResponse *pMatchVSResponse, const MsString &channel, const M
 |错误码| 含义                                     |
 | ---- | ---------------------------------------- |
 | -1   | 失败                                     |
-| -2   | channel 非法，请检查是否正确填写为"Matchvs"|
+| -2   | channel 非法，请检查是否正确填写为"jdge"|
 | -3   | platform 非法，请检查是否正确填写为"alpha" 或 "release" |
 
 ## 
@@ -70,7 +70,7 @@ int32_t registerUser();
 
 ### 说明
 
-注册用户信息，用以获取一个合法的userID，通过此ID可以连接至Matchvs服务器。一个用户只需注册一次，不必重复注册
+注册用户信息，用以获取一个合法的userID，通过此ID可以连接至 jdge 服务器。一个用户只需注册一次，不必重复注册
 
 ## registerUserResponse
 
@@ -104,9 +104,9 @@ int32_t login(int userid, const MsString &token, int gameid, int gameversion, co
 | ----------- | -------------- | -------------------------- | ------ |
 | userid      | int            | 用户ID，调用注册接口后获取             | 123456 |
 | token       | const MsString | 用户token，调用注册接口后获取          | ""     |
-| gameid      | int            | 游戏ID，来自Matchvs控制台游戏信息      | 210329 |
+| gameid      | int            | 游戏ID，来自 jdge 控制台游戏信息      | 210329 |
 | gameversion | int            | 游戏版本，自定义，用于隔离匹配空间     | 1      |
-| appkey      | const MsString | 游戏App key，来自Matchvs控制台游戏信息 | ""     |
+| appkey      | const MsString | 游戏App key，来自 jdge 控制台游戏信息 | ""     |
 | secretkey   | const MsString | 用户token，调用注册接口后获取          | ""     |
 | deviceid    | const MsString | 设备ID，用于多端登录检测，请保证是唯一ID     | ""     |
 | gatewayid   | int            | 服务器节点ID，默认为0                  | 0      |
@@ -137,7 +137,7 @@ virtual int loginResponse(const MsLoginRsp &tRsp) = 0;
 
 - 1.如果用户加入房间之后掉线，再重新登录进来，则roomID为之前加入的房间的房间号。
 
-- 2.登录Matchvs服务端，与Matchvs建立连接。
+- 2.登录 jdge 服务端，与 jdge 建立连接。
 
 - 3.服务端会校验游戏信息是否合法，保证连接的安全性。
 
@@ -153,7 +153,7 @@ int32_t logout();
 
 ### 说明
 
-退出登录，断开与Matchvs的连接。
+退出登录，断开与jdge的连接。
 
 ### 错误码
 
@@ -190,7 +190,7 @@ int32_t createRoom(const MsCreateRoomInfo &roomInfo, const MsString &userProfile
 
 ### 说明
 
-- 开发者可以在客户端主动创建房间，创建成功后玩家会被自动加入该房间，创建房间者即为房主，如果房主离开房间则matchvs会自动转移房主并通知房间内所有成员，开发者通过设置CreateRoomInfo创建不同类型的房间
+- 开发者可以在客户端主动创建房间，创建成功后玩家会被自动加入该房间，创建房间者即为房主，如果房主离开房间则jdge会自动转移房主并通知房间内所有成员，开发者通过设置CreateRoomInfo创建不同类型的房间
 
 ## createRoomResponse
 
@@ -239,7 +239,7 @@ virtual void getRoomListResponse(const MsRoomListRsp &rsp) = 0;
 | ------------ | -------------- | -------------------------- | ------ |
 | status       | int            | 返回值   | 200            |
 | roomID       | uint64_t       | 房间ID   | "156231454561" |
-| roomName     | MsString       | 房间名称 | "matchvs"      |
+| roomName     | MsString       | 房间名称 | "jdge"      |
 | maxPlayer    | uint32_t       | 最大人数 | 3              |
 | mode         | int32_t        | 模式     | 0              |
 | canWatch     | int32_t        | 可否观战 | 1可观战，2不可观战 |
@@ -811,7 +811,7 @@ int32_t sendEventGroup(const MsString &cpProto, std::vector<MsString> &groups);
 | 参数     | 类型     | 描述   | 示例值      |
 | -------- | -------- | ------ | ----------- |
 | cpProto  | MsString | 消息   | ""          |
-| groups   | std::vector<MsString> | 订阅组  | {"matchvs"} |
+| groups   | std::vector<MsString> | 订阅组  | {"jdge"} |
 
 
 

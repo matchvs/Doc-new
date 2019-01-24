@@ -33,7 +33,7 @@ Sort: 47
 
 #### 房间匹配制 - 在线玩家分组
 
-考虑到IO游戏对地图活动范围有限制,进而对同场景下的`最大(max)`游戏人数也有限制,故而需要把所有玩家分割成独立的若干个小组 , 这和酒店的开房间类似, 3人间,5人间等,  即 `房间制` . 通过`matchvs`把玩家匹配到各个房间,`Server端` 把`Room`作为管理游戏世界的最小操作单元 .
+考虑到IO游戏对地图活动范围有限制,进而对同场景下的`最大(max)`游戏人数也有限制,故而需要把所有玩家分割成独立的若干个小组 , 这和酒店的开房间类似, 3人间,5人间等,  即 `房间制` . 通过`JDGE`把玩家匹配到各个房间,`Server端` 把`Room`作为管理游戏世界的最小操作单元 .
 
 
 
@@ -134,20 +134,20 @@ public class Room {
 ### 开发环境的搭建
 #### Server端开发
 #####  Server端的框架选择
-- 如果从头开发一个服务端, 需要解决与客户端的网络通信问题, 协议的选择, 硬件和带宽资源的采购,以及客户端有可能存在H5/Android/iOS/Win的多个版本 , 从无到有,再做到稳定和兼容性俱佳,无疑费时费力, 所以这里借助Matchvs的GameServer框架与Matchvs 客户端SDK提供的通信能力, 在此基础上进行二次开发事半功倍, 这里选用GameServer的大众版本 - Java版本作为`server`端开发的基础框架, 需要电脑上安装Java(JDK1.8+)的开发环境 .
+- 如果从头开发一个服务端, 需要解决与客户端的网络通信问题, 协议的选择, 硬件和带宽资源的采购,以及客户端有可能存在H5/Android/iOS/Win的多个版本 , 从无到有,再做到稳定和兼容性俱佳,无疑费时费力, 所以这里借助 JDGE 的GameServer框架与 JDGE 客户端SDK提供的通信能力, 在此基础上进行二次开发事半功倍, 这里选用GameServer的大众版本 - Java版本作为`server`端开发的基础框架, 需要电脑上安装Java(JDK1.8+)的开发环境 .
 
-> Matchvs GS和Matchvs SDK关系如下图:
+> JDGE GS和 JDGE SDK关系如下图:
 > ![GameServer](./贪吃星球gameServer开发教程.Assets/GameServer.png)
 >
 > - 2.下载包含Java版本GS框架的示例工程代码  (下载地址:https://github.com/matchvs/GameServer-Java)
 - 3.本案例使用的IDE为 `IntelliJ IDEA`，也可以使用其他开发工具进行开发，例如Eclipse 使用IDE打开`demo`工程。
-> Matchvs GameServer开发框架的具体的使用文档:https://doc.matchvs.com/QuickStart/GameServer-Java
+> JDGE GameServer开发框架的具体的使用文档:https://doc-ge.matrix.jdcloud.com/QuickStart/GameServer-Java
 
 ##### Server端的RoomMap模块开发
-玩家被`matchvs`匹配到一个房间中时,会与GS框架通信,在GameServer的App.java类中能收到这个信息.  所以需要在App.java中使用一个`Map`来管理`Room`,控制room的新建和销毁
+玩家被`JDGE`匹配到一个房间中时,会与GS框架通信,在GameServer的App.java类中能收到这个信息.  所以需要在App.java中使用一个`Map`来管理`Room`,控制room的新建和销毁
 
-- 玩家被`matchvs`分配到一个房间时,需要先检查这个房间是否在`Map`中存在,没有则新建Room
-- 玩家与`matchvs`断开网络连接从`Map`中移除Room
+- 玩家被`JDGE`分配到一个房间时,需要先检查这个房间是否在`Map`中存在,没有则新建Room
+- 玩家与`JDGE`断开网络连接从`Map`中移除Room
 
 具体做法为:
 
@@ -361,4 +361,4 @@ onUIEvent(event) {
 
 ```
 ## 游戏调试和发布
-> 参见文档:https://doc.matchvs.com/QuickStart/GameServer-Java
+> 参见文档:https://doc-ge.matrix.jdcloud.com/QuickStart/GameServer-Java

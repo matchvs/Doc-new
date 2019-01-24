@@ -11,7 +11,7 @@ Sort: 13
 
 **注意** 在整个应用全局，开发者只需要对引擎做一次初始化。
 
-调用下面的代码获取Matchvs引擎对象：
+调用下面的代码获取JDGE引擎对象：
 
 ```javascript
 var jsMatchvs = require("matchvs.all");
@@ -31,16 +31,16 @@ var response = new jsMatchvs.MatchvsResponse();
 engine.init(response, channel, platform, gameID);
 ```
 
-Matchvs 提供了两个环境，alpha 调试环境和 release 正式环境。游戏开发调试阶段请使用 alpha 环境，即 platform 传参"alpha"。[环境说明](../Advanced/EnvGuide)，参数列表如下：
+JDGE 提供了两个环境，alpha 调试环境和 release 正式环境。游戏开发调试阶段请使用 alpha 环境，即 platform 传参"alpha"。[环境说明](../Advanced/EnvGuide)，参数列表如下：
 
 
-gameID获取请[前往控制台](http://www.matchvs.com/manage/gameContentList)
+gameID获取请[前往控制台](http://www-ge.matrix.jdcloud.com/manage/gameContentList)
 
 ## 注册
 
-**注意** userID和token有需要的可以缓存起来，在之后的应用启动中不必重复获取。如果你有自己的用户系统，可以将Matchvs 提供的 userID 和用户系统进行映射，也可以使用我们提供的第三方账号绑定功能，详情参考[第三方绑定解决方法](../Advanced/ThirdAccount)。
+**注意** userID和token有需要的可以缓存起来，在之后的应用启动中不必重复获取。如果你有自己的用户系统，可以将JDGE 提供的 userID 和用户系统进行映射，也可以使用我们提供的第三方账号绑定功能，详情参考[第三方绑定解决方法](../Advanced/ThirdAccount)。
 
-Matchvs提供的用户ID被用于在各个服务中校验连接的有效性，调试前开发者需要先获取到一个合法的用户ID。
+JDGE提供的用户ID被用于在各个服务中校验连接的有效性，调试前开发者需要先获取到一个合法的用户ID。
 
 ```javascript
 engine.registerUser();
@@ -61,17 +61,17 @@ response.registerUserResponse : function(userInfo) {
 
 ## 登录   
 
-成功获取用户ID后即可连接Matchvs服务：
+成功获取用户ID后即可连接JDGE服务：
 
 ```javascript
 engine.login(userID, token, gameID, gameVersion, appKey, secret, deviceID, gatewayID);
 ```
 
 
-- 其中，appKey，secret，gameID是你创建游戏后从官网获取的信息，可以[前往控制台](http://www.matchvs.com/manage/gameContentList)查看。appkey和secret是校验游戏合法性的关键信息，请妥善保管secret信息。  
+- 其中，appKey，secret，gameID是你创建游戏后从官网获取的信息，可以[前往控制台](http://home-ge.matrix.jdcloud.com/manage/gameContentList)查看。appkey和secret是校验游戏合法性的关键信息，请妥善保管secret信息。  
 - userID 和 token 是第二步 **注册成功** 的回调信息。  
 - deviceID 用于检测是否存在多个设备同时登录同一个用户的情况，如果一个账号在两台设备上登录，则后登录的设备会连接失败。
-- Matchvs默认将相同游戏版本的用户匹配到一起。如果开发者对游戏进行了版本升级，不希望两个版本的用户匹配到一起，此时可以在登录的时候通过`gameVersion`区分游戏版本。 
+- JDGE默认将相同游戏版本的用户匹配到一起。如果开发者对游戏进行了版本升级，不希望两个版本的用户匹配到一起，此时可以在登录的时候通过`gameVersion`区分游戏版本。 
 
 登录成功会收到回调 ：
 
@@ -90,9 +90,9 @@ response.loginResponse : function(loginRsp) {
 
 **注意**  随机匹配不能匹配到客户端主动创建的房间里，即通过`createRoom()`创建的房间。
 
-登录成功后，可以调用Matchvs加入房间逻辑将用户匹配至一个房间开始一局游戏（如：《荒野行动》的开始匹配、《球球大作战》的开始比赛等）。
-Matchvs默认提供了随机加入房间的模式，调用加入房间逻辑后，Matchvs服务器会自动帮助用户寻找当前可用房间，只有在同一个房间里的用户才可以互相通信。
-随机加入房间的模式下，Matchvs服务器能够快速找到合适的房间，开发者只需要自定义房间人数上限，Matchvs服务端会根据当前房间人数判断是否可继续加入。  
+登录成功后，可以调用JDGE加入房间逻辑将用户匹配至一个房间开始一局游戏（如：《荒野行动》的开始匹配、《球球大作战》的开始比赛等）。
+JDGE默认提供了随机加入房间的模式，调用加入房间逻辑后，JDGE服务器会自动帮助用户寻找当前可用房间，只有在同一个房间里的用户才可以互相通信。
+随机加入房间的模式下，JDGE服务器能够快速找到合适的房间，开发者只需要自定义房间人数上限，JDGE服务端会根据当前房间人数判断是否可继续加入。  
 加入房间后，服务器会指定一个房主，当房主主动离开房间后，服务器会随机指定下一个房主，并通过`leaveRoomNotify` 通知房间内其他成员。
 
 ```javascript
@@ -108,7 +108,7 @@ engine.joinRandomRoom(maxPlayer, userProfile);
 
 加入房间的回调：
 
-**注意** 如果开发者想用户匹配成功后可查看对方信息，可以通过填充`userProfile`的方式，将当前用户的头像昵称信息填充至`userProfile`，Matchvs会在匹配成功时将`userProfile`广播给所有用户。 
+**注意** 如果开发者想用户匹配成功后可查看对方信息，可以通过填充`userProfile`的方式，将当前用户的头像昵称信息填充至`userProfile`，JDGE会在匹配成功时将`userProfile`广播给所有用户。 
 
 如果用户已经在房间里，此时再次调用加入房间：如果房间未JoinOver，则玩家会退出房间然后随机加入房间；如果房间已经JoinOver，则SDK会返回重复加入的错误提示。
 
@@ -122,11 +122,11 @@ response.joinRoomResponse = function(status, roomUserInfoList, roomInfo) {
 
 ## 房间关闭
 
-如果房间内游戏人数已经满足开始条件，此时客户端需要通知 Matchvs 无需再向房间里加人。如:原本设置的房间人数上限为6，而房间人数≥4个即可开始游戏，开发者就需调用停止加入接口。
+如果房间内游戏人数已经满足开始条件，此时客户端需要通知 JDGE 无需再向房间里加人。如:原本设置的房间人数上限为6，而房间人数≥4个即可开始游戏，开发者就需调用停止加入接口。
 
 任意客户端发起`JoinOver`，其他客户端均会收到该房间被`JoinOver`的通知。
 
-**注意：** Matchvs 服务器判断房间**人未满**且**未JoinOver**时，会向房间加人。为避免出现：房间人满开始游戏，在游戏过程中有人退出，此时Matchvs向房间加人。所以建议大家在任何不希望中途加入的游戏里，只要满足开始游戏条件则发送停止加入。
+**注意：** JDGE 服务器判断房间**人未满**且**未JoinOver**时，会向房间加人。为避免出现：房间人满开始游戏，在游戏过程中有人退出，此时JDGE向房间加人。所以建议大家在任何不希望中途加入的游戏里，只要满足开始游戏条件则发送停止加入。
 
 `cpProto` 为开发者自定义的协议内容，如果没有自定义协议可填`''`。`cpProto`的内容会伴随消息的广播以`Notify`的方式发给房间所有成员。其他接口里的`cpProto`机制均是如此。
 
@@ -151,7 +151,7 @@ response.joinOverResponse = function(joinOverRsp) {
 
 ## 游戏数据传输
 
-当玩家在同一个房间时，即可互相通信。开发者可用该接口将数据发送给其他玩家，Matchvs默认将数据广播给当前房间内除自己以外的所有用户。
+当玩家在同一个房间时，即可互相通信。开发者可用该接口将数据发送给其他玩家，JDGE默认将数据广播给当前房间内除自己以外的所有用户。
 
 默认广播数据：
 
@@ -232,7 +232,7 @@ response.leaveRoomNotify = function(leaveRoomInfo) {;
 
 ## 游戏登出
 
-如果用户不会再加入游戏，此时可以调用登出与Matchvs服务端断开连接。  
+如果用户不会再加入游戏，此时可以调用登出与JDGE服务端断开连接。  
 
 **注意** 游戏退出时，务必要调用登出。
 

@@ -3,7 +3,7 @@ Title: GameServer CSharp 基础使用
 Sort: 16
 */
 
-## 创建房间   
+## 创建房间
 
 房间被创建时，gameServer 会触发`onCreateRoom()`消息，如有"房间创建“的相关逻辑应写在该方法里。
 
@@ -56,7 +56,7 @@ public override IMessage OnCreateRoom(ByteString msg)
 | CreateFlag   | uint       | 房间创建途径：1 系统创建房间、2 玩家创建房间、3 gameServer创建房间 |
 | CreateTime   | ulong      | 创建时间                                                     |
 
-Matchvs 提供了在 gameServer 里主动创建房间的接口`CreateRoom`。调用该接口向 Matchvs 请求创建一个空房间。
+JDGE 提供了在 gameServer 里主动创建房间的接口`CreateRoom`。调用该接口向 JDGE 请求创建一个空房间。
 
 ```c#
 public CreateRoomAck CreateRoom(CreateRoom request)
@@ -155,7 +155,7 @@ public override IMessage OnHotelCloseConnect(ByteString msg)
 | GameID | uint  | 游戏ID |
 | RoomID | ulong | 房间ID |
 
-Matchvs 提供了在 gameServer 里主动删除房间的接口`DestroyRoom`。调用该接口向 Matchvs 请求删除一个房间。允许在房间内还有玩家时删除房间，这时会先踢出房间内的玩家再执行删除操作。
+JDGE 提供了在 gameServer 里主动删除房间的接口`DestroyRoom`。调用该接口向 JDGE 请求删除一个房间。允许在房间内还有玩家时删除房间，这时会先踢出房间内的玩家再执行删除操作。
 
 ```c#
 public DestroyRoomAck DestroyRoom(DestroyRoom request)
@@ -226,7 +226,7 @@ public override IMessage OnJoinRoom(ByteString msg)
 
 ## 加入房间成功
 
-客户端调用JoinRoom进入房间，Matchvs会先通知gameServer有用户要加入房间，然后再向客户端发送JoinRoomResponse，所以当gameServer收到OnJoinRoom通知时，用户可能还没有真正进入房间（没有收到JoinRoomResponse），如果这时gameServer向该用户发送消息将会失败。所以我们增加了一个状态通知接口`OnHotelCheckin()`，用于通知gameServer用户已经真正进入了房间，这时向用户发送消息是可靠的。
+客户端调用JoinRoom进入房间，JDGE会先通知gameServer有用户要加入房间，然后再向客户端发送JoinRoomResponse，所以当gameServer收到OnJoinRoom通知时，用户可能还没有真正进入房间（没有收到JoinRoomResponse），如果这时gameServer向该用户发送消息将会失败。所以我们增加了一个状态通知接口`OnHotelCheckin()`，用于通知gameServer用户已经真正进入了房间，这时向用户发送消息是可靠的。
 
 ```c#
 public override IMessage OnHotelCheckin(ByteString msg)
@@ -285,7 +285,7 @@ public override IMessage OnJoinOver(ByteString msg)
 | RoomID  | ulong      | 房间ID   |
 | CpProto | ByteString | 附加消息 |
 
-Matchvs提供了在gameServer里主动发起JoinOver的接口。调用该接口向Matchvs通知不要再向房间加人。
+JDGE提供了在gameServer里主动发起JoinOver的接口。调用该接口向JDGE通知不要再向房间加人。
 
 ```c#
 public void PushJoinOver(UInt64 roomId, UInt32 gameId, UInt32 userId = 0, UInt32 version = 2)
@@ -344,7 +344,7 @@ public override IMessage OnJoinOpen(ByteString msg)
 | RoomID  | ulong      | 房间ID   |
 | CpProto | ByteString | 附加消息 |
 
-Matchvs提供了在gameServer里主动发起JoinOpen的接口。调用该接口向Matchvs通知允许向房间加人。
+JDGE提供了在gameServer里主动发起JoinOpen的接口。调用该接口向JDGE通知允许向房间加人。
 
 ```c#
 public void PushJoinOpen(UInt64 roomId, UInt32 gameId, UInt32 userId = 0, UInt32 version = 2)
@@ -511,7 +511,7 @@ public override IMessage OnKickPlayer(ByteString msg)
 | RoomID  | ulong      | 房间ID   |
 | CpProto | ByteString | 附加消息 |
 
-Matchvs提供了在gameServer里踢除房间成员的接口。当发现有玩家恶意不准备等情况，可以调用该接口将该玩家踢出房间。
+JDGE提供了在gameServer里踢除房间成员的接口。当发现有玩家恶意不准备等情况，可以调用该接口将该玩家踢出房间。
 
 ```c#
 public void PushKickPlayer(UInt64 roomId, UInt32 destId, UInt32 userId = 0, UInt32 version = 2)
@@ -590,7 +590,7 @@ public override IMessage OnConnectStatus(ByteString msg)
 
 ## 房间详情
 
-Matchvs提供了在gameServer里查询房间详情的接口，查询结果在`onRoomDetail()`中返回。
+JDGE提供了在gameServer里查询房间详情的接口，查询结果在`onRoomDetail()`中返回。
 
 ```c#
 public void PushGetRoomDetail(UInt64 roomId, UInt32 gameId, UInt32 latestWatcherNum, UInt32 userId = 0, UInt32 version = 2)
@@ -755,7 +755,7 @@ public override IMessage OnSetRoomProperty(ByteString msg)
 | ------------ | ---------- | -------- |
 | RoomProperty | ByteString | 房间属性 |
 
-另外Matchvs提供了在gameServer里修改房间自定义属性的接口。
+另外JDGE提供了在gameServer里修改房间自定义属性的接口。
 
 ```c#
 public void PushSetRoomProperty(UInt64 roomId, UInt32 gameId, ByteString roomProperty, UInt32 userId = 0, UInt32 version = 2)
@@ -805,7 +805,7 @@ public override void OnHotelSetFrameSyncRate(FrameSyncRate request)
 | EnableGS     | uint  | GameServer是否参与帧同步（0：不参与；1：参与）          |
 | CacheFrameMS | int   | 缓存帧的毫秒数(0为不开启缓存功能，-1为缓存所有数据，毫秒数的上限为1小时) |
 
-另外 Matchvs 提供了在 gameServer 里设置房间帧同步帧率以及帧缓存的接口：
+另外 JDGE 提供了在 gameServer 里设置房间帧同步帧率以及帧缓存的接口：
 
 ```c#
 public void SetFrameSyncRate(UInt64 roomId, UInt32 gameId, UInt32 rate, UInt32 enableGS, Int32 cacheFrameMS, UInt32 userId = 1, UInt32 version = 2)

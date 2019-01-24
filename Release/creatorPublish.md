@@ -29,8 +29,8 @@ Native平台的编译和预览请参考cocos[原生平台发布](http://docs.coc
 
 ## 发布到Facebook Instant Games
 
-Matchvs支持发布到FaceBook，无需做多余适配，按照cocos发布流程即可参考[cocos发布Facebook instant Games](http://docs.cocos.com/creator/manual/zh/publish/publish-fb-instant-games.html)
+JDGE支持发布到FaceBook，无需做多余适配，按照cocos发布流程即可参考[cocos发布Facebook instant Games](http://docs.cocos.com/creator/manual/zh/publish/publish-fb-instant-games.html)
 
 ## 发布到QQ玩一玩
 
-在SDK3.7.3.0版本之后，Matchvs支持了QQ玩一玩。无需多余适配工作，发布流程参考[cocos发布QQ 玩一玩](http://docs.cocos.com/creator/manual/zh/publish/publish-qqplay.html)
+在SDK3.7.3.0版本之后，JDGE支持了QQ玩一玩。无需多余适配工作，发布流程参考[cocos发布QQ 玩一玩](http://docs.cocos.com/creator/manual/zh/publish/publish-qqplay.html)

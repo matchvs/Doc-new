@@ -5,7 +5,7 @@ Sort: 20
 
 # 数据存储
 
-Matchvs 给开发者提供了三种存储接口：用户数据存储、全局数据存储、哈希存储。
+JDGE 给开发者提供了三种存储接口：用户数据存储、全局数据存储、哈希存储。
 
 三种数据存储的特点及对比如下：
 
@@ -19,11 +19,11 @@ Matchvs 给开发者提供了三种存储接口：用户数据存储、全局数
 
 ## 域名
 
-Matchvs 环境分为测试环境（alpha）和 正式环境（release），所以在使用http接口时，需要通过域名进行区分。使用正式环境需要先在[官网控制台](http://www.matchvs.com/manage/gameContentList)将您的游戏发布上线。
+JDGE 环境分为测试环境（alpha）和 正式环境（release），所以在使用http接口时，需要通过域名进行区分。使用正式环境需要先在[官网控制台](http://home-ge.matrix.jdcloud.com/manage/gameContentList)将您的游戏发布上线。
 
-**alpha环境域名：alphavsopen.matchvs.com**
+**alpha环境域名：alphavsopen-ge.matrix.jdcloud.com**
 
-**release环境域名：vsopen.matchvs.com**
+**release环境域名：vsopen-ge.matrix.jdcloud.com**
 
 
 
@@ -34,7 +34,7 @@ Matchvs 环境分为测试环境（alpha）和 正式环境（release），所�
 开发者可以通过调用该接口将用户自定义的数据存储至服务器。
 
 ```
-http://alphavsopen.matchvs.com/wc5/setUserData.do?gameID=200660&userID=21023&dataList=[
+http://alphavsopen-ge.matrix.jdcloud.com/wc5/setUserData.do?gameID=200660&userID=21023&dataList=[
 {"key":"Johnuser", "value":"Smith"}]&sign=f6c15ebd1957a7616781b20fc150f4aa 
 ```
 
@@ -67,7 +67,7 @@ http://alphavsopen.matchvs.com/wc5/setUserData.do?gameID=200660&userID=21023&dat
 开发者可以通过调用该接口获取用户自定义存储的数据。
 
 ```
-http://alphavsopen.matchvs.com/wc5/getUserData.do?gameID=200660&userID=21023&keyList=[
+http://alphavsopen-ge.matrix.jdcloud.com/wc5/getUserData.do?gameID=200660&userID=21023&keyList=[
 {"key":"Johnuser"}]&sign=f6c15ebd1957a7616781b20fc150f4aa 
 ```
 
@@ -103,7 +103,7 @@ http://alphavsopen.matchvs.com/wc5/getUserData.do?gameID=200660&userID=21023&key
 开发者可以通过调用该接口删除用户自定义存储的数据。
 
 ```
-http://alphavsopen.matchvs.com/wc5/delUserData.do?gameID=200660&userID=21023&keyList=[
+http://alphavsopen-ge.matrix.jdcloud.com/wc5/delUserData.do?gameID=200660&userID=21023&keyList=[
 {"key":"Johnuser"}]&sign=f6c15ebd1957a7616781b20fc150f4aa 
 ```
 
@@ -132,7 +132,7 @@ http://alphavsopen.matchvs.com/wc5/delUserData.do?gameID=200660&userID=21023&key
 开发者可以通过调用该接口将全局自定义的数据存储至服务器。
 
 ```
-http://alphavsopen.matchvs.com/wc5/setGameData.do?gameID=200660&userID=21023&dataList=[
+http://alphavsopen-ge.matrix.jdcloud.com/wc5/setGameData.do?gameID=200660&userID=21023&dataList=[
 {"key":"Johnuser", "value":"Smith"}]&sign=0c2c2df5949f498afd307e8783bb1f3c 
 ```
 
@@ -163,7 +163,7 @@ http://alphavsopen.matchvs.com/wc5/setGameData.do?gameID=200660&userID=21023&dat
 开发者可以通过调用该接口获取用户自定义存储的数据。
 
 ```
-http://alphavsopen.matchvs.com/wc5/getGameData.do?gameID=200660&userID=21023&keyList=[
+http://alphavsopen-ge.matrix.jdcloud.com/wc5/getGameData.do?gameID=200660&userID=21023&keyList=[
 {"key":"Johnuser"}]&sign=0c2c2df5949f498afd307e8783bb1f3c 
 ```
 
@@ -199,7 +199,7 @@ http://alphavsopen.matchvs.com/wc5/getGameData.do?gameID=200660&userID=21023&key
 开发者可以通过调用该接口删除全局自定义存储的数据。
 
 ```
-http://alphavsopen.matchvs.com/wc5/delGameData.do?gameID=200660&userID=21023&keyList=[
+http://alphavsopen-ge.matrix.jdcloud.com/wc5/delGameData.do?gameID=200660&userID=21023&keyList=[
 {"key":"Johnuser"}]&sign=0c2c2df5949f498afd307e8783bb1f3c 
 ```
 
@@ -228,7 +228,7 @@ http://alphavsopen.matchvs.com/wc5/delGameData.do?gameID=200660&userID=21023&key
 开发者可以通过调用该接口将自定义的数据存储至服务器。
 
 ```
-http://alphavsopen.matchvs.com/wc5/hashSet.do?gameID=102003&userID=21023&key=1&value=a&sign=68c592733f19f6c5ae7e8b7ae8e5002f 
+http://alphavsopen-ge.matrix.jdcloud.com/wc5/hashSet.do?gameID=102003&userID=21023&key=1&value=a&sign=68c592733f19f6c5ae7e8b7ae8e5002f 
 ```
 
 **注意：** 每个value的长度上限为1M，如果长度超过1M，会返回“长度超过限制”的错误。存储上限为每个玩家1000条，如果超过1000条，会返回对应错误。
@@ -260,7 +260,7 @@ http://alphavsopen.matchvs.com/wc5/hashSet.do?gameID=102003&userID=21023&key=1&v
 开发者可以通过调用该接口获取存储在服务器的自定义数据。
 
 ```
-http://vsopen.matchvs.com/wc5/hashGet.do?gameID=102003&userID=21023&key=1&sign=b0244f7ed1d433975512a8f6c2ba4517 
+http://vsopen-ge.matrix.jdcloud.com/wc5/hashGet.do?gameID=102003&userID=21023&key=1&sign=b0244f7ed1d433975512a8f6c2ba4517 
 ```
 
 **注意** 存储前，如果将字符串解码成二进制再用UrlEndcode编码后存储，对应的取出时应用UrlDecode进行解码后显示
@@ -342,7 +342,7 @@ appKey&param1=value1&param2=value2&param3=value3&token
 ```typescript
 class MvsHttpApi {
 	//这里定义接口要使用的连接
-	public  open_host:string = MatchvsData.pPlatform == "release"? "https://vsopen.matchvs.com":"https://alphavsopen.matchvs.com";
+	public  open_host:string = MatchvsData.pPlatform == "release"? "https://vsopen-ge.matrix.jdcloud.com":"https://alphavsopen-ge.matrix.jdcloud.com";
 	
 	public  get_game_data:string = "/wc5/getGameData.do?";
 	public  set_game_data:string = "/wc5/setGameData.do?";
