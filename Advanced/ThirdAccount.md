@@ -88,7 +88,7 @@ wx.request({
  */
 private static bindOpenIDWithUserID(wxUserInfo:any){
     console.log("获取到的微信用户信息",wxUserInfo);
-    let reqUrl = "http://vsuser.matchvs.com/wc6/thirdBind.do?";
+    let reqUrl = "http://vsuser-ge.matrix.jdcloud.com/wc6/thirdBind.do?";
     let appKey = "xxxxxxxxxx";
     let secretKey = "xxxxxxxxxx";
     //sign=md5(appKey&gameID=value1&openID=value2&session=value3&thirdFlag=value4&appSecret)

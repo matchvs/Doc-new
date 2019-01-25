@@ -26,7 +26,7 @@ Demo支持两人或三人同时游戏，匹配成功后，玩家通过向左、�
 
 ### Demo下载地址
 
-https://github.com/matchvs/demo-unity
+http://home-ge.matrix.jdcloud.com/serviceCourse
 
 ## 游戏配置
 

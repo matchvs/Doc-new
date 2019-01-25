@@ -5,7 +5,7 @@ Sort: 6
 
 ## 创建游戏
 
-在开始使用 gameServer 之前，你需要创建自己的游戏。如何创建游戏详见 [Matchvs快速入门](../matchvs)。 
+在开始使用 gameServer 之前，你需要创建自己的游戏。如何创建游戏详见 [jdge快速入门](../jdge)。 
 
 
 
@@ -25,7 +25,7 @@ gameServer 使用 git 仓库管理代码，git 仓库账号密码在 gameServer 
 
 ![](http://imgs.matchvs.com/static/Doc-img/new-start/gameServerimg/creategameserversuccess.png)
 
-gameServer 创建成功后，Matchvs 会为每个 gameServer 分配一个唯一的 git 仓库地址。在本示例中，Matchvs 分配的 git 仓库地址为： `ssh://git@git.matchvs.com:3879/1424769556baec5362f5b1513f7e1167.git`。下一小节将介绍如何使用 git 仓库。
+gameServer 创建成功后，jdge 会为每个 gameServer 分配一个唯一的 git 仓库地址。在本示例中，jdge 分配的 git 仓库地址为： `ssh://git-ge.matrix.jdcloud.com/1424769556baec5362f5b1513f7e1167.git`。下一小节将介绍如何使用 git 仓库。
 
 
 
@@ -34,14 +34,14 @@ gameServer 创建成功后，Matchvs 会为每个 gameServer 分配一个唯一�
 拿到 git 仓库地址后，使用 git 命令将 gameServer 仓库克隆到本地：
 
 ```shell
-$ git clone ssh://git@git.matchvs.com:3879/1424769556baec5362f5b1513f7e1167.git myGameServer
+$ git clone ssh://git-ge.matrix.jdcloud.com/1424769556baec5362f5b1513f7e1167.git myGameServer
 Cloning into 'myGameServer'...
 warning: You appear to have cloned an empty repository.
 ```
 
 **因为这是一个新的 git 仓库，所以在克隆成功后 git 工具会发出一条警告，忽略该警告信息即可。**
 
-前往[下载中心](http://www.matchvs.com/serviceDownload)，下载 Node.js 版本的 gameServer 框架（框架版本可能有更新，以官网展示为准）:
+前往[下载中心](http://home-ge.matrix.jdcloud.com/serviceDownload)，下载 Node.js 版本的 gameServer 框架（框架版本可能有更新，以官网展示为准）:
 
 ![](http://imgs.matchvs.com/static/Doc-img/new-start/gameServerimg/nodegameserver.png)
 
@@ -86,7 +86,7 @@ gameServer 配置文件路径为`myGameServer/conf/config.json`，其中包含�
 
 - **logLevel**：日志配置。gameServer 使用 [log4js](https://www.npmjs.com/package/log4js) 作为日志管理框架，如需自定义 log 输出可在了解 log4js 的前提下自行修改配置文件。
 
-- **register**：独立部署配置，仅在使用 Matchvs 独立部署解决方案时开启。
+- **register**：独立部署配置，仅在使用 jdge 独立部署解决方案时开启。
 ```
   - enable：register 注册服务控制开关，设为 true 时开启独立部署模式，设为 false 时关闭独立部署模式。
   - gameID：开发者自定义游戏ID。
@@ -112,18 +112,18 @@ $ jdge debug 1424769556baec5362f5b1513f7e1167
 	==================== Develop config ====================
 	SvcName:        svc-201994-0
 	PodName:        deploy-201994-0-5f5d8785f8-9545j
-	RemoteHost:     directory10.matchvs.com
+	RemoteHost:     directory10.jdge.com
 	RemotePort:     9982
 	
 2018/11/13 15:38:01 [I] [proxy_manager.go:298] proxy removed: []
-2018/11/13 15:38:01 [I] [proxy_manager.go:308] proxy added: [matchvs]
+2018/11/13 15:38:01 [I] [proxy_manager.go:308] proxy added: [jdge]
 2018/11/13 15:38:01 [I] [proxy_manager.go:331] visitor removed: []
 2018/11/13 15:38:01 [I] [proxy_manager.go:340] visitor added: []
 2018/11/13 15:38:01 [I] [control.go:240] [37ff6c2d5cc54535] login to server success, get run id [37ff6c2d5cc54535], server udp port [0]
-2018/11/13 15:38:01 [I] [control.go:165] [37ff6c2d5cc54535] [matchvs] start proxy success
+2018/11/13 15:38:01 [I] [control.go:165] [37ff6c2d5cc54535] [jdge] start proxy success
 ```
 
-`jdge debug`命令在启动时与 Matchvs 服务建立代理连接。启动完成后，客户端发送给 gameServer 的消息将通过代理服务转发到开发者本地运行的 gameServer。同样的，gameServer 发送的消息也通过代理服务转发给客户端。
+`jdge debug`命令在启动时与 jdge 服务建立代理连接。启动完成后，客户端发送给 gameServer 的消息将通过代理服务转发到开发者本地运行的 gameServer。同样的，gameServer 发送的消息也通过代理服务转发给客户端。
 
 保留这个窗口，然后在另外一个窗口里启动 gameServer 服务：
 
@@ -137,16 +137,16 @@ $ node main.js
 
 `npm install`和`cnpm install`混用时报错,建议删除`node_modules`, 重新使用一种方式安装。
 
-如果想要退出调试，在Matchvs命令行终端输入`quit`回车即可。
+如果想要退出调试，在jdge命令行终端输入`quit`回车即可。
 
 
 
 ## Demo 客户端与 gameServer 建立连接
 
-本地调试模式只支持测试环境，所以 Demo 客户端需要切换到测试环境，即 Demo 客户端 Matchvs `init`接口的 `channel`需要修改为 `Matchvs`，`platform`需要修改为`alpha`。  
+本地调试模式只支持测试环境，所以 Demo 客户端需要切换到测试环境，即 Demo 客户端 jdge `init`接口的 `channel`需要修改为 `jdge`，`platform`需要修改为`alpha`。  
 本地调试和线上运行的区别，请参考[环境说明](../Advanced/EnvGuide)
 
-运行Demo客户端，此时Matchvs 引擎就会将客户端的请求转发到开发者本地 gameServer 服务，开发者无须提交代码即可在本地调试代码。
+运行Demo客户端，此时jdge 引擎就会将客户端的请求转发到开发者本地 gameServer 服务，开发者无须提交代码即可在本地调试代码。
 
 
 
