@@ -261,9 +261,9 @@ cc.Class({
 
 ## 在Cocos Creator中使用Ts
 
-当前项目支持Ts后，按照上面步骤成功导入JSSDK后，在官网的[下载页面](http://matchvs.com/serviceDownload)下载TypeScript，将其中的matchvs.d.ts拷贝到JSSDK的同路径下即可使用。
+当前项目支持Ts后，按照上面步骤成功导入JSSDK后，在官网的[下载页面](http://home-ge.matrix.jdcloud.com/serviceDownload)下载TypeScript，将其中的matchvs.d.ts拷贝到JSSDK的同路径下即可使用。
 
-下面是一段TS的演示代码，实现的主要功能有初始化，注册，登录。[工程地址](https://github.com/matchvs/demo-creator)
+下面是一段TS的演示代码，实现的主要功能有初始化，注册，登录。[工程地址](http://home-ge.matrix.jdcloud.com/serviceCourse)
 
 ```javascript
 const {ccclass, property} = cc._decorator;

@@ -5,7 +5,7 @@ Sort: 9
 
 ## 创建游戏  
 
-在开始使用 gameServer 之前，你需要创建自己的游戏。如何创建游戏详见 [Matchvs快速入门](../matchvs) 。
+在开始使用 gameServer 之前，你需要创建自己的游戏。如何创建游戏详见 [jdge快速入门](../Jdge) 。
 
 
 
@@ -55,7 +55,7 @@ warning: You appear to have cloned an empty repository.
 
 **因为这是一个新的 git 仓库，所以在克隆成功后 git 工具会发出一条警告，忽略该警告信息即可。**
 
-前往[下载中心](http://www.matchvs.com/serviceDownload)，下载 C# 版本的 gameServer 框架（框架版本可能有更新，以官网展示为准）:
+前往[下载中心](http://home-ge.matrix.jdcloud.com/serviceDownload)，下载 C# 版本的 gameServer 框架（框架版本可能有更新，以官网展示为准）:
 
 ![](http://imgs.matchvs.com/static/Doc-img/new-start/gameServerimg/csharpgameserver.png)
 

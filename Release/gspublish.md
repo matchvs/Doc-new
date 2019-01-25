@@ -139,22 +139,22 @@ gameServer 本地开发调试完成后需要将代码推送到 JDGE 远程仓库
 
   - 代码目录层次是否正确，是否多嵌套了一层。标准目录结构参考各语言“新手上路”文档：
 
-    Node.js：https://doc-ge.matrix.jdcloud.com/QuickStart/GameServer-JavaScript
+    Node.js：http://doc-ge.matrix.jdcloud.com/QuickStart/GameServer-JavaScript
 
-    C#：https://doc-ge.matrix.jdcloud.com/QuickStart/QuickStart-CSharp
+    C#：http://doc-ge.matrix.jdcloud.com/QuickStart/QuickStart-CSharp
 
-    Java：https://doc-ge.matrix.jdcloud.com/QuickStart/GameServer-Java
+    Java：http://doc-ge.matrix.jdcloud.com/QuickStart/GameServer-Java
 
 - 未找到 Makfile 文件：Makefile 是 gameServer 编译脚本，位于 gmeServer 框架的根目录下。发布时报该错误时请检查：
 
   - 代码根目录是否包含 Makefile 文件
   - 代码目录层次是否正确，是否多嵌套了一层。标准目录结构参考各语言“新手上路”文档。
 
-    Node.js：https://doc-ge.matrix.jdcloud.com/QuickStart/GameServer-JavaScript
+    Node.js：http://doc-ge.matrix.jdcloud.com/QuickStart/GameServer-JavaScript
 
-    C#：https://doc-ge.matrix.jdcloud.com/QuickStart/QuickStart-CSharp
+    C#：http://doc-ge.matrix.jdcloud.com/QuickStart/QuickStart-CSharp
 
-    Java：https://doc-ge.matrix.jdcloud.com/QuickStart/GameServer-Java
+    Java：http://doc-ge.matrix.jdcloud.com/QuickStart/GameServer-Java
 
 - 生成 Docker 镜像失败，请检查代码编译：
 
