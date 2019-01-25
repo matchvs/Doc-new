@@ -1,15 +1,15 @@
 /*
-Title: Matchvs开发者后台使用指引
+Title: jdge开发者后台使用指引
 Sort: 2
 */
 
-## 注册 Matchvs
+## 注册 jdge
 
 [点击登录](http://home-ge.matrix.jdcloud.com/login) 如果还没有注册账号请先注册
 
 ## 新建游戏
 
-登录Matchvs后选择 [控制台](http://home-ge.matrix.jdcloud.com/manage/gameContentList) ，根据以下流程创建游戏
+登录jdge后选择 [控制台](http://home-ge.matrix.jdcloud.com/manage/gameContentList) ，根据以下流程创建游戏
 
 ```flow
 st=>start: 登录
@@ -25,10 +25,10 @@ st->op1->op2->op3->ed
 
 ![](http://imgs.matchvs.com/static/Doc-img/new-start/MatchvsManageimg/Matchvs_use1.png)
 
-使用 Matchvs SDK 需要用到` appKey、secret, gameID` 等信息。
+使用 jdge SDK 需要用到` appKey、secret, gameID` 等信息。
 
-## 更多Matchvs
+## 更多jdge
 
-[Matchvs环境说明](../Advanced/EnvGuide)
+[jdge环境说明](../Advanced/EnvGuide)
 
 
