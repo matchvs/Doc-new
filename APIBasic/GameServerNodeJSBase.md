@@ -56,7 +56,7 @@ JDGE 提供了在 gameServer 里主动创建房间的接口`createRoom()`。调�
  createRoom(msg, callback)
 ```
 
-TTL（time to live）：Mathcvs 从房间变成空时开始计时，超过 TTL 后销毁房间。在 TTL 内如有玩家加入房间则重置超时时长，而当房间再次变为空时重新开始计时。
+TTL（time to live）： jdge 从房间变成空时开始计时，超过 TTL 后销毁房间。在 TTL 内如有玩家加入房间则重置超时时长，而当房间再次变为空时重新开始计时。
 
 ## 设置空房间存活时长
 

@@ -27,7 +27,7 @@ java-gameServer
 
 ### 本地开发调试
 
-下载Matchvs命令行工具 参考 [gameServer命令行工具](../Advanced/GameServerCMD)
+下载jdge命令行工具 参考 [gameServer命令行工具](../Advanced/GameServerCMD)
 
 为了方便开发者在开发过程中快速调试和定位问题，jdge 命令行工具提供了本地调试命令jdge debug <GS_key>
 
@@ -56,17 +56,17 @@ localHost IP默认为 “0.0.0.0” 即可，不建议修改。localPort：端�
 
 **注意** gameServer 只能使用系统分配的端口号，否则发布上线后将无法正常提供服务。
 
-isRemote：本地调试时使用GameServer主动创建房间，销毁房间，设置房间存活时间需要开启。在使用 Matchvs 独立部署解决方案时也需要开启。
+isRemote：本地调试时使用GameServer主动创建房间，销毁房间，设置房间存活时间需要开启。在使用 jdge 独立部署解决方案时也需要开启。
 
-remoteHost：gameServer 注册服务地址，从Matchvs命令行工具获取。独立部署方案单独提供。
+remoteHost：gameServer 注册服务地址，从jdge命令行工具获取。独立部署方案单独提供。
 
-remotePort：gameServer 注册服务端口，从Matchvs命令行工具获取。独立部署方案单独提供。
+remotePort：gameServer 注册服务端口，从jdge命令行工具获取。独立部署方案单独提供。
 
 gameID： 从官网控制台获取，gameServer独立部署模式下单独提供。
 
-svcName： 从Matchvs命令行工具获取。独立部署方案单独提供。
+svcName： 从jdge命令行工具获取。独立部署方案单独提供。
 
-podName： 从Matchvs命令行工具获取。独立部署方案单独提供。
+podName： 从jdge命令行工具获取。独立部署方案单独提供。
 
 ![](http://imgs.matchvs.com/static/Doc-img/new-start/gameServerimg/java-GameServer3.png)
 
@@ -74,7 +74,7 @@ podName： 从Matchvs命令行工具获取。独立部署方案单独提供。
 
 ### Demo 客户端与 gameServer 建立连接
 
-本地调试模式只支持测试环境，所以 Demo 客户端需要切换到测试环境，即 Demo 配置文件中的 `channel`需要修改为 `Matchvs`，`platform`需要修改为`alpha`, `GameID` 需要和Config.json文件中的`GameID`一致。
+本地调试模式只支持测试环境，所以 Demo 客户端需要切换到测试环境，即 Demo 配置文件中的 `channel`需要修改为 `jdge`，`platform`需要修改为`alpha`, `GameID` 需要和Config.json文件中的`GameID`一致。
 
 ### 查看日志
 
@@ -107,7 +107,7 @@ java-gameServer
 ├── README.md
 ```
 
-从控制台启动。GameServer现网启动需要游戏转商用后才可以 转商用参考  [Matchvs环境说明](../Advanced/EnvGuide)
+从控制台启动。GameServer现网启动需要游戏转商用后才可以 转商用参考  [jdge环境说明](../Advanced/EnvGuide)
 
 
 

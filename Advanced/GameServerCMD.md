@@ -44,7 +44,7 @@ jdge 命令行工具是由京东云战网提供的命令行执行工具，可以
 ## 开发者帐号登录
 `jdge login`  
 
-使用在Matchvs官网 **注册邮箱**和**gameServer 列表顶部密码**进行登录，如果还没有官网账号，请前往[Matchvs官网](http://www.matchvs.com/vsRegister)进行注册。
+使用在 jdge 官网 **注册邮箱**和**gameServer 列表顶部密码**进行登录，如果还没有官网账号，请前往[jdge官网](http://home-ge.matrix.jdcloud.com/vsRegister) 进行注册。
 
 系统生成的账号密码用于登录命令行工具和git仓库：
 
@@ -56,7 +56,7 @@ jdge 命令行工具是由京东云战网提供的命令行执行工具，可以
 F:\>jdge login
 	Email or Mobile phone: 						# 输入官网注册的账号邮箱
 	Password: 									# 输入gameServer列表页的密码
-	1 -- Matchvs
+	1 -- jdge
 	2 -- Cocos
 	3 -- Egret（白鹭）
 	4 -- 阿里云
@@ -65,10 +65,10 @@ F:\>jdge login
 
 输入账号和密码，然后命令行工具会提示选择账号注册渠道，这里根据自己的账号类型进行选择：
 
-* Matchvs：直接在Matchvs官网注册的用户
+* jdge ：直接在 jdge 官网注册的用户
 * Cocos：Cocos授权登录的用户，登录账号为 Cocos 的注册邮箱
 * Egret：Egret授权登录的用户，登录账号为 Egret 的注册邮箱
-* 阿里云：购买阿里云市场 Matchvs 镜像版的用户
+* 阿里云：购买阿里云市场 jdge 镜像版的用户
 
 **同一个邮箱可以在多个渠道注册，但是数据并不互通。**
 
@@ -105,7 +105,7 @@ F:\>jdge login
 
 发布gameServer到镜像仓库，`GS_key`可通过`jdge list` 查看。
 
-**注意：** 操作前需要将代码上传至Matchvs指定的git仓库。
+**注意：** 操作前需要将代码上传至 jdge 指定的git仓库。
 
 ![image](http://imgs.matchvs.com/static/gs_publishCLI.png)
 
@@ -143,6 +143,6 @@ F:\>jdge login
 
 `jdge debug <GS_key>`
 
-Matchvs 提供了gameServer的本地调试功能，通过以上命令可以开启调试模式。
+jdge 提供了gameServer的本地调试功能，通过以上命令可以开启调试模式。
 
 ![image](http://imgs.matchvs.com/static/gs_debug.png)

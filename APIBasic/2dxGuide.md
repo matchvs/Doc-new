@@ -24,7 +24,7 @@ public:
 ```
 
 
-Matchvs提供了两个环境，alpha调试环境和release正式环境。  
+jdge 提供了两个环境，alpha调试环境和release正式环境。  
 
 游戏开发调试阶段请使用alpha环境，即sPlatform传参"alpha"。如下：
 
@@ -37,14 +37,14 @@ MatchVSEngine::getInstance()->init(&m_Response_Test, sChannel.c_str(), sPlatform
 | 参数               | 含义                              |
 | ---------------- | ------------------------------- |
 | &m_Response_Test | 回调函数                            |
-| sChannel         | 渠道，填“Matchvs”即可                 |
+| sChannel         | 渠道，填“jdge”即可                 |
 | sPlatform        | 平台，调试环境填“alpha” ，正式环境填“release” |
 | iGameId          | 游戏ID，来自官网控制台游戏信息                |
 
 
 ## 注册
 
-Matchvs提供的用户ID被用于在各个服务中校验连接的有效性，调试前开发者需要先获取到一个合法的用户ID。
+jdge提供的用户ID被用于在各个服务中校验连接的有效性，调试前开发者需要先获取到一个合法的用户ID。
 
 ```
 MatchVSEngine::getInstance()->registerUser();
@@ -61,11 +61,11 @@ int MatchVSDemo_Response::registerUserResponse(const matchvs::MsUserInfo &userIn
 }
 ```
 
-**注意** 用户ID和token建议缓存起来，在之后的应用启动中不必重复获取。如果你有自己的用户系统，可以将Matchvs提供的 uerID 和用户系统进行映射。
+**注意** 用户ID和token建议缓存起来，在之后的应用启动中不必重复获取。如果你有自己的用户系统，可以将jdge提供的 uerID 和用户系统进行映射。
 
 ## 登录
 
-成功获取用户ID后即可连接Matchvs服务：
+成功获取用户ID后即可连接jdge服务：
 
 ```
 MatchVSEngine::getInstance()->login(userid, token.c_str(), gameid, gameversion, appkey.c_str(), secretkey.c_str(), deviceid.c_str(), gatewayid);
@@ -77,10 +77,10 @@ MatchVSEngine::getInstance()->login(userid, token.c_str(), gameid, gameversion, 
 | ----------- | ------------------------- |
 | userid      | 用户ID，调用注册接口后获取            |
 | token       | 用户token，调用注册接口后获取         |
-| gameid      | 游戏ID，来自Matchvs控制台游戏信息     |
+| gameid      | 游戏ID，来自jdge控制台游戏信息     |
 | gameVersion | 游戏版本，自定义，用于隔离匹配空间         |
-| appkey      | 游戏Appkey，来自Matchvs控制台游戏信息 |
-| secretkey   | secret，来自Matchvs控制台游戏信息   |
+| appkey      | 游戏Appkey，来自jdge控制台游戏信息 |
+| secretkey   | secret，来自jdge控制台游戏信息   |
 | deviceid    | 设备ID，用于多端登录检测，请保证是唯一ID    |
 | gatewayid   | 服务器节点ID，默认为0              |
 
@@ -89,7 +89,7 @@ MatchVSEngine::getInstance()->login(userid, token.c_str(), gameid, gameversion, 
 - userID 和 token 是第二步 **注册成功** 的回调信息。  
 - deviceID 用于检测是否存在多个设备同时登录同一个用户的情况，如果一个账号在两台设备上登录，则后登录的设备会连接失败。
 
-**注意** 如果游戏版本升级，且不希望两个版本的用户匹配至一起，此时可以在登录的时候区分游戏版本。Matchvs只会将相同游戏版本的用户匹配到一起。    
+**注意** 如果游戏版本升级，且不希望两个版本的用户匹配至一起，此时可以在登录的时候区分游戏版本。jdge只会将相同游戏版本的用户匹配到一起。    
 
 登录成功会收到回调 ：
 
@@ -108,9 +108,9 @@ SDK支持房间断线重连，掉线重新登录后可以选择加入原来的�
 
 房间开始一局游戏（如：《荒野行动》的开始匹配、《球球大作战》的开始比赛等）
 
-Matchvs默认提供了随机加入房间的模式，调用加入房间逻辑后，Matchvs服务器会自动帮助用户寻找当前可用房间，只有在同一个房间里的用户才可以互相通信。
+jdge默认提供了随机加入房间的模式，调用加入房间逻辑后，jdge服务器会自动帮助用户寻找当前可用房间，只有在同一个房间里的用户才可以互相通信。
 
-随机加入房间的模式下，Matchvs服务器能够快速找到合适的房间，开发者只需要自定义房间人数上限，Matchvs服务端会根据当前房间人数判断是否可继续加入。 
+随机加入房间的模式下，jdge服务器能够快速找到合适的房间，开发者只需要自定义房间人数上限，jdge服务端会根据当前房间人数判断是否可继续加入。 
 
 随机加入一个房间：
 
@@ -140,7 +140,7 @@ int MatchVSDemo_Response::roomJoinResponse(const MsRoomJoinRsp * tRsp){
 }
 ```
 
-如果当前没有可用房间，Matchvs会自动创建一个房间并将该用户加入到服务端创建的房间。当其他用户加入时，Matchvs会通知开发者新加入的用户信息。
+如果当前没有可用房间，jdge会自动创建一个房间并将该用户加入到服务端创建的房间。当其他用户加入时，jdge会通知开发者新加入的用户信息。
 
 其他玩家加入房间的回调：
 
@@ -153,14 +153,14 @@ int MatchVSDemo_Response::roomPeerJoinNotify(const MsRoomUserInfo & objPeerJoin)
 }
 ```
 
-**注意** 如果开发者想用户匹配成功后可查看对方信息，可以通过填充`userProfile`的方式，将当前用户的头像昵称信息填充至`userProfile`，Matchvs会在匹配成功时将`userProfile`广播给所有用户。 
+**注意** 如果开发者想用户匹配成功后可查看对方信息，可以通过填充`userProfile`的方式，将当前用户的头像昵称信息填充至`userProfile`，jdge会在匹配成功时将`userProfile`广播给所有用户。 
 
 如果用户已经在房间里，此时再次调用加入房间：如果房间未JoinOver，则玩家会退出房间然后随机加入房间；如果房间已经JoinOver，则SDK会返回重复加入的错误提示。
 
 
 ## 停止加入
 
-如果房间内游戏人数已经满足开始条件，此时客户端需要通知Matchvs无需再向房间里加人。（如原本设置的房间人数上限为6，而开发者在房间人数满足4个即可开始游戏，开发者就需调用停止加入接口。）
+如果房间内游戏人数已经满足开始条件，此时客户端需要通知jdge无需再向房间里加人。（如原本设置的房间人数上限为6，而开发者在房间人数满足4个即可开始游戏，开发者就需调用停止加入接口。）
 
 停止加入 ：
 
@@ -187,14 +187,14 @@ int roomJoinOverResponse(const MsRoomJoinOverRsp* tRsp) {
 }
 ```
 
-**注意** Matchvs服务器会判断房间是人满状态或者已停止加入状态，根据状态判断房间是否还可加人。为避免房间人满后开始游戏，在游戏过程中有人退出后，Matchvs判断人不满可继续向房间加人，建议在任何不希望中途加入的游戏里，只要满足开始游戏条件则向Matchvs服务端发送停止加入。
+**注意** jdge服务器会判断房间是人满状态或者已停止加入状态，根据状态判断房间是否还可加人。为避免房间人满后开始游戏，在游戏过程中有人退出后，jdge判断人不满可继续向房间加人，建议在任何不希望中途加入的游戏里，只要满足开始游戏条件则向jdge服务端发送停止加入。
 
 `proto` 为开发者自定义的协议内容，如果没有自定义协议可填`''`。proto的内容会伴随消息的广播以Notify的方式发给房间所有成员。其他接口里的`proto`机制均是如此。
 
 
 ## 游戏数据传输
 
-当玩家在同一个房间时，即可互相通信。开发者可用该接口将数据发送给其他玩家，Matchvs默认将数据广播给当前房间内除自己以外的所有用户。
+当玩家在同一个房间时，即可互相通信。开发者可用该接口将数据发送给其他玩家，jdge默认将数据广播给当前房间内除自己以外的所有用户。
 
 默认广播数据：
 
@@ -209,7 +209,7 @@ MatchVSEngine::getInstance()->sendEvent( msg.c_str());
 
 如果只希望数据只发送给部分相关玩家，则可以指定玩家列表。  
 
-不同的数据处理的优先级不一样，Matchvs提供了自定义优先级的方式，共有0-3四个优先级，0最高，3最低。
+不同的数据处理的优先级不一样，jdge提供了自定义优先级的方式，共有0-3四个优先级，0最高，3最低。
 
 
 ```
@@ -294,7 +294,7 @@ int MatchVSDemo_Response::roomPeerJoinNotify(const MsRoomUserInfo & objPeerJoin)
 
 ##  游戏登出
 
-如果用户不会再加入游戏，此时可以调用登出与Matchvs服务端断开连接。  
+如果用户不会再加入游戏，此时可以调用登出与jdge服务端断开连接。  
 
 **注意** 游戏退出时，务必要调用登出。
 
@@ -324,7 +324,7 @@ MatchVSEngine::getInstance()->uninit();
 
 ## 数据存取
 
-**注意** Matchvs 环境分为测试环境（alpha）和 正式环境（release），所以在使用http接口时，需要通过域名进行区分。使用正式环境需要先在[官网控制台](http://home-ge.matrix.jdcloud.com/manage/gameContentList)将您的游戏发布上线。
+**注意** jdge 环境分为测试环境（alpha）和 正式环境（release），所以在使用http接口时，需要通过域名进行区分。使用正式环境需要先在[官网控制台](http://home-ge.matrix.jdcloud.com/manage/gameContentList)将您的游戏发布上线。
 
 **alpha环境域名：alphavsopen-ge.matrix.jdcloud.com**
 
@@ -339,7 +339,7 @@ MatchVSEngine::getInstance()->uninit();
 http://alphavsopen-ge.matrix.jdcloud.com/wc5/hashSet.do?gameID=102003&userID=21023&key=1&value=a&sign=68c592733f19f6c5ae7e8b7ae8e5002f 
 ```
 
-**注意：** value的长度上限为255字符，如果长度超过255，Matchvs 在存储时会忽略255后的字符内容。存储上限为每个玩家1000条，如果超过1000条，会返回对应错误。
+**注意：** value的长度上限为255字符，如果长度超过255，jdge 在存储时会忽略255后的字符内容。存储上限为每个玩家1000条，如果超过1000条，会返回对应错误。
 
 可以调用hashSet实现增量存储。为避免特殊字符影响，存储前，建议开发者最好将字符串解码成二进制再用UrlEndcode编码后存储。
 
@@ -418,7 +418,7 @@ response.errorResponse = function(error) {
 	console.log("错误信息：", error);
 }
 ```
-**注意** Matchvs相关的异常信息可通过该接口获取
+**注意** jdge相关的异常信息可通过该接口获取
 
 | 错误码 | 含义                                                         |
 | ------ | ------------------------------------------------------------ |

@@ -3,7 +3,7 @@ Title: Egret发布
 Sort: 33
 */
 
-集成Matchvs SDK 同时支持多个平台的发布，几乎与egret发布多平台是完美适配的。  
+集成 jdge SDK 同时支持多个平台的发布，几乎与egret发布多平台是完美适配的。  
 
 - HTML5 
 - IOS
