@@ -15,7 +15,7 @@ Sort: 9
 
 ![](http://imgs.matchvs.com/static/Doc-img/new-start/gameServerimg/init.png)
 
-Matchvs 使用 git 管理 gameServer，所以在创建 gameServer 之前，你需要将自己的 SSH key 上传至 Matchvs 账号。
+jdge 使用 git 管理 gameServer，所以在创建 gameServer 之前，你需要将自己的 SSH key 上传至 jdge 账号。
 
 1. 复制 SSH key 到粘贴板 
 
@@ -39,7 +39,7 @@ SSH key 上传成功后，点击 “创建gameServer”，填写 gameServer 基�
 
 ![](http://imgs.matchvs.com/static/Doc-img/new-start/gameServerimg/creategameserversuccess.png)
 
-gameServer 创建成功后，Matchvs 会为每个 gameServer 分配一个唯一的 git 仓库地址。在本示例中，Matchvs 分配的 git 仓库地址为： `ssh://git-ge.matrix.jdcloud.com/1424769556baec5362f5b1513f7e1167.git`。下一小节将介绍如何使用 git 仓库。
+gameServer 创建成功后，jdge 会为每个 gameServer 分配一个唯一的 git 仓库地址。在本示例中，jdge 分配的 git 仓库地址为： `ssh://git-ge.matrix.jdcloud.com/1424769556baec5362f5b1513f7e1167.git`。下一小节将介绍如何使用 git 仓库。
 
 
 
@@ -116,7 +116,7 @@ gameServer 配置文件路径为`myGameServer/gameServer/conf/gs.json`，其中�
 
 - **logLevel**：日志等级配置。gameServer 使用 [log4net](https://logging.apache.org/log4net/) 作为日志管理框架，如需自定义 log 输出可在了解log4net 的前提下自行修改 logConf.xml 文件。
 
-- **regConf**：独立部署配置，仅在使用 Matchvs 独立部署解决方案时开启。
+- **regConf**：独立部署配置，仅在使用 jdge 独立部署解决方案时开启。
 ```
 
   - enable：register 注册服务控制开关，设为 true 时开启独立部署模式，设为 false 时关闭独立部署模式。
@@ -144,18 +144,18 @@ $ jdge debug 1424769556baec5362f5b1513f7e1167
 	==================== Develop config ====================
 	SvcName:        svc-201994-0
 	PodName:        deploy-201994-0-5f5d8785f8-9545j
-	RemoteHost:     directory10.matchvs.com
+	RemoteHost:     directory10.jdge.com
 	RemotePort:     9982
 	
 2018/11/13 15:38:01 [I] [proxy_manager.go:298] proxy removed: []
-2018/11/13 15:38:01 [I] [proxy_manager.go:308] proxy added: [matchvs]
+2018/11/13 15:38:01 [I] [proxy_manager.go:308] proxy added: [jdge]
 2018/11/13 15:38:01 [I] [proxy_manager.go:331] visitor removed: []
 2018/11/13 15:38:01 [I] [proxy_manager.go:340] visitor added: []
 2018/11/13 15:38:01 [I] [control.go:240] [37ff6c2d5cc54535] login to server success, get run id [37ff6c2d5cc54535], server udp port [0]
-2018/11/13 15:38:01 [I] [control.go:165] [37ff6c2d5cc54535] [matchvs] start proxy success
+2018/11/13 15:38:01 [I] [control.go:165] [37ff6c2d5cc54535] [jdge] start proxy success
 ```
 
-`jdge debug`命令在启动时与 Matchvs 服务建立代理连接。启动完成后，客户端发送给 gameServer 的消息将通过代理服务转发到开发者本地运行的 gameServer。同样的，gameServer 发送的消息也通过代理服务转发给客户端。
+`jdge debug`命令在启动时与 jdge 服务建立代理连接。启动完成后，客户端发送给 gameServer 的消息将通过代理服务转发到开发者本地运行的 gameServer。同样的，gameServer 发送的消息也通过代理服务转发给客户端。
 
 保留这个窗口，然后在另外一个窗口里启动 gameServer 服务：
 
@@ -167,15 +167,15 @@ $ dotnet run
 
 这里使用`dotnet`工具启动 gameServer，实际使用时也可以使用 Visual Studio IDE 启动。
 
-如果想要退出调试，在Matchvs命令行终端输入`quit`回车即可。
+如果想要退出调试，在jdge命令行终端输入`quit`回车即可。
 
 
 
 ## Demo 客户端与 gameServer 建立连接
 
-本地调试模式只支持测试环境，所以 Demo 客户端需要切换到测试环境，即 Demo 中 Matchvs `init` 接口的 `channel`需要修改为 `Matchvs`，`platform`需要修改为`alpha`。
+本地调试模式只支持测试环境，所以 Demo 客户端需要切换到测试环境，即 Demo 中 jdge `init` 接口的 `channel`需要修改为 `jdge`，`platform`需要修改为`alpha`。
 
-运行Demo客户端，此时Matchvs 引擎就会将客户端的请求转发到开发者本地 gameServer 服务，开发者无须提交代码即可在本地调试代码。
+运行Demo客户端，此时jdge 引擎就会将客户端的请求转发到开发者本地 gameServer 服务，开发者无须提交代码即可在本地调试代码。
 
 
 

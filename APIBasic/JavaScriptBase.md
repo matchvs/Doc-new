@@ -34,7 +34,7 @@ engine.init(response, channel, platform, gameID);
 JDGE 提供了两个环境，alpha 调试环境和 release 正式环境。游戏开发调试阶段请使用 alpha 环境，即 platform 传参"alpha"。[环境说明](../Advanced/EnvGuide)，参数列表如下：
 
 
-gameID获取请[前往控制台](http://www-ge.matrix.jdcloud.com/manage/gameContentList)
+gameID获取请[前往控制台](http://home-ge.matrix.jdcloud.com/manage/gameContentList)
 
 ## 注册
 

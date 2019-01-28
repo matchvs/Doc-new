@@ -5,7 +5,7 @@ Sort: 2
 
 ## 注册 jdge
 
-[点击登录](http://home-ge.matrix.jdcloud.com/login) 如果还没有注册账号请先注册
+[点击登录](http://home-ge.matrix.jdcloud.com/serviceGuide) 如果还没有注册账号请先注册
 
 ## 新建游戏
 
