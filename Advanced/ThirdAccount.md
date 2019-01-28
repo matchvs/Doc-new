@@ -123,7 +123,7 @@ private static bindOpenIDWithUserID(wxUserInfo:any){
             let name = wxUserInfo.userInfo.nickName;
             let avatar = wxUserInfo.userInfo.avatarUrl;
             let token = repData.data.token;
-            //绑定成功就可以登录 matchvs
+            //绑定成功就可以登录
         }
     },this);
 }
