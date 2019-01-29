@@ -12,7 +12,7 @@ Sort: -1
 
 ## 二、特性展示
 
-![](http://imgs.matchvs.com/static/guangwang/texing.png)
+![](http://imgs.matchvs.com/static/guangwang/texing2.png)
 
 ## 三、架构说明
 
