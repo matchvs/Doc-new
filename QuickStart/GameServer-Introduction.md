@@ -11,7 +11,7 @@ Sort: -1
 
 有一个抢小饼干的游戏，两个玩家几乎“同时”抢到小饼干:
 
-![](http://imgs.matchvs.com/static/Doc-img/new-start/gameServerimg/gsex.png)
+![](http://imgs.matchvs.com/static/Doc-img/new-start/gameServerimg/gsex22.png)
 
 以上示例简单说明了，我们利用 gameServer 可以根据玩家的地理位置及抢小饼干时机，去仲裁究竟谁抢到了小饼干。虽然我们也可以通过客户端实现这个机制，但这大大提升了客户端代码的复杂度，用 gameServer 来实现会非常便捷。
 
