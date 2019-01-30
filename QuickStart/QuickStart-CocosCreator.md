@@ -20,72 +20,13 @@ Sort: 3
 
 打开zip后双击CocosCreator_setup.exe,选择对应的安装路径进行安装，此过程需要几分钟。
 
-## 项目创建
-
-CreatorIDE安装成功后，双击打开CreatorIDE，选择新建项目选择一个空白工程，如下图所示
-
-![](http://imgs.matchvs.com/static/Doc-img/new-start/CocosCreatorImg/creatorNewProject.jpg)
-
-**注意** jdge的联网游戏案例已经集成进如了Cocos Creator v2.0.7版本中，建议新使用的玩家可以先建立一个联网游戏案例进行体验。
-
-选择好自己的工程路径后，点击新建项目,新的工程就创建好了。
 
 ## SDK的集成
 
-#### Creator V2.0.7
+前往JD云战网下载对应的![](http://home-ge.matrix.jdcloud.com/serviceDownload)下载javaScriptSDK下载对应的SDK然后创建对应的文件夹将matchvs.all.js文件放入创建的文件夹中，引用即可。
 
-在CreatorV2.0.7 版本之后推出了新的服务模块。同时在服务模块中也集成了jdge，使大家集成更加方便 `服务模块在面板选项中`。
+**注意** 参考创建路径project/assets/scripts/matchvs/
 
-
-服务模块如下图:
-
-![](http://imgs.matchvs.com/static/Doc-img/new-start/CocosCreatorImg/CocosServer.png)
-
-**注意** 服务模块加载SDK为Cocos渠道SDK，必须使用CreatorIDE登录的账号Cocos渠道账户必须绑定公司才可以使用。
-
- - 服务模块加载SDK路径为project/assets/scripts/matchvs/matchvs.all.js。
- 
-```javascript
-let engine;
-let response = {};
-try {
-    engine =  new window.MatchvsEngine();
-    response = new window.MatchvsResponse();
-	} catch (e) {
-	console.warn("load jdge fail,"+e.message);
-}
-module.exports = {
-    engine: engine,
-    response: response,
-};
-```
- 服务模块加载SDK参考以上代码。
-
-#### Creator V2.0.7以外的其他版本使用插件形式加载。
-
- -插件中携带的SDK版本比较旧，可以到官网自己下载最新的SDK然后更新。
-
-工程打开以后，点击CreatorIDE上方的扩展按钮，如图所示
-
-![](http://imgs.matchvs.com/static/Doc-img/new-start/CocosCreatorImg/creatorExtend.png)
-
-点击扩展商店，点击Creator插件，选择jdge游戏云-联网服务插件，如下图所示
-
-![](http://imgs.matchvs.com/static/Doc-img/new-start/CocosCreatorImg/creatorStore.png)
-
-进入插件页面后，点击下载完成以后点击安装按钮,选择安装到 **项目目录**
-
-![](http://imgs.matchvs.com/static/Doc-img/new-start/CocosCreatorImg/creatorMatchvsInstall.png)
-
-安装成功后，重启CreatorIDE，如下图所示
-
-![](http://imgs.matchvs.com/static/Doc-img/new-start/CocosCreatorImg/creatorInstallSuccess.png)
-
-**注意** 插件的卸载和替换
-
- - 全局插件路径默认为 C:/user/admin/.CocosCreator/packages/plugin-matchvs。如需卸载，删除plugin-matchvs文件夹即可。如果手动更换过cocosCreator的配置地址，全局插件地址跟随 .CocosCreator进行变动。
-
- - 项目插件路径为 project/packages/plugin-matchvs，如需卸载删除plugin-matchvs文件夹即可。 
 
 ## 第一行代码
 
