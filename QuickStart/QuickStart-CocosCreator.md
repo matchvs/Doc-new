@@ -174,7 +174,7 @@ this.Login(userInfo.id,userInfo.token);
 
 Login(userID,token) {
 	var DeviceID = 'abcdef';
-	this.engine.login(userID,token,this.gameID,DeviceID)
+	this.engine.login(userID,token,DeviceID)
 },
 
 loginResponse:function (MsLoginRsp) {
@@ -213,7 +213,7 @@ cc.Class({
     MatchvsInit() {
 		var appkey = '4fd4a67c10e84e259a2c3c417b9114f4';
 		var gameVersion = 1;
-        this.engine.init(this.rsp,'Matchvs','release',this.gameID,appkey,gameVersion);
+        this.engine.init(this.rsp,'Matchvs','release',appkey,gameVersion);
     },
 
     initResponse :function (status) {
@@ -235,7 +235,7 @@ cc.Class({
     },
     Login(userID,token) {
 		var DeviceID = 'abcdef';
-		this.engine.login(userID,token,this.gameID,DeviceID)
+		this.engine.login(userID,token,DeviceID)
     },
 
     loginResponse:function (loginRsp) {
