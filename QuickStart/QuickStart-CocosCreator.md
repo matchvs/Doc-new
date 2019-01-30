@@ -23,9 +23,9 @@ Sort: 3
 
 ## SDK的集成
 
-前往JD云战网下载对应的![](http://home-ge.matrix.jdcloud.com/serviceDownload)下载javaScriptSDK下载对应的SDK然后创建对应的文件夹将matchvs.all.js文件放入创建的文件夹中，引用即可。
+前往JD云战网下载对应的[javaScriptSDK](http://home-ge.matrix.jdcloud.com/serviceDownload)，然后创建对应的文件夹，将matchvs.all.js文件放入并引用即可。
 
-**注意** 参考创建路径project/assets/scripts/matchvs/
+**注意** 参考创建路径`project/assets/scripts/matchvs/`
 
 
 ## 第一行代码
@@ -69,15 +69,15 @@ cc.Class({
 
 ![](http://imgs.matchvs.com/static/Doc-img/new-start/CocosCreatorImg/creator_12.png)
 
- 6：jdge SDK 接口使用
-​	
+ 6：Matchvs SDK 接口使用
+	
  - 第一步初始化 init
 
 ```javascript
     MatchvsInit() {
 		var appkey = '4fd4a67c10e84e259a2c3c417b9114f4';
 		var gameVersion = 1;
-        this.engine.init(this.rsp,'jdge','release',this.gameID,appkey,gameVersion);
+        this.engine.init(this.rsp,'Matchvs','release',this.gameID,appkey,gameVersion);
     },
 
     initResponse :function (status) {
@@ -120,7 +120,7 @@ Login(userID,token) {
 
 loginResponse:function (MsLoginRsp) {
 	if (MsLoginRsp.status === 200) {
-		this.labelLog('恭喜你登录成功，来到jdge的世界，你已经成功的迈出了第一步，Hello World');
+		this.labelLog('恭喜你登录成功，来到Matchvs的世界，你已经成功的迈出了第一步，Hello World');
 	} else {
 		this.labelLog('登录失败');
 	}
@@ -154,7 +154,7 @@ cc.Class({
     MatchvsInit() {
 		var appkey = '4fd4a67c10e84e259a2c3c417b9114f4';
 		var gameVersion = 1;
-        this.engine.init(this.rsp,'jdge','release',this.gameID,appkey,gameVersion);
+        this.engine.init(this.rsp,'Matchvs','release',this.gameID,appkey,gameVersion);
     },
 
     initResponse :function (status) {
@@ -181,7 +181,7 @@ cc.Class({
 
     loginResponse:function (loginRsp) {
         if (loginRsp.status === 200) {
-            this.labelLog('恭喜你登录成功，来到jdge的世界，你已经成功的迈出了第一步，Hello World');
+            this.labelLog('恭喜你登录成功，来到Matchvs的世界，你已经成功的迈出了第一步，Hello World');
         } else {
             this.labelLog('登录失败');
         }
@@ -202,9 +202,9 @@ cc.Class({
 
 ## 在Cocos Creator中使用Ts
 
-当前项目支持Ts后，按照上面步骤成功导入JSSDK后，在官网的[下载页面](http://home-ge.matrix.jdcloud.com/serviceDownload)下载TypeScript，将其中的matchvs.d.ts拷贝到JSSDK的同路径下即可使用。
+当前项目支持Ts后，按照上面步骤成功导入JSSDK后，在官网的[下载页面](http://matchvs.com/serviceDownload)下载TypeScript，将其中的matchvs.d.ts拷贝到JSSDK的同路径下即可使用。
 
-下面是一段TS的演示代码，实现的主要功能有初始化，注册，登录。[工程地址](http://home-ge.matrix.jdcloud.com/serviceCourse)
+下面是一段TS的演示代码，实现的主要功能有初始化，注册，登录。[工程地址](https://github.com/matchvs/demo-creator)
 
 ```javascript
 const {ccclass, property} = cc._decorator;
@@ -249,9 +249,9 @@ export default class NewClass extends cc.Component {
                 self.AppKey = self.appKeyInput.string;
             }
             if (Number(self.gameIdInput.string) === 0) {
-                self.Engine.init(self.Response,"jdge","alpha",Number(self.gameIdInput.placeholder));
+                self.Engine.init(self.Response,"Matchvs","alpha",Number(self.gameIdInput.placeholder));
             }else {
-                self.Engine.init(self.Response,"jdge","alpha",Number(self.gameIdInput.string));
+                self.Engine.init(self.Response,"Matchvs","alpha",Number(self.gameIdInput.string));
             }
 		});
         self.initEvent();
@@ -333,4 +333,4 @@ export default class NewClass extends cc.Component {
 }
 ```
 
-[更多jdge文档查看基础功能文档](../APIBasic/JavaScriptBase)
+[更多Matchvs文档查看基础功能文档](../APIBasic/JavaScriptBase)
