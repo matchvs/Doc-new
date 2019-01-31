@@ -8,7 +8,7 @@ Sort: 21
 
 jdge 提供了两套环境，测试环境 alpha 和正式环境 release，两套环境提供的功能一模一样。两套环境是完全隔离的，目的是让游戏调试和线上运行互不干扰。
 
-![](http://imgs.matchvs.com/static/alphaRelease.png)
+![](http://imgs.matchvs.com/static/alphaReleasejd.jpg)
 
 
 
