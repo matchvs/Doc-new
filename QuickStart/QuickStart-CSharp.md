@@ -15,7 +15,7 @@ Sort: 9
 
 ![](http://imgs.matchvs.com/static/Doc-img/new-start/gameServerimg/gsCLI1.png)
 
-gameServer 使用 git 管理 gameServer，git 仓库账号密码在 gameServer 列表页顶部可获取。
+gameServer 使用 git 仓库管理代码，git 仓库账号密码在 gameServer 列表页顶部可获取。
 
 点击 “创建gameServer”，填写 gameServer 基本信息：
 
