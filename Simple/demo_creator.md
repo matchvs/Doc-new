@@ -1,4 +1,4 @@
-# Matchvs_demo_creator
+# demo_creator
 - [官网](http://home-ge.matrix.jdcloud.com/serviceGuide)
 - [在线体验链接](http://demo.matchvs.com/demo-creator/)
 
@@ -6,7 +6,7 @@
 
 用京东云战 SDK 和 creator 开发的多人摘星星，用于演示多人匹配、数据传输、帧同步、消息订阅等功能，下面是游戏内同步效果图。
 
-![conv_ops](demo.gif) 
+![conv_ops](./img.Assets/demo.gif) 
 
 ## 1：加载插件
 
