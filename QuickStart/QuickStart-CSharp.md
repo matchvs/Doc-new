@@ -13,25 +13,11 @@ Sort: 9
 
 成功创建游戏后，点击左侧菜单栏 “gameServer” 即可进入 gameServer 列表页。
 
-![](http://imgs.matchvs.com/static/Doc-img/new-start/gameServerimg/init.png)
+![](http://imgs.matchvs.com/static/Doc-img/new-start/gameServerimg/gsCLI1.png)
 
-jdge 使用 git 管理 gameServer，所以在创建 gameServer 之前，你需要将自己的 SSH key 上传至 jdge 账号。
+gameServer 使用 git 管理 gameServer，git 仓库账号密码在 gameServer 列表页顶部可获取。
 
-1. 复制 SSH key 到粘贴板 
-
-   SSH key 文件通常位于 `~/.ssh/id_rsa.pub`。如果文件不存在，请参阅 [SSHKey 手册](../References/git)生成 SSH key。
-
-2. 点击上图中的 “立即上传”
-
-   ![](http://imgs.matchvs.com/static/Doc-img/new-start/gameServerimg/uploadsshkey.png)
-
-   把第1步复制的内容粘贴到输入框，注意不要输入多余的空格或空行，点击确定。
-
-3. 确定上传成功
-
-   ![](http://imgs.matchvs.com/static/Doc-img/new-start/gameServerimg/uploadsshkeysuccess.png)
-
-SSH key 上传成功后，点击 “创建gameServer”，填写 gameServer 基本信息：
+点击 “创建gameServer”，填写 gameServer 基本信息：
 
 ![](http://imgs.matchvs.com/static/Doc-img/new-start/gameServerimg/creategameserver.png)
 
