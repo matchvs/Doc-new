@@ -18,8 +18,6 @@ Sort: 32
 
 https://sdk-ge.matrix.jdcloud.com
 
-https://-ge.matrix.jdcloud.com
-
 https://alpha-ge.matrix.jdcloud.com
 
 
