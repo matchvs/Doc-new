@@ -1,6 +1,6 @@
 # demo_creator
 - [官网](http://home-ge.matrix.jdcloud.com/serviceGuide)
-- [在线体验链接](http://demo.matchvs.com/demo-creator/)
+- [在线体验链接](http://demo-ge.matrix.jdcloud.com/demo-creator/)
 
 **注意** 本demo支持creator1.X，creator2.X版本，有疑问可以在控制台发送工单或发邮件咨询 ：hanyongxiang@jd.com。欢迎你对我们的产品提出建议。
 
