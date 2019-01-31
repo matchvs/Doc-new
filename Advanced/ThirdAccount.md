@@ -258,4 +258,4 @@ statue 非零
 
 
 
-有关第三方绑定使用方法，可以参考我们的 [Demo](https://github.com/matchvs/demo-Egret) 
+有关第三方绑定使用方法，可以参考我们的 [demo-Egret](http://home-ge.matrix.jdcloud.com/serviceCourse) 
