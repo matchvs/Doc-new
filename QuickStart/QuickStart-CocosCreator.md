@@ -61,31 +61,7 @@ module.exports = {
 ```
  服务模块加载SDK参考以上代码。
 
-#### Creator V2.0.7以外的其他版本使用插件形式加载。
-
- -插件中携带的SDK版本比较旧，可以到官网自己下载最新的SDK然后更新。
-
-工程打开以后，点击CreatorIDE上方的扩展按钮，如图所示
-
-![](http://imgs.matchvs.com/static/Doc-img/new-start/CocosCreatorImg/creatorExtend.png)
-
-点击扩展商店，点击Creator插件，选择Matchvs游戏云-联网服务插件，如下图所示
-
-![](http://imgs.matchvs.com/static/Doc-img/new-start/CocosCreatorImg/creatorStore.png)
-
-进入插件页面后，点击下载完成以后点击安装按钮,选择安装到 **项目目录**
-
-![](http://imgs.matchvs.com/static/Doc-img/new-start/CocosCreatorImg/creatorMatchvsInstall.png)
-
-安装成功后，重启CreatorIDE，如下图所示
-
-![](http://imgs.matchvs.com/static/Doc-img/new-start/CocosCreatorImg/creatorInstallSuccess.png)
-
-**注意** 插件的卸载和替换
-
- - 全局插件路径默认为 C:/user/admin/.CocosCreator/packages/plugin-matchvs。如需卸载，删除plugin-matchvs文件夹即可。如果手动更换过cocosCreator的配置地址，全局插件地址跟随 .CocosCreator进行变动。
-
- - 项目插件路径为 project/packages/plugin-matchvs，如需卸载删除plugin-matchvs文件夹即可。 
+#### Creator V2.0.7以外的其他版本推荐大家升级到2.0.7以上版本使用
 
 ## 第一行代码
 
