@@ -41,15 +41,14 @@ let matchvsEngine = new MatchvsEngine()
 let matchvsResponse = new MatchvsResponse()
 
 // 初始化
-matchvsEngine.init(matchvsResponse, GameData.channel, GameData.platform, GameData.gameId)
+matchvsEngine.init(matchvsResponse, GameData.channel, GameData.platform, GameData.gameId,GameData.appkey, 1)
 
 // 注册
 matchvsEngine.registerUser()
 
 // 登陆
 matchvsEngine.login(GameData.userId, GameData.token,
-        GameData.gameId, GameData.gameVersion, GameData.appKey,
-        GameData.secretKey, GameData.deviceId, GameData.gatewayId)
+        GameData.deviceId)
 // ...
 ```
 更多接口功能和用法可[参考此处](../APIBasic/JavaScriptBase) ；

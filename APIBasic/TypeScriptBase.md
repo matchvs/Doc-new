@@ -29,7 +29,7 @@ class MsEngine {
     private static response = new MatchvsResponse();
 }
 
-```  
+```
 
 ##初始化
 
@@ -45,7 +45,7 @@ class MsEngine {
 初始化请求接口。
 
 ```typescript
-engine.init(response: MatchvsResponse, channel: string, platform: string, gameID: string): number
+engine.init(response: MatchvsResponse, channel: string, platform: string, gameID: string, appKey: string, gameVersion: number): number
 ```
 
 response 中设置一些回调方法，在执行注册、登录、发送事件等操作对应的方法之后，reponse中的回调函数会被SDK异步调用。
@@ -76,7 +76,7 @@ class MsEngine {
                 //失败
             }
         }
-        this.engine.init(this.response, "Matchvs", "alpha", 123456);
+        this.engine.init(this.response, "Matchvs", "alpha", 123456,"xxxxappkey", 1);
     }
 }
 ```
@@ -138,7 +138,7 @@ class MsEngine {
 ### login
 
 ```typescript
-engine.login(userID: number, token: string, gameID: number, gameVersion: number, appKey: string, secretKey: string, deviceID: string, gatewayID: number): number
+engine.login(userID: number, token: string, deviceID: string): number
 ```
 
 ### loginResponse
@@ -160,7 +160,7 @@ class MsEngine {
                 //失败
             }
         }
-        this.engine.login(1234, "xxxxxtoken", 123456, 1, "xxxxxappkey", "xxxxxsecret", "v",0);
+        this.engine.login(1234, "xxxxxtoken", "deviceID");
     }
 }
 ````

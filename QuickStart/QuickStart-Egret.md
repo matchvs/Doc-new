@@ -99,7 +99,7 @@ class Main extends eui.UILayer {
 请求示例：
 
 ```typescript
-engine.init(response, "Matchvs", "alpha", 201016);
+engine.init(response, "Matchvs", "alpha", 201016, "appkey","gameSersion");
 ```
 
 回调示例:
@@ -123,7 +123,7 @@ class Main extends eui.UILayer {
     .....
     private runMatchvs(){
         this.response.initResponse = this.initResponse.bind(this);
-        this.engine.init(this.response, "Matchvs", "alpha", 201016);
+        this.engine.init(this.response, "Matchvs", "alpha", 201016, "xxxxappkey", 1);
     }
 
 	private initResponse(status:number){
@@ -186,7 +186,7 @@ private registerUserResponse(userInfo:MsRegistRsp){
 请求示例：
 
 ```typescript
-engine.login(userInfo.userID, userInfo.token, 201016, 1, "xxxxxappkey", "xxxxxsecret", "v", 0);
+engine.login(userInfo.userID, "deviceID");
 ```
 
 回调示例：
@@ -209,7 +209,7 @@ private registerUserResponse(userInfo:MsRegistRsp){
     if(userInfo.status == 0){
         console.log("注册成功");
         this.response.loginResponse = this.loginResponse.bind(this);
-        this.engine.login(userInfo.userID, userInfo.token, 201489, 1, "xxxxxappkey", "xxxxxsecret", "v",0);
+        this.engine.login(userInfo.userID, userInfo.token, "deviceID");
     }
 }
 
