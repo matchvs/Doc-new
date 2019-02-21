@@ -6,7 +6,7 @@ Title: 组队匹配
 
 当前页面是组队相关的API说明。我们同样是以 MatchvsEngine 和 MatchvsResponse 的对象 engine 和 response 来说明。
 
-组队匹配信息可以使用getRoomDetail 接口查看房间是否有组队。
+组队匹配信息可以使用getRoomDetail 接口查看房间是否有组队。请求接口返回码可以参考 [错误码说明](https://doc.matchvs.com/ErrCode) 
 
 
 
@@ -362,7 +362,7 @@ response.teamMatchStartNotify(notify);
 
 ### teamMatchResultNotify
 
-队伍匹配结果通过这个接口通知队伍中的所有人。匹配成功后，默认已经加入了房间，不用额外的调用加入房间接口。
+队伍匹配结果通过这个接口通知队伍中的所有人。匹配成功但并不是加入了房间，收到匹配成功后，马上给其他玩家发送消息是不可行的。匹配成功后SDK会自动处理加入房间的逻辑，开发者不用额外的调用加入房间接口，只需要处理，joinRoomResponse 接口和 joinRoomNotify 接口即可，通过这个两个接口判断是否所有人都加入了房间，如果需要检查谁掉线了可以处理 networkStateNotify 接口。
 
 ```
 response.teamMatchResultNotify(notify);
@@ -460,5 +460,210 @@ var info = new MVS.MsTeamMatchInfo("STTeamMatch", 10, 1, 0,1,"STTeamMatch",
            new MVS.MsWatchSet(600000, 3, 60000, true)
 );
 console.log("[REQ]STTeamMatch:"+engine.teamMatch(info));
+```
+
+
+
+## cancelTeamMatch
+
+开始匹配后，在还没有匹配到队伍的情况下可以取消当前匹配。这个时候所有小队伍内的玩家都会从匹配列表中移除，触发取消匹配的人收到 cancelTeamMatchResponse 回调，其他人收到 cancelTeamMatchNotify 的回调。
+
+```
+engine.cancelTeamMatch(args)
+```
+
+#### args 属性
+
+| 属性    | 类型   | 说明     | 示例               |
+| ------- | ------ | -------- | ------------------ |
+| cpProto | string | 附带消息 | “有事，暂时不玩啦” |
+
+
+
+## cancelTeamMatchResponse
+
+调用取消匹配接口 cancelTeamMatch 时会收到这个接口的回调。
+
+```
+response.cancelTeamMatchResponse(rsp)
+```
+
+#### rsp 属性
+
+| 属性   | 类型   | 说明                                                         | 示例 |
+| ------ | ------ | ------------------------------------------------------------ | ---- |
+| status | number | 状态值 200 成功，其他 [请看说明](https://doc.matchvs.com/ErrCode) | 200  |
+
+
+
+## cancelTeamMatchNotify
+
+有队员调用取消匹配接口 cancelTeamMatch 时，其他队员会收到这个接口的回调
+
+```typescript
+response.cancelTeamMatchNotify(notify)
+```
+
+#### notify 属性
+
+| 属性    | 类型   | 说明     | 示例                |
+| ------- | ------ | -------- | ------------------- |
+| userID  | number | 用户ID   | 123456              |
+| teamID  | string | 队伍ID   | “12345678901234567” |
+| cpProto | string | 附带消息 | “有事，不能玩”      |
+
+#### 示例代码
+
+```javascript
+response.cancelTeamMatchResponse = function(rsp){
+    console.log("[RSP]cancelTeamMatchResponse:"+JSON.stringify(rsp));
+};
+response.cancelTeamMatchNotify = function(notify){
+    console.log("[RSP]cancelTeamMatchNotify:"+JSON.stringify(notify));
+};
+engine.cancelTeamMatch({cpProto:"cancel team match"});
+```
+
+
+
+## kickTeamMember
+
+剔除对内成员，在组队期间如果没有开始组队匹配可以使用这个接口剔除其他玩家，不可以剔除自己。
+
+```typescript
+engine.kickTeamMember(args)
+```
+
+#### args 属性
+
+| 属性    | 类型   | 说明     | 示例         |
+| ------- | ------ | -------- | ------------ |
+| userID  | number | 用户ID   | 123456       |
+| cpProto | string | 附带消息 | “不想和你玩” |
+
+#### 返回值
+
+请看 [错误码说明](https://doc.matchvs.com/ErrCode) 
+
+
+
+## kickTeamMemberResponse
+
+调用踢人接口会收到这个接口的回调。
+
+```typescript
+response.kickTeamMemberResponse(rsp)
+```
+
+#### rsp 属性
+
+| 属性    | 类型          | 说明                                                         | 示例               |
+| ------- | ------------- | ------------------------------------------------------------ | ------------------ |
+| status  | number        | 状态值 200 成功，其他 [请看说明](https://doc.matchvs.com/ErrCode) | 200                |
+| members | Array<number> | 当前队伍成员                                                 | [123456, 678901]   |
+| owner   | number        | 队长                                                         | 123456             |
+| teamID  | string        | 队伍号                                                       | "1234567890987654" |
+
+
+
+## kickTeamMemberNotify
+
+有别的玩家调用了踢人接口，那么另外其他玩家会收到这个接口的回调。
+
+```typescript
+response.kickTeamMemberNotify(notify)
+```
+
+#### notify 属性
+
+| 属性      | 类型          | 说明       | 示例               |
+| --------- | ------------- | ---------- | ------------------ |
+| teamID    | string        | 队伍ID     | “1234567890987654” |
+| userID    | number        | 发起剔除者 | 123456             |
+| dstUserID | number        | 剔除的人   | 678901             |
+| owner     | number        | 队长       | 123456             |
+| members   | Array<number> | 当前队员   | [123456,234564]    |
+| cpProto   | string        | 附带消息   | "不想和你玩"       |
+
+#### 示例代码
+
+```javascript
+response.kickTeamMemberResponse = function(rsp){
+    console.log("[RSP]kickTeamMemberResponse:"+JSON.stringify(rsp));
+};
+response.kickTeamMemberNotify = function(notify){
+    console.log("[RSP]kickTeamMemberNotify:"+JSON.stringify(notify));
+};
+engine.kickTeamMember({userID:userid, cpProto:"kick team member"});
+```
+
+
+
+## sendTeamEvent
+
+ 在组队期间，可以使用这个接口发送消息给其他的队内成员，自己收到 sendTeamEvent 的回调，其他成员收到 sendTeamEventNotify的回调，类似 sendEvent接口的使用，这个接口有对消息发送的频率做了限定，目前限定每秒不能超过20次。同时消息长度也有限定。只有在队伍中才能发送消息。
+
+```typescript
+engine.sendTeamEvent(args)
+```
+
+#### args 属性
+
+| 属性       | 类型          | 说明                                      | 示例    |
+| ---------- | ------------- | ----------------------------------------- | ------- |
+| dstType    | number        | 0-包含dstUids  1-排除dstUids              | 1       |
+| msgType    | number        | 0-只发client  1-只发gs  2-client和 gs都发 | 0       |
+| dstUserIDs | Array<number> | 指定的用户列表 配合 dstType 使用          | []      |
+| data       | string        | 发送的数据                                | "hello" |
+
+#### 返回值
+
+请看 [错误码说明](https://doc.matchvs.com/ErrCode) 
+
+
+
+## sendTeamEventResponse
+
+发送队内消息回调，发送者收到的回调
+
+```typescript
+response.sendTeamEventResponse(rsp)
+```
+
+#### rsp 属性
+
+| 属性       | 类型          | 说明                                                     | 示例             |
+| ---------- | ------------- | -------------------------------------------------------- | ---------------- |
+| status     | number        | 状态值，其他 [请看说明](https://doc.matchvs.com/ErrCode) | 200              |
+| dstUserIDs | Array<number> | 发给了哪些人                                             | [123456 , 68790] |
+
+
+
+## sendTeamEventNotify
+
+有别的玩家调用了发送消息接口，那么另外其他玩家会收到这个接口的回调。
+
+```typescript
+response.sendTeamEventNotify(notify)
+```
+
+#### notify 属性
+
+| 属性    | 类型   | 说明           | 示例               |
+| ------- | ------ | -------------- | ------------------ |
+| teamID  | string | 当前队伍号     | “1234567890987654” |
+| userID  | number | 发送消息的玩家 | 68790              |
+| cpProto | string | 消息内容       | 123456             |
+
+#### 示例代码
+
+```javascript
+response.sendTeamEventResponse = function(rsp){
+    console.log("[RSP]sendTeamEventResponse:"+JSON.stringify(rsp));
+};
+response.sendTeamEventNotify = function(notify){
+    console.log("[RSP]sendTeamEventNotify:"+JSON.stringify(notify));
+};
+engine.sendTeamEvent({msgType:0, dstType:1, data:data, dstUserIDs:[]});
 ```
 
