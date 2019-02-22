@@ -2,8 +2,6 @@
 Title: 组队匹配
 */
 
-[组队示例](http://demo-ge.matrix.jdcloud.com/RombBoy/)
-
 当前页面是组队相关的API说明。我们同样是以 MatchvsEngine 和 MatchvsResponse 的对象 engine 和 response 来说明。
 
 组队匹配信息可以使用getRoomDetail 接口查看房间是否有组队。
