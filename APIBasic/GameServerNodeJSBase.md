@@ -4,7 +4,7 @@ Sort: 15
 */
 ## 创建房间
 
-房间被创建时，gameServer 会触发`onCreateRoom()`消息，如有"房间创建“的相关逻辑应写在该方法里。
+房间被创建时，gameServer 会触发`onCreateRoom()`消息，如有"房间创建“的相关逻辑应写在该方法里。`onCreateRoom()`仅表示创建了一个空房间，此时还没有玩家进入房间。如有“玩家进入房间”的逻辑处理应放在`onJoinRoom`。
 
 ```javascript
 /**
