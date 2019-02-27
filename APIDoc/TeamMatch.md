@@ -6,6 +6,8 @@ Title: 组队匹配
 
 当前页面是组队相关的API说明。我们同样是以 MatchvsEngine 和 MatchvsResponse 的对象 engine 和 response 来说明。
 
+Response 是发起方在调用接口后，自己收到的回调；Notify是发起方调用接口后，小队其他成员收到的通知。
+
 组队匹配信息可以使用getRoomDetail 接口查看房间是否有组队。请求接口返回码可以参考 [错误码说明](https://doc.matchvs.com/ErrCode) 
 
 
@@ -16,6 +18,16 @@ Title: 组队匹配
 
 - 请求接口：createTeam
 - 回调接口：createTeamResponse
+
+### 说明
+
+开发者可以创建一个带密码的小队，并指定小队的人数上限（如5v5，则小队人数上限为5，玩家可以再邀请4个好友一起组成小队）。
+
+可以定义组队模式，比如基础模式，进阶模式等。在创建小队时，设置用户信息，之后有玩家加入小队时，可以直接获取到该用户信息。
+
+玩家A创建小队成功后，A会收到小队ID，将小队ID分享给好友，好友即可通过ID+密码进入小队。（不需要密码可以全部默认设置为同一个值。）
+
+每个小队会有一个队长，一般是创建小队的那个玩家，如果队长掉线/离开小队，则队长会随机转移给小队内其他玩家。新的队长信息可以在 `leaveTeamNotify`里获取。
 
 ### createTeam
 
@@ -89,6 +101,12 @@ response.createTeamResponse = function(rsp){
 
 - 请求接口：joinTeam
 - 回调接口：joinTeamResponse, joinTeamNotify
+
+### 说明
+
+加入小队时，可以携带头像、昵称等信息。
+
+队员加入后，会收到已在小队里的所有成员列表信息以及小队信息。其他玩家会收到该队员加入的通知。
 
 ### joinTeam
 
@@ -262,10 +280,24 @@ console.log("[REQ]STLeaveTeam:"+engine.leaveTeam());
 
 ##发起队伍匹配 
 
-加入了队伍后，可以发起队伍匹配，队伍匹配的队伍成员数和队伍数量可在调用匹配的时候调用，比如我需要做5v5 那么队伍成员数是5，队伍数量是2。队伍匹配调用 teamMatch 接口。teamMatch 接口可以由队伍中任意一个人调用。
+加入了队伍后，可以发起队伍匹配，队伍匹配的队伍成员数和队伍数量可在调用匹配的时候调用，如需要做5v5对战，则队伍成员数设置5，队伍数量设置2。队伍匹配调用 teamMatch 接口。teamMatch 接口可以由队伍中任意一个人调用。
 
 - 请求接口：teamMatch
 - 回调接口：teamMatchResponse, teamMatchStartNotify, teamMatchResultNotify
+
+### 说明
+
+匹配规则：你可以为每个小队设置一个权值，这个权值代表该小队的实力水平，如段位等级为3。然后设置小队实力的匹配范围，如2，则在匹配时，会为该小队寻找 3±2 段位（即1--5）的其他小队进行匹配。如果是不同模式，可以用 mode 区分，相同 mode 的小队才会被匹配到一起。匹配时会以`mode`、`cond`为匹配依据。
+
+权重规则`weightRule` 用于小队合成大队后计算大队的段位，目前默认为 0 ，即求平均。如，team1 段位为 2，team2 段位为4，则合成大队后，大队权重为平均值 3 。如相应支持更多的合成后计算规则，可以进入技术支持群QQ：450335262  进行反馈。
+
+匹配时，会自动根据设置的队伍数量及每队人数进行小队间的组合，最终会尽量保障两边队伍段位均衡。如5v5，team1（playerA）、team2（player B C D E）、team3（player F G ）、team4（player H I J）发起匹配，最终结果可能是 A B C D E ，F G H I J 两队。
+
+你可以设置一个等待超时时间，如10秒，如果10秒之内未匹配到合适的其他小队，会返回匹配失败。
+
+发起匹配后，其他队员会收到开始匹配的通知，匹配成功/失败的通知也会相继收到。
+
+小队匹配支持人满和人不满模式，人满即  5v5 ，则最终匹配结果肯定是 5v5 ,否则会匹配失败；人不满即 5v5 ,在超时之前可能只能匹配到 2v3 ,则依然匹配成功，你可以再自行添加机器人。
 
 ### teamMatch
 
@@ -285,7 +317,7 @@ info 是 MVS.MsTeamMatchInfo 类型。
 | mode         | number              | 玩家自定义数据                                               | 0          |
 | visibility   | number              | 房间是否可见（是否可以被getRoomListEx查看到）。0-不可见 1- 可见 | 1          |
 | roomProperty | string              | 房间自定义信息                                               | "房间信息" |
-| watchSet     | MVS.MsWatchSet      | 观战设置，但canWatch 设置为1的时候有效                       |            |
+| watchSet     | MVS.MsWatchSet      | 观战设置，canWatch 设置为1的时候有效                         |            |
 | cond         | MVS.MsTeamMatchCond | 匹配设置                                                     |            |
 
 #### 参数 MVS.MsWatchSet属性
@@ -306,7 +338,7 @@ info 是 MVS.MsTeamMatchInfo 类型。
 | timeout       | number | 匹配的超时时间,指匹配多久就视为超时，没有匹配到。接口teamMatchResultNotify会报422错误 | 20     |
 | weight        | number | 权值                                                         | 10     |
 | weightRange   | number | 匹配范围                                                     | 5      |
-| weightRule    | number | 匹配规则， 默认是0                                           | 0      |
+| weightRule    | number | 匹配规则， 默认是0(求平均)                                   | 0      |
 | full          | number | 是否人满匹配，0-人不满也可以匹配，1-人满匹配 (人不满匹配不到会超时报422错误码) | 0      |
 
 #### 返回码
@@ -362,7 +394,7 @@ response.teamMatchStartNotify(notify);
 
 ### teamMatchResultNotify
 
-队伍匹配结果通过这个接口通知队伍中的所有人。匹配成功但并不是加入了房间，收到匹配成功后，马上给其他玩家发送消息是不可行的。匹配成功后SDK会自动处理加入房间的逻辑，开发者不用额外的调用加入房间接口，只需要处理，joinRoomResponse 接口和 joinRoomNotify 接口即可，通过这个两个接口判断是否所有人都加入了房间，如果需要检查谁掉线了可以处理 networkStateNotify 接口。
+队伍匹配结果通过这个接口通知队伍中的所有人。**注意：匹配成功但并不是加入了房间，收到匹配成功后，马上给其他玩家发送消息是不可行的。**匹配成功后SDK会自动处理加入房间的逻辑，开发者不用额外的调用加入房间接口，只需要处理，joinRoomResponse 接口和 joinRoomNotify 接口即可，通过这个两个接口判断是否所有人都加入了房间，如果需要检查谁掉线了可以处理 networkStateNotify 接口。
 
 ```
 response.teamMatchResultNotify(notify);
@@ -528,7 +560,7 @@ engine.cancelTeamMatch({cpProto:"cancel team match"});
 
 ## kickTeamMember
 
-剔除对内成员，在组队期间如果没有开始组队匹配可以使用这个接口剔除其他玩家，不可以剔除自己。
+踢出内成员，在组队期间如果没有开始组队匹配可以使用这个接口踢出其他玩家，不可以踢出自己。
 
 ```typescript
 engine.kickTeamMember(args)
@@ -579,8 +611,8 @@ response.kickTeamMemberNotify(notify)
 | 属性      | 类型          | 说明       | 示例               |
 | --------- | ------------- | ---------- | ------------------ |
 | teamID    | string        | 队伍ID     | “1234567890987654” |
-| userID    | number        | 发起剔除者 | 123456             |
-| dstUserID | number        | 剔除的人   | 678901             |
+| userID    | number        | 发起踢出者 | 123456             |
+| dstUserID | number        | 被踢出的人 | 678901             |
 | owner     | number        | 队长       | 123456             |
 | members   | Array<number> | 当前队员   | [123456,234564]    |
 | cpProto   | string        | 附带消息   | "不想和你玩"       |
@@ -601,7 +633,7 @@ engine.kickTeamMember({userID:userid, cpProto:"kick team member"});
 
 ## sendTeamEvent
 
- 在组队期间，可以使用这个接口发送消息给其他的队内成员，自己收到 sendTeamEvent 的回调，其他成员收到 sendTeamEventNotify的回调，类似 sendEvent接口的使用，这个接口有对消息发送的频率做了限定，目前限定每秒不能超过20次。同时消息长度也有限定。只有在队伍中才能发送消息。
+ 在组队期间，可以使用这个接口发送消息给其他的队内成员，自己收到 sendTeamEvent 的回调，其他成员收到 sendTeamEventNotify的回调，类似 sendEvent接口的使用，这个接口有对消息发送的频率做了限定，目前限定每秒不能超过20次。同时消息长度也有限定不能超过 1KB。只有在队伍中才能发送消息。
 
 ```typescript
 engine.sendTeamEvent(args)
@@ -609,12 +641,14 @@ engine.sendTeamEvent(args)
 
 #### args 属性
 
-| 属性       | 类型          | 说明                                      | 示例    |
-| ---------- | ------------- | ----------------------------------------- | ------- |
-| dstType    | number        | 0-包含dstUids  1-排除dstUids              | 1       |
-| msgType    | number        | 0-只发client  1-只发gs  2-client和 gs都发 | 0       |
-| dstUserIDs | Array<number> | 指定的用户列表 配合 dstType 使用          | []      |
-| data       | string        | 发送的数据                                | "hello" |
+使用技巧：如果想发给小队内所有人，则可以将 `dstType`  设置为 1, `dstUserIDs ` 填空，意思是“目标用户是，发给除空以外的人，即所有玩家”。
+
+| 属性       | 类型          | 说明                                                         | 示例    |
+| ---------- | ------------- | ------------------------------------------------------------ | ------- |
+| dstType    | number        | 0-包含dstUids  1-排除dstUids                                 | 1       |
+| msgType    | number        | 0-只发client  1-只发gs  2-client和 gs都发 ps:目前暂不支持与gs通信 | 0       |
+| dstUserIDs | Array<number> | 指定的用户列表 配合 dstType 使用                             | []      |
+| data       | string        | 发送的数据                                                   | "hello" |
 
 #### 返回值
 

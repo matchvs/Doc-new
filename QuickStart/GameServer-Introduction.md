@@ -47,6 +47,16 @@ Matchvs 提供了一系列 gameServer 管理功能，您可以点击 gameServer 
 
 ![](http://imgs.matchvs.com/static/Doc-img/new-start/gameServerimg/gslist.png)
 
+## 平滑重启
+
+如果游戏更新了 gameServer 功能，须在 gameServer 提交后，点击发布，然后点击重启。
+
+你只需要评估最长一局游戏时长并设置，然后就可以保障所有玩家在服务升级时的良好体验。
+
+重启时，Matchvs 提供了平滑过渡，即你可以设置一个旧版本 gameServer 保留时长，如 10min 。在 新的 gameServer 服务启动后，再过 10 min 旧的 gameServer停止，所有的玩家都会调度到新的 gameServer。
+
+10 min 内，已经在 旧版本 gameServer 上的玩家不受影响，新的玩家会被调度到新的 gameServer。
+
 
 
 ## 数据库
