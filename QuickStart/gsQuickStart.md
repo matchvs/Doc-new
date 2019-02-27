@@ -15,7 +15,7 @@ gameServer是基于房间的可以自定义逻辑服务端框架。
 
 ## 创建游戏
 
-在开始使用 gameServer 之前，你需要创建自己的游戏。如何创建游戏详见 [Matchvs快速入门](../matchvs)。 
+在开始使用 gameServer 之前，你需要创建自己的游戏。如何创建游戏详见 [快速入门](http://doc-ge.matrix.jdcloud.com/QuickStart/Guide-jdge)。 
 
 ## 创建 gameServer  
 
@@ -39,7 +39,7 @@ gameServer 创建成功后，Matchvs 会为每个 gameServer 分配一个唯一�
 
 ## 下载框架代码
 
-前往[下载中心](http://www.matchvs.com/serviceDownload)，下载对应语言版本的 gameServer 框架。
+前往[下载中心](http://home-ge.matrix.jdcloud.com/serviceDownload)，下载对应语言版本的 gameServer 框架。
 
 下载完成并解压，将解压后的所有文件复制到 `myGameServer`目录下。
 

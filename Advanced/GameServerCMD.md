@@ -7,6 +7,7 @@ Sort: 22
 jdge 命令行工具是由京东云战网提供的命令行执行工具，可以在Windows、Linux和Mac系统中使用。
 该命令行工具提供了以下功能：创建gameServer、启动服务、重启服务、查看gameServer列表。
 
+[命令行工具下载地址](http://www.matchvs.com/serviceDownload)    **注意：在下载页面的底部**
 
 
 ## 安装说明：
