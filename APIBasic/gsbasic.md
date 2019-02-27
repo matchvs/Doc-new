@@ -1,6 +1,6 @@
 /*
 Title: gameServer 交互说明
-Sort: -5
+Sort: 20
 */
 
 本文主要展示 客户端 -- Matchvs 引擎服务 -- gameServer 之间的交互时序图。
