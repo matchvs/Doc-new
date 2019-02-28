@@ -13,7 +13,7 @@ Sort: 49
 
 ## init
 
-init 接口和之前的 init 接口是同一个，这里只是在 init 接口中新增了一个参数 threshold，只有传了该参数，才能获取节点列表和使用指定节点登录。[参考init接口说明](./JavaScript.md)
+init 接口和之前的 init 接口是同一个，这里只是在 init 接口中新增了一个参数 threshold，只有传了该参数，才能获取节点列表和使用指定节点登录。[参考init接口说明](./JavaScript)
 
 ## getNodeList
 
@@ -37,7 +37,7 @@ engine.getNodeList()
 
 ## login
 
- 登录接口和前面 API文档描述的登录接口是同一个，[login接口说明](./JavaScript.md) 。只是加了一个 nodeID 参数，如果不传这个参数或者传入的参数为0，login 则使用默认节点登录。否则会使用指定的 nodeID登录，nodeID 必须是从 getNodeList 接口获取的有效ID。
+ 登录接口和前面 API文档描述的登录接口是同一个，[login接口说明](./JavaScript) 。只是加了一个 nodeID 参数，如果不传这个参数或者传入的参数为0，login 则使用默认节点登录。否则会使用指定的 nodeID登录，nodeID 必须是从 getNodeList 接口获取的有效ID。
 
 
 
@@ -57,5 +57,5 @@ engine.changeNode(args)
 | ------ | ------ | ------------------------- | ---- |
 | nodeID | number | 从 getNodeList 获取的信息 | 1    |
 
-返回值参考 [错误码说明](../ErrCode.md)
+返回值参考 [错误码说明](../ErrCode)
 
