@@ -24,19 +24,20 @@ Sort: 38
 初始化请求接口。
 
 ```typescript
-engine.init(pResponse: MatchvsResponse, pChannel: string, pPlatform: string, gameID: number, appKey: string, gameVersion: number): number
+engine.init(pResponse: MatchvsResponse, pChannel: string, pPlatform: string, gameID: number, appKey: string, gameVersion: number, threshold ?:number): number
 ```
 
 #### 参数：
 
-| 参数        | 类型            | 描述                                     | 示例值    |
-| ----------- | --------------- | ---------------------------------------- | --------- |
-| response    | MatchvsResponse | 回调类型MatchvsResponse的对象            | response  |
-| channel     | string          | 渠道，固定值                             | "Matchvs" |
-| platform    | string          | 平台，选择测试(alpha)or正式环境(release) | "alpha"   |
-| gameID      | number          | 游戏ID，在引擎官网创建游戏给出的ID       | 200103    |
-| appKey      | string          | 游戏 App Key 官网生成                    |           |
-| gameVersion | number          | 游戏版本，自定义，用于隔离匹配空间       |           |
+| 参数        | 类型            | 描述                                                         | 示例值    |
+| ----------- | --------------- | ------------------------------------------------------------ | --------- |
+| response    | MatchvsResponse | 回调类型MatchvsResponse的对象                                | response  |
+| channel     | string          | 渠道，固定值                                                 | "Matchvs" |
+| platform    | string          | 平台，选择测试(alpha)or正式环境(release)                     | "alpha"   |
+| gameID      | number          | 游戏ID，在引擎官网创建游戏给出的ID                           | 200103    |
+| appKey      | string          | 游戏 App Key 官网生成                                        |           |
+| gameVersion | number          | 游戏版本，自定义，用于隔离匹配空间                           |           |
+| threshold   | number          | 延迟容忍,在有多个节点的情况下使用，如果使用默认节点请可以不传该值 | 0 或 不传 |
 
 response 中设置一些回调方法，在执行注册、登录、发送事件等操作对应的方法之后，reponse中的回调函数会被SDK异步调用。
 
@@ -205,16 +206,17 @@ class MsEngine {
 ### login
 
 ```typescript
-engine.login(userID: number, token: string, deviceID: string): number
+engine.login(userID: number, token: string, deviceID: string, nodeID?:number): number
 ```
 
 #### 参数
 
-| 参数        | 类型   | 描述                                     | 示例值 |
-| ----------- | ------ | ---------------------------------------- | ------ |
-| userID      | number | 用户ID，调用注册接口后获取               | 123546 |
-| token       | string | 用户token，调用注册接口后获取            | ""     |
-| deviceID    | string | 设备ID，用于多端登录检测，请保证是唯一ID | ""     |
+| 参数     | 类型   | 描述                                                         | 示例值 |
+| -------- | ------ | ------------------------------------------------------------ | ------ |
+| userID   | number | 用户ID，调用注册接口后获取                                   | 123546 |
+| token    | string | 用户token，调用注册接口后获取                                | ""     |
+| deviceID | string | 设备ID，用于多端登录检测，请保证是唯一ID                     | ""     |
+| nodeID   | number | 节点ID，有多节点的时候，使用getNodeList 获取有效节点，多节点情况[说明](MultNode.md) |        |
 
 #### 返回值
 
