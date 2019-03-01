@@ -2616,7 +2616,14 @@ response.leaveWatchRoomNotify = function(user){
 
 注意：如果要关闭SDK中的日志就调用 MatchvsLog.closeLog()。如果打开SDK中的日志就调用MatchvsLog.openLog();
 
+## ws和Wss的切换
 
+```javascript
+MVS.IsWss = [boolean]   
+```
+IsWss 为true时连接Wss，为false 时连接Ws
+
+注意：微信小游戏必须使用Wss，微信小游戏环境下无需手动修改;
 
 ## 错误码
 
