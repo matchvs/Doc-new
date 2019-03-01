@@ -1284,6 +1284,8 @@ engine.sendEventEx(msgType, data, destType, userIDs)
 | data     | string | 消息内容                                                     | "hello"     |
 | destType | number | 目标类型。0表示发送目标为目标列表成员；1表示发送目标为除目标列表成员以外的房间成员 | 0           |
 | userIDs  | array  | 目标列表                                                     | [1001,1002] |
+  
+使用技巧：如果想发给小队内所有人，则可以将 dstType 设置为 1, dstUserIDs 填空，意思是“目标用户是，发给除空以外的人，即所有玩家”。  
 
 #### 返回值
 
