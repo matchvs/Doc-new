@@ -31,19 +31,20 @@ var response = new Matchvs.MatchvsResponse();
 **注意** 发布之前须到官网控制台申请“发布上线”，申请通过后在调用init方法时传“release”才会生效，否则将不能使用release环境。
 
 ```javascript
-engine.init(response, channel, platform, gameID, appkey, gameVersion)
+engine.init(response, channel, platform, gameID, appkey, gameVersion,threshold)
 ```
 
 #### 参数
 
-| 参数        | 类型   | 描述                                   | 示例值    |
-| ----------- | ------ | -------------------------------------- | --------- |
-| response    | object | 回调对象                               | {}        |
-| channel     | string | 渠道，固定值                           | "Matchvs" |
-| platform    | string | 平台，选择测试or正式环境               | "alpha"   |
-| gameID      | number | 游戏ID                                 | 200978    |
-| appkey      | string | 游戏App key，来自Matchvs控制台游戏信息 |           |
-| gameVersion | number | 游戏版本，自定义，用于隔离匹配空间     | 1         |
+| 参数        | 类型   | 描述                                                         | 示例值    |
+| ----------- | ------ | ------------------------------------------------------------ | --------- |
+| response    | object | 回调对象                                                     | {}        |
+| channel     | string | 渠道，固定值                                                 | "Matchvs" |
+| platform    | string | 平台，选择测试or正式环境                                     | "alpha"   |
+| gameID      | number | 游戏ID                                                       | 200978    |
+| appkey      | string | 游戏App key，来自Matchvs控制台游戏信息                       |           |
+| gameVersion | number | 游戏版本，自定义，用于隔离匹配空间                           | 1         |
+| threshold   | number | 延迟容忍,在有多个节点的情况下使用，如果使用默认节点请可以不传该值 | 0 或 不传 |
 
 #### 说明
 
@@ -207,16 +208,17 @@ registerUserResponse :function (userInfo) {
 ## login
 
 ```javascript
-engine.login(userID, token, deviceID)
+engine.login(userID, token, deviceID, nodeID)
 ```
 
 #### 参数
 
-| 参数        | 类型   | 描述                                     | 示例值 |
-| ----------- | ------ | ---------------------------------------- | ------ |
-| userID      | number | 用户ID，调用注册接口后获取               | 123546 |
-| token       | string | 用户token，调用注册接口后获取            | ""     |
-| deviceID    | string | 设备ID，用于多端登录检测，请保证是唯一ID | ""     |
+| 参数     | 类型   | 描述                                                         | 示例值 |
+| -------- | ------ | ------------------------------------------------------------ | ------ |
+| userID   | number | 用户ID，调用注册接口后获取                                   | 123546 |
+| token    | string | 用户token，调用注册接口后获取                                | ""     |
+| deviceID | string | 设备ID，用于多端登录检测，请保证是唯一ID                     | ""     |
+| nodeID   | number | 节点ID，有多节点的时候，使用getNodeList 获取有效节点，多节点情况[说明](MultNode.md) | 1      |
 
 #### 返回值
 
@@ -655,7 +657,7 @@ engine.leaveRoom(cpProto)
 
 #### 说明
 
-- 客户端调用该接口通知服务端该客户端对应的用户要离开房间。
+- 客户端调用该接口通知服务端该客户端对应的用户要离开房间。当所有玩家离开房间后，房间会被自动销毁。
 
 #### 示例
 
@@ -1472,7 +1474,7 @@ engine.kickPlayer(userID, cpProto)
 
 #### 说明
 
-- kickPlayer 用于剔除玩家，房间任何人都可以调用这个接口，参数userID 可以是房间内任意一个，自己也可以剔除自己。主要剔除方式由开发者自己制定。
+- kickPlayer 用于剔除玩家，房间任何人都可以调用这个接口，参数userID 可以是房间内任意一个，不可以剔除自己。主要剔除方式由开发者自己制定。
 - 如果是房主被踢出房间，服务器会在房间中剩下的玩家中重新指定一个房主通过`kickPlayerResponse`,`kickPlayerNotify`返回给房间中剩余的玩家。
 
 #### 示例
