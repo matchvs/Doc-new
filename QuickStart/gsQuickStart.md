@@ -494,3 +494,5 @@ gameServer 详细使用[参考此处](../APIBasic/GameServerNodeJSBase) 。
 1、去掉 node_modules 再上传发布一下，依赖模块添加到 package.json 里面，发布时会执行 npm install。
 
 2、多操作几次发布。
+#### gameServer git 地址是无效的 url  
+解决方法：检查 url 是否多复制了空格
