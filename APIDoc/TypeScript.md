@@ -1152,7 +1152,9 @@ engine.sendEventEx(msgType:number, data:string, destType:number, userIDs:Array <
 | data     | string        | 要发送的数据                                                 | “hello”     |
 | destType | number        | 0-包含destUids用户  1-排除destUids的用户                     | 2           |
 | userIDs  | Array<number> | 玩家ID集合                                                   | [1234,4567] |
-
+  
+  使用技巧：如果想发给小队内所有人，则可以将 dstType 设置为 1, dstUserIDs 填空，意思是“目标用户是，发给除空以外的人，即所有玩家”。
+  
 > 提示：senEventEx 参数示例说明
 >
 > //发送给房间中的全部玩家，destType = 1, userIDs = []
