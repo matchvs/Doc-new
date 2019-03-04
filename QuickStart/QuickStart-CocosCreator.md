@@ -130,7 +130,6 @@ loginResponse:function (MsLoginRsp) {
 下面是完整的代码片段
 
 ```javascript
-var mvs = require('matchvs.all')
 cc.Class({
     extends: cc.Component,
 
@@ -144,8 +143,8 @@ cc.Class({
 
     onLoad () {
         this.login.node.on('click',this.MatchvsInit,this);
-        this.engine = new mvs.MatchvsEngine();
-        this.rsp = new  mvs.MatchvsResponse();
+        this.engine = new window.MatchvsEngine();
+        this.rsp = new  window.MatchvsResponse();
         this.rsp.initResponse = this.initResponse.bind(this);
         this.rsp.registerUserResponse = this.registerUserResponse.bind(this);
         this.rsp.loginResponse = this.loginResponse.bind(this);
