@@ -3,11 +3,24 @@ Title: 短号映射
 Sort: 20
 */
 
+## 域名
+
+Matchvs 环境分为测试环境（alpha）和 正式环境（release），所以在使用http接口时，需要通过域名进行区分。使用正式环境需要先在官网控制台将您的游戏发布上线。
+
+- alpha环境域名：alphavsopen.matchvs.com
+- release环境域名：vsopen.matchvs.com
+
 ## 接口签名
 
-接口需要校验签名，参数中都必须包含sign参数，ts、seq、mode3个参数可选
+接口需要校验签名，参数中都必须包含sign、mode参数，ts、seq 2个参数可选
 
-ts为请求时间戳，精确到秒。seq为请求序号，每次请求递增变化由发起方自行维护。mode指定本次请求使用哪种签名方式。（1:token, 2:secret) sign由签名参数和签名方法计算得到的签名值。
+ts为请求时间戳，精确到秒。
+
+seq为请求序号，每次请求递增变化由发起方自行维护。
+
+mode指定本次请求使用哪种签名方式（1:token, 2:secret) 。
+
+sign由签名参数和签名方法计算得到的签名值。
 
 如果同时设置ts和seq可用于避免重复请求攻击，当前支持如下两种方式签名方式:
 
