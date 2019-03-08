@@ -437,8 +437,8 @@ window.getUserSign = getUserSign;
 
 ```
 
-- 代码地址:https://github.com/matchvs/demo-creator/blob/dev/assets/scripts/interface/DataStore.js
-
+- 代码地址:https://github.com/matchvs/demo-creator/blob/dev/assets/scripts/Utils/DataStore.js
+- hex_md5()加密地址: https://github.com/matchvs/demo-creator/blob/dev/assets/scripts/Utils/md5.js
 
 ```javaScript
 //使用代码示例

@@ -79,6 +79,85 @@ wx.request({
 
 获取到微信用户信息和 openID后， 再调用 matchvs 第三方账号绑定接口获取 Matchvs 用户信息。
 
+creator 代码示例
+
+```javaScript
+    /**
+     * 绑定微信OpenID 返回用户信息
+     */
+    bindOpenIDWithUserID:function(wxUserInfo){
+        let self = this;
+        console.log("获取到的微信用户信息",wxUserInfo);
+        if(!wxUserInfo){
+            return;
+        }
+        console.log('openid:'+wxUserInfo.openInfos.data.openid);
+        if (wxUserInfo.openInfos.data.openid === undefined) {
+            console.warn("没有获取到微信OpenID，获取OpenID请参考："+'http://www.matchvs.com/service?page=third');
+            engine.prototype.registerUser();
+            return;
+        }
+        GLB.name = wxUserInfo.nickName;
+        GLB.avatar = wxUserInfo.avatarUrl;
+        GLB.isWX = true;
+        let req = new  XMLHttpRequest();
+        let reqUrl = this.getBindOpenIDAddr(GLB.channel,GLB.platform);
+        req.open("post",reqUrl , true);
+        req.setRequestHeader("Content-Type", "application/json");
+        req.onreadystatechange = function () {
+            if (req.readyState === 4 && (req.status >= 200 && req.status < 400)) {
+                try{
+                    let response = req.responseText;
+                    let data = JSON.parse(response).data;
+                    console.log(data.userid,data.token);
+                    self.login(data.userid,data.token);
+                } catch(error){
+                    console.warn(error.message);
+                    engine.prototype.registerUser();
+                }
+            }
+        };
+        let params = "gameID="+GLB.gameID+"&openID="+wxUserInfo.openInfos.data.openid+"&session="+wxUserInfo.openInfos.data.session_key+"&thirdFlag=1";
+        //计算签名
+        let signstr = this.getSign(params);
+        let jsonParam ={
+            userID:0,
+            gameID:GLB.gameID,
+            openID:wxUserInfo.openInfos.data.openid,
+            session:wxUserInfo.openInfos.data.session_key,
+            thirdFlag:1,
+            sign:signstr
+        };
+        req.send(jsonParam);
+    },
+
+    getBindOpenIDAddr :function(channel, platform){
+        if(channel === "MatchVS" || channel === "Matchvs"){
+            if(platform === "release"){
+                return "http://vsuser.matchvs.com/wc6/thirdBind.do?"
+            }else if(platform === "alpha"){
+                return "http://alphavsuser.matchvs.com/wc6/thirdBind.do?";
+            }
+        }else if(channel === "MatchVS-Test1"){
+            if(platform === "release"){
+                return "http://zwuser.matchvs.com/wc6/thirdBind.do?"
+            }else if(platform === "alpha"){
+                return "http://alphazwuser.matchvs.com/wc6/thirdBind.do?";
+            }
+        }
+    },
+
+    getSign:function(params){
+        let str = GLB.appKey+"&"+params+"&"+GLB.secret;
+        console.log(str);
+        let md5Str = hex_md5(str);
+        console.log(md5Str);
+        return md5Str;
+    },
+
+```
+
+
 这里以 egret 代码请求为例：
 
 ```typescript
