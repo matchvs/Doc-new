@@ -35,6 +35,7 @@ Matchvs SDK 错误码分为两个部分。
 | -25    | channel 非法，请检查是否正确填写为 “Matchvs”             |
 | -26    | platform 非法，请检查是否正确填写为 “alpha” 或 “release” |
 | -27    | timeout 超出范围  0=< timeout <=600 |
+| -29    | nodeID>0或者不存在该nodeID对应的多节点 |
 | -30    | 设置的 rType 值与当前模式冲突。     |
 
 
