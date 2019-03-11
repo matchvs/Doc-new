@@ -14,11 +14,12 @@ Sort: 49
 
 如果您的游戏对延时要求不高（如棋牌，回合制游戏等），不建议您开启多节点服务。
 
-如需开启多节点服务，可以前往控制台 - 游戏列表 - 设置：
+如需开启多节点服务，可以前往控制台 - 游戏列表 - 设置：  
+**注意** 多节点服务只在 release 环境下才有，即需要先将游戏**发布上线**才能使用。
 
 ![](http://imgs.matchvs.com/static/node/node6.png)
 
-![](http://imgs.matchvs.com/static/node/node7.png)
+![](http://imgs.matchvs.com/static/node/node8.png)
 
 成功启用后，即可对接 SDK 多节点功能，gameServer 无变化。
 
