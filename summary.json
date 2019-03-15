@@ -4,6 +4,7 @@
     {"file":"/APIBasic","alias":"基础使用"},
     {"file":"/APIDoc","alias":"API文档"},
     {"file":"/QuickStart","alias":"新手上路"},
+	{"file":"/SelfHost","alias":"自托管"},
     {"file":"/References","alias":"参考资料"},
     {"file":"/Release","alias":"发布上线"},
     {"file":"/Simple","alias":"案例Demo"},
