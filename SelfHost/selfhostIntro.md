@@ -1,6 +1,6 @@
 /*
 Title: 自托管简介
-Sort: 1
+Sort: -3
 */
 
 使用 Matchvs 云托管，游戏信息、gameServer 需要在官网创建。由 Matchvs 提供所有资源，并处理资源扩缩容，应对并发问题。
