@@ -1140,7 +1140,7 @@ engine.sendEvent(data:string):any
 
 ### sendEventEx
 
- `sendEvent` 是 `sendEventEx` 接口的二次封装，只是 `sendEvent` 接口默认把消息发送给了房间其他人。如果需要把消息发送房间指定人员，或者只想把消息发送给 `gameServer` 那么就需要使用 `sendEventEx` 这个接口。想了解 `gameServer` 查看 [gameServer 文挡](../QuickStart/GameServer-JavaScript) 
+ `sendEvent` 是 `sendEventEx` 接口的二次封装，只是 `sendEvent` 接口默认把消息发送给了房间其他人。如果需要把消息发送房间指定人员，或者只想把消息发送给 `gameServer` 那么就需要使用 `sendEventEx` 这个接口。想了解 `gameServer` 查看 [gameServer 文挡](https://doc.matchvs.com/QuickStart/gsQuickStart) 
 
 ```typescript
 engine.sendEventEx(msgType:number, data:string, destType:number, userIDs:Array <number> ):any
