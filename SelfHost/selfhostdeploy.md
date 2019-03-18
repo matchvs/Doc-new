@@ -4,8 +4,8 @@ Sort:-2
 */
 ## 安装准备
 
-- 部署工具(Standalone_tools) [下载地址]() ,注意在页面底部
-- 许可证(license)，在 控制台 - 自托管页面[免费获取]()，许可证信息点击“查看”按钮即可获取。
+- 部署工具(Standalone_tools) [下载地址](http://www.matchvs.com/serviceDownload) ,注意在页面底部
+- 许可证(license)，在 控制台 - 自托管页面[免费获取](http://www.matchvs.com/manage/collocationList)，许可证信息点击“查看”按钮即可获取。
 - 一台或多台 `干净的`（**没有部署过任何服务**） Centos 7 服务器，**提供root账号与密码**,机器需要具备合适外网访问权限，防火墙配置请参考章节--“服务防火墙配置”说明。
 - 域名、对应的ssl证书（证书为可选项目，如果不使用wss连接可以不用准备）
 
