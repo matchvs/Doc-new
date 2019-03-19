@@ -408,6 +408,6 @@ engine.logout(cpProto:string):number
 response.logoutResponse(status:number);
 ```
 
-### 错误码说明:<../ErrCode>
+### 错误码说明:[错误码](https://doc.matchvs.com/APIDoc/erroCode)
 
 ### 更多接口调用和说明请看 [接口使用说明](../APIDoc/TypeScript) 
