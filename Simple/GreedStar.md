@@ -141,7 +141,7 @@ public class Room {
 >
 > - 2.下载包含Java版本GS框架的示例工程代码  (下载地址:https://github.com/matchvs/GameServer-Java)
 - 3.本案例使用的IDE为 `IntelliJ IDEA`，也可以使用其他开发工具进行开发，例如Eclipse 使用IDE打开`demo`工程。
-> Matchvs GameServer开发框架的具体的使用文档:https://doc.matchvs.com/QuickStart/GameServer-Java
+> Matchvs GameServer开发框架的具体的使用文档:https://doc.matchvs.com/QuickStart/gsQuickStart
 
 ##### Server端的RoomMap模块开发
 玩家被`matchvs`匹配到一个房间中时,会与GS框架通信,在GameServer的App.java类中能收到这个信息.  所以需要在App.java中使用一个`Map`来管理`Room`,控制room的新建和销毁
@@ -361,4 +361,4 @@ onUIEvent(event) {
 
 ```
 ## 游戏调试和发布
-> 参见文档:https://doc.matchvs.com/QuickStart/GameServer-Java
+> 参见文档:https://doc.matchvs.com/QuickStart/gsQuickStart
