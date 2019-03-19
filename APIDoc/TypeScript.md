@@ -2061,7 +2061,7 @@ getWatchRoomsResponse(rooms:MsGetRoomListExRsp);
 
 | 参数      | 类型                   | 说明                                                         | 示例值 |
 | --------- | ---------------------- | ------------------------------------------------------------ | ------ |
-| status    | number                 | 接口调用状态 200 成功，其他值请看 [错误码说明](../ErrCode) |        |
+| status    | number                 | 接口调用状态 200 成功，其他值请看 [错误码说明](https://doc.matchvs.com/APIDoc/erroCode) |        |
 | total     | number                 | 房间                                                         |        |
 | roomAttrs | Array<MsRoomAttribute> | 房间信息列信息                                               |        |
 
@@ -2142,7 +2142,7 @@ joinWatchRoomResponse(rsp:MVS.MsJoinWatchRoomRsp):void
 
 | 参数       | 类型                | 说明                                                         | 示例值 |
 | ---------- | ------------------- | ------------------------------------------------------------ | ------ |
-| status     | number              | 状态值 200 成功，其他错误值请看 [错误码文档](../ErrCode) | 200    |
+| status     | number              | 状态值 200 成功，其他错误值请看 [错误码文档](https://doc.matchvs.com/APIDoc/erroCode) | 200    |
 | roomStatus | number              | 当前房间状态                                                 |        |
 | reserved   |                     |                                                              |        |
 | wathchInfo | MVS.MsLiveWatchInfo | 观战房间信息                                                 |        |
@@ -2260,7 +2260,7 @@ setLiveOffsetResponse(status:number):void
 
 | 参数   | 类型   | 说明                                                         | 示例值 |
 | ------ | ------ | ------------------------------------------------------------ | ------ |
-| status | number | 200 成功，其他错误值请看 [错误码文档](../ErrCode) | 200    |
+| status | number | 200 成功，其他错误值请看 [错误码文档](https://doc.matchvs.com/APIDoc/erroCode) | 200    |
 
 ### liveFrameUpdate
 
@@ -2375,7 +2375,7 @@ changeRoleResponse(status:MVS.MsChangeRoleRsp):void
 
 | 参数           | 类型   | 描述                                                         | 示例值 |
 | -------------- | ------ | ------------------------------------------------------------ | ------ |
-| status         | number | 200 成功，其他错误值请看 [错误码文档](../ErrCode) | 200    |
+| status         | number | 200 成功，其他错误值请看 [错误码文档](https://doc.matchvs.com/APIDoc/erroCode) | 200    |
 | targetRoomType | number | 当前的模式 0-游戏模式 1-观战模式                             | 0      |
 
 #### 示例代码
@@ -2442,7 +2442,7 @@ leaveWatchRoomResponse(status:number):void
 
 | 参数   | 类型   | 描述                                                         | 示例值 |
 | ------ | ------ | ------------------------------------------------------------ | ------ |
-| status | number | 200 成功，其他错误值请看 [错误码文档](../ErrCode) | 200    |
+| status | number | 200 成功，其他错误值请看 [错误码文档](https://doc.matchvs.com/APIDoc/erroCode) | 200    |
 
 ### leaveWatchRoomNotify
 
