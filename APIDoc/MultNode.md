@@ -75,4 +75,4 @@ engine.changeNode(args)
 | ------ | ------ | ------------------------- | ---- |
 | nodeID | number | 从 getNodeList 获取的信息 | 1    |
 
-返回值参考 [错误码说明](../ErrCode)
+返回值参考 [错误码说明](https://doc.matchvs.com/APIDoc/erroCode)
