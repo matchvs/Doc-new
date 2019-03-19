@@ -8,7 +8,7 @@ Title: 组队匹配
 
 Response 是发起方在调用接口后，自己收到的回调；Notify是发起方调用接口后，小队其他成员收到的通知。
 
-组队匹配信息可以使用getRoomDetail 接口查看房间是否有组队。请求接口返回码可以参考 [错误码说明](https://doc.matchvs.com/ErrCode) 
+组队匹配信息可以使用getRoomDetail 接口查看房间是否有组队。请求接口返回码可以参考 [错误码说明](https://doc.matchvs.com/APIDoc/erroCode) 
 
 
 
@@ -524,7 +524,7 @@ response.cancelTeamMatchResponse(rsp)
 
 | 属性   | 类型   | 说明                                                         | 示例 |
 | ------ | ------ | ------------------------------------------------------------ | ---- |
-| status | number | 状态值 200 成功，其他 [请看说明](https://doc.matchvs.com/ErrCode) | 200  |
+| status | number | 状态值 200 成功，其他 [请看说明](https://doc.matchvs.com/APIDoc/erroCode) | 200  |
 
 
 
@@ -575,7 +575,7 @@ engine.kickTeamMember(args)
 
 #### 返回值
 
-请看 [错误码说明](https://doc.matchvs.com/ErrCode) 
+请看 [错误码说明](https://doc.matchvs.com/APIDoc/erroCode) 
 
 
 
@@ -591,7 +591,7 @@ response.kickTeamMemberResponse(rsp)
 
 | 属性    | 类型          | 说明                                                         | 示例               |
 | ------- | ------------- | ------------------------------------------------------------ | ------------------ |
-| status  | number        | 状态值 200 成功，其他 [请看说明](https://doc.matchvs.com/ErrCode) | 200                |
+| status  | number        | 状态值 200 成功，其他 [请看说明](https://doc.matchvs.com/APIDoc/erroCode) | 200                |
 | members | Array<number> | 当前队伍成员                                                 | [123456, 678901]   |
 | owner   | number        | 队长                                                         | 123456             |
 | teamID  | string        | 队伍号                                                       | "1234567890987654" |
@@ -652,7 +652,7 @@ engine.sendTeamEvent(args)
 
 #### 返回值
 
-请看 [错误码说明](https://doc.matchvs.com/ErrCode) 
+请看 [错误码说明](https://doc.matchvs.com/APIDoc/erroCode) 
 
 
 
@@ -668,7 +668,7 @@ response.sendTeamEventResponse(rsp)
 
 | 属性       | 类型          | 说明                                                     | 示例             |
 | ---------- | ------------- | -------------------------------------------------------- | ---------------- |
-| status     | number        | 状态值，其他 [请看说明](https://doc.matchvs.com/ErrCode) | 200              |
+| status     | number        | 状态值，其他 [请看说明](https://doc.matchvs.com/APIDoc/erroCode) | 200              |
 | dstUserIDs | Array<number> | 发给了哪些人                                             | [123456 , 68790] |
 
 
