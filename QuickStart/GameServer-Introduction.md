@@ -61,7 +61,7 @@ Matchvs 提供了一系列 gameServer 管理功能，您可以点击 gameServer 
 
 ## 数据库
 
-Matchvs 提供了数据存储功能，详情可以参考[数据存储教程](../Advanced//DataStoreGuide)。如果您觉得不够用，则可以使用自己的数据库。
+Matchvs 提供了数据存储功能，详情可以参考[数据存储教程](https://doc.matchvs.com/APIDoc/dataStore)。如果您觉得不够用，则可以使用自己的数据库。
 
 或者您有自己的服务器业务需要和 gameServer 进行互通，也通过以下方式实现。
 
