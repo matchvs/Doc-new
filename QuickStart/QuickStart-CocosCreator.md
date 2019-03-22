@@ -39,12 +39,12 @@ CreatorIDE安装成功后，双击打开CreatorIDE，选择新建项目选择一
 
 服务模块如下图:
 
-![](http://imgs.matchvs.com/static/Doc-img/new-start/CocosCreatorImg/CocosServer.png)
+![CocosServer](QuickStart-CocosCreator.assets/CocosServer.png)
 
 **注意** 服务模块加载SDK为Cocos渠道SDK，必须使用CreatorIDE登录的账号,Cocos渠道账户必须绑定公司才可以使用。(个人开发者可先在Cocos控制台添加一个公司信息，无需认证，即可使用)
 
  - 服务模块加载SDK路径为project/assets/scripts/matchvs/matchvs.all.js。
- 
+
 ```javascript
 let engine;
 let response = {};
