@@ -2,6 +2,10 @@
 Title: 组队匹配
 */
 
+
+
+
+
 [组队示例](http://demo.matchvs.com/RombBoy/)
 
 当前页面是组队相关的API说明。我们同样是以 MatchvsEngine 和 MatchvsResponse 的对象 engine 和 response 来说明。
@@ -10,44 +14,26 @@ Response 是发起方在调用接口后，自己收到的回调；Notify是发�
 
 组队匹配信息可以使用getRoomDetail 接口查看房间是否有组队。请求接口返回码可以参考 [错误码说明](https://doc.matchvs.com/APIDoc/erroCode) 
 
+## 名词概念
 
+对函数和回调函数中函数做统一说明
 
-## 创建队伍
+| 属性                 | 类型          | 描述                  | 示例值    |
+| -------------------- | ------------- | --------------------- | --------------------- |
+| team/teaminfo | object | 队伍信息        |                       |
+| team.teamID     | string        | 队伍ID                | "131113213211323121231" |
+| team.password   | string        | 队伍权限值            | 1ab2                  |
+| team.capacity   | number        | 队伍人数容量          | 3                     |
+| team.mode   | number | 组队模式,匹配条件 | 由开发者自己定义,作为 |
+| team.owner  | number | 队长   | 123456 |
+| team.visibility  | number | 0-不可见 1-可见       | 1          |
+| status               | number        | 加入队伍状态值        | 200  |
+|    user    | object        |       玩家               |{userID:""}|
+| userList  | array<object> | 队伍玩家列表          |         [{userID:""},{}] |
+| userID | number        | 玩家ID                | 2356   |
+| userProfile | string        | 玩家自定义信息        | 如玩家头像|
 
-组队匹配需要调用这个接口先创建一支队伍。
-
-- 请求接口：createTeam
-- 回调接口：createTeamResponse
-
-### 说明
-
-开发者可以创建一个带密码的小队，并指定小队的人数上限（如5v5，则小队人数上限为5，玩家可以再邀请4个好友一起组成小队）。
-
-可以定义组队模式，比如基础模式，进阶模式等。在创建小队时，设置用户信息，之后有玩家加入小队时，可以直接获取到该用户信息。
-
-玩家A创建小队成功后，A会收到小队ID，将小队ID分享给好友，好友即可通过ID+密码进入小队。（不需要密码可以全部默认设置为同一个值。）
-
-每个小队会有一个队长，一般是创建小队的那个玩家，如果队长掉线/离开小队，则队长会随机转移给小队内其他玩家。新的队长信息可以在 `leaveTeamNotify`里获取。
-
-### createTeam
-
-```
-engine.createTeam(teaminfo)
-```
-
-#### 参数 
-
-teaminfo 是 MVS.MsCreateTeamInfo 的对象
-
-| 属性        | 类型   | 描述                  | 示例值     |
-| ----------- | ------ | --------------------- | ---------- |
-| password    | string | 队伍权限              | 1ab2       |
-| capacity    | number | 队伍人数容量          | 3          |
-| mode        | number | 模式-由开发者自己定义 | 0          |
-| visibility  | number | 0-不可见 1-可见       | 1          |
-| userProfile | string | 用户自定义信息        | "用户头像" |
-
-#### 返回码
+#### 函数返回码
 
 | 返回码 | 说明                               |
 | ------ | ---------------------------------- |
@@ -63,19 +49,56 @@ teaminfo 是 MVS.MsCreateTeamInfo 的对象
 | -12    | 正在加入观战房间                   |
 | -13    | 队伍正在匹配中                     |
 
-### createTeamResponse
+
+
+
+
+## 创建队伍
+
+组队匹配需要调用这个接口先创建一支队伍。
+
+- 请求接口：createTeam
+- 回调接口：createTeamResponse
+
+
+
+开发者可以创建一个带密码的小队，并指定小队的人数上限（如5v5，则小队人数上限为5，玩家可以再邀请4个好友一起组成小队）。
+
+可以定义组队模式，比如基础模式，进阶模式等。在创建小队时，设置用户信息，之后有玩家加入小队时，可以直接获取到该用户信息。
+
+玩家A创建小队成功后，A会收到小队ID，将小队ID分享给好友，好友即可通过ID+密码进入小队。（不需要密码可以全部默认设置为同一个值。）
+
+每个小队会有一个队长，一般是创建小队的那个玩家，如果队长掉线/离开小队，则队长会随机转移给小队内其他玩家。新的队长信息可以在 `leaveTeamNotify`里获取。
+
+#### createTeam
+
+```typescript
+
+    /**
+     * 创建组队
+     * @param {MVS.MsCreateTeamInfo} teaminfo
+     * @returns {number}
+     * @memberof MatchvsEngine
+     */
+    createTeam(teaminfo: MVS.MsCreateTeamInfo):number
+```
+
+#### createTeamResponse
 
 ```
-response.createTeamResponse(rsp)
+
+    /**
+     * 创建组队同步放回信息
+     * @param {*} rps
+     * @param {number} rps.status
+     * @param {string} rps.teamID
+     * @param {number} rps.owner
+     * @memberof MatchvsResponse
+     */
+    createTeamResponse(rps:any):void
 ```
 
-#### 参数 rsp 属性
 
-| 属性   | 类型   | 描述            | 示例值                |
-| ------ | ------ | --------------- | --------------------- |
-| status | number | 状态值 200 成功 | 200                   |
-| teamID | number | 队伍编号        | 131113213211323121231 |
-| owner  | number | 队长            | 123456                |
 
 #### 示例代码
 
@@ -102,84 +125,63 @@ response.createTeamResponse = function(rsp){
 - 请求接口：joinTeam
 - 回调接口：joinTeamResponse, joinTeamNotify
 
-### 说明
+
 
 加入小队时，可以携带头像、昵称等信息。
 
 队员加入后，会收到已在小队里的所有成员列表信息以及小队信息。其他玩家会收到该队员加入的通知。
 
-### joinTeam
+#### joinTeam
 
+```typescript
+    /**
+     * 加入组队队伍，队伍必须是由 createTeam 接口创建的
+     * @param {MVS.MsJoinTeamInfo} teaminfo
+     * @returns {number}
+     * @memberof MatchvsEngine
+     */
+    joinTeam(teaminfo:MVS.MsJoinTeamInfo):number
 ```
-engine.joinTeam(teaminfo)
-```
-
-#### 参数 teaminfo 属性
-
-| 属性        | 类型   | 描述           | 示例值                |
-| ----------- | ------ | -------------- | --------------------- |
-| teamID      | string | 队伍ID         | 131113213211323121231 |
-| password    | string | 队伍权限值     | 1ab2                  |
-| userProfile | string | 用户自定义信息 | “用户头像”            |
-
-#### 返回码
-
-| 返回码 | 说明                               |
-| ------ | ---------------------------------- |
-| 0      | 接口调用成功                       |
-| -2     | 未初始化                           |
-| -3     | 正在初始化                         |
-| -4     | 未登录                             |
-| -5     | 正在登录                           |
-| -7     | 正在创建房间，或者正在加入游戏房间 |
-| -6     | 不在观战房间                       |
-| -10    | 正在离开房间                       |
-| -11    | 正在登出                           |
-| -12    | 正在加入观战房间                   |
-| -13    | 队伍正在匹配中                     |
 
 
 
-### joinTeamResponse
+#### joinTeamResponse
 
 调用加入队伍接口，自己会收到这个接口通知
 
-```javascript
-response.joinTeamResponse(rsp)
+```typescript
+    /**
+     * 加入队伍返回信息
+     * @param {*} rsp
+     * @param {*} rsp.team //队伍信息
+     * @param {number} rsp.team.teamID 队伍号
+     * @param {string} rsp.team.password 队伍验证信息
+     * @param {number} rsp.team.capacity 队伍人数容量
+     * @param {number} rsp.team.mode 模式-开发者自定义的值
+     * @param {number} rsp.team.owner 队长
+     * @param {number} rsp.status 加入队伍状态值
+     * @param {Array<any>} rsp.userList [{userID:, userProfile:,}]
+     * @memberof MatchvsResponse
+     */
+    joinTeamResponse(rsp:any):void
 ```
 
-#### 参数 rsp 属性
-
-| 属性                 | 类型          | 描述                  | 示例值                |
-| -------------------- | ------------- | --------------------- | --------------------- |
-| team                 | object        | 队伍信息              |                       |
-| team.teamID          | string        | 队伍ID                | 131113213211323121231 |
-| team.password        | string        | 队伍权限值            | 1ab2                  |
-| team.capacity        | number        | 队伍人数容量          | 3                     |
-| team.mode            | number        | 模式-开发者自定义的值 | 0                     |
-| team.owner           | number        | 队长                  | 123456                |
-| status               | number        | 加入队伍状态值        | 200                   |
-| userList             | array<object> | 队伍玩家列表          |                       |
-| userList.userID      | number        | 玩家ID                | 2356                  |
-| userList.userProfile | string        | 玩家自定义信息        | “玩家头像”            |
-
-
-
-### joinTeamNotify
+#### joinTeamNotify
 
 有人加入队伍，队伍中其他玩家会收到 joinTeamNotify 接口的通知
 
-```
-response.joinTeamNotify(notify)
+```typescript
+    /**
+     *
+     * @param {string} notify.teamID
+     * @param {number} notify.status
+     * @param {number} notify.userID
+     * @param {String} notify.teamProperty
+     */
+    leaveTeamNotify (notify):void
 ```
 
-#### 参数 notify 属性
 
-| 属性             | 类型   | 描述           | 示例值     |
-| ---------------- | ------ | -------------- | ---------- |
-| user             | object | 玩家信息       |            |
-| user.userID      | number | 玩家ID         | 2356       |
-| user.userProfile | string | 玩家自定义信息 | “玩家头像” |
 
 #### 示例代码
 
@@ -201,68 +203,60 @@ console.log("[REQ]STJoinTeam:"+engine.joinTeam(req));
 
 
 
-##离开队伍
+## 离开队伍
 
 在队伍中如果要离开队伍就调用 leaveTeam 接口，其他人会收到 leaveTeamNotify 接口通知，自己收到 leaveTeamResponse 通知
 
 - 请求接口：leaveTeam
 - 回调接口：leaveTeamResponse, leaveTeamNotify
 
-### leaveTeam
+#### leaveTeam
 
-```
-engine.leaveTeam()
-```
-
-#### 参数：无
-
-#### 返回码
-
-| 返回码 | 说明                               |
-| ------ | ---------------------------------- |
-| 0      | 接口调用成功                       |
-| -2     | 未初始化                           |
-| -3     | 正在初始化                         |
-| -4     | 未登录                             |
-| -5     | 正在登录                           |
-| -7     | 正在创建房间，或者正在加入游戏房间 |
-| -6     | 不在观战房间                       |
-| -10    | 正在离开房间                       |
-| -11    | 正在登出                           |
-| -12    | 正在加入观战房间                   |
-| -13    | 队伍正在匹配中                     |
-
-
-
-### leaveTeamResponse
-
-```
-response.leaveTeamResponse(rsp)
+```typescript
+    /**
+     * 离开组队队伍
+     * @returns {number}
+     * @memberof MatchvsEngine
+     */
+    leaveTeam():number
 ```
 
-#### 参数
-
-| 属性   | 类型   | 描述            | 示例值                |
-| ------ | ------ | --------------- | --------------------- |
-| userID | number | 离开者ID        | 123456                |
-| teamID | number | 离开的队伍号    | 131113213211323121231 |
-| status | number | 状态值 200 成功 | 200                   |
 
 
+#### leaveTeamResponse
 
-### leaveTeamNotify
+```typescript
 
+    /**
+     * 离开队伍回调信息
+     * @param {*} rsp
+     * @param {number} rsp.userID 离开者ID
+     * @param {number} rsp.teamID 离开的队伍号
+     * @param {number} rsp.status 状态值 200 成功
+     * @memberof MatchvsResponse
+     */
+    leaveTeamResponse(rsp:any):void
 ```
-response.leaveTeamNotify(rsp)
+
+
+
+#### leaveTeamNotify
+
+```typescript
+
+    /**
+     * 有人离开队伍，其他人收到的通知接口
+     * @param {*} notify
+     * @param {number} notify.teamID 离开的队伍
+     * @param {number} notify.userID 离开者
+     * @param {number} notify.owner 队长
+     * @param {String} notify.teamProperty 队伍属性
+     * @memberof MatchvsResponse
+     */
+    leaveTeamNotify(notify:any):void
 ```
 
-#### 参数
 
-| 属性   | 类型   | 描述         | 示例值                |
-| ------ | ------ | ------------ | --------------------- |
-| teamID | number | 离开的队伍号 | 131113213211323121231 |
-| userID | number | 离开者ID     | 3264                  |
-| owner  | number | 队长         | 123456                |
 
 #### 示例代码
 
@@ -278,14 +272,14 @@ console.log("[REQ]STLeaveTeam:"+engine.leaveTeam());
 
 
 
-##发起队伍匹配 
+##队伍与队伍匹配
 
 加入了队伍后，可以发起队伍匹配，队伍匹配的队伍成员数和队伍数量可在调用匹配的时候调用，如需要做5v5对战，则队伍成员数设置5，队伍数量设置2。队伍匹配调用 teamMatch 接口。teamMatch 接口可以由队伍中任意一个人调用。
 
 - 请求接口：teamMatch
 - 回调接口：teamMatchResponse, teamMatchStartNotify, teamMatchResultNotify
 
-### 说明
+说明
 
 匹配规则：你可以为每个小队设置一个权值，这个权值代表该小队的实力水平，如段位等级为3。然后设置小队实力的匹配范围，如2，则在匹配时，会为该小队寻找 3±2 段位（即1--5）的其他小队进行匹配。如果是不同模式，可以用 mode 区分，相同 mode 的小队才会被匹配到一起。匹配时会以`mode`、`cond`为匹配依据。
 
@@ -299,13 +293,19 @@ console.log("[REQ]STLeaveTeam:"+engine.leaveTeam());
 
 小队匹配支持人满和人不满模式，人满即  5v5 ，则最终匹配结果肯定是 5v5 ,否则会匹配失败；人不满即 5v5 ,在超时之前可能只能匹配到 2v3 ,则依然匹配成功，你可以再自行添加机器人。
 
-### teamMatch
+#### teamMatch
 
-```
-engine.teamMatch(info)
+```typescript
+    /**
+     * 加入的队伍之后，可以由队伍中的任何一个人发起队伍匹配
+     * @param {MVS.MsTeamMatchInfo} matchInfo
+     * @returns {number}
+     * @memberof MatchvsEngine
+     */
+    teamMatch(matchInfo:MVS.MsTeamMatchInfo):number
 ```
 
-#### 参数 info 属性
+参数 info 属性
 
 info 是 MVS.MsTeamMatchInfo 类型。
 
@@ -320,7 +320,7 @@ info 是 MVS.MsTeamMatchInfo 类型。
 | watchSet     | MVS.MsWatchSet      | 观战设置，canWatch 设置为1的时候有效                         |            |
 | cond         | MVS.MsTeamMatchCond | 匹配设置                                                     |            |
 
-#### 参数 MVS.MsWatchSet属性
+ 参数 MVS.MsWatchSet属性
 
 | 属性       | 类型    | 描述                 | 示例值          |
 | ---------- | ------- | -------------------- | --------------- |
@@ -329,7 +329,7 @@ info 是 MVS.MsTeamMatchInfo 类型。
 | delayMS    | number  | 观看延迟多久后的数据 | 2000            |
 | persistent | boolean | 是否持久缓存         | false           |
 
-#### 参数 MVS.MsTeamMatchCond属性
+参数 MVS.MsTeamMatchCond属性
 
 | 属性          | 类型   | 描述                                                         | 示例值 |
 | ------------- | ------ | ------------------------------------------------------------ | ------ |
@@ -341,88 +341,60 @@ info 是 MVS.MsTeamMatchInfo 类型。
 | weightRule    | number | 匹配规则， 默认是0(求平均)                                   | 0      |
 | full          | number | 是否人满匹配，0-人不满也可以匹配，1-人满匹配 (人不满匹配不到会超时报422错误码) | 0      |
 
-#### 返回码
-
-| 返回码 | 说明                               |
-| ------ | ---------------------------------- |
-| 0      | 接口调用成功                       |
-| -2     | 未初始化                           |
-| -3     | 正在初始化                         |
-| -4     | 未登录                             |
-| -5     | 正在登录                           |
-| -7     | 正在创建房间，或者正在加入游戏房间 |
-| -6     | 不在观战房间                       |
-| -10    | 正在离开房间                       |
-| -11    | 正在登出                           |
-| -12    | 正在加入观战房间                   |
-| -13    | 队伍正在匹配中                     |
-
-
-
-### teamMatchResponse
+#### teamMatchResponse
 
 发送匹配的人会收到这个接口的回调，告诉自己队伍正在匹配中。其他人会收到 teamMatchStartNotify 的通知。
 
+```typescript
+    /**
+     * 队伍中发起匹配者会收到这个回调，表示正在匹配中
+     * @param {*} rsp
+     * @param {number} rsp.status 匹配状态
+     * @memberof MatchvsResponse
+     */
+    teamMatchResponse(rsp:any):void
+
 ```
-response.teamMatchResponse(rsp)
-```
 
-#### 参数 rsp 属性
-
-| 属性   | 类型   | 描述            | 示例值 |
-| ------ | ------ | --------------- | ------ |
-| status | number | 状态值 200-成功 | 200    |
-
-
-
-### teamMatchStartNotify
+#### teamMatchStartNotify
 
 在队伍中有人调用了匹配接口，其他人就会收到这个接口的通知，队伍开始进入匹配啦。
 
+```typescript
+    /**
+     * 队伍中如果有人发起匹配，其他人会收到这个开启匹配的通知
+     * @param {*} rsp
+     * @param {*} rsp.teamID 队伍号
+     * @param {*} rsp.userID 发起匹配者ID
+     * @memberof MatchvsResponse
+     */
+    teamMatchStartNotify(rsp:any):void
 ```
-response.teamMatchStartNotify(notify);
-```
-
-#### 参数 notify 属性
-
-| 属性   | 类型   | 描述         | 示例值                |
-| ------ | ------ | ------------ | --------------------- |
-| teamID | string | 匹配的队伍号 | 131113213211323121231 |
-| userID | number | 发起匹配的人 | 123456                |
 
 
 
-### teamMatchResultNotify
+#### teamMatchResultNotify
 
 队伍匹配结果通过这个接口通知队伍中的所有人。**注意：匹配成功但并不是加入了房间，收到匹配成功后，马上给其他玩家发送消息是不可行的。**匹配成功后SDK会自动处理加入房间的逻辑，开发者不用额外的调用加入房间接口，只需要处理，joinRoomResponse 接口和 joinRoomNotify 接口即可，通过这个两个接口判断是否所有人都加入了房间，如果需要检查谁掉线了可以处理 networkStateNotify 接口。
 
+```typescript
+    /**
+     * 发起匹配后，队伍中所有人都会收到匹配结果通知
+     * @param {*} rsp
+     * @param {number} rsp.status 配置的状态，200 成功，422 超时
+     * @param {Array<any>} rsp.brigades 配置到队伍，大队伍列表信息
+     * @param {number} rsp.brigades.brigadeID 大队伍ID号
+     * @param {Array<any>} rsp.brigades.playerList 小队伍玩家列表
+     * @param {number} rsp.brigades.playerList.userID 小队伍玩家ID
+     * @param {string} rsp.brigades.playerList.userProfile 小队伍玩家自定义数据
+     * @memberof MatchvsResponse
+     */
+    teamMatchResultNotify(rsp:any):void
 ```
-response.teamMatchResultNotify(notify);
-```
 
-#### 参数 notify 属性
 
-| 属性     | 类型   | 描述                           | 示例值 |
-| -------- | ------ | ------------------------------ | ------ |
-| status   | number | 匹配的状态，200 成功，422 超时 |        |
-| brigades | object | 匹配到队伍列表信息             |        |
-|          |        |                                |        |
 
-#### brigades 属性
-
-| 属性       | 类型          | 描述           | 示例值 |
-| ---------- | ------------- | -------------- | ------ |
-| brigadeID  | number        | 大队伍的ID     | 1      |
-| playerList | Array<object> | 小队伍信息列表 |        |
-
-#### playerList 数据项属性
-
-| 属性        | 类型   | 描述           | 示例值     |
-| ----------- | ------ | -------------- | ---------- |
-| userID      | number | 用户ID号       | 123456     |
-| userProfile | string | 玩家自定义数据 | “玩家头像” |
-
-#### 数据示例：
+数据示例：
 
 ````json
 {
@@ -496,55 +468,47 @@ console.log("[REQ]STTeamMatch:"+engine.teamMatch(info));
 
 
 
-## cancelTeamMatch
+#### cancelTeamMatch
 
 开始匹配后，在还没有匹配到队伍的情况下可以取消当前匹配。这个时候所有小队伍内的玩家都会从匹配列表中移除，触发取消匹配的人收到 cancelTeamMatchResponse 回调，其他人收到 cancelTeamMatchNotify 的回调。
 
+```typescript
+    /**
+     * 取消组队匹配，只有在组队匹配的时候才能调用这个接口
+     * @param {object} args
+     * @param {string} args.cpProto 取消组队匹配时携带的消息 长度不能超过 1024/B
+     */
+    cancelTeamMatch(args:object):number
 ```
-engine.cancelTeamMatch(args)
-```
 
-#### args 属性
-
-| 属性    | 类型   | 说明     | 示例               |
-| ------- | ------ | -------- | ------------------ |
-| cpProto | string | 附带消息 | “有事，暂时不玩啦” |
-
-
-
-## cancelTeamMatchResponse
+#### cancelTeamMatchResponse
 
 调用取消匹配接口 cancelTeamMatch 时会收到这个接口的回调。
 
 ```
-response.cancelTeamMatchResponse(rsp)
+    /**
+     * 取消组队匹配返回，但调用 cancelTeamMatch 接口后，通过这个接口接收服务的结果
+     * @param {number} rsp.status
+     */
+    cancelTeamMatchResponse(rsp:any);
 ```
 
-#### rsp 属性
-
-| 属性   | 类型   | 说明                                                         | 示例 |
-| ------ | ------ | ------------------------------------------------------------ | ---- |
-| status | number | 状态值 200 成功，其他 [请看说明](https://doc.matchvs.com/APIDoc/erroCode) | 200  |
-
-
-
-## cancelTeamMatchNotify
+#### cancelTeamMatchNotify
 
 有队员调用取消匹配接口 cancelTeamMatch 时，其他队员会收到这个接口的回调
 
 ```typescript
-response.cancelTeamMatchNotify(notify)
+    /**
+     * 取消组队匹配时
+     * @param {any} notify 
+     * @param {number} notify.userID 取消组队匹配的玩家ID
+     * @param {string} notify.teamID 当前的队伍号
+     * @param {string} notify.cpProto 取消时附带的消息
+     */
+    cancelTeamMatchNotify(notify:any);
 ```
 
-#### notify 属性
-
-| 属性    | 类型   | 说明     | 示例                |
-| ------- | ------ | -------- | ------------------- |
-| userID  | number | 用户ID   | 123456              |
-| teamID  | string | 队伍ID   | “12345678901234567” |
-| cpProto | string | 附带消息 | “有事，不能玩”      |
-
-#### 示例代码
+示例代码
 
 ```javascript
 response.cancelTeamMatchResponse = function(rsp){
@@ -556,66 +520,55 @@ response.cancelTeamMatchNotify = function(notify){
 engine.cancelTeamMatch({cpProto:"cancel team match"});
 ```
 
+## 组队对内管理
 
-
-## kickTeamMember
+#### kickTeamMember
 
 踢出内成员，在组队期间如果没有开始组队匹配可以使用这个接口踢出其他玩家，不可以踢出自己。
 
 ```typescript
-engine.kickTeamMember(args)
+    /**
+     * 剔除队伍中的指定玩家，队伍中任何人都可以剔除任意人，但是不能剔除自己。
+     * @param {object} args
+     * @param {number} args.userID 要剔除的玩家
+     * @param {number} args.cpProto 剔除玩家时携带的信息，长度不能超过 1024/B
+     */
+    kickTeamMember(args:object):number
 ```
 
-#### args 属性
-
-| 属性    | 类型   | 说明     | 示例         |
-| ------- | ------ | -------- | ------------ |
-| userID  | number | 用户ID   | 123456       |
-| cpProto | string | 附带消息 | “不想和你玩” |
-
-#### 返回值
-
-请看 [错误码说明](https://doc.matchvs.com/APIDoc/erroCode) 
-
-
-
-## kickTeamMemberResponse
+#### kickTeamMemberResponse
 
 调用踢人接口会收到这个接口的回调。
 
 ```typescript
-response.kickTeamMemberResponse(rsp)
+    /**
+     * 调用 kickTeamMember 接口后，通过这个接口获取服务的结果
+     * @param {any} rsp
+     * @param {number} rsp.status 状态 200 表示成功
+     * @param {Array<number>} rsp.members 队伍内剩下的玩家
+     * @param {number} rsp.owner 当前队伍中队长
+     * @param {string} rsp.teamID 当前队伍号
+     */
+    kickTeamMemberResponse(rsp:any);
 ```
 
-#### rsp 属性
-
-| 属性    | 类型          | 说明                                                         | 示例               |
-| ------- | ------------- | ------------------------------------------------------------ | ------------------ |
-| status  | number        | 状态值 200 成功，其他 [请看说明](https://doc.matchvs.com/APIDoc/erroCode) | 200                |
-| members | Array<number> | 当前队伍成员                                                 | [123456, 678901]   |
-| owner   | number        | 队长                                                         | 123456             |
-| teamID  | string        | 队伍号                                                       | "1234567890987654" |
-
-
-
-## kickTeamMemberNotify
+#### kickTeamMemberNotify
 
 有别的玩家调用了踢人接口，那么另外其他玩家会收到这个接口的回调。
 
 ```typescript
-response.kickTeamMemberNotify(notify)
+    /**
+     * 收到踢人通知，当队伍中有人触发踢人接口，其他人就会收到这个接口的通知
+     * @param {any} notify 
+     * @param {string} notify.teamID 当前队伍号
+     * @param {number} notify.userID 当前发起踢人的玩家号
+     * @param {number} notify.dstUserID 被踢的玩家号
+     * @param {number} notify.owner 当前队伍的队长
+     * @param {Array<number>} notify.members 队伍中剩下的玩家
+     * @param {string} notify.cpProto 踢人时携带的消息
+     */
+    kickTeamMemberNotify(notify:any);
 ```
-
-#### notify 属性
-
-| 属性      | 类型          | 说明       | 示例               |
-| --------- | ------------- | ---------- | ------------------ |
-| teamID    | string        | 队伍ID     | “1234567890987654” |
-| userID    | number        | 发起踢出者 | 123456             |
-| dstUserID | number        | 被踢出的人 | 678901             |
-| owner     | number        | 队长       | 123456             |
-| members   | Array<number> | 当前队员   | [123456,234564]    |
-| cpProto   | string        | 附带消息   | "不想和你玩"       |
 
 #### 示例代码
 
@@ -629,65 +582,52 @@ response.kickTeamMemberNotify = function(notify){
 engine.kickTeamMember({userID:userid, cpProto:"kick team member"});
 ```
 
+## 小对内通信
 
-
-## sendTeamEvent
+#### sendTeamEvent
 
  在组队期间，可以使用这个接口发送消息给其他的队内成员，自己收到 sendTeamEvent 的回调，其他成员收到 sendTeamEventNotify的回调，类似 sendEvent接口的使用，这个接口有对消息发送的频率做了限定，目前限定每秒不能超过20次。同时消息长度也有限定不能超过 1KB。只有在队伍中才能发送消息。
 
 ```typescript
-engine.sendTeamEvent(args)
+    /**
+     * 组队时，进入到同一个队伍中的玩家，可以通过这个接口来发送消息。这个消息发送频率是有限制 50ms/条。
+     * @param {object} args
+     * @param {number} args.dstType 0-包含dstUids  1-排除dstUids
+     * @param {number} args.msgType 0-只发client  1-只发gs  2-client和 gs 都发
+     * @param {Array<number>} args.dstUserIDs 指定的用户列表 配合 dstType 使用
+     * @param {string} args.data 发送的数据 长度不能超过 1024/B
+     */
+    sendTeamEvent(args:object):number
 ```
 
-#### args 属性
-
-使用技巧：如果想发给小队内所有人，则可以将 `dstType`  设置为 1, `dstUserIDs ` 填空，意思是“目标用户是，发给除空以外的人，即所有玩家”。
-
-| 属性       | 类型          | 说明                                                         | 示例    |
-| ---------- | ------------- | ------------------------------------------------------------ | ------- |
-| dstType    | number        | 0-包含dstUids  1-排除dstUids                                 | 1       |
-| msgType    | number        | 0-只发client  1-只发gs  2-client和 gs都发 ps:目前暂不支持与gs通信 | 0       |
-| dstUserIDs | Array<number> | 指定的用户列表 配合 dstType 使用                             | []      |
-| data       | string        | 发送的数据                                                   | "hello" |
-
-#### 返回值
-
-请看 [错误码说明](https://doc.matchvs.com/APIDoc/erroCode) 
-
-
-
-## sendTeamEventResponse
+#### sendTeamEventResponse
 
 发送队内消息回调，发送者收到的回调
 
 ```typescript
-response.sendTeamEventResponse(rsp)
+    /**
+     * 在队伍中发送消息回调，调用sendTeamEvent 接口后，这个接口收到发送的结果
+     * @param {any} rsp
+     * @param {number} rsp.status 发送队伍消息的结果，200 成功。
+     * @param {Array<number>} rsp.dstUserIDs 发送消息给了哪些玩家。
+     */
+    sendTeamEventResponse(rsp:any);
 ```
 
-#### rsp 属性
-
-| 属性       | 类型          | 说明                                                     | 示例             |
-| ---------- | ------------- | -------------------------------------------------------- | ---------------- |
-| status     | number        | 状态值，其他 [请看说明](https://doc.matchvs.com/APIDoc/erroCode) | 200              |
-| dstUserIDs | Array<number> | 发给了哪些人                                             | [123456 , 68790] |
-
-
-
-## sendTeamEventNotify
+#### sendTeamEventNotify
 
 有别的玩家调用了发送消息接口，那么另外其他玩家会收到这个接口的回调。
 
 ```typescript
-response.sendTeamEventNotify(notify)
+    /**
+     * 接收忘记发送队伍消息，当其他玩家在队伍中发送消息时，其他指定的玩家就能收到这个接口的回调
+     * @param {any} notify
+     * @param {any} notify.userID 发送消息的玩家ID
+     * @param {any} notify.teamID 当前队伍号
+     * @param {string} notify.cpProto 收到的数据
+     */
+    sendTeamEventNotify(notify:any);
 ```
-
-#### notify 属性
-
-| 属性    | 类型   | 说明           | 示例               |
-| ------- | ------ | -------------- | ------------------ |
-| teamID  | string | 当前队伍号     | “1234567890987654” |
-| userID  | number | 发送消息的玩家 | 68790              |
-| cpProto | string | 消息内容       | 123456             |
 
 #### 示例代码
 
@@ -701,3 +641,115 @@ response.sendTeamEventNotify = function(notify){
 engine.sendTeamEvent({msgType:0, dstType:1, data:data, dstUserIDs:[]});
 ```
 
+
+
+## 队伍属性
+
+####  setTeamProperty
+
+设置队伍属性,对全员可见,主体是小队
+
+```typescript
+    /**
+     * 设置队伍属性,对全员可见,主体是小队
+     * @see {string} setTeamUserProfile
+     * @param teamProperty
+     * @returns {number}
+     */
+    setTeamProperty(teamProperty:string):number;
+```
+#### setTeamPropertyResponse
+
+```typescript
+    /**
+     * @see setTeamProperty
+     * @param {number} rsp.status
+     * @param {string} rsp.teamID
+     * @param {number} rsp.userID
+     * @param {String} rsp.teamProperty
+     */
+    setTeamPropertyResponse(rsp): void
+```
+
+#### setTeamUserProfileNotify
+
+```typescript
+ /**
+     * @see setTeamProperty
+     * @param {string} notify.teamID
+     * @param {number} notify.userID
+     * @param {String} notify.teamUserProfile
+     */
+    setTeamUserProfileNotify(notify): void
+```
+
+## 队伍成员属性
+
+#### setTeamUserProfile
+
+设置小队中自己的私有属性,主体是队伍成员,对其他成员可见
+
+```typescript
+    /**
+     * 设置小队中自己的私有属性,主体是队伍成员,对其他成员可见
+     * @see {string} setTeamProperty
+     * @param userProfile
+     * @returns {number}
+     */
+    setTeamUserProfile (userProfile:string):number;
+```
+#### setTeamUserProfileResponse
+
+```typescript
+    /**
+     * @see setTeamUserProfile
+     * @param {number} rsp.status
+     * @param {string} rsp.teamID
+     * @param {number} rsp.userID
+     * @param {String} rsp.teamProperty
+     */
+    setTeamUserProfileResponse(rsp):void
+```
+#### setTeamPropertyNotify
+
+```typescript
+    /**
+     * @see setTeamUserProfile
+     * @param {string} notify.teamID
+     * @param {number} notify.userID
+     * @param {String} notify.teamProperty
+     */
+    setTeamPropertyNotify(notify): void
+```
+## 掉线异常处理
+
+#### teamNetworkStateNotify
+
+当队伍中有成员与服务器断开连接时回调
+
+```typescript
+/**
+ * 当队伍中有成员与服务器断开连接时,回调
+ * @param notify
+ * @param {number} notify.userID 掉线的userID
+ */
+teamNetworkStateNotify(notify:any);
+```
+
+#### setTeamReconnectTimeout
+
+有必要重连时, 在login后调用此函数
+
+```typescript
+    /**
+     * 设置组队匹配断线后允许的重连进入小队的时间, 单位秒,范围(1~60)
+     * @param {number} timeout 单位秒
+     */
+    setTeamReconnectTimeout (timeout:number):number;
+    
+    /**
+     * @see setTeamReconnectTimeout
+     * @param {number} status 200表示成功
+     */
+    setTeamReconnectTimeoutResponse(status:number);
+```

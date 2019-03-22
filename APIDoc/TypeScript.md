@@ -1105,14 +1105,17 @@ class MsEngine{
 ### sendEvent
 
 ```typescript
-engine.sendEvent(data:string):any
+    /**
+     * 发送消息，retuen 值 sequence 与接口回调 sendEventResponse 收到的 sequence 对应
+     * 网络消息传递存在延时，不确定 sendEventResponse 是再哪一次 sendEvent 发送的，通过 sequence 确定。
+     * @param {string|Uint8Array} data 要发送的数据
+     * @param {boolean} isBinary 是否以二进制发送,如果是,data必须是Uint8Array类型
+     * @returns {{sequence: number, result: number}}
+     */
+    sendEvent(data:string|Uint8Array,isBinary?:boolean):any
 ```
 
-#### 参数
 
-| 参数 | 类型   | 描述     | 示例值  |
-| ---- | ------ | -------- | ------- |
-| data | string | 消息内容 | "hello" |
 
 #### 返回值
 
@@ -1146,14 +1149,7 @@ engine.sendEvent(data:string):any
 engine.sendEventEx(msgType:number, data:string, destType:number, userIDs:Array <number> ):any
 ```
 
-#### 参数
 
-| 属性     | 类型          | 描述                                                         | 示例值      |
-| -------- | ------------- | ------------------------------------------------------------ | ----------- |
-| msgType  | number        | 消息发送的地方：0-发客户端不发gameServer  1-不发客户端+发gameServer   2-发客户端 发gameServer | 0           |
-| data     | string        | 要发送的数据                                                 | “hello”     |
-| destType | number        | 0-包含destUids用户  1-排除destUids的用户                     | 2           |
-| userIDs  | Array<number> | 玩家ID集合                                                   | [1234,4567] |
 
 > 提示：senEventEx 参数示例说明
 >
@@ -1663,15 +1659,15 @@ response.setFrameSyncNotify(rsp:MVS.MsSetFrameSyncNotify);
 发送帧同步数据，调用 sendFrameEvent 接口之前一定要先设置帧率。
 
 ```typescript
-engine.sendFrameEvent(cpProto:string, op?:number):number
+    /**
+     * 发送帧同步消息
+     * @param {string|Uint8Array} cpProto
+     * @param {MVS.FrameOpt} op  0-只发送客户端 1-只发送GS 2-客户端和GS
+     * @param {boolean} isBinary 是否以二进制发送,如果是,cpProto必须是Uint8Array类型
+     * @returns {number}
+     */
+    sendFrameEvent(cpProto:string|Uint8Array, op?:number, isBinray?:boolean):number
 ```
-
-#### 参数
-
-| 参数    | 类型   | 描述                                                  | 示例值    |
-| ------- | ------ | ----------------------------------------------------- | --------- |
-| cpProto | string | 帧同步消息内容                                        | ”message“ |
-| op      | number | 帧同步数据操作 0-只发送客户端 1-只发送GS 2-客户端和GS | 0         |
 
 #### 返回值
 
