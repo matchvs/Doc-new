@@ -1817,7 +1817,7 @@ response.reconnectResponse(status:number, roomUserInfoList:Array<MsRoomUserInfo>
 
 ### setReconnectTimeout
 
-用户进入房间后默认断线20秒会被剔除，在用户加入房间之前调用这个接口，服务就会从新设置断线重连时间，设置范围为 `-1到600 秒` 如果设置的值为-1, 则在用户断开就马上被踢出房间。
+用户进入房间后默认断线20秒会被剔除，在用户加入房间之前调用这个接口，服务就会从新设置断线重连时间，设置范围为 `-1到600 秒` 如果设置的值为-1, 则在用户断开就马上被踢出房间;设置为0则20秒后踢出。
 
 ```typescript
 setReconnectTimeout(timeout:number):number
