@@ -1765,7 +1765,7 @@ class MsEngine{
 
 ### reconnect
 
-- 用户在中途断线后服务器会保存用户20秒在房间状态，20秒内用户可以重新登录连接到原来的房间里面。
+- 用户在中途断线后服务器会默认保存用户20秒在房间状态，20秒内用户可以重新登录连接到原来的房间里面。
 - 在游戏里面如果网络断开，可以调用 reconnect 函数重新连接，断线重新连接分为两种情况，第一种没有重新启动程序：在游戏进行时网络断开，直接调用 reconnect 重新连接到游戏。第二种重新加载程序：先调用login 然后判断 loginResponse 中的参数 roomID 是否为0 如果不为 0 就调用reconnect 重连到房间
 - reconnect 接口调用，其他玩家收到 netWorkStateNotify 接口信息，接口详情请看netWorkStateNotify的接口说明。
 
@@ -1817,7 +1817,7 @@ response.reconnectResponse(status:number, roomUserInfoList:Array<MsRoomUserInfo>
 
 ### setReconnectTimeout
 
-用户进入房间后默认断线20秒会被剔除，在用户加入房间之前调用这个接口，服务就会从新设置断线重连时间，设置范围为 `0-600 秒` 如果设置的值为0, 则在用户断开就马上被踢出。
+用户进入房间后默认断线20秒会被剔除，在用户加入房间之前调用这个接口，服务就会从新设置断线重连时间，设置范围为 `-1到600 秒` 如果设置的值为-1, 则在用户断开就马上被踢出房间。
 
 ```typescript
 setReconnectTimeout(timeout:number):number
