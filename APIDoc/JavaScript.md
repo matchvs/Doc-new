@@ -918,18 +918,19 @@ engine.getRoomListEx(filter);
 
 #### 参数 filter属性
 
-| 参数         | 类型   | 描述                                              | 示例值         |
-| ------------ | ------ | ------------------------------------------------- | -------------- |
-| maxPlayer    | number | 房间最大人数 (0-全部)                             | 3              |
-| mode         | number | 模式（0-全部）*创建房间时，mode最好不要填0        | 0              |
-| canWatch     | number | 是否可以观战 0-全部 1-可以 2-不可以               | 1              |
-| roomProperty | string | 房间属性                                          | “roomProperty” |
-| full         | number | 0-全部 1-满 2-未满                                | 0              |
-| state        | number | 0-全部 1-开放 2-关闭                              | 0              |
-| sort         | number | 0-不排序 1-创建时间排序 2-玩家数量排序 3-状态排序 | 0              |
-| order        | number | 0-ASC  1-DESC                                     | 0              |
-| pageNo       | number | 页码，0为第一页                                   | 0              |
-| pageSize     | number | 每一页的数量应该大于 0                            | 10             |
+| 参数          | 类型    | 描述                                              | 示例值         |
+| ------------- | ------- | ------------------------------------------------- | -------------- |
+| maxPlayer     | number  | 房间最大人数 (0-全部)                             | 3              |
+| mode          | number  | 模式（0-全部）*创建房间时，mode最好不要填0        | 0              |
+| canWatch      | number  | 是否可以观战 0-全部 1-可以 2-不可以               | 1              |
+| roomProperty  | string  | 房间属性                                          | “roomProperty” |
+| full          | number  | 0-全部 1-满 2-未满                                | 0              |
+| state         | number  | 0-全部 1-开放 2-关闭                              | 0              |
+| sort          | number  | 0-不排序 1-创建时间排序 2-玩家数量排序 3-状态排序 | 0              |
+| order         | number  | 0-ASC  1-DESC                                     | 0              |
+| pageNo        | number  | 页码，0为第一页                                   | 0              |
+| pageSize      | number  | 每一页的数量应该大于 0                            | 10             |
+| getSystemRoom | boolean | 是否获取系统创建的房间                            | true           |
 
 #### 返回值
 
