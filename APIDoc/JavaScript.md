@@ -218,7 +218,7 @@ engine.login(userID, token, deviceID, nodeID)
 | userID   | number | 用户ID，调用注册接口后获取                                   | 123546 |
 | token    | string | 用户token，调用注册接口后获取                                | ""     |
 | deviceID | string | 设备ID，用于多端登录检测，请保证是唯一ID                     | ""     |
-| nodeID   | number | 节点ID，有多节点的时候，使用getNodeList 获取有效节点，多节点情况[说明](MultNode.md) | 1      |
+| nodeID   | number | 节点ID，有多节点的时候，使用getNodeList 获取有效节点，多节点情况[说明](MultNode) | 1      |
 
 #### 返回值
 
@@ -918,19 +918,19 @@ engine.getRoomListEx(filter);
 
 #### 参数 filter属性
 
-| 参数          | 类型    | 描述                                              | 示例值         |
-| ------------- | ------- | ------------------------------------------------- | -------------- |
-| maxPlayer     | number  | 房间最大人数 (0-全部)                             | 3              |
-| mode          | number  | 模式（0-全部）*创建房间时，mode最好不要填0        | 0              |
-| canWatch      | number  | 是否可以观战 0-全部 1-可以 2-不可以               | 1              |
-| roomProperty  | string  | 房间属性                                          | “roomProperty” |
-| full          | number  | 0-全部 1-满 2-未满                                | 0              |
-| state         | number  | 0-全部 1-开放 2-关闭                              | 0              |
-| sort          | number  | 0-不排序 1-创建时间排序 2-玩家数量排序 3-状态排序 | 0              |
-| order         | number  | 0-ASC  1-DESC                                     | 0              |
-| pageNo        | number  | 页码，0为第一页                                   | 0              |
-| pageSize      | number  | 每一页的数量应该大于 0                            | 10             |
-| getSystemRoom | boolean | 是否获取系统创建的房间                            | true           |
+| 参数          | 类型   | 描述                                                      | 示例值         |
+| ------------- | ------ | --------------------------------------------------------- | -------------- |
+| maxPlayer     | number | 房间最大人数 (0-全部)                                     | 3              |
+| mode          | number | 模式（0-全部）*创建房间时，mode最好不要填0                | 0              |
+| canWatch      | number | 是否可以观战 0-全部 1-可以 2-不可以                       | 1              |
+| roomProperty  | string | 房间属性                                                  | “roomProperty” |
+| full          | number | 0-全部 1-满 2-未满                                        | 0              |
+| state         | number | 0-全部 1-开放 2-关闭                                      | 0              |
+| sort          | number | 0-不排序 1-创建时间排序 2-玩家数量排序 3-状态排序         | 0              |
+| order         | number | 0-ASC  1-DESC                                             | 0              |
+| pageNo        | number | 页码，0为第一页                                           | 0              |
+| pageSize      | number | 每一页的数量应该大于 0                                    | 10             |
+| getSystemRoom | number | 是否获取系统创建的房间,0玩家创建,1系统创建,2玩家+系统创建 | 2              |
 
 #### 返回值
 
