@@ -434,7 +434,7 @@ getCacheData(msg)
 
 ## 接收帧同步消息
 
-当房间启用了 gameServer 帧同步，同时客户端指定了将帧同步消息发往 gameServer 时，gameServer 即可接收到该房间的帧同步消息。
+当房间启用了 gameServer 帧同步，同时客户端指定了将帧同步消息发往 gameServer 时，gameServer 即可接收到该房间的帧同步消息。**cpProto 自定义消息内容为Base64编码格式，使用前需要解码。**
 
 ```javascript
 /**
