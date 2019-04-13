@@ -78,7 +78,7 @@ if(result === 0) {
 使用独立部署的游戏调用此接口初始化SDK。
 
 ```typescript
-function engine.premiseInit(response:MatchvsResponse, endPoint:string, gameID:number):number
+function engine.premiseInit(response:MatchvsResponse, endPoint:string, gameID:number,appKey:String):number
 ```
 
 #### 参数
@@ -88,6 +88,8 @@ function engine.premiseInit(response:MatchvsResponse, endPoint:string, gameID:nu
 | response | MatchvsResponse | 回调类型MatchvsResponse的对象 | response       |
 | endPoint | string          | 服务配置的域名地址            | test.xxxxx.com |
 | gameID   | number          | 服务配置的游戏ID              | 123456         |
+| appKey   | String          | 游戏AppKey(控制台创建游戏时得到)  | xxxxxx         |
+
 
 #### 返回值
 
