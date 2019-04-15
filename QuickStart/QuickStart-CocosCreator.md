@@ -112,7 +112,7 @@ cc.Class({
     MatchvsInit() {
 		var appkey = '4fd4a67c10e84e259a2c3c417b9114f4';
 		var gameVersion = 1;
-        this.engine.init(this.rsp,'Matchvs','release',this.gameID,appkey,gameVersion);
+        this.engine.init(this.rsp,'Matchvs','alpha',this.gameID,appkey,gameVersion);
     },
 
     initResponse :function (status) {
@@ -187,8 +187,9 @@ cc.Class({
 
     MatchvsInit() {
 		var appkey = '4fd4a67c10e84e259a2c3c417b9114f4';
+		var gameID = 123456;
 		var gameVersion = 1;
-        this.engine.init(this.rsp,'Matchvs','release',appkey,gameVersion);
+        this.engine.init(this.rsp,'Matchvs','alpha',gameID,appkey,gameVersion);
     },
 
     initResponse :function (status) {
