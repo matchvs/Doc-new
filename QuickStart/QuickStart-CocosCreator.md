@@ -354,7 +354,7 @@ export default class NewClass extends cc.Component {
      */
     login (id, token) {
         // this.labelLog('开始登录...用户ID:' + id + " gameID " + "200978");
-        this.Engine.login(id,token,this.GameID,1,this.AppKey,"0");
+        this.Engine.login(id,token,"abcdef");
     }
 
     /**
