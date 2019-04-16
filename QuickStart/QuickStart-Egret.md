@@ -99,7 +99,7 @@ class Main extends eui.UILayer {
 请求示例：
 
 ```typescript
-engine.init(response, "Matchvs", "alpha", 201016, "appkey","gameSersion");
+engine.init(response, "Matchvs", "alpha", 201016, "appKey","secretKey");
 ```
 
 回调示例:
@@ -123,7 +123,7 @@ class Main extends eui.UILayer {
     .....
     private runMatchvs(){
         this.response.initResponse = this.initResponse.bind(this);
-        this.engine.init(this.response, "Matchvs", "alpha", 201016, "xxxxappkey", 1);
+        this.engine.init(this.response, "Matchvs", "alpha", 201016, "appKey", 1);
     }
 
 	private initResponse(status:number){
@@ -197,7 +197,7 @@ response.loginResponse = function(rsp:MsLoginRsp){
 }
 ```
 
-- 其中，`appKey，secret，gameID`是你在Matchvs官网创建游戏后获取的信息，可以[前往控制台](http://www.matchvs.com/manage/gameContentList)查看。appkey和secret是校验游戏合法性的关键信息，请妥善保管secret信息。  
+- 其中，`appKey，secret，gameID`是你在Matchvs官网创建游戏后获取的信息，可以[前往控制台](http://www.matchvs.com/manage/gameContentList)查看。appKey和secret是校验游戏合法性的关键信息，请妥善保管secret信息。  
 - userID 和 token 是调用 registerUser 接口 **注册成功** 的回调信息。
 - deviceID 用于检测是否存在多个设备同时登录同一个用户的情况，如果一个账号在两台设备上登录，则后登录的设备会连接失败。
 - Matchvs默认将相同游戏版本的用户匹配到一起。如果开发者对游戏进行了版本升级，不希望两个版本的用户匹配到一起，此时可以在登录的时候通过`gameVersion`区分游戏版本。 

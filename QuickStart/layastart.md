@@ -331,8 +331,8 @@ private initResponse(event:mvs.MsEventData){
 
 ```typescript
 //MvEvent.ts 请求
-public login(userID:number, token:string, gameID:number, appkey:string, secretkey:string):number{
-    let res = this._engine.login(userID,token,gameID,1,appkey,secretkey,"eglejjddg",0);
+public login(userID:number, token:string, gameID:number, appKey:string, secretKey:string):number{
+    let res = this._engine.login(userID,token,gameID,1,appKey,secretKey,"eglejjddg",0);
     return res;
 }
 //MsResponse.ts 回调

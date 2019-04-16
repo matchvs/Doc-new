@@ -105,7 +105,7 @@ class MsEngine {
                 //失败
             }
         }
-        this.engine.init(this.response, "Matchvs", "alpha", 123456, "xxxxappkey", 1);
+        this.engine.init(this.response, "Matchvs", "alpha", 123456, "xxxxappKey", 1);
     }
 }
 ```
@@ -240,7 +240,7 @@ response.loginResponse(login:MsLoginRsp);
 
 | 属性   | 类型   | 描述                                                         | 示例值 |
 | ------ | ------ | ------------------------------------------------------------ | ------ |
-| status | number | 状态返回 <br>200 成功<br>402 应用校验失败，确认是否在未上线时用了release环境，并检查gameID、appkey 和 secret<br>403 检测到该账号已在其他设备登录<br>404 无效用户 <br>500 服务器内部错误 | 200    |
+| status | number | 状态返回 <br>200 成功<br>402 应用校验失败，确认是否在未上线时用了release环境，并检查gameID、appKey 和 secret<br>403 检测到该账号已在其他设备登录<br>404 无效用户 <br>500 服务器内部错误 | 200    |
 | roomID | string | 房间号（预留断线重连）                                       | 210039 |
 
 ### 示例代码

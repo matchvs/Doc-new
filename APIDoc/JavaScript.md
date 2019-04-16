@@ -31,7 +31,7 @@ var response = new Matchvs.MatchvsResponse();
 **注意** 发布之前须到官网控制台申请“发布上线”，申请通过后在调用init方法时传“release”才会生效，否则将不能使用release环境。
 
 ```javascript
-engine.init(response, channel, platform, gameID, appkey, gameVersion,threshold)
+engine.init(response, channel, platform, gameID, appKey, gameVersion,threshold)
 ```
 
 #### 参数
@@ -42,7 +42,7 @@ engine.init(response, channel, platform, gameID, appkey, gameVersion,threshold)
 | channel     | string | 渠道，固定值                                                 | "Matchvs" |
 | platform    | string | 平台，选择测试or正式环境                                     | "alpha"   |
 | gameID      | number | 游戏ID                                                       | 200978    |
-| appkey      | string | 游戏App key，来自Matchvs控制台游戏信息                       |           |
+| appKey      | string | 游戏App key，来自Matchvs控制台游戏信息                       |           |
 | gameVersion | number | 游戏版本，自定义，用于隔离匹配空间                           | 1         |
 | threshold   | number | 延迟容忍,在有多个节点的情况下使用，如果使用默认节点请可以不传该值 | 0 或 不传 |
 
@@ -88,7 +88,7 @@ function engine.premiseInit(response:MatchvsResponse, endPoint:string, gameID:nu
 | response | MatchvsResponse | 回调类型MatchvsResponse的对象 | response       |
 | endPoint | string          | 服务配置的域名地址            | test.xxxxx.com |
 | gameID   | number          | 服务配置的游戏ID              | 123456         |
-| appKey   | String          | 游戏AppKey(控制台创建游戏时得到)  | xxxxxx         |
+| appKey   | String          | 游戏appKey(控制台创建游戏时得到)  | xxxxxx         |
 
 
 #### 返回值
@@ -252,7 +252,7 @@ response.loginResponse(loginRsp)
 
 | 属性   | 类型   | 描述                            | 示例值 |
 | ------ | ------ | ------------------------------- | ------ |
-| status | number | 状态返回 <br>200 成功<br>402 应用校验失败，确认是否在未上线时用了release环境，并检查gameID、appkey 和 secret<br>403 检测到该账号已在其他设备登录<br>404 无效用户 <br>500 服务器内部错误 | 200    |
+| status | number | 状态返回 <br>200 成功<br>402 应用校验失败，确认是否在未上线时用了release环境，并检查gameID、appKey 和 secret<br>403 检测到该账号已在其他设备登录<br>404 无效用户 <br>500 服务器内部错误 | 200    |
 | roomID | string | 房间号                          | "210039" |
 
 #### 说明

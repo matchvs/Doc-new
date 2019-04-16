@@ -21,7 +21,7 @@ st->op1->op2->op3->ed
 
 ```
 
-创建好游戏后可以查看创建的游戏信息，比如` appkey, Secret, gameID `等如下图：
+创建好游戏后可以查看创建的游戏信息，比如` appKey, Secret, gameID `等如下图：
 
 ![](http://imgs.matchvs.com/static/Doc-img/new-start/MatchvsManageimg/Matchvs_use1.png)
 

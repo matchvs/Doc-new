@@ -41,7 +41,7 @@ let matchvsEngine = new MatchvsEngine()
 let matchvsResponse = new MatchvsResponse()
 
 // 初始化
-matchvsEngine.init(matchvsResponse, GameData.channel, GameData.platform, GameData.gameId,GameData.appkey, 1)
+matchvsEngine.init(matchvsResponse, GameData.channel, GameData.platform, GameData.gameID,GameData.appKey, 1)
 
 // 注册
 matchvsEngine.registerUser()

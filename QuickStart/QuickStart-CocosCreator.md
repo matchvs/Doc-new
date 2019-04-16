@@ -110,9 +110,9 @@ cc.Class({
 
 ```javascript
     MatchvsInit() {
-		var appkey = '4fd4a67c10e84e259a2c3c417b9114f4';
+		var appKey = '4fd4a67c10e84e259a2c3c417b9114f4';
 		var gameVersion = 1;
-        this.engine.init(this.rsp,'Matchvs','alpha',this.gameID,appkey,gameVersion);
+        this.engine.init(this.rsp,'Matchvs','alpha',this.gameID,appKey,gameVersion);
     },
 
     initResponse :function (status) {
@@ -186,10 +186,10 @@ cc.Class({
     },
 
     MatchvsInit() {
-		var appkey = '4fd4a67c10e84e259a2c3c417b9114f4';
+		var appKey = '4fd4a67c10e84e259a2c3c417b9114f4';
 		var gameID = 123456;
 		var gameVersion = 1;
-        this.engine.init(this.rsp,'Matchvs','alpha',gameID,appkey,gameVersion);
+        this.engine.init(this.rsp,'Matchvs','alpha',gameID,appKey,gameVersion);
     },
 
     initResponse :function (status) {
@@ -268,7 +268,7 @@ export default class NewClass extends cc.Component {
     private Engine:MatchvsEngine;
     private Response:MatchvsResponse;
     private GameID:number = 200978;
-    private AppKey:string = "4fd4a67c10e84e259a2c3c417b9114f4";
+    private appKey:string = "4fd4a67c10e84e259a2c3c417b9114f4";
 
     start () {
         let self = this;
@@ -279,9 +279,9 @@ export default class NewClass extends cc.Component {
                 return;
             }
             if (self.appKeyInput.string === "") {
-                self.AppKey = self.appKeyInput.placeholder;
+                self.appKey = self.appKeyInput.placeholder;
 		    } else {
-                self.AppKey = self.appKeyInput.string;
+                self.appKey = self.appKeyInput.string;
             }
             if (Number(self.gameIdInput.string) === 0) {
                 self.Engine.init(self.Response,"Matchvs","alpha",Number(self.gameIdInput.placeholder));
