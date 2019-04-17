@@ -220,7 +220,7 @@ engine.login(userID, token, deviceID, nodeID)
 | userID   | number | 用户ID，调用注册接口后获取                                   | 123546 |
 | token    | string | 用户token，调用注册接口后获取                                | ""     |
 | deviceID | string | 设备ID，用于多端登录检测，请保证是唯一ID                     | ""     |
-| nodeID   | number | 节点ID，有多节点的时候，使用getNodeList 获取有效节点，多节点情况[说明](MultNode) | 1      |
+| nodeID   | number | 节点ID，可选参数，不需要多节点功能时可不填。有多节点的时候，使用getNodeList 获取有效节点，多节点情况[说明](MultNode) | 1      |
 
 #### 返回值
 
@@ -260,7 +260,7 @@ response.loginResponse(loginRsp)
 - 登录Matchvs服务端，与Matchvs建立连接。
 - 服务端会校验游戏信息是否合法，保证连接的安全性。
 - 如果一个账号在两台设备上登录，则后登录的设备会连接失败。
-- 如果用户加入房间之后掉线，再重新登录进来，则roomID为之前加入的房间的房间号。
+- 如果用户加入房间之后掉线，再重新登录进来，则roomID为之前加入的房间的房间号。如果游戏不需要断线重连功能，login 如果有 roomID 则需要调用 leaveRoom() ，或者将重连超时设置为 不支持重连。
 
 #### 示例
 
