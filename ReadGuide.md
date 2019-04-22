@@ -24,3 +24,9 @@ Matchvs 文档结构分为下面几种
 第二步：看完新手教程就可以阅读 API 调用，同样使用 Cocos 或者 Egret 同步了解 Matchvs 的工作流。
 
 第三步：在掌握了 Matchvs 的工作流后，后面的内容可以自行选择阅读啦。
+
+> Tips:万事皆能搜索,效率最高
+>
+> 站内搜索: https://doc.matchvs.com/?search=1006
+>
+> google: site:doc.matchvs.com errcode

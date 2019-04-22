@@ -128,7 +128,7 @@ creator 代码示例
             thirdFlag:1,
             sign:signstr
         };
-        req.send(jsonParam);
+        req.send(JSON.stringify(jsonParam));
     },
 
     getBindOpenIDAddr :function(channel, platform){

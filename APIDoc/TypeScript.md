@@ -216,7 +216,7 @@ engine.login(userID: number, token: string, deviceID: string, nodeID?:number): n
 | userID   | number | 用户ID，调用注册接口后获取                                   | 123546 |
 | token    | string | 用户token，调用注册接口后获取                                | ""     |
 | deviceID | string | 设备ID，用于多端登录检测，请保证是唯一ID                     | ""     |
-| nodeID   | number | 节点ID，有多节点的时候，使用getNodeList 获取有效节点，多节点情况[说明](MultNode) |        |
+| nodeID   | number | (可选)节点ID，有多节点的时候，使用getNodeList 获取有效节点，多节点情况[说明](MultNode) |        |
 
 #### 返回值
 

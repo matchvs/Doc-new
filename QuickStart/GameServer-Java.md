@@ -50,27 +50,60 @@ public static void main(String[] args) {
 
 ### Config配置
 
-localHost IP默认为 “0.0.0.0” 即可，不建议修改。localPort：端口号可以从官网查询到：
+具体规则见<https://doc.matchvs.com/QuickStart/gsQuickStart#Config%20配置>
+java额外需要注意的是:
+
+- 本地IP的配置
+
+```
+  localHost IP默认为 “0.0.0.0” 即可，不建议修改。localPort：端口号可以从官网查询到
+  **注意** gameServer 只能使用系统分配的端口号，否则发布上线后将无法正常提供服务。
+```
 
 ![](http://imgs.matchvs.com/static/Doc-img/new-start/gameServerimg/java-GameServer1.png)
 
-**注意** gameServer 只能使用系统分配的端口号，否则发布上线后将无法正常提供服务。
 
-isRemote：本地调试时使用GameServer主动创建房间，销毁房间，设置房间存活时间需要开启。在使用 Matchvs 独立部署解决方案时也需要开启。
 
-remoteHost：gameServer 注册服务地址，从Matchvs命令行工具获取。独立部署方案单独提供。
+- 运行模式的配置(SAAS or PAAS)
+```
+isPAAS：设为 true 时开启`独立部署`模式，默认为 false 。 
 
-remotePort：gameServer 注册服务端口，从Matchvs命令行工具获取。独立部署方案单独提供。
+什么是`独立部署(PAAS)`<https://doc.matchvs.com/SelfHost/selfhostIntro>
+```
+- 独立部署服务器地址的配置(isPAAS为true时生效)
+```
+remoteHost：`独立部署` 服务器Host
+remotePort：`独立部署` 服务器Port
+```
+> `独立部署`下的remoteHost和remotePort创建和获取:
 
-gameID： 从官网控制台获取，gameServer独立部署模式下单独提供。
+> 配置: <https://doc.matchvs.com/SelfHost/deploygameServer#修改配置>
 
-svcName： 从Matchvs命令行工具获取。独立部署方案单独提供。
+> 获取: <https://doc.matchvs.com/SelfHost/deploygameServer>
 
-podName： 从Matchvs命令行工具获取。独立部署方案单独提供。
+- gameID的配置
+```
+gameID：与客户端的gameID对应, 从官网控制台获取，`独立部署`模式下自行配置。
+```
 
-![](http://imgs.matchvs.com/static/Doc-img/new-start/gameServerimg/java-GameServer3.png)
+- GameServer的房间管理相关
 
-**注意** 本地调试时将对应的值填入配置文件，isRemote在上传商用环境时候设置为false。
+```
+roomServerHost：房间服务的host
+roomServerPort：房间服务的port
+自托管(SAAS)模式下roomServerHost和roomServerPort通过命令行工具获取.独立部署模式下等同于remoteHost和remotePort
+```
+![commandtool](GameServer-Java.assets/commandtool.png)
+
+> 命令行工具的使用 <<https://doc.matchvs.com/Advanced/GameServerCMD> >
+
+- GameServer标识的配置
+```
+svcName：gameServer名称, 从Matchvs命令行工具获取。`独立部署`模式下自行配置。
+podName：gameServer名称, 从Matchvs命令行工具获取。`独立部署`模式下自行配置。
+```
+
+**注意** 上述文件仅本地调试时才会被用到. 发布上线是时应被移除
 
 ### Demo 客户端与 gameServer 建立连接
 

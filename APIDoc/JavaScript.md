@@ -3,7 +3,6 @@ Title: JavaScript
 Sort: -3
 */
 
-
 ## JavaScriptSDK接口说明
 
 ```javascript
@@ -12,6 +11,7 @@ var engine = new Matchvs.MatchvsEngine();
 ```
 
 #### 说明
+
 - 根据上面的代码片段获取Matchvs引擎的一个实例，接下来可以调用这个实例的方法实现联网对战功能。
 - 建议在获取一个实例之后，将其作为单例或全局变量。  
 
@@ -25,6 +25,8 @@ var response = new Matchvs.MatchvsResponse();
 #### 说明
 - 根据上面的代码片段获取Matchvs引擎的一个实例，接下来可以调用这个实例的回调方法实现联网对战功能。
 - 建议在获取一个实例之后，将其作为单例或全局变量。
+
+> Tips:建议在写JS 的时候也同时拷贝一个TS文件(matchvs.d.ts)到同目录下  这样 有代码提示 写起来效率高
 
 ## init
 
@@ -220,7 +222,7 @@ engine.login(userID, token, deviceID, nodeID)
 | userID   | number | 用户ID，调用注册接口后获取                                   | 123546 |
 | token    | string | 用户token，调用注册接口后获取                                | ""     |
 | deviceID | string | 设备ID，用于多端登录检测，请保证是唯一ID                     | ""     |
-| nodeID   | number | 节点ID，有多节点的时候，使用getNodeList 获取有效节点，多节点情况[说明](MultNode) | 1      |
+| nodeID   | number | (可选)节点ID，有多节点的时候，使用getNodeList 获取有效节点，多节点情况[说明](MultNode) | 1      |
 
 #### 返回值
 
@@ -1720,8 +1722,7 @@ response.setFrameSyncResponse(rsp)
 #### 示例
 
 ```javascript
-response.setFrameSyncResponse = this.setFrameSyncResponse.bind(this);
-setFrameSyncResponse = function (rsp) {
+response.setFrameSyncResponse = function (rsp) {
     if (rsp.status == 200) {
         console.log('帧率设置成功');
     } else if (rsp.status ==519 ) {
@@ -1729,7 +1730,7 @@ setFrameSyncResponse = function (rsp) {
     } else if (rsp.status == 500) {
         console.log('帧率设置失败,帧率需被1000整除');
     }
-}
+}.bind(this);
 ```
 
 ## setFrameSyncNotify
