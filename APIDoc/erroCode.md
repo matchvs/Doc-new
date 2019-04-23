@@ -60,6 +60,7 @@ Matchvs SDK 一些附带 status 参数的回调接口中具体的参数值可参
 | 402    | 应用校验失败，确认是否在未上线时用了release环境，并检查gameID、appKey 和 secret | login                |
 | 403    | 访问禁止，该用户多端登录。                                   | login                |
 | 404    | userID错误                                                   | 所有API              |
+| 405    | 请求的游戏ID与登录时的游戏ID不一致                           | 所有API              |
 | 500    | 内部错误                                                     | 所有API              |
 | 502    | 服务停止，许可证失效 或者账号欠费                            | login                |
 | 503    | ccu 超出限额                                                 | login                |
