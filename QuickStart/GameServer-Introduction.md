@@ -59,7 +59,7 @@ Matchvs 提供了一系列 gameServer 管理功能，您可以点击 gameServer 
 
 
 
-## 数据库
+## 访问授权
 
 Matchvs 提供了数据存储功能，详情可以参考[数据存储教程](https://doc.matchvs.com/APIDoc/dataStore)。如果您觉得不够用，则可以使用自己的数据库。
 
