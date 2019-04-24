@@ -17,7 +17,10 @@ Sort: 10
 Matchvs 环境分为测试环境（alpha）和 正式环境（release），所以在使用http接口时，需要通过域名进行区分。使用正式环境需要先在官网控制台将您的游戏发布上线。
 
 - alpha环境域名：alphavsopen.matchvs.com
+
 - release环境域名：vsopen.matchvs.com
+
+如过要在 release 环境下的 gameServer 中使用排行榜接口，需要首先配置[访问授权](http://doc.matchvs.com/QuickStart/GameServer-Introduction#%E8%AE%BF%E9%97%AE%E6%8E%88%E6%9D%83)。
 
 ## 请求与响应格式
 
