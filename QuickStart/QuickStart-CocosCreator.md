@@ -34,7 +34,7 @@ CreatorIDE安装成功后，双击打开CreatorIDE，选择新建项目选择一
 
 #### Creator V2.0.7
 
-在CreatorV2.0.7 版本之后推出了新的服务模块。同时在服务模块中也集成了Matchvs，使大家集成更加方便 `服务模块在面板选项中`。
+在CreatorV2.0.7 以上的版本(推荐2.0.9)推出了新的服务模块。同时在服务模块中也集成了Matchvs，使大家集成更加方便 `服务模块在面板选项中`。
 
 
 服务模块如下图:
@@ -61,68 +61,49 @@ module.exports = {
 ```
  服务模块加载SDK参考以上代码。
 
-#### Creator V2.0.7以外的其他版本推荐大家升级到2.0.7以上版本使用
+#### Creator V2.0.7以外的其他版本推荐大家升级到2.0.9以上版本使用
 
 ## 第一行代码
 
- 1：在assets文件夹下创建Script和Scene两个文件夹，在Script文件夹下创建HelloWorld.js文件，在Scene文件夹下创建一个名字叫做HelloWorld的场景文件.
+ 1：在assets文件夹下创建Script和Scene两个文件夹，在Script文件夹下创建.js文件，在Scene文件夹下创建一个名字叫做.fire的场景文件.
 
  2：双击场景文件创建一个Button和Label。目录结构如下
 
-![](http://imgs.matchvs.com/static/Doc-img/new-start/CocosCreatorImg/creator_9.png)
+![](QuickStart-CocosCreator.assets/1556157453103.png)
 
- 3：在代码中定义login,info两个对象，代码如下。
+ 3：在代码中定义login,init两个按钮，代码如下。
 
-```javascript
-cc.Class({
-    extends: cc.Component,
+![1556157504142](QuickStart-CocosCreator.assets/1556157504142.png)
 
-    properties: {
-        login:cc.Button,
-        info:cc.Label
-    },
+![1556157938156](QuickStart-CocosCreator.assets/1556157938156.png)
 
-
-    onLoad () {
-    },
-
-    start () {
-
-    },
-
-});
-```
  4：回到IDE中点击场景文件点击添加组件按钮，添加用户脚本文件
 
-![](http://imgs.matchvs.com/static/Doc-img/new-start/CocosCreatorImg/creator_10.png)
 
- 5：将创建的对象与对应的精灵绑定，将1拖拽到2，3拖拽到4进行对象与精灵的绑定。
 
-![](http://imgs.matchvs.com/static/Doc-img/new-start/CocosCreatorImg/creator_11.png)
+ 5：将编辑器中的控件从左边导航栏用鼠标拖曳至右边的属性栏,与代码绑定,点击按钮事件触发脚本
 
-绑定成功如下图所示
+![](QuickStart-CocosCreator.assets/1556157593533.png)
 
-![](http://imgs.matchvs.com/static/Doc-img/new-start/CocosCreatorImg/creator_12.png)
+
 
  6：Matchvs SDK 接口使用
 ​	
  - 第一步初始化 init
 
 ```javascript
-    MatchvsInit() {
-		var appKey = '4fd4a67c10e84e259a2c3c417b9114f4';
-		var gameVersion = 1;
-        this.engine.init(this.rsp,'Matchvs','alpha',this.gameID,appKey,gameVersion);
-    },
-
-    initResponse :function (status) {
-        if (status === 200) {
-            this.labelLog('初始化成功，开始注册');
-            this.engine.registerUser();
-        } else {
-            this.labelLog('初始化失败，错误码：'+status);
-        }
-    },
+/**
+ * 初始化
+ * @param channel 渠道 例如Matchvs
+ * @param platform 平台 例如'alpha ,release'
+ * @param gameID 游戏ID
+ * @param {string} appKey
+ */
+NetWorkEngine.prototype.init = function (channel, platform, gameID,appKey) {
+    var result = mvs.engine.init(mvs.response,channel,platform,gameID,appKey,1);
+    console.log("初始化result"+result);
+    return result;
+}
 
 ```
 
@@ -131,241 +112,583 @@ cc.Class({
  **注意** 所有的response回调是异步的，下一步的操作一定要在response回调成功后在进行操作
 
 ```javascript
-this.engine.registerUser();
-
-registerUserResponse:function(userInfo) {
-	if (userInfo.status ===0) {
-		this.labelLog('注册成功，开始登录，登录ID是：'+userInfo.id+'token是'+userInfo.token);
-		this.Login(userInfo.id,userInfo.token);
-	} else {
-		this.labelLog('注册失败错误状态码为：'+userInfo.status);
-	}
-},
-
+/**
+ * 注册
+ * @returns {number|*}
+ */
+NetWorkEngine.prototype.registerUser = function() {
+    var result = mvs.engine.registerUser();
+    console.log("注册result"+result);
+    return result;
+};
 ```
 - 第三步登录 login
 
 ```javascript
-this.Login(userInfo.id,userInfo.token);
 
-Login(userID,token) {
-	var DeviceID = 'abcdef';
-	this.engine.login(userID,token,DeviceID)
-},
-
-loginResponse:function (MsLoginRsp) {
-	if (MsLoginRsp.status === 200) {
-		this.labelLog('恭喜你登录成功，来到Matchvs的世界，你已经成功的迈出了第一步，Hello World');
-	} else {
-		this.labelLog('登录失败');
-	}
-},
+/**
+ * 注册
+ * @param userID
+ * @param token
+ * @returns {DataView|*|number|void}
+ */
+NetWorkEngine.prototype.login = function(userID,token){
+    var DeviceID = 'matchvs';
+    var result = mvs.engine.login(userID,token,DeviceID);
+    console.log("登录result"+result);
+    return result;
+};
 ```
 
 下面是完整的代码片段
 
+![1556157371044](QuickStart-CocosCreator.assets/1556157371044.png)
+
 ```javascript
+var engine = require('../1/MatchvsEngine');
+var response = require("../1/MatchvsResponse");
+var msg = require("../1/MatvhsvsMessage");
+var GameData = require('../1/ExamplesData');
+
 cc.Class({
     extends: cc.Component,
 
     properties: {
-        login:cc.Button,
-        info:cc.Label,
-        engine:null,
-        rsp:null,
-        gameID:200978,
+        initButton: cc.Button,
+        registerButton: cc.Button,
+        loginButton: cc.Button,
+        joinRandomRoomButton: cc.Button,
+        joinOverButton: cc.Button,
+        sendEventButton: cc.Button,
+        leaveRoomButton: cc.Button,
+        logoutButton: cc.Button,
+        unInitButton: cc.Button,
+        clearLogButton: cc.Button,
+        backHomeButton: cc.Button,
+
+        textTitle: cc.Label,
+        btnClear: cc.Button,
+        btnSAAS: cc.Button,
+
+        ebGameID: cc.EditBox,
+        ebAppKey: cc.EditBox,
+
+        //独立部署(PAAS)
+        ebEndPoint: cc.EditBox,
+        ebUserID: cc.EditBox,
+        ebToken: cc.EditBox,
+        textToturail: cc.Node,
+        passGroup: cc.Node,
+
+        logListView: {
+            default: null,
+            type: cc.ScrollView
+        },
+        logList: [],
+        spacing: 0,
+        totalCount: 0,
+        itemTemplate: {
+            default: null,
+            type: cc.Node
+        },
     },
 
-    onLoad () {
-        this.login.node.on('click',this.MatchvsInit,this);
-        this.engine = new window.MatchvsEngine();
-        this.rsp = new window.MatchvsResponse();
-        this.rsp.initResponse = this.initResponse.bind(this);
-        this.rsp.registerUserResponse = this.registerUserResponse.bind(this);
-        this.rsp.loginResponse = this.loginResponse.bind(this);
-    },
 
-    MatchvsInit() {
-		var appKey = '4fd4a67c10e84e259a2c3c417b9114f4';
-		var gameID = 123456;
-		var gameVersion = 1;
-        this.engine.init(this.rsp,'Matchvs','alpha',gameID,appKey,gameVersion);
-    },
+    onLoad() {
+        this.initMatchvsEvent(this);
+        this.logList = new Array();
+        this.content = this.logListView.content;
+        //初始化按钮点击监听事件
+        this.initButton.node.on('click', this.init, this);
+        this.registerButton.node.on('click', this.register, this);
+        this.loginButton.node.on('click', this.login, this);
+        this.joinRandomRoomButton.node.on('click', this.joinRandomRoom, this);
+        this.joinOverButton.node.on('click', this.joinOver, this);
+        this.sendEventButton.node.on('click', this.sendEvent, this);
+        this.leaveRoomButton.node.on('click', this.leaveRoom, this);
+        this.logoutButton.node.on('click', this.logout, this);
+        this.unInitButton.node.on('click', this.unInit, this);
+        this.backHomeButton.node.on('click', this.backHome, this);
+        this.clearLogButton.node.on('click', this.clearLog, this);
+        this.btnSAAS.node.on('click', function () {
+            GameData.isPAAS = !GameData.isPAAS;
+            engine.prototype.logout();
+            engine.prototype.unInit();
+            cc.director.loadScene('pass');
+        }, this);
+        this.btnClear.node.on('click', function () {
+            LocalStore_Clear();
+            this.labelLog('已删除UserID和Token的本地缓存');
+        }, this);
+        this.textToturail.on(cc.Node.EventType.MOUSE_UP, function () {
+            window.open("https://doc.matchvs.com/SelfHost/selfhostIntro");
+        }, this);
 
-    initResponse :function (status) {
-        if (status === 200) {
-            this.labelLog('初始化成功，开始注册');
-            this.engine.registerUser();
+        this.labelLog('您需要打开两个以上的浏览器模拟多人联网进行测试使用');
+
+        if (GameData.isPAAS) {
+            this.ebGameID.getComponent(cc.EditBox).string = "";
+            this.ebAppKey.getComponent(cc.EditBox).string = "";
+            this.ebUserID.getComponent(cc.EditBox).string = "";
+            this.ebToken.getComponent(cc.EditBox).string = "";
+            this.ebEndPoint.getComponent(cc.EditBox).string = "";
+            this.getAndCheckPAASInfo();
+            GameData.reset();
         } else {
-            this.labelLog('初始化失败，错误码：'+status);
+            this.ebGameID.getComponent(cc.EditBox).string = GameData.gameID;
+            this.ebAppKey.getComponent(cc.EditBox).string = GameData.appKey;
+        }
+        this.getAndCheckGameInfo();
+        this.textTitle.string = !GameData.isPAAS ? "云托管模式" : "自托管模式";
+        this.btnClear.node.active = !GameData.isPAAS;
+        // this.ebUserID.node.parent.active = !GameData.isPAAS ? false : true;
+        // this.ebToken.node.parent.active = !GameData.isPAAS ? false : true;
+        // this.ebEndPoint.node.parent.active = !GameData.isPAAS ? false : true;
+        this.passGroup.active = GameData.isPAAS;
+        console.log("isPaas:", GameData.isPAAS);
+        this.btnSAAS.getComponentInChildren(cc.Label).string = GameData.isPAAS ? "云托管模式" : "自托管模式";
+        console.log("GameData:", GameData);
+    },
+    premiseInit() {
+        if (this.getAndCheckPAASInfo()) {
+            engine.prototype.premiseInit(GameData.host, GameData.gameID, GameData.appKey);
+        }
+    },
+    getAndCheckPAASInfo() {
+        var token = this.ebToken.getComponent(cc.EditBox).string;
+        var userID = this.ebUserID.getComponent(cc.EditBox).string;
+        var host = this.ebEndPoint.getComponent(cc.EditBox).string;
+        if (userID === '' || token === '' || host === '') {
+            this.labelLog("独立部署请输入userID,token以及服务地址");
+            this.labelLog("有疑问请点击右上角<自托管教程>按钮");
+            return false;
+        } else {
+            GameData.userID = userID;
+            GameData.token = token;
+            GameData.host = host;
+            // this.login(userID,token);
+            return true;
+        }
+    },
+    getAndCheckGameInfo() {
+        var gameID = this.ebGameID.getComponent(cc.EditBox).string;
+        var appKey = this.ebAppKey.getComponent(cc.EditBox).string;
+        if (gameID === '' || appKey === '') {
+            this.labelLog("gameID&&appKey不能为空,请输入");
+            console.log("GameData:", GameData);
+            return false;
+        } else {
+            GameData.gameID = gameID;
+            GameData.appKey = appKey;
+            return true;
+        }
+    },
+    /**
+     * 注册对应的事件监听和把自己的原型传递进入，用于发送事件使用
+     * @param self this
+     */
+    initMatchvsEvent(self) {
+        //在应用开始时手动绑定一下所有的回调事件
+        response.prototype.bind();
+        response.prototype.init(self);
+        this.node.on(msg.MATCHVS_INIT, this.initResponse, this);
+        this.node.on(msg.MATCHVS_REGISTER_USER, this.registerUserResponse, this);
+        this.node.on(msg.MATCHVS_LOGIN, this.loginResponse, this);
+        this.node.on(msg.MATCHVS_JOIN_ROOM_RSP, this.joinRoomResponse, this);
+        this.node.on(msg.MATCHVS_JOIN_ROOM_NOTIFY, this.joinRoomNotify, this);
+        this.node.on(msg.MATCHVS_JOIN_OVER_RSP, this.joinOverResponse, this);
+        this.node.on(msg.MATCHVS_JOIN_OVER_NOTIFY, this.joinOverNotify, this);
+        this.node.on(msg.MATCHVS_SEND_EVENT_RSP, this.sendEventResponse, this);
+        this.node.on(msg.MATCHVS_SEND_EVENT_NOTIFY, this.sendEventNotify, this);
+        this.node.on(msg.MATCHVS_LEAVE_ROOM, this.leaveRoomResponse, this);
+        this.node.on(msg.MATCHVS_LEAVE_ROOM_NOTIFY, this.leaveRoomNotify, this);
+        this.node.on(msg.MATCHVS_LOGOUT, this.logoutResponse, this);
+        this.node.on(msg.MATCHVS_ERROE_MSG, this.errorResponse, this);
+    },
+
+    /**
+     * 移除监听
+     */
+    removeEvent() {
+        this.node.off(msg.MATCHVS_INIT, this.initResponse, this);
+        this.node.off(msg.MATCHVS_REGISTER_USER, this.registerUserResponse, this);
+        this.node.off(msg.MATCHVS_LOGIN, this.loginResponse, this);
+        this.node.off(msg.MATCHVS_JOIN_ROOM_RSP, this.joinRoomResponse, this);
+        this.node.off(msg.MATCHVS_JOIN_ROOM_NOTIFY, this.joinRoomNotify, this);
+        this.node.off(msg.MATCHVS_JOIN_OVER_RSP, this.joinOverResponse, this);
+        this.node.off(msg.MATCHVS_JOIN_OVER_NOTIFY, this.joinOverNotify, this);
+        this.node.off(msg.MATCHVS_SEND_EVENT_RSP, this.sendEventResponse, this);
+        this.node.off(msg.MATCHVS_SEND_EVENT_NOTIFY, this.sendEventNotify, this);
+        this.node.off(msg.MATCHVS_LEAVE_ROOM, this.leaveRoomResponse, this);
+        this.node.off(msg.MATCHVS_LEAVE_ROOM_NOTIFY, this.leaveRoomNotify, this);
+        this.node.off(msg.MATCHVS_LOGOUT, this.logoutResponse, this);
+        this.node.off(msg.MATCHVS_ERROE_MSG, this.errorResponse, this);
+    },
+
+    /**
+     * 返回首页
+     */
+    backHome() {
+        cc.director.loadScene('index');
+    },
+
+    clearLog() {
+        this.logList.length = 0;
+        this.content.removeAllChildren(true);
+    },
+
+    /**
+     * 初始化
+     */
+    init() {
+
+        var result;
+        if (GameData.isPAAS) {
+            if (this.getAndCheckPAASInfo() && this.getAndCheckGameInfo()) {
+                result = engine.prototype.premiseInit(GameData.host, GameData.gameID, GameData.appKey);
+            } else {
+                return;
+            }
+        } else {
+            if (this.getAndCheckGameInfo()) {
+                result = engine.prototype.init(GameData.channel, GameData.platform, GameData.gameID, GameData.appKey);
+            } else {
+                return;
+            }
+        }
+        this.labelLog('初始化使用的gameID是:' + GameData.gameID, '如需更换为自己SDK，请修改ExamplesData.js文件');
+        this.engineCode(result, 'init');
+    },
+
+    /**
+     * 注册
+     */
+    register() {
+        if (GameData.isPAAS) {
+            this.labelLog("独立部署使用第三方账号,无需注册");
+            return;
+        }
+        var result = engine.prototype.registerUser();
+        this.engineCode(result, 'registerUser');
+    },
+
+    /**
+     * 登录
+     */
+    login() {
+        if (this.getAndCheckGameInfo()) {
+            var result = engine.prototype.login(GameData.userID, GameData.token);
+            this.labelLog('登录的账号userID是:', GameData.userID);
+            if (result == -6) {
+                this.labelLog('已登录，请勿重新登录');
+            } else if (result === -26) {
+                console.log("GameData:", GameData);
+                this.labelLog('[游戏账户与渠道不匹配，请使用cocos账号登录Matchvs官网创建游戏]：(https://www.matchvs.com/cocos)');
+            } else {
+                this.engineCode(result, 'login');
+            }
         }
     },
 
-    registerUserResponse:function(userInfo) {
-        if (userInfo.status ===0) {
-            this.labelLog('注册成功，开始登录，登录ID是：'+userInfo.id+'token是'+userInfo.token);
-            this.Login(userInfo.id,userInfo.token);
-        } else {
-            this.labelLog('注册失败错误状态码为：'+userInfo.status);
-        }
-    },
-    Login(userID,token) {
-		var DeviceID = 'abcdef';
-		this.engine.login(userID,token,DeviceID)
+    /**
+     * 进入房间
+     */
+    joinRandomRoom() {
+        var result = engine.prototype.joinRandomRoom(GameData.mxaNumer);
+        this.engineCode(result, 'joinRandomRoom');
     },
 
-    loginResponse:function (loginRsp) {
-        if (loginRsp.status === 200) {
-            this.labelLog('恭喜你登录成功，来到Matchvs的世界，你已经成功的迈出了第一步，Hello World');
+    /**
+     * 关闭房间
+     */
+    joinOver() {
+        var result = engine.prototype.joinOver();
+        this.engineCode(result, 'joinOver');
+    },
+
+    /**
+     * 发送信息
+     */
+    sendEvent() {
+        var eventMsg = ['万剑归宗', ' 亢龙有悔', '庐山升龙霸 ', ' 天马流行拳', ' 钻石星尘', ' 凤翼天翔',
+            '庐山亢龙霸 ', '极冻冰棺', ' 等离子光速拳', '星云锁链'];
+        var msg = eventMsg[Math.floor(Math.random() * 10)];
+        var result = engine.prototype.sendEvent('你使出一招:' + msg);
+        this.labelLog('你准备使出一招：' + msg);
+        this.engineCode(result, 'sendEvent');
+    },
+
+    /**
+     *  离开房间
+     */
+    leaveRoom() {
+        var result = engine.prototype.leaveRoom();
+        this.engineCode(result, 'leaveRoom');
+    },
+
+    /**
+     * 注销
+     */
+    logout() {
+        var result = engine.prototype.logout();
+        this.engineCode(result, 'logout');
+    },
+
+    /**
+     * 反初始化
+     */
+    unInit() {
+        var result = engine.prototype.unInit();
+        this.engineCode(result, 'unInit');
+    },
+
+
+    /**
+     * 初始化回调
+     * @param info
+     */
+    initResponse(status) {
+        if (status == 200) {
+            this.labelLog('initResponse：初始化成功，status：' + status);
         } else {
-            this.labelLog('登录失败');
+            this.labelLog('initResponse：初始化失败，status：' + status)
         }
     },
+
+
+    /**
+     * 注册回调
+     * @param userInfo
+     */
+    registerUserResponse(userInfo) {
+        if (userInfo.status == 0) {
+            this.labelLog('registerUserResponse：注册用户成功,id = ' + userInfo.id + 'token = ' + userInfo.token + 'name:' + userInfo.name +
+                'avatar:' + userInfo.avatar);
+            GameData.userID = userInfo.id;
+            GameData.token = userInfo.token;
+            this.ebUserID.getComponent(cc.EditBox).string = GameData.userID;
+            this.ebToken.getComponent(cc.EditBox).string = GameData.token;
+            GameData.userName = userInfo.name;
+        } else {
+            this.labelLog('registerUserResponse: 注册用户失败');
+        }
+    },
+
+    /**
+     * 登陆回调
+     * @param MsLoginRsp
+     */
+    loginResponse(MsLoginRsp) {
+        if (MsLoginRsp.status == 200) {
+            this.labelLog('loginResponse: 登录成功');
+        } else if (MsLoginRsp.status == 402) {
+            this.labelLog('loginResponse: 应用校验失败，确认是否在未上线时用了release环境，并检查gameID、appkey 和 secret');
+        } else if (MsLoginRsp.status == 403) {
+            this.labelLog('loginResponse：检测到该账号已在其他设备登录');
+        } else if (MsLoginRsp.status == 404) {
+            this.labelLog('loginResponse：无效用户 ');
+        } else if (MsLoginRsp.status == 500) {
+            this.labelLog('loginResponse：服务器内部错误');
+        }
+    },
+
+    /**
+     * 进入房间回调
+     * @param status
+     * @param userInfoList
+     * @param roomInfo
+     */
+    joinRoomResponse(status, userInfoList, roomInfo) {
+        if (status == 200) {
+            this.labelLog('joinRoomResponse: 进入房间成功：房间ID为：' + roomInfo.roomID + '房主ID：' + roomInfo.ownerId + '房间属性为：' + roomInfo.roomProperty);
+            for (var i = 0; i < userInfoList.length; i++) {
+                this.labelLog('joinRoomResponse：房间的玩家ID是' + userInfoList[i].userID);
+            }
+            if (userInfoList.length == 0) {
+                this.labelLog('joinRoomResponse：房间暂时无其他玩家');
+            }
+        } else {
+            this.labelLog('joinRoomResponse：进入房间失败');
+        }
+    },
+
+    /**
+     * 其他玩家加入房间通知
+     * @param roomUserInfo
+     */
+    joinRoomNotify(roomUserInfo) {
+        this.labelLog('joinRoomNotify：加入房间的玩家ID是' + roomUserInfo.userID);
+    },
+
+    /**
+     * 关闭房间成功
+     * @param joinOverRsp
+     */
+    joinOverResponse(joinOverRsp) {
+        if (joinOverRsp.status == 200) {
+            this.labelLog('joinOverResponse: 关闭房间成功');
+        } else if (joinOverRsp.status == 400) {
+            this.labelLog('joinOverResponse: 客户端参数错误 ');
+        } else if (joinOverRsp.status == 403) {
+            this.labelLog('joinOverResponse: 该用户不在房间 ');
+        } else if (joinOverRsp.status == 404) {
+            this.labelLog('joinOverResponse: 用户或房间不存在');
+        } else if (joinOverRsp.status == 500) {
+            this.labelLog('joinOverResponse: 服务器内部错误');
+        }
+    },
+
+    /**
+     * 关闭房间通知
+     * @param notifyInfo
+     */
+    joinOverNotify(notifyInfo) {
+        this.labelLog('joinOverNotify：用户' + notifyInfo.srcUserID + '关闭了房间，房间ID为：' + notifyInfo.roomID);
+    },
+
+    /**
+     * 发送消息回调
+     * @param sendEventRsp
+     */
+    sendEventResponse(sendEventRsp) {
+        if (sendEventRsp.status == 200) {
+            this.labelLog('sendEventResponse：发送消息成功');
+        } else {
+            this.labelLog('sendEventResponse：发送消息失败');
+        }
+    },
+
+    /**
+     * 接收到其他用户消息通知
+     * @param eventInfo
+     */
+    sendEventNotify(eventInfo) {
+        this.labelLog('sendEventNotify：用户' + eventInfo.srcUserID + '对你使出了一招' + eventInfo.cpProto);
+    },
+
+    /**
+     * 离开房间回调
+     * @param leaveRoomRsp
+     */
+    leaveRoomResponse(leaveRoomRsp) {
+        if (leaveRoomRsp.status == 200) {
+            this.labelLog('leaveRoomResponse：离开房间成功，房间ID是' + leaveRoomRsp.roomID);
+        } else if (leaveRoomRsp.status == 400) {
+            this.labelLog('leaveRoomResponse：客户端参数错误,请检查参数');
+        } else if (leaveRoomRsp.status == 404) {
+            this.labelLog('leaveRoomResponse：房间不存在')
+        } else if (leaveRoomRsp.status == 500) {
+            this.labelLog('leaveRoomResponse：服务器错误');
+        }
+    },
+
+    /**
+     * 其他离开房间通知
+     * @param leaveRoomInfo
+     */
+    leaveRoomNotify(leaveRoomInfo) {
+        this.labelLog('leaveRoomNotify：' + leaveRoomInfo.userID + '离开房间，房间ID是' + leaveRoomInfo.roomID);
+    },
+
+    /**
+     * 注销回调
+     * @param status
+     */
+    logoutResponse(status) {
+        if (status == 200) {
+            this.labelLog('logoutResponse：注销成功');
+        } else if (status == 500) {
+            this.labelLog('logoutResponse：注销失败，服务器错误');
+        }
+
+    },
+
+    /**
+     * 错误信息回调
+     * @param errorCode
+     * @param errorMsg
+     */
+    errorResponse(errorCode, errorMsg) {
+        this.labelLog('errorMsg:' + errorMsg + 'errorCode:' + errorCode);
+    },
+
 
     /**
      * 页面log打印
      * @param info
      */
     labelLog: function (info) {
-        this.info.string += '\n[LOG]: ' + info;
+        this.logList.push(info);
+        this.totalCount = this.logList.length;
+        this.content.height = this.totalCount * (this.itemTemplate.height + this.spacing) + this.spacing;
+        this.content.removeAllChildren(true);
+        for (var i = 0; i < this.logList.length; i++) {
+            var item = cc.instantiate(this.itemTemplate);
+            this.content.addChild(item);
+            item.setPosition(0, -item.height * (0.5 + i) - this.spacing * (i + 1));
+            item.getComponent('Item').updateItem(this.logList[i]);
+        }
+
     },
 
-});
 
+    engineCode: function (code, engineName) {
+        switch (code) {
+            case 0:
+                this.labelLog(engineName + '调用成功');
+                break;
+            case -1:
+                this.labelLog(engineName + '调用失败');
+                break;
+            case -2:
+                this.labelLog('尚未初始化，请先初始化再进行' + engineName + '操作');
+                break;
+            case -3:
+                this.labelLog('正在初始化，请稍后进行' + engineName + '操作');
+                break;
+            case -4:
+                this.labelLog('尚未登录，请先登录再进行' + engineName + '操作');
+                break;
+            case -5:
+                this.labelLog('已经登录，请勿重复登陆');
+                break;
+            case -6:
+                this.labelLog('尚未加入房间，请稍后进行' + engineName + '操作');
+                break;
+            case -7:
+                this.labelLog('正在创建或者进入房间,请稍后进行' + engineName + '操作');
+                break;
+            case -8:
+                this.labelLog('已经在房间中');
+                break;
+            case -20:
+                this.labelLog('maxPlayer超出范围 0 < maxPlayer ≤ 20');
+                break;
+            case -21:
+                this.labelLog('userProfile 过长，不能超过512个字符');
+                break;
+            case -25:
+                this.labelLog(engineName + 'channel 非法，请检查是否正确填写为 “Matchvs”');
+                break;
+            case -26:
+                this.labelLog(engineName + '：platform 非法，请检查是否正确填写为 “alpha” 或 “release”');
+                break;
+
+
+        }
+    },
+
+    onDestroy() {
+        this.removeEvent();
+    }
+    // start () {},
+    // update (dt) {},
+});
 
 ```
 
 ## 在Cocos Creator中使用Ts
 
 当前项目支持Ts后，按照上面步骤成功导入JSSDK后，在官网的[下载页面](http://matchvs.com/serviceDownload)下载TypeScript，将其中的matchvs.d.ts拷贝到JSSDK的同路径下即可使用。
-
-下面是一段TS的演示代码，实现的主要功能有初始化，注册，登录。[工程地址](https://github.com/matchvs/demo-creator)
-
-```javascript
-const {ccclass, property} = cc._decorator;
-
-
-@ccclass
-export default class NewClass extends cc.Component {
-
-    @property(cc.EditBox)
-    gameIdInput: cc.EditBox = null;
-
-    @property(cc.EditBox)
-    appKeyInput: cc.EditBox = null;
-
-    @property(cc.Node)
-    confirm: cc.Node = null;
-
-    @property(cc.Node)
-    clear: cc.Node = null;
-
-    @property(cc.Node)
-    independent: cc.Node = null;
-
-    @property(cc.Node)
-    labelInfo: cc.Label = null;
-    private Engine:MatchvsEngine;
-    private Response:MatchvsResponse;
-    private GameID:number = 200978;
-    private appKey:string = "4fd4a67c10e84e259a2c3c417b9114f4";
-
-    start () {
-        let self = this;
-        self.Engine = new MatchvsEngine();
-        self.Response = new MatchvsResponse();
-        this.confirm.on(cc.Node.EventType.TOUCH_END, function () {
-            if (Number(self.gameIdInput.string) === 0 && Number(self.gameIdInput.placeholder) === 0  && self.appKeyInput.string === "" && self.appKeyInput.placeholder === ""){
-                return;
-            }
-            if (self.appKeyInput.string === "") {
-                self.appKey = self.appKeyInput.placeholder;
-		    } else {
-                self.appKey = self.appKeyInput.string;
-            }
-            if (Number(self.gameIdInput.string) === 0) {
-                self.Engine.init(self.Response,"Matchvs","alpha",Number(self.gameIdInput.placeholder));
-            }else {
-                self.Engine.init(self.Response,"Matchvs","alpha",Number(self.gameIdInput.string));
-            }
-		});
-        self.initEvent();
-    }
-
-    /**
-     * 注册对应的事件监听和把自己的原型传递进入，用于发送事件使用
-     */
-    private initEvent () {
-        this.Response.initResponse = this.initRsp.bind(this);
-        this.Response.registerUserResponse = this.registerUserRsp.bind(this);
-        this.Response.loginResponse = this.loginRsp.bind(this);
-    }
-
-    /**
-     * 初始化回调
-     * @param status
-     */
-    initRsp(status) {
-        if (status === 200) {
-            console.log("Ts版本 初始化成功");
-            this.Engine.registerUser();
-        } else {
-            console.log("Ts版本 初始化失败");
-        }
-    }
-
-    /**
-     * 注册回调
-     * @param userInfo
-     */
-    registerUserRsp(userInfo) {
-        if  (userInfo.status === 0) {
-            this.login(userInfo.userID,userInfo.token);
-            console.log("Ts版本 注册成功");
-        } else {
-            console.log("Ts版本 注册失败");
-        }
-    }
-
-    /**
-     * 登录回调
-     * @param loginRsp
-     */
-    loginRsp(loginRsp) {
-        if  (loginRsp.status === 200) {
-            console.log("Ts版本 登录成功");
-            if (loginRsp.roomID !== null && loginRsp.roomID !== '0') {
-                this.Engine.leaveRoom("");
-                cc.director.loadScene("Lobby");
-            } else {
-                cc.director.loadScene("Lobby");
-            }
-
-        } else {
-            console.log("Ts版本 登录失败");
-        }
-
-    }
-
-    /**
-     * 登录
-     * @param id
-     * @param token
-     */
-    login (id, token) {
-        // this.labelLog('开始登录...用户ID:' + id + " gameID " + "200978");
-        this.Engine.login(id,token,"abcdef");
-    }
-
-    /**
-     * 页面log打印
-     * @param info
-     */
-    labelLog (info) {
-        this.labelInfo.string += '\n[LOG]: ' + info;
-    }
-
-}
-```
 
 [更多Matchvs文档查看基础功能文档](../APIBasic/JavaScriptBase)
