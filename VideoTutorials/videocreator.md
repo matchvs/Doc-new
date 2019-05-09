@@ -1,7 +1,11 @@
 /*
 Title: 视频教程-Cocos Creator插件
 Sort: 53
-*/
+*/  
+
+<font color=red size=3>小贴士：部分视频的声音声音较小，建议佩戴耳机观看。</font>
+
+
 ## 视频简介
 
 视频包含如下内容：
