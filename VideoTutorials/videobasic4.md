@@ -3,7 +3,7 @@ Title: 视频教程(四)-高级拓展
 Sort: 50
 */  
 
-<font color=red size=25>小贴士：部分视频的声音声音较小，建议佩戴耳机观看。</font>
+<font color=red size=3>小贴士：部分视频的声音声音较小，建议佩戴耳机观看。</font>
 
 ## 视频简介
 
