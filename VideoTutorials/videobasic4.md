@@ -3,12 +3,7 @@ Title: 视频教程(四)-高级拓展
 Sort: 50
 */  
 
-<font face="黑体">我是黑体字</font>
-<font face="微软雅黑">我是微软雅黑</font>
-<font face="STCAIYUN">我是华文彩云</font>
-<font color=#0099ff size=7 face="黑体">color=#0099ff size=72 face="黑体"</font>
-<font color=#00ffff size=72>color=#00ffff</font>
-<font color=gray size=72>color=gray</font>
+<font color=red size=25>小贴士：部分视频的声音声音较小，建议佩戴耳机观看。</font>
 
 ## 视频简介
 
