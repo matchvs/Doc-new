@@ -76,7 +76,7 @@ Matchvs SDK 一些附带 status 参数的回调接口中具体的参数值可参
 | 200    | 成功                                  | 房间相关API         |
 | 400    | 请求无法被服务器理解,解包异常         | 房间相关API         |
 | 401    | gameID 错误                           | 房间相关API         |
-| 402    | roomID 错误                           | 房间相关API         |
+| 402    | roomID 错误,或检查调用 leaveRoom 时是否在房间内                           | 房间相关API         |
 | 403    | userID 错误                           | 房间相关API         |
 | 404    | 未找到房间消息的推送目标用户          | 房间相关API         |
 | 405    | 房间已满                              | joinRoom                |
