@@ -111,6 +111,68 @@ curl -X POST \
 | shortstr | string | 短字符串             |
 | longstr  | string | 长字符串（原字符串） |
 
+## 查询短号
+
+当使用`/extra/shortCreate`成功创建一个短号后，你可以调用以下接口查询一个长号对应的短号。如果未使用过该长号创建短号，接口会返回相应的错误消息。
+
+请求地址：/extra/longQuery?userID=10000&mode=1&sign=xxx
+
+请求方式：POST
+
+Content-Type：application/json
+
+请求参数：
+
+URL 参数：
+
+| 字段   | 类型   | 是否必须 | 是否参与签名                  | 说明                                       | 示例                             |
+| ------ | ------ | -------- | ----------------------------- | ------------------------------------------ | -------------------------------- |
+| userID | number | 是       | 是                            | 用户ID                                     | 1000                             |
+| mode   | number | 是       | 否                            | 签名方式，1:token, 2:secret                | 1                                |
+| seq    | number | 否       | 如果设置了seq和ts，则参与签名 | 请求序号，每次请求递增变化由发起方自行维护 | 1                                |
+| ts     | number | 否       | 如果设置了seq和ts，则参与签名 | 请求时间戳，精确到秒                       | 1551255392                       |
+| sign   | string | 是       | 否                            | 签名值                                     | 4ee9db3a5bd68f2e610bd4e19988b431 |
+
+Body：
+
+| 字段    | 类型   | 是否必须 | 是否参与签名 | 说明                          | 示例                  |
+| ------- | ------ | -------- | ------------ | ----------------------------- | --------------------- |
+| gameID  | number | 是       | 是           | 游戏ID                        | 201001                |
+| longstr | string | 是       | 是           | 长字符串，例如 roomID、teamID | "1738555257257988168" |
+
+请求示例：
+
+```
+curl -X POST \
+ 'http://zwopen.matchvs.com/extra/longQuery?userID=3307434&mode=1&sign=4ee9db3a5bd68f2e610bd4e19988b431' \
+ -H 'Content-Type: application/json' \
+ -d '{
+   "gameID": 102003,
+   "longstr": "1738555257257988168"
+}'
+```
+
+响应结果示例：
+
+```
+{
+   "data": {
+       "longstr": "1738555257257988168",
+       "shortstr": "000002"
+  },
+   "status": 0
+}
+```
+
+响应参数说明：
+
+| 字段     | 类型   | 说明                 |
+| -------- | ------ | -------------------- |
+| status   | number | 错误码               |
+| shortstr | string | 短字符串             |
+| longstr  | string | 长字符串（原字符串） |
+
+
 ## 短号还原
 
 其他玩家拿到短号后，可以调用以下接口还原成长号，然后利用长号加入房间/小队。
