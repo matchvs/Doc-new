@@ -1,5 +1,5 @@
 /*
-Title: JavaScript&/TypeScript
+Title: JavaScript&TypeScript
 Sort: -2
 */
 
@@ -1734,7 +1734,7 @@ Matchvs提供了帧同步的功能，开发者可以让房间内的玩家保持�
 - 发送帧同步请求：sendFrameEvent
 - 发送帧同步回调：sendFrameEventResponse
 - 帧数据更新回调：frameUpdate
- 
+
 
 设置帧同步速率，发送帧同步消息之前一定要先设置帧同步。帧同步最大值为20。也就是 50ms 发送一次数据。
 
