@@ -3,12 +3,11 @@ Title: JavaScript&TypeScript
 Sort: -2
 */
 
-
-# Matchvs SDK JavaScriptSDK/TypeScript 版接口说明
-
+## JavaScriptSDK/TypeScript 版接口说明
 
 
-## 初始化
+
+## 初始化和反初始化
 
 在连接至 Matchvs前须对SDK进行初始化操作。此时选择连接测试环境（alpha）还是正式环境（release）。[环境说明](../Advanced/EnvGuide) 。初始化请求接口有两个，如果你是使用 Matchvs 官网账号在 Matchvs 控制台创建的游戏（简称Matchvs云服务）使用 init 接口初始化，如果是使用 Matchvs 服务端引擎代码在自己自定的服务器上部署的游戏服务就使用（简称 [Matchvs独立部署]() ） premiseInit 接口初始化。
 
@@ -19,7 +18,7 @@ Sort: -2
 - 请求接口：init、premiseInit
 - 回调接口：initResponse
 
-## init
+### init
 
 初始化请求接口。
 
@@ -90,7 +89,7 @@ function engine.premiseInit(response:MatchvsResponse, endPoint:string, gameID:nu
 | 0      | 接口调用成功 |
 | -1     | 接口调用失败 |
 
-## initResponse
+### initResponse
 
 initResponse是 MatchvsResponse对象属性，在 engine.init 方法中传入的对象，init初始化完成之后，会异步回调 initResponse方法。
 
@@ -129,9 +128,6 @@ class MsEngine {
 ```
 
 
-
-## 反初始化
-
 SDK反初始化工作，反初始化会让 init 中的 response 回调失效，也就是收不到任何的回调了。只有请求，没有回调。
 
 - 请求接口： uninit
@@ -165,7 +161,7 @@ Matchvs提供的 `userID` 被用于在各个服务中校验连接的有效性，
 - 请求接口：registerUser
 - 回调接口：registerUserResponse
 
-## registerUser
+### registerUser
 
 ```
 engine.registerUser()
@@ -181,7 +177,7 @@ engine.registerUser()
 
 
 
-## registerUserResponse
+### registerUserResponse
 ```javascript
 response.registerUserResponse(userInfo)
 ```
@@ -229,7 +225,7 @@ class MsEngine {
 
 
 
-## 登录
+## 登录登出
 
 登录Matchvs服务端，与Matchvs建立连接。服务端会校验游戏信息是否合法，保证连接的安全性。如果一个账号在两台设备上登录，则后登录的设备会连接失败，提示403错误。  
 如果用户加入房间之后掉线，再重新登录进来，则roomID为之前加入的房间的房间号。如果游戏不需要断线重连功能，login 如果有 roomID 则需要调用 leaveRoom() ，或者将重连超时设置为 不支持重连。
@@ -237,7 +233,7 @@ class MsEngine {
 - 请求接口：login
 - 回调接口：loginResponse
 
-## login
+### login
 
 ```typescript
 engine.login(userID: number, token: string, deviceID: string, nodeID?:number): number
@@ -274,7 +270,7 @@ var result = engine.login(userID,token,DeviceID);
 console.log("登录result"+result);
 ```
 
-## loginResponse
+### loginResponse
 
 ```typescript
 response.loginResponse(login:MsLoginRsp);
@@ -345,7 +341,7 @@ engine.logout(cpProto:string):number
 
 
 
-## logoutResponse
+### logoutResponse
 
 ```typescript
 response.logoutResponse(status:number);
@@ -357,9 +353,9 @@ response.logoutResponse(status:number);
 | ------ | ------ | ------------------------------- | ------ |
 | status | number | 状态返回，200表示成功 <br>500 服务器内部错误 | 200    |
 
+## 加入房间
 
-
-## joinRandomRoom
+### joinRandomRoom
 
 登录游戏后，需要与其他在线玩家一起对战，先要进行进入房间，类似英雄联盟这样的匹配功能将若干用户匹配至一个房间开始一局游戏，Matchvs 提供4中加入房间的方法。
 
@@ -417,7 +413,7 @@ console.log("随机匹配result"+result);
 
 
 
-## joinRoomWithProperties
+### joinRoomWithProperties
 
 ```typescript
 joinRoomWithProperties(matchinfo:MsMatchInfo, userProfile:string, watchSet?: MVS.MsWatchSet ):number
@@ -482,7 +478,7 @@ var result = mvs.engine.joinRoomWithProperties(matchinfo,"I Love China");
 console.log("属性匹配result"+result);
 ```
 
-## joinRoom
+### joinRoom
 
 ```
 engine.joinRoom(roomID, userProfile)
@@ -522,7 +518,7 @@ console.log("加入指定房间 result"+result);
 ```
 
 
-## joinRoomResponse
+### joinRoomResponse
 
 开发者可以在客户端主动创建房间，创建成功后玩家会被自动加入该房间，创建房间者即为房主，如果房主离开房间则Matchvs会自动转移房主并通知房间内所有成员，开发者通过设置CreateRoomInfo创建不同类型的房间。创建房间成功，如果需要再次创建房间需要调用离开房间接口(leaveRoom)先离开当前房间。
 
@@ -571,7 +567,7 @@ engine.createRoom(createRoomInfo:MsCreateRoomInfo, userProfile:string, watchSet?
 | -8     | 已在房间                      |
 | -21    | userProfile 过长，不能超过512 |
 
-## createRoomResponse
+### createRoomResponse
 
 ```typescript
 response.createRoomResponse(rsp:MsCreateRoomRsp);
@@ -686,7 +682,7 @@ class MsEngine {
 
 
 
-## joinOver
+### joinOver
 
 关闭房间
 
@@ -751,7 +747,7 @@ response.joinOverNotify(notifyInfo:MsJoinOverNotifyInfo);
 | srcUserID | number | 发起关闭房间玩家ID |        |
 | cpProto   | string | 负载信息           |        |
 
-### 示例代码
+#### 示例代码
 
 ````typescript
 class MsEngine {
@@ -773,9 +769,6 @@ class MsEngine {
 ````
 
 
-
-## 离开房间
-
 客户端调用该接口通知服务端该客户端对应的用户要离开房间。当所有玩家离开房间后，房间会被自动销毁。
 
 - 请求接口：leaveRoom
@@ -783,7 +776,7 @@ class MsEngine {
   - leaveRoomResponse：自己离开房间回调
   - leaveRoomNotify:  其他玩家离开房间回调
 
-## leaveRoom
+### leaveRoom
 
 ```typescript
 engine.leaveRoom(cpProto:string):number
@@ -843,7 +836,7 @@ response.leaveRoomNotify(leaveRoomInfo:MsLeaveRoomNotify);
 
 - roomUserInfo 的属性与response.joinRoomResponse中的[roomUserInfoList中的元素包含的属性](../APIDoc/JavaScript#roomUserInfo)相同。
 
-### 示例代码
+#### 示例代码
 
 ````typescript
 class MsEngine {
@@ -863,6 +856,91 @@ class MsEngine {
     }
 }
 ````
+
+### kickPlayer
+
+在房间没有关闭状态下，在房间中的任何人都可以把其他人踢出房间。参数 userID 可以是房间内任意一个，自己也可以剔除自己。主要剔除方式由开发者自己制定。
+
+- 请求接口：kickPlayer
+- 回调接口：kickPlayerResponse
+
+```typescript
+engine.kickPlayer(userID:number, cpProto:string);
+```
+
+#### 参数
+
+| 参数    | 类型   | 描述         | 示例值 |
+| ------- | ------ | ------------ | ------ |
+| userID  | number | 被踢除玩家ID | 655444 |
+| cpProto | string | 附加消息     | “kick” |
+
+#### 返回值
+
+| 错误码 | 含义                          |
+| :----- | ----------------------------- |
+| 0      | 成功                          |
+| -1     | 失败                          |
+| -2     | 未初始化                      |
+| -3     | 正在初始化                    |
+| -4     | 未登录                        |
+| -7     | 正在创建或者进入房间          |
+| -6     | 未加入房间                    |
+| -21    | data 过长，不能超过1024个字符 |
+
+### kickPlayerResponse
+
+```typescript
+response.kickPlayerResponse(rsp:MsKickPlayerRsp);
+```
+
+#### 参数 MsKickPlayerRsp 的属性
+
+| 参数   | 类型   | 描述                                                         | 示例值 |
+| ------ | ------ | ------------------------------------------------------------ | ------ |
+| status | number | 接口状态 200 成功 <br>  400 客户端参数错误 <br>404 用户或房间不存在 |        |
+| owner  | nunber | 房主ID                                                       |        |
+| userID | number | 被踢玩家ID                                                   |        |
+
+### kickPlayerNotify
+
+```typescript
+response.kickPlayerNotify(knotify:MsKickPlayerNotify)
+```
+
+#### 参数 MsKickPlayerNotify 的属性
+
+| 参数      | 类型   | 描述           | 示例值 |
+| --------- | ------ | -------------- | ------ |
+| userID    | number | 被踢玩家ID     |        |
+| srcUserID | number | 发起踢人玩家ID |        |
+| cpProto   | string | 附加消息       |        |
+| owner     | number | 房主ID         |        |
+
+#### 示例代码
+
+```typescript
+class MsEngine{
+    ......
+    public constructor(){
+        this.response.kickPlayerResponse = ( rsp:MsKickPlayerRsp )=>{
+            if(rsp.status == 200){
+                //rsp.userID 用户被踢掉
+            }else{
+                //用户踢除失败
+            }
+        };
+        
+        this.response.kickPlayerNotify = (knotify:MsKickPlayerNotify)=>{
+            //srcUserID 把userID 踢掉了
+        };
+    }
+
+    public kickPlayer(){
+        this.engine.kickPlayer(123,"不想和你一起玩")
+    }
+}
+```
 
 
 
@@ -904,7 +982,7 @@ engine.getRoomList(filter:MsRoomFilter):number
 | -8     | 已在房间                        |
 | -21    | filter 过长，总字节不能超过1024 |
 
-## getRoomListResponse
+### getRoomListResponse
 
 ```
 response.getRoomListResponse(status:number, roomInfos:Array<MsRoomInfoEx>);
@@ -945,7 +1023,7 @@ getRoomListResponse : function (status, roomInfo) {
 }
 ```
 
-## getRoomListEx
+### getRoomListEx
 
 获取房间列表信息扩展版，可获得更多的房间信息。
 
@@ -1006,7 +1084,7 @@ var filter = new MsRoomFilterEx(
         );
 ```
 
-## getRoomListExResponse
+### getRoomListExResponse
 
 ```typescript
 response.getRoomListExResponse(rsp:MsGetRoomListExRsp);
@@ -1059,7 +1137,7 @@ class MsEgine {
 
 
 
-## getRoomDetail
+### getRoomDetail
 
 获取房间详情
 
@@ -1090,8 +1168,7 @@ engine.getRoomDetail(roomID:string)
 | -7     | 正在加入房间 |
 | -3     | 正在初始化   |
 
-
-## getRoomDetailResponse
+### getRoomDetailResponse
 
 ```typescript
 response.getRoomDetailResponse(rsp:MsGetRoomDetailRsp);
@@ -1183,7 +1260,7 @@ engine.setRoomProperty(roomID:string, roomProperty:string):number
 | -11    | 正在离开房间                            |
 | -21    | roomProperty 长度过长，不能超过1023字符 |
 
-## setRoomPropertyResponse
+### setRoomPropertyResponse
 
 ```typescript
 response.setRoomPropertyResponse(rsp:MsSetRoomPropertyRspInfo);
@@ -1198,7 +1275,7 @@ response.setRoomPropertyResponse(rsp:MsSetRoomPropertyRspInfo);
 | userID       | number | 玩家            | 123                  |
 | roomProperty | string | 修改后的属性值  | “changeRoomProperty” |
 
-## setRoomPropertyNotify
+### setRoomPropertyNotify
 
 房间有人调用 setRoomProperty 接口，其他人就会收到 setRoomPropertyNotify接口的回调。
 
@@ -1248,7 +1325,7 @@ class MsEngine{
 - 请求接口：sendEvent、sendEventEx
 - 回调接口：sendEventResponse、sendEventNotify、gameServerNotify (gameServer 推送的消息回调)
 
-## sendEvent
+### sendEvent
 
 ```typescript
     /**
@@ -1338,7 +1415,7 @@ engine.sendEventEx(msgType:number, data:string, destType:number, userIDs:Array <
 
 同一客户端多次调用engine.sendEvent方法时，每次返回的sequence都是唯一的。但同一房间的不同客户端调用sendEvent时生成的sequence之间会出现重复。
 
-## sendEventResponse
+### sendEventResponse
 
 ```typescript
 response.sendEventResponse(rsp:MsSendEventRsp);
@@ -1355,7 +1432,7 @@ response.sendEventResponse(rsp:MsSendEventRsp);
 
 - 客户端调用engine.sendEvent或engine.sendEventEx 发送消息之后，SDK异步调用reponse.sendEventResponse 方法告诉客户端消息是否发送成功。
 
-## sendEventNotify
+### sendEventNotify
 
 ```typescript
 response.sendEventNotify(eventInfo:MsSendEventNotify);
@@ -1414,7 +1491,7 @@ class MsEngine{
 
 
 
-## errorResponse
+### errorResponse
 
 在游戏中如果自己断线了就会收到 errorResponse 的错误码为1001的消息，如果是其他玩家掉线了就会收到 networkStateNotify 的回调消息。通过这个接口就可以知道其他玩家的网络状态啦。断线后会有20秒内还可以调用 reconnect 接口重新连接进入房间。
 
@@ -1434,7 +1511,7 @@ response.errorResponse(errCode:number, errMsg:string)
 | errCode | number | 错误码   | 1001     |
 | errMsg  | string | 错误描述 | 网络错误 |
 
-## networkStateNotify
+### networkStateNotify
 
 其他用户断线了会触发 networkStateNotify 接口。根据接口参数 state 判断其他玩家当前的状态。
 
@@ -1476,92 +1553,6 @@ class MsEngine{
 
 
 
-##  kickPlayer
-
-在房间没有关闭状态下，在房间中的任何人都可以把其他人踢出房间。参数 userID 可以是房间内任意一个，自己也可以剔除自己。主要剔除方式由开发者自己制定。
-
-- 请求接口：kickPlayer
-- 回调接口：kickPlayerResponse
-
-
-```typescript
-engine.kickPlayer(userID:number, cpProto:string);
-```
-
-#### 参数
-
-| 参数    | 类型   | 描述         | 示例值 |
-| ------- | ------ | ------------ | ------ |
-| userID  | number | 被踢除玩家ID | 655444 |
-| cpProto | string | 附加消息     | “kick” |
-
-#### 返回值
-
-| 错误码 | 含义                          |
-| :----- | ----------------------------- |
-| 0      | 成功                          |
-| -1     | 失败                          |
-| -2     | 未初始化                      |
-| -3     | 正在初始化                    |
-| -4     | 未登录                        |
-| -7     | 正在创建或者进入房间          |
-| -6     | 未加入房间                    |
-| -21    | data 过长，不能超过1024个字符 |
-
-## kickPlayerResponse
-
-```typescript
-response.kickPlayerResponse(rsp:MsKickPlayerRsp);
-```
-
-#### 参数 MsKickPlayerRsp 的属性
-
-| 参数   | 类型   | 描述              | 示例值 |
-| ------ | ------ | ----------------- | ------ |
-| status | number | 接口状态 200 成功 <br>  400 客户端参数错误 <br>404 用户或房间不存在  |        |
-| owner  | nunber | 房主ID            |        |
-| userID | number | 被踢玩家ID        |        |
-
-## kickPlayerNotify
-
-```typescript
-response.kickPlayerNotify(knotify:MsKickPlayerNotify)
-```
-
-#### 参数 MsKickPlayerNotify 的属性
-
-| 参数      | 类型   | 描述           | 示例值 |
-| --------- | ------ | -------------- | ------ |
-| userID    | number | 被踢玩家ID     |        |
-| srcUserID | number | 发起踢人玩家ID |        |
-| cpProto   | string | 附加消息       |        |
-| owner     | number | 房主ID         |        |
-
-#### 示例代码
-
-````typescript
-class MsEngine{
-    ......
-    public constructor(){
-        this.response.kickPlayerResponse = ( rsp:MsKickPlayerRsp )=>{
-            if(rsp.status == 200){
-                //rsp.userID 用户被踢掉
-            }else{
-                //用户踢除失败
-            }
-        };
-        
-        this.response.kickPlayerNotify = (knotify:MsKickPlayerNotify)=>{
-            //srcUserID 把userID 踢掉了
-        };
-    }
-
-    public kickPlayer(){
-        this.engine.kickPlayer(123,"不想和你一起玩")
-    }
-}
-````
-
 
 
 ## 分组订阅
@@ -1571,7 +1562,7 @@ class MsEngine{
 - 请求接口：subscribeEventGroup
 - 回调接口：subscribeEventGroupResponse
 
-## subscribeEventGroup
+### subscribeEventGroup
 
 ```typescript
 engine.subscribeEventGroup(confirms:Array<string>, cancles:Array<string>):number
@@ -1597,7 +1588,7 @@ engine.subscribeEventGroup(confirms:Array<string>, cancles:Array<string>):number
 | -6     | 未加入房间                     |
 | -20    | confirms 和 cancles 不能都为空 |
 
-## subscribeEventGroupResponse
+### subscribeEventGroupResponse
 
 ```typescript
 response.subscribeEventGroupResponse(status:number, groups:Array<string>);
@@ -1633,7 +1624,7 @@ class MsEngine{
 
 
 
-## sendEventGroup
+### sendEventGroup
 
 加入同一个组的玩家是可以相互广播消息，其他没有加入该组的玩家是收不到组消息的。发送组消息使用 sendEventGroup 接口。消息分组发送可以根据 groups 参数发送多个分组。
 
@@ -1667,7 +1658,7 @@ engine.sendEventGroup(groups:Array<string>, data:string):number
 | -20    | groups 不能都为空    |
 | -21    | data 过长（1K）      |
 
-## sendEventGroupResponse
+### sendEventGroupResponse
 
 调用 sendEventGroup 接口发送消息成功会收到sendEventGroupResponse的回调。dstNum表示这个分组消息会有多少个人收到。
 
@@ -1682,7 +1673,7 @@ response.sendEventGroupResponse(status:number);
 | status | number | 状态值 200成功，其他失败 | 200    |
 | dstNum | number | 将被发送给多少个客户端   | 3      |
 
-## sendEventGroupNotify
+### sendEventGroupNotify
 
 多个用户在同一个分组时，有一个用户发送消息，那么其他用户就会收到 sendEventGroupNotify 的异步回调。
 
@@ -1724,7 +1715,9 @@ class MsEngine{
 
 
 
-## 帧同步setFrameSync
+## 帧同步
+
+### setFrameSync
 
 Matchvs提供了帧同步的功能，开发者可以让房间内的玩家保持帧同步。 Matchvs 所提供的帧同步能力，让您可以根据游戏需要，直接设置同步帧率，比如10帧每秒，然后您可以调用发送帧同步数据的接口来发送逻辑帧数据。 Matchvs 会缓存每100毫秒的数据，将这100毫秒的数据作为一帧发给各个客户端。
 
@@ -1765,7 +1758,7 @@ engine.setFrameSync(frameRate:number，enableGS?:number, other?:any ):number
 
 setFrameSync 设置帧率，参数值设置 0表示关闭，参数值大于0表示打开，不调用为关闭。帧率须能被1000整除
 
-## setFrameSyncResponse
+### setFrameSyncResponse
 
 ```typescript
 response.setFrameSyncResponse(rsp:MsSetChannelFrameSyncRsp);
@@ -1777,7 +1770,7 @@ response.setFrameSyncResponse(rsp:MsSetChannelFrameSyncRsp);
 | ------ | ------ | ---------------------------------------------------------- | ------ |
 | status | number | 状态：<br>200 成功<br>519 重复设置<br>500 帧率需被1000整除 | 200    |
 
-## setFrameSyncNotify
+### setFrameSyncNotify
 
 设置帧同步异步回调同时会回调给自己。可能是gameServer 设置的帧同步，也可以是玩家设置的帧同步。
 
@@ -1797,7 +1790,7 @@ response.setFrameSyncNotify(rsp:MVS.MsSetFrameSyncNotify);
 
 
 
-## sendFrameEvent
+### sendFrameEvent
 
 发送帧同步数据，调用 sendFrameEvent 接口之前一定要先设置帧率。
 
@@ -1825,7 +1818,7 @@ response.setFrameSyncNotify(rsp:MVS.MsSetFrameSyncNotify);
 | -6     | 未加入房间                     |
 | -21    | cpProto 过长，不能超过1024字符 |
 
-## sendFrameEventResponse
+### sendFrameEventResponse
 
 帧消息发送回调，用来检测帧消息是否发送成功。
 
@@ -1899,7 +1892,9 @@ class MsEngine{
 
 
 
-## reconnect断线重连
+## 断线重连
+
+### reconnect
 
 用户断线后可以调用次接口进行重连，重连具体教程可以参考 [断线重连详细文档](../Advanced/reconnect) 。
 
@@ -2003,7 +1998,7 @@ response.setReconnectTimeoutResponse(status:number):void
 | ------ | ------ | ------------------- | ------ |
 | status | number | 状态值 200 设置成功 | 200    |
 
-## getOffLineData
+### getOffLineData
 
 获取断线期间的帧数据，只有在开启了帧同步的时候使用，调用这个接口后，在断线期间游戏的数据会通过 frameUpdate 接口返回指定时间内的数据。
 ```typescript
@@ -2020,7 +2015,7 @@ engine.getOffLineData(cacheFrameMS:number)
 
 - 略 可参考其他接口的返回码。
 
-## getOffLineDataResponse
+### getOffLineDataResponse
 
 调用 getOffLineData 接口获取断线期间的帧数据，这个接口会返回是否调用成功通知和，缓存的帧数据数量。
 
@@ -2038,7 +2033,7 @@ response.getOffLineDataResponse(rsp)
 
 
 
-## joinOpen
+### joinOpen
 
 重新打开房间
 
@@ -2227,7 +2222,7 @@ class MsEngine {
 
 ```
 
-## 加入观战房间
+## 观战
 
 - 请求接口：joinWatchRoom
 - 回调接口：joinWatchRoomResponse, joinWatchRoomNotify
@@ -2308,7 +2303,7 @@ joinWatchRoomResponse(rsp:MVS.MsJoinWatchRoomRsp):void
 | profile   | string | 用户附带消息 | “hello” |
 | enterTime | string | 进入时间     |         |
 
-## joinWatchRoomNotify
+### joinWatchRoomNotify
 
 加入观战房间异步回调
 
@@ -2353,7 +2348,99 @@ class MsEngine{
 
 ```
 
-## setLiveOffset获取观战数据
+### leaveWatchRoom
+
+- 请求接口：leaveWatchRoom
+- 回调接口：leaveWatchRoomResponse
+
+
+离开观战房间请求接口。
+
+```typescript
+leaveWatchRoom(cpProto:string):number
+```
+
+#### 参数
+
+| 参数    | 类型   | 描述              | 示例值 |
+| ------- | ------ | ----------------- | ------ |
+| cpProto | string | 附加值默认填 空值 | “”     |
+
+#### 返回值
+
+| 返回码 | 说明                               |
+| ------ | ---------------------------------- |
+| 0      | 接口调用成功                       |
+| -2     | 未初始化                           |
+| -3     | 正在初始化                         |
+| -4     | 未登录                             |
+| -5     | 正在登录                           |
+| -7     | 正在创建房间，或者正在加入游戏房间 |
+| -10    | 正在离开房间                       |
+| -11    | 正在登出                           |
+| -12    | 正在加入观战房间                   |
+
+### leaveWatchRoomResponse
+
+离开观战房间回调
+
+```typescript
+leaveWatchRoomResponse(status:number):void
+```
+
+#### 参数
+
+| 参数   | 类型   | 描述                                                         | 示例值 |
+| ------ | ------ | ------------------------------------------------------------ | ------ |
+| status | number | 200 成功，其他错误值请看 [错误码文档](https://doc.matchvs.com/APIDoc/erroCode) | 200    |
+
+### leaveWatchRoomNotify
+
+离开观战房间请求异步回调，其他观战者可收到这个回调。
+
+```typescript
+leaveWatchRoomNotify(user:MVS.MsExitLiveRoomNotify):void
+```
+
+#### 参数
+
+| 参数 | 类型                     | 描述               | 示例值 |
+| ---- | ------------------------ | ------------------ | ------ |
+| user | MVS.MsExitLiveRoomNotify | 离开房间的用户信息 |        |
+
+#### MVS.MsExitLiveRoomNotify
+
+| 属性        | 类型   | 描述     | 示例值 |
+| ----------- | ------ | -------- | ------ |
+| userID      | number | 用户ID   | 32322  |
+| userProfile | string | 玩家简介 | ""     |
+
+#### 代码示例
+
+```typescript
+class MsEngine{
+    public LeaveWatchRoom(){
+        this.response.leaveWatchRoomNotify = (user)=>{
+            console.log("用户离开观战：",user.userID)；
+            console.log("用户离开时附带的信息：",user.userProfile)
+        }
+        
+        this.response.leaveWatchRoomResponse = (status)=>{
+            if(status == 0){
+                console.log("退出观战房间成功");
+            }
+        }
+        
+        let resNo = this.engine.leaveWatchRoom("leaveWatchRoom");
+        if(resNo == 0){
+            console.log("ok");
+        }
+    }
+}
+```
+获取观战数据
+
+### setLiveOffset
 
 - 请求接口：setLiveOffset
 - 回调接口：setLiveOffsetResponse, liveFrameUpdate
@@ -2458,7 +2545,9 @@ class MsEngine{
 
 ```
 
-## changeRole角色游戏与观战切换
+## 角色游戏与观战切换
+
+### changeRole
 
 - 请求接口：changeRole
 - 回调接口：changeRoleResponse
@@ -2535,96 +2624,7 @@ class MsEngine{
 
 ```
 
-## leaveWatchRoom离开观战房间
 
-- 请求接口：leaveWatchRoom
-- 回调接口：leaveWatchRoomResponse
-
-
-离开观战房间请求接口。
-
-```typescript
-leaveWatchRoom(cpProto:string):number
-```
-
-#### 参数
-
-| 参数    | 类型   | 描述              | 示例值 |
-| ------- | ------ | ----------------- | ------ |
-| cpProto | string | 附加值默认填 空值 | “”     |
-
-#### 返回值
-
-| 返回码 | 说明                               |
-| ------ | ---------------------------------- |
-| 0      | 接口调用成功                       |
-| -2     | 未初始化                           |
-| -3     | 正在初始化                         |
-| -4     | 未登录                             |
-| -5     | 正在登录                           |
-| -7     | 正在创建房间，或者正在加入游戏房间 |
-| -10    | 正在离开房间                       |
-| -11    | 正在登出                           |
-| -12    | 正在加入观战房间                   |
-
-### leaveWatchRoomResponse
-
-离开观战房间回调
-
-```typescript
-leaveWatchRoomResponse(status:number):void
-```
-
-#### 参数
-
-| 参数   | 类型   | 描述                                                         | 示例值 |
-| ------ | ------ | ------------------------------------------------------------ | ------ |
-| status | number | 200 成功，其他错误值请看 [错误码文档](https://doc.matchvs.com/APIDoc/erroCode) | 200    |
-
-### leaveWatchRoomNotify
-
-离开观战房间请求异步回调，其他观战者可收到这个回调。
-
-```typescript
-leaveWatchRoomNotify(user:MVS.MsExitLiveRoomNotify):void
-```
-
-#### 参数
-
-| 参数 | 类型                     | 描述               | 示例值 |
-| ---- | ------------------------ | ------------------ | ------ |
-| user | MVS.MsExitLiveRoomNotify | 离开房间的用户信息 |        |
-
-#### MVS.MsExitLiveRoomNotify
-
-| 属性        | 类型   | 描述     | 示例值 |
-| ----------- | ------ | -------- | ------ |
-| userID      | number | 用户ID   | 32322  |
-| userProfile | string | 玩家简介 | ""     |
-
-#### 代码示例
-
-```typescript
-class MsEngine{
-    public LeaveWatchRoom(){
-        this.response.leaveWatchRoomNotify = (user)=>{
-            console.log("用户离开观战：",user.userID)；
-            console.log("用户离开时附带的信息：",user.userProfile)
-        }
-        
-        this.response.leaveWatchRoomResponse = (status)=>{
-            if(status == 0){
-                console.log("退出观战房间成功");
-            }
-        }
-        
-        let resNo = this.engine.leaveWatchRoom("leaveWatchRoom");
-        if(resNo == 0){
-            console.log("ok");
-        }
-    }
-}
-```
 
 
 
@@ -2639,8 +2639,6 @@ class MsEngine{
 打开Matchvs日志输出。
 
 
-
-## 
 
 ## CHANGELOG
 
