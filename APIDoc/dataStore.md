@@ -233,7 +233,7 @@ http://alphavsopen.matchvs.com/wc5/delGameData.do?gameID=200660&userID=21023&key
 http://alphavsopen.matchvs.com/wc5/hashSet.do?gameID=102003&userID=21023&key=1&value=a&sign=68c592733f19f6c5ae7e8b7ae8e5002f 
 ```
 
-**注意：** 每个value的长度上限为1M，如果长度超过1M，会返回“长度超过限制”的错误。存储上限为每个玩家1000条，如果超过1000条，会返回对应错误。
+**注意：** 每个value的长度上限为255个字符，长度超过255个字符时会返回“长度超过限制”的错误。存储上限为每个玩家1000条，如果超过1000条，会返回对应错误。
 
 可以调用hashSet实现增量存储。为避免特殊字符影响，存储前，建议开发者最好将字符串解码成二进制再用UrlEndcode编码后存储。
 
