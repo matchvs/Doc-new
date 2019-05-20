@@ -257,4 +257,4 @@ engine.uninit();
 ```
 [错误码说明](https://doc.matchvs.com/APIDoc/erroCode)  
 
-[更多完整API介绍请参考API手册](../APIDoc/JavaScript)
+[更多完整API介绍请参考API手册](../APIDoc/TypeScript)
