@@ -3,7 +3,7 @@ Title: JavaScript&TypeScript
 Sort: -2
 */
 
-## JavaScriptSDK/TypeScript 版接口说明
+JavaScriptSDK/TypeScript 版接口说明
 
 
 
@@ -289,7 +289,7 @@ response.loginResponse(login:MsLoginRsp);
 - 服务端会校验游戏信息是否合法，保证连接的安全性。
 - 如果一个账号在两台设备上登录，则后登录的设备会连接失败。
 - 如果用户加入房间之后掉线，再重新登录进来，则roomID为之前加入的房间的房间号。如果游戏不需要断线重连功能，login 如果有 roomID 则需要调用 leaveRoom() ，或者将重连超时设置为 不支持重连。
-### 示例代码
+#### 示例代码
 
 ````typescript
 class MsEngine {
@@ -1291,7 +1291,7 @@ response.setRoomPropertyNotify(notify:MsRoomPropertyNotifyInfo);
 | userID       | number | 玩家           | 123                  |
 | roomProperty | string | 修改后的属性值 | “changeRoomProperty” |
 
-### 示例代码
+#### 示例代码
 
 ```typescript
 class MsEngine{
@@ -1588,7 +1588,7 @@ engine.subscribeEventGroup(confirms:Array<string>, cancles:Array<string>):number
 | -6     | 未加入房间                     |
 | -20    | confirms 和 cancles 不能都为空 |
 
-### subscribeEventGroupResponse
+###  subscribeEventGroupResponse
 
 ```typescript
 response.subscribeEventGroupResponse(status:number, groups:Array<string>);
@@ -1983,8 +1983,7 @@ setReconnectTimeout(timeout:number):number
 | -27    | timeout 超出范围  0=< timeout <=600 |
 | -30    | 设置的 rType 值与当前模式冲突。     |
 
-
-### setReconnectTimeoutResponse
+###   setReconnectTimeoutResponse
 
 设置重连时间回调
 
@@ -2551,8 +2550,6 @@ class MsEngine{
 
 - 请求接口：changeRole
 - 回调接口：changeRoleResponse
-
-### changeRole
 
 游戏角色与观战者角色的身份转换请求接口。在游戏中，如果需要转换为观战者就需要调用该接口，反之如果观战者需要加入游戏中也要调用此接口。切换角色的时候会 在产生changeRole 回调后，根据不同的模式分别触发 joinRoomResponse 和joinWatchRoomResponse 回调接口。
 
