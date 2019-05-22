@@ -363,7 +363,7 @@ response.logoutResponse(status:number);
   - joinRandomRoom：随机接入房间。
   - joinRoomWithProperties：自定义属性匹配。
   - createRoom：创建房间。
-  - joinRoom: 指定由createRoom接口创建房间的房间号加入房间。
+  - joinRoom: 指定房间号加入房间。
 - 回调接口：
   - joinRoomResponse：自己加入房间收到回调。
   - joinRoomNotify：其他人加入房间收到回调。
@@ -507,7 +507,6 @@ engine.joinRoom(roomID, userProfile)
 #### 说明
 
 - 客户端可以通过调用该接口加入指定房间，roomID为加入指定房间的房间号
-- 指定房间号必须是由 createRoom接口创建的房间。
 
 #### 示例
 
@@ -583,7 +582,7 @@ response.createRoomResponse(rsp:MsCreateRoomRsp);
 
 #### joinRoom
 
-客户端可以通过调用该接口加入指定房间，roomID为加入指定房间的房间号，指定房间号必须是由 createRoom接口创建的房间。
+客户端可以通过调用该接口加入指定房间，roomID为加入指定房间的房间号。
 
 ```typescript
 engine.joinRoom(roomID:string,userProfile:string):number
