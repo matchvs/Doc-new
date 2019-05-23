@@ -56,7 +56,7 @@ public static void main(String[] args) {
 具体规则见<https://doc.matchvs.com/QuickStart/gsQuickStart#Config%20配置>
 java额外需要注意的是:
 
-- 本地IP的配置
+#### 本地IP的配置
 
 ```
   localHost IP默认为 “0.0.0.0” 即可，不建议修改。localPort：端口号可以从官网查询到
@@ -67,7 +67,7 @@ java额外需要注意的是:
 
 
 
-- 运行模式的配置(SAAS or PAAS)
+#### 运行模式的配置(SAAS or PAAS)
 ```
 isPAAS：设为 true 时开启`独立部署`模式，默认为 false 。 
 
@@ -84,23 +84,27 @@ remotePort：`独立部署` 服务器Port
 
 > 获取: <https://doc.matchvs.com/SelfHost/deploygameServer>
 
-- gameID的配置
+#### gameID的配置
+
 ```
 gameID：与客户端的gameID对应, 从官网控制台获取，`独立部署`模式下自行配置。
 ```
 
-- GameServer的房间管理相关
+#### GameServer的房间管理相关
 
 ```
 roomServerHost：房间服务的host
 roomServerPort：房间服务的port
 自托管(SAAS)模式下roomServerHost和roomServerPort通过命令行工具获取.独立部署模式下等同于remoteHost和remotePort
 ```
+
 ![commandtool](GameServer-Java.assets/commandtool.png)
 
 > 命令行工具的使用 <<https://doc.matchvs.com/Advanced/GameServerCMD> >
 
-- GameServer标识的配置
+
+#### GameServer标识的配置
+
 ```
 svcName：gameServer名称, 从Matchvs命令行工具获取，执行"matchvs debug"，在打印信息里。`独立部署`模式下自行配置。
 podName：gameServer名称, 从Matchvs命令行工具获取，执行"matchvs debug"，在打印信息里。`独立部署`模式下自行配置。
