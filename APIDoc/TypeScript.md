@@ -945,7 +945,7 @@ class MsEngine{
 
 ## 获取房间列表
 
-调用`createRoom`创建房间可以使用 `getRoomList` 或者 `getRoomListEx` 接口获取房间列表，由系统创建的房间是不能被获取的。`getRoomList`  接口参数要简单一些，对应的 `getRoomListResponse` 回调信息也少很多。 `getRoomListEx` 接口请求返回的信息要多一些，支持房间信息排序等功能。
+以使用 `getRoomList` 或者 `getRoomListEx` 接口获取房间列表。`getRoomList`  接口参数要简单一些，对应的 `getRoomListResponse` 回调信息也少很多。 `getRoomListEx` 接口请求返回的信息要多一些，支持房间信息排序等功能。`getRoomList`只能在房间外调用，`getRoomListEx`可以在房间外和房间内调用。
 
 - 请求接口：getRoomList，getRoomListEx
 
@@ -953,7 +953,7 @@ class MsEngine{
 
 ### getRoomList
 
-获取主动创建房间的列表信息，简单版。
+获取房间的列表信息，简单版。
 
 ```typescript
 engine.getRoomList(filter:MsRoomFilter):number
@@ -1060,7 +1060,7 @@ engine.getRoomListEx(filter:MsRoomFilterEx);
 
 #### 说明
 
-- getRoomListEx 是 getRoomList 接口的扩展功能接口，只能获取调用 createRoom 接口创建的房间，获取房间列表参数必须和createRoom接口创建的房间参数完全一致而且 createRoom中的参数 visibility 必须设置为1(可见)比如：createRoom 参数结构 如下
+- getRoomListEx 是 getRoomList 接口的扩展功能接口，获取房间列表参数必须和房间参数完全一致而且 visibility 必须设置为1(可见)比如：createRoom 参数结构 如下
 
 ```typescript
 var createRoomInfo = new MsCreateRoomInfo("Matchvs",3, 0, 0, 1, "mapA")
