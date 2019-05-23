@@ -102,8 +102,8 @@ roomServerPort：房间服务的port
 
 - GameServer标识的配置
 ```
-svcName：gameServer名称, 从Matchvs命令行工具获取。`独立部署`模式下自行配置。
-podName：gameServer名称, 从Matchvs命令行工具获取。`独立部署`模式下自行配置。
+svcName：gameServer名称, 从Matchvs命令行工具获取，执行"matchvs debug"，在打印信息里。`独立部署`模式下自行配置。
+podName：gameServer名称, 从Matchvs命令行工具获取，执行"matchvs debug"，在打印信息里。`独立部署`模式下自行配置。
 ```
 
 **注意** 上述文件仅本地调试时才会被用到. 发布上线是时应被移除
