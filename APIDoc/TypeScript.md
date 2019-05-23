@@ -818,7 +818,8 @@ response.leaveRoomResponse(rsp:MsLeaveRoomRsp);
 
 ### leaveRoomNotify
 
-当同房间中的其他玩家调用leaveRoom发送离开房间的指令之后，本客户端将会收到回调通知，response.leaveRoomNotify方法会被SDK调用，调用时传入的roomUserInfo是离开房间的玩家的信息。
+当同房间中的其他玩家调用leaveRoom发送离开房间的指令之后，本客户端将会收到回调通知，response.leaveRoomNotify方法会被SDK调用，调用时传入的roomUserInfo是离开房间的玩家的信息。  
+如果房主离开，新房主会在Notify里通知。
 
 ```typescript
 response.leaveRoomNotify(leaveRoomInfo:MsLeaveRoomNotify);
@@ -828,8 +829,8 @@ response.leaveRoomNotify(leaveRoomInfo:MsLeaveRoomNotify);
 
 | 参数    | 类型   | 描述                     | 示例值 |
 | ------- | ------ | ------------------------ | ------ |
-| userID  | number | 房间号                   | 200    |
-| roomID  | string | 刚刚离开房间的用户的信息 |        |
+| userID  | number |         刚刚离开房间的用户的信息           |123456   |
+| roomID  | string | 房间号 |        |
 | owner   | number | 房主                     |        |
 | cpProto | string | 附加信息                 |        |
 
