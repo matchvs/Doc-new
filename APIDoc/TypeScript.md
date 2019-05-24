@@ -656,7 +656,7 @@ response.joinRoomNotify(roomUserInfo:MsRoomUserInfo);
 | roomUserInfo | MsRoomUserInfo | 房间新加的用户的信息 |        |
 
 - 某个玩家加入房间之后，如果该房间后来又有其他玩家加入，那么将会收到回调通知，response.joinRoomNotify方法会被SDK调用，调用时传入的roomUserInfo是新加入的其他玩家的信息，不是本玩家的信息。
-- roomUserInfo的属性与response.joinRoomResponse中的[roomUserInfoList中的元素包含的属性](../APIDoc/JavaScript#roomUserInfo)相同。
+- roomUserInfo的属性与response.joinRoomResponse中的[roomUserInfoList中的元素包含的属性](../APIDoc/TypeScript#roomUserInfo)相同。
 
 #### 示例代码
 
@@ -1443,7 +1443,7 @@ response.sendEventNotify(eventInfo:MsSendEventNotify);
 | 参数      | 类型   | 描述                                                         | 示例值  |
 | --------- | ------ | ------------------------------------------------------------ | ------- |
 | srcUserID | number | 推送方用户ID，表示是谁发的消息                               | 321     |
-| cpProto   | string | 消息内容，对应[sendEvent](../APIDoc/JavaScript#sendEvent)中的msg参数 | "hello" |
+| cpProto   | string | 消息内容，对应[sendEvent](../APIDoc/TypeScript#sendEvent)中的msg参数 | "hello" |
 
 ### gameServerNotify
 
