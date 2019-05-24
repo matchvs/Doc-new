@@ -956,6 +956,8 @@ class MsEngine{
 
 以使用 `getRoomList` 或者 `getRoomListEx` 接口获取房间列表。`getRoomList`  接口参数要简单一些，对应的 `getRoomListResponse` 回调信息也少很多。 `getRoomListEx` 接口请求返回的信息要多一些，支持房间信息排序等功能。`getRoomList`只能在房间外调用，`getRoomListEx`可以在房间外和房间内调用。
 
+> 注意:getRoomList 各个条件是取并集，getRoomListEx 是取交集
+
 - 请求接口：getRoomList，getRoomListEx
 
 - 回调接口：getRoomListResponse , getRoomListExResponse
