@@ -526,7 +526,8 @@ console.log("加入指定房间 result"+result);
 
 ### createRoom
 
-开发者可以在客户端主动创建房间，创建成功后玩家会被自动加入该房间，创建房间者即为房主，如果房主离开房间则Matchvs会自动转移房主并通知房间内所有成员，开发者通过设置CreateRoomInfo创建不同类型的房间。创建房间成功，如果需要再次创建房间需要调用离开房间接口(leaveRoom)先离开当前房间。
+开发者可以在客户端主动创建房间，创建成功后玩家会被自动加入该房间，创建房间者即为房主，如果房主离开房间则Matchvs会自动转移房主并通知房间内所有成员，开发者通过设置CreateRoomInfo创建不同类型的房间。创建房间成功，如果需要再次创建房间需要调用离开房间接口(leaveRoom)先离开当前房间。  
+客户端主动创建的房间或随机/属性匹配的房间，在玩家全部掉线（超过重连超时时间）或全部离开房间后，房间会自动销毁。如果想要创建长时间存在的房间，可以使用 gameServer 进行创建。
 
 ```typescript
 engine.createRoom(createRoomInfo:MsCreateRoomInfo, userProfile:string, watchSet?:MVS.MsWatchSet): number
