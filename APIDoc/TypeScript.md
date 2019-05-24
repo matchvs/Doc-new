@@ -43,7 +43,7 @@ engine.init(pResponse: MatchvsResponse, pChannel: string, pPlatform: string, gam
 | gameID      | number          | 游戏ID，在引擎官网创建游戏给出的ID                           | 200103    |
 | appKey      | string          | 游戏 App Key 官网生成                                        |           |
 | gameVersion | number          | 游戏版本，自定义，用于隔离匹配空间                           |           |
-| threshold   | number          | 延迟容忍,在有多个节点的情况下使用，如果使用默认节点请可以不传该值 | 0 或 不传 |
+| threshold   | number          | 延迟容忍,在有多个节点的情况下使用，如果使用默认节点可以不传该值 | 0 或 不传 |
 
 #### 说明
 
