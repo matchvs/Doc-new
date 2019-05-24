@@ -55,6 +55,7 @@ reconnectResponse接口是重连的结果。
 
 - 重连如果成功接口会返回 200 的 status。并且会收到 hotel 的心跳日志。这个时候用户处于房间内，用户可以进行房间内的所有操作，比如 sendEvent ， sendEvenEx， kickPlayer, setFrameSync, sendFrameEvent 等等。
 - 重连如果返回 201，是因为你断线的时间过久不能重连进入房间了。这个时候玩家是处于已经登录状态，可以看到 gateway 的心跳日志。玩家不用再次调用 login 了。玩家可以进行 joinRandRoom ，createRoom 等操作。
+- 小队重连成功有joinTeamResponse ,房间重连成功没有joinRoomResponse
 
 #### 其他玩家重连结果通知
 
