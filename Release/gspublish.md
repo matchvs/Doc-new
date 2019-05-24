@@ -139,9 +139,9 @@ gameServer 本地开发调试完成后需要将代码推送到 Matchvs 远程仓
 
   2. 代码目录层次是否正确，是否多嵌套了一层。标准目录结构参考各语言“新手上路”文档：
 
-    Node.js：https://doc.matchvs.com/QuickStart/GameServer-JavaScript
+    Node.js：https://doc.matchvs.com/QuickStart/gsQuickStart
 
-    C#：https://doc.matchvs.com/QuickStart/QuickStart-CSharp
+    C#：https://doc.matchvs.com/QuickStart/gsQuickStart
 
     Java：https://doc.matchvs.com/QuickStart/GameServer-Java
 
@@ -150,9 +150,9 @@ gameServer 本地开发调试完成后需要将代码推送到 Matchvs 远程仓
   1. 代码根目录是否包含 Makefile 文件
   2. 代码目录层次是否正确，是否多嵌套了一层。标准目录结构参考各语言“新手上路”文档：
 
-    Node.js：https://doc.matchvs.com/QuickStart/GameServer-JavaScript
+    Node.js：https://doc.matchvs.com/QuickStart/gsQuickStart
 
-    C#：https://doc.matchvs.com/QuickStart/QuickStart-CSharp
+    C#：https://doc.matchvs.com/QuickStart/gsQuickStart
 
     Java：https://doc.matchvs.com/QuickStart/GameServer-Java
 
