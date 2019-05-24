@@ -24,3 +24,11 @@ Sort: 16
 3）将IsWss:!1 改成 IsWss: 1，即去掉 “！”，然后保存
 
 4）回到CocosCreator 等待刷新，刷新成功后即可编译。
+
+4. 微信小游戏
+
+    模拟器调试 你打开微信开发者工具的调试选项.
+    真机调试  开启微信的小程序调试模式.
+    
+    
+> 发布时 客户端 init 参数platfrom 由 alpha 改为realse ,微信小游戏平台要启用wss选项: https://doc.matchvs.com/Release/platform ,
