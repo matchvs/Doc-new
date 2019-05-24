@@ -37,7 +37,7 @@ engine.setTeamReconnectTimeout(59) //组队重连超时
 
 
 
-断线重连接口使用说明请看 [API文档](../APIDoc/JavaScript)    
+断线重连接口使用说明请看 [API文档](../APIDoc/TypeScript)    
 
 ## 自定义重连逻辑
 
