@@ -31,7 +31,7 @@ Sort: 49
 
 ## init
 
-init 接口和之前的 init 接口是同一个，这里只是在 init 接口中新增了一个参数 threshold，只有传了该参数，才能获取节点列表和使用指定节点登录。[参考init接口说明](./JavaScript)
+init 接口和之前的 init 接口是同一个，这里只是在 init 接口中新增了一个参数 threshold，只有传了该参数，才能获取节点列表和使用指定节点登录。[参考init接口说明](./TypeScript)
 
 ## getNodeList
 
