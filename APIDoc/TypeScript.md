@@ -834,7 +834,7 @@ response.leaveRoomNotify(leaveRoomInfo:MsLeaveRoomNotify);
 | owner   | number | 房主                     |        |
 | cpProto | string | 附加信息                 |        |
 
-- roomUserInfo 的属性与response.joinRoomResponse中的[roomUserInfoList中的元素包含的属性](../APIDoc/JavaScript#roomUserInfo)相同。
+- roomUserInfo 的属性与response.joinRoomResponse中的[roomUserInfoList中的元素包含的属性](../APIDoc/TypeScript#roomUserInfo)相同。
 
 #### 示例代码
 
