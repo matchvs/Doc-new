@@ -55,7 +55,7 @@ engine.getNodeList()
 
 ## login
 
- 登录接口和前面 API文档描述的登录接口是同一个，[login接口说明](./JavaScript) 。只是加了一个 nodeID 参数，如果不传这个参数或者传入的参数为0，login 则使用默认节点登录。否则会使用指定的 nodeID登录，nodeID 必须是从 getNodeList 接口获取的有效ID。
+ 登录接口和前面 API文档描述的登录接口是同一个，[login接口说明](./TypeScript) 。只是加了一个 nodeID 参数，如果不传这个参数或者传入的参数为0，login 则使用默认节点登录。否则会使用指定的 nodeID登录，nodeID 必须是从 getNodeList 接口获取的有效ID。
 
 
 
