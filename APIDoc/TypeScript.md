@@ -2644,7 +2644,9 @@ class MsEngine{
 
 
 
-## CHANGELOG
+## CHANGELOG  
+SDK 版本号可以在运行时的打印信息第二行获取。    
+最新的更新日志可在下载SDK处查看。
 
 时间：2018.08.20
 
