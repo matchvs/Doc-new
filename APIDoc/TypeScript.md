@@ -370,7 +370,7 @@ response.logoutResponse(status:number);
   - crateRoomResponse：调用 createRoom 接口收到的回调。
 
 
-当房间里人数等于maxPlayer时，房间人满。系统会将玩家随机加入到人未满且没有 [joinOver](../APIDoc/Type#joinOver) 的房间。如果不存在人未满且没有joinOver的房间，则系统会再创建一个房间，然后将玩家加入到该房间。玩家 `userProfile` 的值可以自定义，接下来会通过回调函数（如 `joinRoomResponse ` ）传给其他客户端。
+当房间里人数等于maxPlayer时，房间人满。系统会将玩家随机加入到人未满且没有 [joinOver](../APIDoc/TypeScript#joinOver) 的房间。如果不存在人未满且没有joinOver的房间，则系统会再创建一个房间，然后将玩家加入到该房间。玩家 `userProfile` 的值可以自定义，接下来会通过回调函数（如 `joinRoomResponse ` ）传给其他客户端。
 
 ```typescript
 engine.joinRandomRoom(maxPlayer:number, userProfile:string):number
