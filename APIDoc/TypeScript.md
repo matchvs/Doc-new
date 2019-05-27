@@ -954,84 +954,14 @@ class MsEngine{
 
 ## 获取房间列表
 
-以使用 `getRoomList` 或者 `getRoomListEx` 接口获取房间列表。`getRoomList`  接口参数要简单一些，对应的 `getRoomListResponse` 回调信息也少很多。 `getRoomListEx` 接口请求返回的信息要多一些，支持房间信息排序等功能。`getRoomList`只能在房间外调用，`getRoomListEx`可以在房间外和房间内调用。
+以使用`getRoomListEx` 接口获取房间列表。`getRoomListEx`，支持房间信息排序等功能。`getRoomListEx`可以在房间外和房间内调用。
 
-> 注意:getRoomList 各个条件是取并集，getRoomListEx 是取交集
+> 注意:getRoomListEx 各个条件是取交集
 
-- 请求接口：getRoomList，getRoomListEx
+- 请求接口：getRoomListEx
 
-- 回调接口：getRoomListResponse , getRoomListExResponse
+- 回调接口： getRoomListExResponse
 
-### getRoomList
-
-获取房间的列表信息，简单版。
-
-```typescript
-engine.getRoomList(filter:MsRoomFilter):number
-```
-
-#### MsRoomFilter 的属性
-
-| 参数         | 类型   | 描述                         | 示例值                        |
-| ------------ | ------ | ---------------------------- | ----------------------------- |
-| maxPlayer    | number | 最大玩家数                   | maxPlayer:3;mode:0;canWatch:0 |
-| mode         | number | 模式                         | 0                             |
-| canWatch     | number | 是否可以观战 1-可以 2-不可以 | 2                             |
-| roomProperty | string | 房间属性                     | “roomProperty”                |
-
-#### 返回值
-
-| 错误码 | 含义                            |
-| ------ | ------------------------------- |
-| 0      | 成功                            |
-| -1     | 失败                            |
-| -2     | 未初始化                        |
-| -3     | 正在初始化                      |
-| -4     | 未登录                          |
-| -7     | 正在创建或者进入房间            |
-| -8     | 已在房间                        |
-| -21    | filter 过长，总字节不能超过1024 |
-
-### getRoomListResponse
-
-```
-response.getRoomListResponse(status:number, roomInfos:Array<MsRoomInfoEx>);
-```
-
-#### 参数
-
-| 参数      | 类型                | 描述                            | 示例值 |
-| --------- | ------------------- | ------------------------------- | ------ |
-| status    | number              |状态返回，200表示成功<br>500 服务器内部错误 | 200    |
-| roomInfos | Array<MsRoomInfoEx> | 房间信息列表                    |        |
-
-#### MsRoomInfoEx 的属性
-
-| 属性         | 类型   | 描述                         | 示例值         |
-| ------------ | ------ | ---------------------------- | -------------- |
-| roomID       | string | 房间ID                       | "123456786"    |
-| roomName     | string | 房间名称                     | “matchvsRoom”  |
-| maxPlayer    | number | 最大人数                     | 3              |
-| mode         | number | 模式                         | 0              |
-| canWatch     | number | 是否可以观战 1-可以 2-不可以 | 2              |
-| roomProperty | string | 房间属性                     | “roomProperty” |
-
-#### 说明
-
-- response是engine.getRoomList方法中传入的对象，getRoomList完成之后，会异步回调getRoomListResponse方法。
-
-#### 示例
-
-```javascript
-response.getRoomListResponse = this.getRoomListResponse.bind(this);
-getRoomListResponse : function (status, roomInfo) {
-    if (status == 200) {
-        console.log("获取房间列表成功");
-    } else {
-        console.log("获取房间列表失败 status：" + status);
-    }
-}
-```
 
 ### getRoomListEx
 
@@ -1071,13 +1001,13 @@ engine.getRoomListEx(filter:MsRoomFilterEx);
 
 #### 说明
 
-- getRoomListEx 是 getRoomList 接口的扩展功能接口，获取房间列表参数必须和房间参数完全一致而且 visibility 必须设置为1(可见)比如：createRoom 参数结构 如下
+- getRoomListEx 获取房间列表参数必须和房间参数完全一致而且 visibility 必须设置为1(可见)比如：createRoom 参数结构 如下
 
 ```typescript
 var createRoomInfo = new MsCreateRoomInfo("Matchvs",3, 0, 0, 1, "mapA")
 ```
 
-那么getRoomList 参数结构应该如下：
+那么'MsRoomFilterEx' 参数结构应该如下：
 
 ```typescript
 var filter = new MsRoomFilterEx(
