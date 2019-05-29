@@ -301,8 +301,8 @@ response.loginResponse(login:MsLoginRsp);
 class MsEngine {
 	......
     private login(){
-        this.response.registerUserResponse = (login:MsLoginRsp)=>{
-            if(userInfo.status == 200){
+        this.response.registerUserResponse = (loginRsp:MsLoginRsp)=>{
+            if(loginRsp.status == 200){
                 //成功
             }else{
                 //失败
