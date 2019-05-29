@@ -331,7 +331,7 @@ engine.logout(cpProto:string):number
 
 | 参数    | 类型   | 描述     | 示例值 |
 | ------- | ------ | -------- | ------ |
-| cpProto | string | 负载信息 | ""     |
+| cpProto | string | 附加信息 | ""     |
 
 #### 返回值
 
@@ -705,7 +705,7 @@ engine.joinOver(cpProto:string):number
 
 | 参数    | 类型   | 描述     | 示例值 |
 | ------- | ------ | -------- | ------ |
-| cpProto | string | 负载信息 | ""     |
+| cpProto | string | 附加信息 | ""     |
 
 #### 返回值
 
@@ -733,7 +733,7 @@ response.joinOverResponse(rsp:MsJoinOverRsp);
 | 属性    | 类型   | 描述                            | 示例值 |
 | ------- | ------ | ------------------------------- | ------ |
 | status  | number | 状态返回，200表示成功<br>400 客户端参数错误 <br>404 用户或房间不存在 <br>403 该用户不在房间 <br>500 服务器内部错误 | 200    |
-| cpProto | string | 负载信息                        |        |
+| cpProto | string | 附加信息                        |        |
 
 ### joinOverNotify
 
@@ -749,7 +749,7 @@ response.joinOverNotify(notifyInfo:MsJoinOverNotifyInfo);
 | --------- | ------ | ------------------ | ------ |
 | roomID    | string | 房间ID             |        |
 | srcUserID | number | 发起关闭房间玩家ID |        |
-| cpProto   | string | 负载信息           |        |
+| cpProto   | string | 附加信息           |        |
 
 #### 示例代码
 
@@ -819,7 +819,7 @@ response.leaveRoomResponse(rsp:MsLeaveRoomRsp);
 | status  | number | 状态返回，200表示成功<br>400 客户端参数错误 <br>404 房间不存在 <br>500 服务器内部错误 | 200    |
 | roomID  | string | 房间号                                                       | 317288 |
 | userID  | number | 用户ID                                                       | 317288 |
-| cpProto | string | 负载信息                                                     |        |
+| cpProto | string | 附加信息                                                     |        |
 
 ### leaveRoomNotify
 
