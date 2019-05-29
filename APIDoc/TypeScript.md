@@ -790,7 +790,7 @@ engine.leaveRoom(cpProto:string):number
 
 | 参数    | 类型   | 描述     | 示例值 |
 | ------- | ------ | -------- | ------ |
-| cpProto | string | 负载信息 | ""     |
+| cpProto | string | 附加信息 | ""     |
 
 #### 返回值
 
@@ -1624,7 +1624,7 @@ response.sendEventGroupNotify(srcUid:number, groups:Array<string>, cpProto:strin
 | --------- | ------------- | ------------ | ----------- |
 | srcUserID | number        | 消息来源用户 | 277773      |
 | groups    | Array<string> | 消息来源分组 | ["MatchVS"] |
-| cpProto   | string        | 负载消息     | "test"      |
+| cpProto   | string        | 附加消息     | "test"      |
 
 #### 示例代码
 
