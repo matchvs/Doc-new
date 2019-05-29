@@ -272,7 +272,6 @@ engine.login(userID: number, token: string, deviceID: string, nodeID?:number): n
 ```javascript
 //userID 和token 在注册回调接口中获得
 var DeviceID = 'TestDevice';
-var gatewayID = 0;
 var result = engine.login(userID,token,DeviceID);
 console.log("登录result"+result);
 ```
