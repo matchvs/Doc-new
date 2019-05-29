@@ -363,7 +363,7 @@ response.logoutResponse(status:number);
 
 ### joinRandomRoom
 
-登录游戏后，需要与其他在线玩家一起对战，先要进行进入房间，类似英雄联盟这样的匹配功能将若干用户匹配至一个房间开始一局游戏，Matchvs 提供4中加入房间的方法。
+登录游戏后，需要与其他在线玩家一起对战，先要进入房间，类似英雄联盟这样的匹配功能将若干用户匹配至一个房间开始一局游戏，Matchvs 提供多种加入房间的方法。
 
 - 请求接口：
   - joinRandomRoom：随机接入房间。
@@ -375,8 +375,6 @@ response.logoutResponse(status:number);
   - joinRoomNotify：其他人加入房间收到回调。
   - crateRoomResponse：调用 createRoom 接口收到的回调。
 
-
-当房间里人数等于maxPlayer时，房间人满。系统会将玩家随机加入到人未满且没有 [joinOver](../APIDoc/TypeScript#joinOver) 的房间。如果不存在人未满且没有joinOver的房间，则系统会再创建一个房间，然后将玩家加入到该房间。玩家 `userProfile` 的值可以自定义，接下来会通过回调函数（如 `joinRoomResponse ` ）传给其他客户端。
 
 ```typescript
 engine.joinRandomRoom(maxPlayer:number, userProfile:string):number
@@ -453,7 +451,7 @@ joinRoomWithProperties(matchinfo:MsMatchInfo, userProfile:string, watchSet?: MVS
 | delayMS    | number  | 观看延迟多久后的数据 | 2000            |
 | persistent | boolean | 是否持久缓存         | false           |
 
-> ags为匹配标签，开发者通过设置不同的标签进行自定义属性匹配，相同MsMatchInfo的玩家将会被匹配到一起。
+
 
 #### 返回值
 
