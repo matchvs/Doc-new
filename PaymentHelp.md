@@ -197,10 +197,3 @@ Matchvs 提供的流量包，在“后付费”和“预付费”游戏均可使
 
 停服 15 天以内，如果有及时充值或结清欠费，则服务会重新启用；如未及时充值或结清，游戏将会被清理数据（包含gameServer） 。
 账号欠费状态下，套餐的自动续费不生效。
-  
-  {{< tabs "uniqueid" >}}  
-  {{< tab "MacOS" >}} # MacOS Content {{< /tab >}}  
-  {{< tab "Linux" >}} # Linux Content {{< /tab >}}  
-  {{< tab "Windows" >}} # Windows Content {{< /tab >}}
-{{< /tabs >}}  
-
