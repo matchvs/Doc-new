@@ -39,11 +39,11 @@ gameServer是基于房间的可以自定义逻辑服务端框架。
 
 创建成功后的 gameServer 相关信息展示：
 
-![](http://imgs.matchvs.com/static/Doc-img/new-start/gameServerimg/creategameserversuccess.png)
+![](http://imgs.matchvs.com/static/Doc-img/new-start/gameServerimg/creategs.png)
 
 gameServer 创建成功后，Matchvs 会为每个 gameServer 分配一个唯一的 git 仓库地址。
 
-在本示例中，Matchvs 分配的 git 仓库地址为： `ssh://git@git.matchvs.com:3879/1424769556baec5362f5b1513f7e1167.git`。
+在本示例中，Matchvs 分配的 git 仓库地址为： `https://git.matchvs.com/10542/224f9779ae3c65ffd90665ac61f1289b.git`。
 
 
 
@@ -365,7 +365,7 @@ go run main.go
 - 拿到 git 仓库地址后，使用 git 命令将 gameServer 仓库克隆到本地：
 
 ```shell
-$ git clone ssh://git@git.matchvs.com:3879/1424769556baec5362f5b1513f7e1167.git myGameServer
+$ git clone https://git.matchvs.com/10542/947cf2969abdb228c372d487a02b6a12.git myGameServer
 Cloning into 'myGameServer'...
 warning: You appear to have cloned an empty repository.
 ```
