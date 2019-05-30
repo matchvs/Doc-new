@@ -21,8 +21,8 @@ Sort: 23
 
 4.1 初始化：在代码目录下执行`git init`即可。
 
-4.2 关联远程仓库：`git remote add origin ssh://git@xxx.xxx.x.xx/xxx.git`  
-`ssh://git@xxx.xxx.x.xx/xxx.git`是第3步获取的git仓库地址。 
+4.2 关联远程仓库：`git remote add origin https://git.matchvs.com/xxx/xxx.git`  
+`https://git.matchvs.com/xxx/xxx.git`是第3步获取的git仓库地址。 
 
 4.3 添加代码：`git add --all`
 
