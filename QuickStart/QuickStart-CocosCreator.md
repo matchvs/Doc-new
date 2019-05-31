@@ -127,6 +127,8 @@ NetWorkEngine.prototype.login = function(userID,token){
     return result;
 };
 ```
+  
+如果想了解接口调用及响应逻辑，可参考[时序图](https://doc.matchvs.com/APIBasic/JavaScriptBase)
 
 下面是完整的代码片段
 
