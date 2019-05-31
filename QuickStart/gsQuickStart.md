@@ -8,13 +8,13 @@ Sort: 6
 gameServer是基于房间的可以自定义逻辑服务端框架。        
 **注意：**gameServer 无需自己搭建服务器即可开始本地调试，仅需三个步骤： 
 
-1. 填写配置文件  
+1. 填写配置文件 ，参考下方步骤1.Config配置
 
-2. 启动本地调试  
+2. 启动本地调试  ，参考下方步骤2.开启本地调试
 
-3. 启动gameServer  
+3. 启动gameServer  ，参考下方步骤3.启动 gameServer
 
-**详细流程如下 ：**  
+**详细流程如下：**
 
 
 ## 支持语言
@@ -161,11 +161,17 @@ go get -u github.com/matchvs/gameServer-go
 - 需要在本地安装好 golang 运行环境。如果还没有配置好 golang 环境的请先配置好。以下内容教程是默认你已经配置好并且熟悉 golang 开发环境。
 - 在 Matchvs 官网创建了 gameServer。
 
-## Config 配置
+## 步骤1.Config 配置
 
-gameServer 配置文件路径为`myGameServer/conf/config.json`，其中包含以下默认配置项：
+gameServer 配置文件路径为`myGameServer/conf/config.json`（C# gameServer 的配置文件是 gs.json）。
 
-- **addr**：gameServer服务监听地址。**IP默认为 “0.0.0.0” 即可，不建议修改**。端口号可以从官网查询到：
+**我们只需要修改配置文件的端口号即可，其他配置项均无需修改。**
+
+如果你需要在 gameServer 主动创建/删除房间，则参考下方开启房间管理配置 roomconf。
+
+如果你用的是[自托管](https://doc.matchvs.com/SelfHost/selfhostIntro)模式，则参考下方自托管模式配置 register。
+
+- **addr**：gameServer服务监听地址。**IP默认为 “0.0.0.0” 即可，不建议修改**。  端口号可以从官网查询到：
 
   ![](http://imgs.matchvs.com/static/Doc-img/new-start/gameServerimg/gameserverdetail.png)
 
@@ -175,18 +181,18 @@ gameServer 配置文件路径为`myGameServer/conf/config.json`，其中包含�
 
 - **logLevel**：日志配置。gameServer 使用 [log4js](https://www.npmjs.com/package/log4js) 作为日志管理框架，如需自定义 log 输出可在了解 log4js 的前提下自行修改配置文件。
 
-- **register**：独立部署配置，仅在使用 Matchvs 独立部署解决方案时开启。
+- **register**：自托管配置，仅在使用 Matchvs 自托管解决方案时开启。
 ```
-  - enable：register 注册服务控制开关，设为 true 时开启独立部署模式，设为 false 时关闭独立部署模式。
+  - enable：register 注册服务控制开关，设为 true 时开启自托管模式，设为 false 时关闭自托管模式。
   - gameID：开发者自定义游戏ID。
   - svcName：gameServer 服务名，与 podName 组合作为该 gameServer 的唯一标识。 
   - podName：gameServer 实例名，与 svcName 组合作为该 gameServer 的唯一标识。
-  - remoteHost：gameServer 注册服务地址，由独立部署方案提供。
-  - remotePort：gameServer 注册服务端口，由独立部署方案提供。
-  - localHost：gameServer 对外服务地址，该地址需要能被独立部署的引擎服务访问。
+  - remoteHost：gameServer 注册服务地址，由自托管方案提供。
+  - remotePort：gameServer 注册服务端口，由自托管方案提供。
+  - localHost：gameServer 对外服务地址，该地址需要能被自托管的引擎服务访问。
   - localPort：gameServer 对外服务端口。
 ```
-- **roomConf**：gameServer 支持房间管理功能，开发者通过在 gameServer 里调用 API 接口可以实现房间创建、设置房间存活时常和房间删除等操作。**如需在本地调试时使用房间管理功能，则需要开启 roomConf 配置。**
+- **roomConf**：**如需在本地调试时使用房间管理功能，则需要开启 roomConf 配置。**gameServer 支持房间管理功能，开发者通过在 gameServer 里调用 API 接口可以实现房间创建、设置房间存活时常和房间删除等操作。
 ```
   - enable：房间管理服务控制开关，设为 true 时开启房间管理服务，设为 false 时关闭房间管理服务。
   - svcName：gameServer 服务名，开启`matchvs debug`时在终端显示，与 podName 组合作为该 gameServer 的唯一标识。
@@ -195,7 +201,7 @@ gameServer 配置文件路径为`myGameServer/conf/config.json`，其中包含�
   - remotePort：gameServer  房间管理服务端口，开启`matchvs debug`时在终端显示。
 ```
 
-### golang 中的配置如下
+### golang 配置示例
 
 - 打开 conf/config.toml.sample 文件可以看到如下内容：我们刚开始只需要关心 [Server] 下面的 Host内容。使用配置文件需要把 config.toml.sample 重新命名为 config.toml。
 
@@ -225,9 +231,7 @@ RemoteHost = "192.168.8.1"
 RemotePort = 9982
 ```
 
-## 本地开发调试
-
-### 打开命令行工具
+## 步骤2.开启本地调试
 
 - 打开命令行工具[下载地址](http://matchvs.com/serviceDownload) (ps : 在页面底部哦 ~)
 - [命令行工具教程](https://doc.matchvs.com/Advanced/GameServerCMD)
@@ -259,6 +263,8 @@ $ matchvs debug 1424769556baec5362f5b1513f7e1167
 ```
 
 `matchvs debug`命令在启动时与 Matchvs 服务建立代理连接。启动完成后，客户端发送给 gameServer 的消息将通过代理服务转发到开发者本地运行的 gameServer。同样的，gameServer 发送的消息也通过代理服务转发给客户端。
+
+## 步骤3.启动 gameServer
 
 保留这个窗口，然后在另外一个窗口里启动 gameServer 服务，不同语言版本启动方式：
 
@@ -347,7 +353,7 @@ go run main.go
 
 
 
-## Demo 客户端与 gameServer 建立连接
+## 步骤4.Demo 客户端与 gameServer 建立连接
 
 **注意 ：**本地调试模式只支持测试环境，所以 Demo 客户端需要切换到测试环境。即 Demo 客户端 Matchvs `init`接口的 `channel`需要修改为 `Matchvs`，`platform`需要修改为`alpha`。  
 本地调试和线上运行的区别，请参考[环境说明](../Advanced/EnvGuide)
@@ -381,6 +387,8 @@ warning: You appear to have cloned an empty repository.
 ## 
 
 将本地调试没问题的代码上传到 git 仓库，然后在控制台页面点击发布，再点击启动，此时 gameServer 已经成功运行在 Matchvs 托管云里。
+
+上传代码时，确保 config 文件里端口号正确即可，其他配置项无需关注。
 
 **注意每次更新代码都需要重新发布一次。** 
 
@@ -510,4 +518,3 @@ gameServer 详细使用[参考此处](../APIBasic/GameServerNodeJSBase)
 
 #### 5. 仓库拉取或上传提示认证失败  
 解决方法： 检查账号密码是否正确填写，账号密码在 控制台 - gameServer 列表页顶部  
-
