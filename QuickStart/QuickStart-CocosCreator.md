@@ -3,47 +3,33 @@ Title: 快速入门-CocosCreator
 Sort: 3
 */
 
-
-## IDE的下载
-
-如果你的电脑还没有安装cocosCreator可以前往cocos官网进行下载[cocos下载地址](http://www.cocos.com/download) 
-
-![](http://imgs.matchvs.com/static/Doc-img/new-start/CocosCreatorImg/creatorDownload.jpg)
-
-选取对应的版本进行下载和使用。
-
-## IDE的安装
-
-下载成功以后得到一个zip文件，如下图所示
-
-![](http://imgs.matchvs.com/static/Doc-img/new-start/CocosCreatorImg/creatorZip.jpg)
-
-打开zip后双击CocosCreator_setup.exe,选择对应的安装路径进行安装，此过程需要几分钟。
+本文默认你已经 [下载并安装 cocos creator](http://www.cocos.com/download)
 
 ## 项目创建
 
-CreatorIDE安装成功后，双击打开CreatorIDE，选择新建项目选择一个空白工程，如下图所示
+CreatorIDE安装成功后，双击打开CreatorIDE，选择新建项目选择一个空白工程。
+Matchvs的联网使用示例已经集成在Cocos Creator v2.0.7+版本中，你也可以直接建立一个联网示例进行体验。
+如下图所示
 
 ![](http://imgs.matchvs.com/static/Doc-img/new-start/CocosCreatorImg/creatorNewProject.jpg)
 
-**注意** Matchvs的联网游戏案例已经集成进如了Cocos Creator v2.0.7版本中，建议新使用的玩家可以先建立一个联网游戏案例进行体验。
 
 选择好自己的工程路径后，点击新建项目,新的工程就创建好了。
 
 ## SDK的集成
 
-#### Creator V2.0.7
+#### Creator V2.0.7+
 
-在CreatorV2.0.7 以上的版本(推荐2.0.9)推出了新的服务模块。同时在服务模块中也集成了Matchvs，使大家集成更加方便 `服务模块在面板选项中`。
+在CreatorV2.0.7 以上的版本推出了新的服务模块，服务里集成了 Matchvs。
 
 
 服务模块如下图:
+**注意** 服务模块加载 SDK 为Cocos 渠道专用 SDK，您需要在 cocos 控制台/服务里为游戏开通 Matchvs 服务。
 
 ![CocosServer](QuickStart-CocosCreator.assets/CocosServer.png)
 
-**注意** 服务模块加载SDK为Cocos渠道SDK，必须使用CreatorIDE登录的账号,Cocos渠道账户必须绑定公司才可以使用。(个人开发者可先在Cocos控制台添加一个公司信息，无需认证，即可使用)
 
- - 服务模块加载SDK路径为project/assets/scripts/matchvs/matchvs.all.js。
+ - 服务模块加载 SDK 路径为project/assets/scripts/matchvs/matchvs.all.js。
 
 ```javascript
 let engine;
@@ -63,7 +49,9 @@ module.exports = {
 
 #### Creator V2.0.7以外的其他版本推荐大家升级到2.0.9以上版本使用
 
-## 第一行代码
+## 第一行代码  
+如果你创建的是 Matchvs 联网示例工程，则以下内容已经在工程里实现。  
+如果你创建的是空白工程，则可以按如下流程实际动手开发练习。
 
  1：在assets文件夹下创建Script和Scene两个文件夹，在Script文件夹下创建.js文件，在Scene文件夹下创建一个名字叫做.fire的场景文件.
 
