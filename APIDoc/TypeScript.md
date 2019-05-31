@@ -5,7 +5,7 @@ Sort: -2
 
 JavaScriptSDK/TypeScript 版接口说明
 
-  
+
 ## 使用须知  
 - 请求接口：指从客户端向服务端发送请求的功能接口  
 - 接口返回：调用请求接口后，SDK会返回状态码（如 0，1,2...）代表接口有无成功发送请求，或无法发送请求的原因  
@@ -1831,6 +1831,44 @@ class MsEngine{
 
 ## 断线重连
 
+
+
+当用户因为网络不稳定掉线时,可通过断线重连接口重新回到游戏
+
+###  networkStateNotify
+
+ networkStateNotify(netnotify:MsNetworkStateNotify);
+
+房间内有其他用户网络发生变化时回调
+
+#### 参数
+
+#### MsNetworkStateNotify 的属性
+
+| 属性         | 类型   | 描述               | 示例值 |
+| ------------ | ------ | ------------------ | ------ |
+| netnotify       | MsNetworkStateNotify | 网络状态变化信息           |  |
+
+详细定义如下:
+
+```typescript
+/**
+ * @param {number} state 1-网络异常，正在重连  2-重连成功 3-重连失败，退出房间
+ * @param {string} roomID 房间号
+ * @param {number} userID 用户ID
+ * @param {number} state  用户状态 1-用户掉线  2-用户已经登录游戏，待定重连 3-用户离开房间了
+ * @param {number} owner  当前房间房主ID
+ */
+class MsNetworkStateNotify{
+    public roomID:string;
+    public userID:number;
+    public state:number;
+    public owner:number;
+}
+```
+
+​    
+
 ### reconnect
 
 用户断线后可以调用次接口进行重连，重连具体教程可以参考 [断线重连详细文档](../Advanced/reconnect) 。
@@ -1920,7 +1958,7 @@ setReconnectTimeout(timeout:number):number
 | -27    | timeout 超出范围  0=< timeout <=600 |
 | -30    | 设置的 rType 值与当前模式冲突。     |
 
-###   setReconnectTimeoutResponse
+###  setReconnectTimeoutResponse
 
 设置重连时间回调
 
@@ -2072,7 +2110,7 @@ joinOpenResponse(data:MsReopenRoomResponse);
         }
 ```
 
-## 获取观战房间列表
+##  观战
 
 - 请求接口：getWatchRoomList
 - 回调接口：getWatchRoomsResponse
@@ -2157,8 +2195,6 @@ class MsEngine {
 }
 
 ```
-
-## 观战
 
 - 请求接口：joinWatchRoom
 - 回调接口：joinWatchRoomResponse, joinWatchRoomNotify
@@ -2481,7 +2517,6 @@ class MsEngine{
 
 ```
 
-## 角色游戏与观战切换
 
 ### changeRole
 
