@@ -1,6 +1,6 @@
 /*
 Title: 快速入门-GameServer-Java
-Sort: 5
+Sort: 7
 */
 
 # Java-GameServer 开发文档
