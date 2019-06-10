@@ -1308,23 +1308,32 @@ class MsEngine{
 ```typescript
 engine.sendEventEx(msgType:number, data:string, destType:number, userIDs:Array <number> ):any
 ```
+  
+  
+| 参数         | 类型   | 描述           | 示例值               |
+| ------------ | ------ | -------------- | -------------------- |
+| msgType       | number | 消息发送类型：0表示转发给其他玩家；1表示转发给game server；2表示转发给其他玩家及game server        | 2 |
+| data       | string | 发送内容           |"hello"                 |
+| destType | number | 发送目标类型：0表示发送目标为userIDs；1表示发送目标为除userIDs以外的房间其他人 | 0|  
+| userIDs | Array |发送目标 | [12345]|  
 
 
 
 > 提示：senEventEx 参数示例说明
 >
-> //发送给房间中的全部玩家，destType = 1, userIDs = []
-> var data = mvs.engine.sendEventEx(0,msg,1,[]);
-> ​	console.log("发送信息 result"+ data.result);
-> }
-> //发送指定玩家 123456，destType = 0, userIDs = [123456]
-> var data = mvs.engine.sendEventEx(0,msg,0,[123456]);
-> ​	console.log("发送信息 result"+ data.result);
-> }
-> //发送 排除 123456 玩家，destType = 1, userIDs = []
-> var data = mvs.engine.sendEventEx(0,msg, 1,[123456]);
-> ​	console.log("发送信息 result"+ data.result);
-> }
+> //发送给房间中的全部玩家，destType = 1, userIDs = []  
+> var data = mvs.engine.sendEventEx(0,msg,1,[]);  
+> ​	console.log("发送信息 result"+ data.result);  
+> }  
+> //发送指定玩家 123456，destType = 0, userIDs = [123456]  
+> var data = mvs.engine.sendEventEx(0,msg,0,[123456]);  
+> ​	console.log("发送信息 result"+ data.result);  
+> }  
+> //发送 排除 123456 玩家，destType = 1, userIDs = []  
+> var data = mvs.engine.sendEventEx(0,msg, 1,[123456]);  
+> ​	console.log("发送信息 result"+ data.result);  
+> }  
+
 
 #### 返回值
 
