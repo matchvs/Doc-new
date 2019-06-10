@@ -544,9 +544,9 @@ engine.createRoom(createRoomInfo:MsCreateRoomInfo, userProfile:string, watchSet?
 | ------------ | ------ | ---------------------------- | -------------- |
 | roomName     | string | 房间名称                     | “MatchvsRoom”  |
 | maxPlayer    | number | 最大玩家数                   | 3              |
-| mode         | number | 模式                         | 1              |
+| mode         | number | 模式:用于区分不同的游戏模式，如乱斗模式，PK模式等，不同模式不会被被匹配到一起，根据游戏自定义即可                         | 1              |
 | canWatch     | number | 是否可以观战 1-可以 2-不可以 | 2              |
-| visibility   | number | 是否可见默认0不可见 1可见    | 1              |
+| visibility   | number | 是否可见默认0不可见 1可见，用于标识该房间是否可被其他玩家查询到。只有可见的房间才能在获取房间列表时被获取    | 1              |
 | roomProperty | string | 房间属性                     | “roomProperty” |
 
 #### MVS.MsWatchSet
