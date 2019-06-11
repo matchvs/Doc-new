@@ -144,7 +144,7 @@ engine.login(userID: number, token: string, deviceID: string): number
 ### loginResponse
 
 ```typescript
-response.loginResponse(login:MsLoginRsp);
+response.loginResponse(loginRsp:MsLoginRsp);
 ```
 
 ### 示例代码
@@ -153,8 +153,8 @@ response.loginResponse(login:MsLoginRsp);
 class MsEngine {
 	......
     private login(){
-        this.response.registerUserResponse = (login:MsLoginRsp)=>{
-            if(userInfo.status == 200){
+        this.response.registerUserResponse = (loginRsp:MsLoginRsp)=>{
+            if(loginRsp.status == 200){
                 //成功
             }else{
                 //失败
