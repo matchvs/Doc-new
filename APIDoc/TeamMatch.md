@@ -670,18 +670,18 @@ engine.sendTeamEvent({msgType:0, dstType:1, data:data, dstUserIDs:[]});
      */
     setTeamPropertyResponse(rsp): void
 ```
-
-#### setTeamUserProfileNotify
+#### setTeamPropertyNotify
 
 ```typescript
- /**
-     * @see setTeamProperty
+    /**
+     * @see setTeamUserProfile
      * @param {string} notify.teamID
      * @param {number} notify.userID
-     * @param {String} notify.teamUserProfile
+     * @param {String} notify.teamProperty
      */
-    setTeamUserProfileNotify(notify): void
+    setTeamPropertyNotify(notify): void
 ```
+
 
 ## 队伍成员属性
 
@@ -698,6 +698,7 @@ engine.sendTeamEvent({msgType:0, dstType:1, data:data, dstUserIDs:[]});
      */
     setTeamUserProfile (userProfile:string):number;
 ```
+
 #### setTeamUserProfileResponse
 
 ```typescript
@@ -710,16 +711,17 @@ engine.sendTeamEvent({msgType:0, dstType:1, data:data, dstUserIDs:[]});
      */
     setTeamUserProfileResponse(rsp):void
 ```
-#### setTeamPropertyNotify
+
+#### setTeamUserProfileNotify
 
 ```typescript
-    /**
-     * @see setTeamUserProfile
+ /**
+     * @see setTeamProperty
      * @param {string} notify.teamID
      * @param {number} notify.userID
-     * @param {String} notify.teamProperty
+     * @param {String} notify.teamUserProfile
      */
-    setTeamPropertyNotify(notify): void
+    setTeamUserProfileNotify(notify): void
 ```
 ## 掉线异常处理
 
