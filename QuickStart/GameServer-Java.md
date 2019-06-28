@@ -9,7 +9,7 @@ Sort: 7
 
 需要java开发环境 下载JDK环境,参考[JDK安装与环境变量配置](https://jingyan.baidu.com/article/6dad5075d1dc40a123e36ea3.html) 
 
-### 下载Java Gaamerver 框架代码
+### 下载Java GameServer 框架代码
 
 下载完并解压得到一个文件夹，
 
