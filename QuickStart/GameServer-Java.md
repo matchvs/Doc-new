@@ -55,6 +55,8 @@ public static void main(String[] args) {
 
 具体规则见<https://doc.matchvs.com/QuickStart/gsQuickStart#Config%20配置>
 
+![config](GameServer-Java.assets/config.png)
+
 - isPAAS：独立部署配置，仅在使用 Matchvs 独立部署解决方案时开启。默认为false
 - remoteServerHost：gameServer 房间管理服务地址，开启`matchvs debug`时在终端显示。
 - remoteServerPort：gameServer  房间管理服务端口，开启`matchvs debug`时在终端显示。
