@@ -6,7 +6,7 @@ Sort: 11
 
 ## 开发环境搭建
 
-Unity安装和下载(必须Unity 5+):
+Unity安装和下载(必须Unity 5.1.5+):
 
  https://store.unity.com/
 
@@ -15,6 +15,10 @@ Unity安装和下载(必须Unity 5+):
 Matchvs SDK是一个Unity的插件包,同Unity Stroe里面的其他资源一样,通过UnityIDE Import进工程即可
 
 http://www.matchvs.com/serviceDownload 选择UnitySDK.
+
+> 注意,需要修改.Net版本为4.x
+>
+> ![1561963638007](QuickStart-Unity.assets/1561963638007.png)
 
 ## Demo上手
 
