@@ -3,7 +3,7 @@ Title: GameServer专业版使用说明
 Sort: 28
 */
 
-## GS专业版使用说明
+
 
 ### GS免费版与专业版的区别								
 
