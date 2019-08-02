@@ -5,11 +5,10 @@ Sort: 100
 
 ## 错误码 
 
-Matchvs SDK 错误码分为两个部分。    
+Matchvs SDK 错误码分为两个部分。用于检查函数入参的合法性,如空值,越界,状态异常
 
-- 第一部分：MatchvsEngine 类型接口调用的时候返回值。客户端用于检查函数入参的合法性,如空值,越界,状态异常
-- 第二部分：MatchvsResponse 回调接口中的 status 和 errorResponse 中的 code 值。服务端用于检查函数入参的合法性,如空值,越界,状态异常
-
+- 第一部分：MatchvsEngine 类型接口调用的时候返回值。由客户端返回
+- 第二部分：MatchvsResponse 回调接口中的 status 和 errorResponse 中的 code 值。由服务端异步返回
 ### MatchvsEngine 类型接口返回值
 
 | 返回码 | 含义                                  |
