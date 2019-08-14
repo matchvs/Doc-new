@@ -28,7 +28,7 @@ var response = new jsMatchvs.MatchvsResponse();
 接入下可以调用初始化方法init：
 
 ```javascript
-engine.init(response, channel, platform, gameID, token, gameVersion);
+engine.init(pResponse: MatchvsResponse, pChannel: string, pPlatform: string, gameID: number, appKey: string, gameVersion: number, threshold ?:number):
 ```
 
 Matchvs 提供了两个环境，alpha 调试环境和 release 正式环境。游戏开发调试阶段请使用 alpha 环境，即 platform 传参"alpha"。[环境说明](../Advanced/EnvGuide)，参数列表如下：
