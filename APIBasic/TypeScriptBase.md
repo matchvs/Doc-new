@@ -45,7 +45,7 @@ class MsEngine {
 初始化请求接口。
 
 ```typescript
-engine.init(response: MatchvsResponse, channel: string, platform: string, gameID: string, appKey: string, gameVersion: number): number
+engine.init(pResponse: MatchvsResponse, pChannel: string, pPlatform: string, gameID: number, appKey: string, gameVersion: number, threshold ?:number):
 ```
 
 response 中设置一些回调方法，在执行注册、登录、发送事件等操作对应的方法之后，reponse中的回调函数会被SDK异步调用。
