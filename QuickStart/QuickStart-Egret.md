@@ -365,7 +365,7 @@ class Main extends eui.UILayer {
 
     private runMatchvs(){
         this.response.initResponse = this.initResponse.bind(this);
-        this.engine.init(this.response, "Matchvs", "alpha", 201479);
+        this.engine.init(this.response, "Matchvs", "alpha", 217255, "appkey", 1);
     }
 
     private initResponse(status:number){
@@ -380,7 +380,7 @@ class Main extends eui.UILayer {
         if(userInfo.status == 0){
             console.log("注册成功");
             this.response.loginResponse = this.loginResponse.bind(this);
-            this.engine.login(userInfo.userID, userInfo.token, 201479, 1, "xxxxxxxxxxxxxxxxxxxxx","xxxxxxxxxxxxxxxxxxxx","v",0);
+            this.engine.login(userInfo.userID, userInfo.token, "deviceID");
         }else{
             console.log("注册失败",userInfo.status );
         }
