@@ -52,7 +52,7 @@ engine.init(pResponse: MatchvsResponse, pChannel: string, pPlatform: string, gam
 - 如果游戏属于调试阶段则连接至测试环境，游戏调试完成后即可发布到正式环境运行。
 - 如果 Matchvs 服务正在升级，init 接口会放回 510 错误码，开发者可以选择是否需要展示“服务升级”的提示。
 
-> **注意** 发布之前须到官网控制台申请“发布上线”，申请通过后在调用init方法时传“release”才会生效，否则将不能使用release环境。
+**注意** 发布之前须到官网控制台申请“发布上线”，申请通过后在调用init方法时传“release”才会生效，否则将不能使用release环境。
 
 #### 错误码
 
