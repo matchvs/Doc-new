@@ -29,7 +29,7 @@ Matchvs SDK 错误码分为两个部分。用于检查函数入参的合法性,�
 | -14    | 正在观战离开房间                   |
 | -11    | 正在离开房间                            |
 | -20    | 1 <maxPlayer超出范围 ，maxPlayer须≤100 或 confirms 和 cancles 不能都为空，frameRate 不能超过 20，不能小于0 |
-| -21    | 接口调用中包含cpProto参数或者userProfile等参数的长度过长，一般限制 1024。（具体见JavaScript&TypeScript文档） |
+| -21    | 接口调用中包含如：cpProto、userProfile等参数的长度过长，一般限制 1024。（具体见JavaScript&TypeScript文档） |
 | -23    | msgType 非法                           |
 | -24    | desttype 非法                          |
 | -25    | channel 非法，请检查是否正确填写为 “Matchvs”             |
