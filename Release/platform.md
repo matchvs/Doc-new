@@ -5,7 +5,8 @@ Sort: 16
 
 ## 支持平台
 
-微信小程序、oppo小游戏、vivo小游戏、华为小游戏、百度小游戏、Facebook Instant Games、QQ玩一玩安卓、iOS/Mac、Windows、Web、H5小游戏
+微信小程序、oppo小游戏、vivo小游戏、华为小游戏、百度小游戏、Facebook Instant Games、QQ玩一玩、安卓、iOS/Mac、Windows、Web、H5小游戏。
+目前暂不支持头条小游戏
 
 ## 编译注意事项
 
