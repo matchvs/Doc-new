@@ -32,6 +32,6 @@ Sort: 16
     真机调试  开启微信的小程序调试模式.
     
     
-> 发布时 客户端 init 参数platfrom 由 alpha 改为realse ,微信小游戏平台要启用wss选项: https://doc.matchvs.com/Release/platform ,
+> 发布时 客户端 init 参数platfrom 由 alpha 改为realse ,微信小游戏平台要启用wss选项。
 
-> egret发布成微信小游戏时,如果提示代码文件过大超过4096K. 则可以用matchvs.min.js替换微信小游戏工程中的matchvs.js文件. 
+> egret发布成微信小游戏时,如果提示代码文件过大超过4096K. 则可以用matchvs.min.js替换微信小游戏工程中的matchvs.js文件。
