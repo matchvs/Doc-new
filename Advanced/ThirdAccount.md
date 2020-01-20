@@ -227,7 +227,7 @@ private static bindOpenIDWithUserID(wxUserInfo:any){
 | gameID    | number |        | 是       | 你注册的游戏ID       |
 | openID    | string |        | 是       | 获取第三方唯一认证号 |
 | session   | string |        | 是       | 校验值               |
-| thirdFlag | number |        | 是       | 1-微信               |
+| thirdFlag | number |        | 是       | 1-微信   2-QQ        |
 | sign      | string |        | 是       | 参数签名             |
 
 > sign 计算方式：md5(appKey&gameID=value1&openID=value2&session=value3&thirdFlag=value4&appSecret)得到的md5值就是 sign参数的值。这个签名是取 32 为的 小写字符。
