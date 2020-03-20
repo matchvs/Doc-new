@@ -17,6 +17,7 @@ Sort: -2
 
 使用 Matchvs SDK 需要用到` appKey、gameID` 等信息。
 
+注:APPkey后面带的 "#M","#C","#E"为渠道标识,也是必要的,不可漏
 ## 更多Matchvs
 
 [Matchvs环境说明](../Advanced/EnvGuide)
