@@ -467,7 +467,7 @@ joinRoomWithProperties(matchinfo:MsMatchInfo, userProfile:string, watchSet?: MVS
 
 - 同 joinRandomRoom，对应的回调接口也是 joinRoomResponse
 
-  tags为匹配标签，开发者通过设置不同的标签进行自定义属性匹配，相同MsMatchInfo的玩家将会被匹配到一起。
+  tags为匹配标签，开发者通过设置不同的标签进行自定义属性匹配。
   
 #### 示例
 
