@@ -3,7 +3,7 @@ Title: 快速入门-Cocos2dx
 Sort: 8
 */
 
-~~## 导入SDK
+~~## 导入SDK~~
 
 ~~1.前往服务中心-应用中心--SDK下载页面，下载Matchvs SDK-Cocos。~~
 
