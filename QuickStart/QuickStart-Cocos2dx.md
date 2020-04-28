@@ -5,7 +5,7 @@ Sort: 8
 
 ~~## 导入SDK
 
-~~1.前往服务中心-应用中心--SDK下载页面，下载Matchvs SDK-Cocos。
+~~1.前往服务中心-应用中心--SDK下载页面，下载Matchvs SDK-Cocos。~~
 
 ~~2.将SDK导入至你的项目~~
 目前暂不提供Cocos2dx的SDK下载和相关服务。（这份文档是老文档，后期如果支持，会再次更新）
